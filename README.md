@@ -107,9 +107,9 @@ Copy the files into `assets/img/` using the exact names listed in
 a monogram block instead — hover over it to see the file name it is waiting for.
 No rebuild needed.
 
-Seven photographs are already in place (portrait, surgery, aviation, writing,
-philosophy, film and the five gallery pictures). Still open: `hero.jpg`,
-`lecture.jpg`, `public.jpg`, `honours.jpg`, `foundation.jpg`.
+Every topic now carries its own photograph — home page and biography, surgery,
+aviation, writing, philosophy, film, public service and honours — plus thirteen
+pictures in the gallery. Still open: `lecture.jpg` and `foundation.jpg`.
 
 ჩააგდეთ ფაილები `assets/img/`-ში ზუსტად იმ სახელებით, რომლებიც აღწერილია
 [`assets/img/README.md`](assets/img/README.md)-ში. სანამ ფაილი არ არსებობს, გვერდზე

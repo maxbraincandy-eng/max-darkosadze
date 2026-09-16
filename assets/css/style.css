@@ -206,8 +206,16 @@ body.lang-ka .eyebrow { letter-spacing: .1em; text-transform: none; }
   content: ""; position: absolute; inset: 0; z-index: -1;
   background: radial-gradient(1000px 500px at 80% -10%, rgba(201, 162, 39, .22), transparent 60%);
 }
-.hero-media { position: absolute; inset: 0; z-index: -2; opacity: .18; }
-.hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.hero .hero-media {
+  position: absolute; inset: 0; z-index: -2; opacity: .13;
+  /* declared with the parent so a later `.img-slot { position: relative }`
+     cannot pull the backdrop back into the document flow */
+}
+.hero .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
+.hero .hero-media::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(100deg, var(--ink) 0%, rgba(13, 27, 42, .45) 55%, transparent 100%);
+}
 .hero .hero-media.is-missing { display: none; }  /* no photo yet: fall back to the gradient */
 
 .hero-inner {
