@@ -674,3 +674,20 @@ body.choose-lang {
 
 .footer-social { margin-top: 1.4rem; }
 .footer-social li a { color: var(--gold-bright); }
+
+/* a portrait photograph on an article page: shown whole, never cropped */
+.fig-portrait {
+  max-width: 560px;
+  margin: -2rem auto 2.8rem;
+  position: relative;
+  z-index: 1;
+}
+.fig-portrait .img-slot {
+  aspect-ratio: auto;
+  border-radius: calc(var(--radius) + 2px);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--line);
+}
+.fig-portrait img { width: 100%; height: auto; display: block; }
+.fig-portrait figcaption { text-align: center; }
+@media (max-width: 620px) { .fig-portrait { margin-top: -1rem; } }

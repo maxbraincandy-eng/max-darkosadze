@@ -702,11 +702,11 @@ def render_article(data, index):
         reading_time(article),
         esc(ui["readingTime"]),
         figure(
-            article["image"],
+            article.get("imagePortrait") or article["image"],
             article.get("imageAlt", article["title"]),
             article.get("imageCaption"),
             depth,
-            classes="fig fig-hero",
+            classes="fig fig-portrait" if article.get("imagePortrait") else "fig fig-hero",
         ),
         editor_note(data, article["blocks"], article.get("subtitle"), article.get("summary")),
         blocks_html(article["blocks"], depth),

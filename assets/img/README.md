@@ -10,7 +10,7 @@ HTML-ის შეცვლა ან თავიდან აგება ს�
 
 **In place already / უკვე განთავსებულია:** `hero.jpg`, `portrait.jpg`, `og.jpg`, `surgery.jpg`,
 `aviation.jpg`, `writing.jpg`, `philosophy.jpg`, `film.jpg`, `public.jpg`, `honours.jpg`,
-`gallery/01–13.jpg`.
+`gallery/01–14.jpg`, `rescue.jpg`, `rescue-full.jpg`.
 
 **Still empty / ჯერ ცარიელია:** `lecture.jpg` and `foundation.jpg` — these show a monogram block
 until a file is dropped in; hover over one to see the file name it expects.
@@ -31,6 +31,7 @@ already prepared.
 | `lecture.jpg` | Article: The Lecture Hall / აუდიტორია | 1600×900 |
 | `writing.jpg` | Article: The Written Word / დაწერილი სიტყვა | 1600×900 |
 | `philosophy.jpg` | Article: The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია | 1600×900 |
+| `rescue.jpg` / `rescue-full.jpg` | Article: Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე (wide version for the cards, full portrait for the page) | 1600×900 / 1100×1450 |
 | `film.jpg` | Article: The Filmmaker / კინორეჟისორი | 1600×900 |
 | `public.jpg` | Article: A Life in Public Service / საზოგადოების სამსახურში | 1600×900 |
 | `honours.jpg` | Article: Honours and Recognition / ჯილდოები და აღიარება | 1600×900 |

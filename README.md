@@ -83,7 +83,7 @@ contact page: [Instagram](https://www.instagram.com/maxdarkosadze/) and
 | Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
 
-Eight long-form articles, each published in both languages / რვა ვრცელი სტატია, ორივე ენაზე:
+Nine long-form articles, each published in both languages / ცხრა ვრცელი სტატია, ორივე ენაზე:
 
 1. **The Surgeon's Hands / ქირურგის ხელები** — `articles/surgeon.html`
 2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
@@ -91,8 +91,9 @@ Eight long-form articles, each published in both languages / რვა ვრც
 4. **The Written Word / დაწერილი სიტყვა** — `articles/writer.html`
 5. **The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
 6. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
-7. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
-8. **The Filmmaker / კინორეჟისორი** — `articles/filmmaker.html` (written from the public IMDb record)
+7. **Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე** — `articles/two-afternoons.html`
+8. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
+9. **The Filmmaker / კინორეჟისორი** — `articles/filmmaker.html` (written from the public IMDb record)
 
 The language switch in the header always moves to the *same* page in the other
 language. `index.html` at the root sends a visitor to Georgian or English
@@ -144,6 +145,10 @@ previous/next links and the sitemap all update themselves.
 
 Block types available in `blocks`: `lead`, `p`, `h2`, `h3`, `quote` (with `cite`),
 `list` (with `items`), `note`, `image` (with `src`, `alt`, `caption`).
+
+An article with a tall photograph can set `"imagePortrait"` to a second file:
+the article page then shows that photograph whole and large instead of cropping
+it into the wide frame, while `"image"` stays the wide version used on the cards.
 
 Inside any text you can write `[link text](https://example.com)` for a link,
 `*italics*`, `**bold**`, and `[[something]]` for anything still to be filled in.
