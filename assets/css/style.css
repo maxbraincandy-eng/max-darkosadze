@@ -821,3 +821,35 @@ body.lang-ka .news-date { text-transform: none; letter-spacing: .05em; }
 .contact-form textarea { resize: vertical; min-height: 8rem; }
 .form-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .form-actions .muted { font-size: .85rem; }
+
+/* ------------------------------------------------------------ quote wall */
+.quote-wall { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); }
+.quote-card {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 1rem;
+  text-decoration: none; background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.6rem 1.5rem 1.4rem;
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease), border-color .2s;
+}
+.quote-card::before {
+  content: "“"; font-family: var(--serif); font-size: 2.6rem; line-height: .6;
+  color: var(--gold); opacity: .45;
+}
+.quote-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: color-mix(in srgb, var(--gold) 50%, var(--line)); }
+.quote-card p { font-family: var(--serif); font-size: 1.06rem; line-height: 1.45; margin: 0; }
+.quote-card span { font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+body.lang-ka .quote-card span { text-transform: none; letter-spacing: .04em; }
+
+/* ---------------------------------------------- slow drift on photographs */
+@keyframes kenburns {
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to   { transform: scale(1.08) translate3d(-1.2%, -1.2%, 0); }
+}
+.js .hero .hero-media img,
+.js .gallery .gal-item:first-child img {
+  animation: kenburns 26s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .hero .hero-media img, .js .gallery .gal-item:first-child img { animation: none; }
+}

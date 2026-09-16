@@ -119,6 +119,22 @@
     check();
   }
 
+  /* ---- the hero photograph drifts slightly behind the words ---------- */
+  var heroMedia = document.querySelector(".hero .hero-media");
+  if (heroMedia && !reduced) {
+    var parallaxQueued = false;
+    var moveHero = function () {
+      parallaxQueued = false;
+      var y = window.scrollY;
+      if (y > window.innerHeight * 1.2) return;
+      heroMedia.style.transform = "translate3d(0, " + (y * 0.18).toFixed(1) + "px, 0)";
+    };
+    window.addEventListener("scroll", function () {
+      if (!parallaxQueued) { parallaxQueued = true; window.requestAnimationFrame(moveHero); }
+    }, { passive: true });
+    moveHero();
+  }
+
   /* ---- reading progress on article pages ----------------------------- */
   var article = document.querySelector(".article");
   if (article) {

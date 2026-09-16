@@ -64,11 +64,12 @@
     "rights": "All rights reserved.",
     "langLabel": "Language",
     "categoryLabel": "Category",
-    "theme": "Switch between light and dark"
+    "theme": "Switch between light and dark",
+    "quotesTitle": "In his own words"
   },
   "pages": {
     "home": {
-      "title": "Max Darkosadze — Surgeon, Aviation Instructor, Lecturer, Writer",
+      "title": "Max Darkosadze (Batoni Maksi) — Surgeon, Aviation Instructor, Lecturer, Writer, Philosopher",
       "heroEyebrow": "Official site",
       "heroTitle": "Max Darkosadze",
       "heroSubtitle": "A surgeon at the operating table, an instructor in the cockpit, a teacher in the lecture hall, a writer at the desk — and a citizen in the public square.",
@@ -134,7 +135,7 @@
       }
     },
     "about": {
-      "title": "Biography — Max Darkosadze",
+      "title": "Biography — Max Darkosadze | მაქსი დარკოსაძე",
       "eyebrow": "Biography",
       "heading": "The making of Max Darkosadze",
       "lead": "A life built on one conviction: that mastery is a duty, not a privilege. Known to a generation of students, patients and pilots simply as Batoni Maksi.",
@@ -531,7 +532,31 @@
       "downloadsText": "A single archive with the photographs on this site at full size, for print and web.",
       "downloadLabel": "Photographs (ZIP)",
       "contactTitle": "Interviews",
-      "contactText": "Interview and lecture requests go through the contact page."
+      "contactText": "Interview and lecture requests go through the contact page.",
+      "brandTitle": "Brand assets",
+      "brandText": "The wordmark, the business card and the QR code, drawn from the same palette as the site.",
+      "brandItems": [
+        [
+          "Wordmark (SVG)",
+          "assets/brand/wordmark.svg"
+        ],
+        [
+          "Business card — front (PNG, 300 dpi)",
+          "assets/brand/business-card-front.png"
+        ],
+        [
+          "Business card — back (PNG, 300 dpi)",
+          "assets/brand/business-card-back.png"
+        ],
+        [
+          "QR code to this site (PNG)",
+          "assets/brand/qr.png"
+        ],
+        [
+          "E-mail signature (HTML)",
+          "assets/brand/email-signature.html"
+        ]
+      ]
     }
   },
   "articles": [

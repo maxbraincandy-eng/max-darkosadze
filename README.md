@@ -187,6 +187,48 @@ Off by default. For free, privacy-friendly counting register a name at
 put your domain in `analytics.plausible`. Rebuild and the script is added to
 every page. Leave both empty and no tracking code is emitted at all.
 
+## Buying the domain later / დომენის შემდეგ შეძენა
+
+Everything works today on the GitHub Pages address. When the domain is bought,
+three steps and it is done — nothing else in the project needs editing:
+
+```bash
+# 1. put the new address in content/site.json  ("baseUrl": "https://maxdarkosadze.ge")
+python3 tools/brand.py     # 2. redraws the QR code, the card and the signature
+python3 build.py           # 3. rewrites canonical links, hreflang, sitemap, share cards
+```
+
+Then add a `CNAME` file containing the bare domain, point the DNS at GitHub
+Pages, and register the site in Google Search Console so that searches for the
+name find it.
+
+დომენის ყიდვის შემდეგ: შეცვალეთ `baseUrl` ფაილში `content/site.json`, გაუშვით ეს
+ორი ბრძანება და მორჩა — QR-კოდი, ვიზიტკა, ბმულები და sitemap თავისით განახლდება.
+
+## Share images / გაზიარების სურათები
+
+Every page and every article has its own picture for when the link is posted to
+Facebook, WhatsApp, Telegram or LinkedIn — the page's own title over its own
+photograph, drawn by:
+
+```bash
+python3 tools/og_images.py      # writes assets/og/<lang>-<page>.jpg
+```
+
+Run it again after changing a title. `build.py` picks the file up automatically
+and falls back to `assets/img/og.jpg` if one is missing.
+
+## Brand kit / ბრენდის მასალები
+
+```bash
+python3 tools/brand.py
+```
+
+writes into `assets/brand/`: the wordmark (SVG, light and dark), a business card
+front and back at 85×55 mm / 300 dpi ready for a printer, a QR code pointing at
+the site, an e-mail signature to paste into Gmail or Outlook, and six Instagram
+highlight covers. They are all linked from the press-kit page as well.
+
 ## Preparing photographs / ფოტოების მომზადება
 
 After adding or replacing anything in `assets/img/`:

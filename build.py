@@ -216,7 +216,12 @@ def head(data, title, description, depth, key, slug=None):
     canonical = "%s/%s" % (base, page_path(lang, key, slug)) if base else ""
     alt_self = "%s/%s" % (base, page_path(lang, key, slug)) if base else ""
     alt_other = "%s/%s" % (base, page_path(other, key, slug)) if base else ""
-    og_image = "%s/%s" % (base, "assets/img/og.jpg") if base else asset("assets/img/og.jpg", depth)
+    # each page has its own share card when tools/og_images.py has drawn one
+    card = "assets/og/%s-article-%s.jpg" % (lang, slug) if key == "article" \
+        else "assets/og/%s-%s.jpg" % (lang, key)
+    if not os.path.exists(os.path.join(ROOT, card)):
+        card = "assets/img/og.jpg"
+    og_image = "%s/%s" % (base, card) if base else asset(card, depth)
 
     tags = [
         '<meta charset="utf-8">',
@@ -240,8 +245,14 @@ def head(data, title, description, depth, key, slug=None):
         '<meta property="og:description" content="%s">' % esc(description),
         '<meta property="og:locale" content="%s">' % ("ka_GE" if lang == "ka" else "en_GB"),
         '<meta property="og:image" content="%s">' % esc(og_image),
+        '<meta property="og:image:width" content="1200">',
+        '<meta property="og:image:height" content="630">',
+        '<meta property="og:image:alt" content="%s">' % esc(title),
         '<meta name="twitter:card" content="summary_large_image">',
+        '<meta name="twitter:image" content="%s">' % esc(og_image),
         '<link rel="icon" href="%s">' % asset("assets/img/favicon.svg", depth),
+        '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
+        '<link rel="me" href="%s">' % esc(data["meta"]["links"]["imdb"]),
         '<link rel="preconnect" href="https://fonts.googleapis.com">',
         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
@@ -285,11 +296,24 @@ def person_jsonld(data):
         "description": meta["description"],
         "jobTitle": meta["tagline"].replace(" · ", ", "),
         "nationality": "Georgian",
+        "sameAs": [meta["links"]["instagram"], meta["links"]["imdb"]],
+        "knowsLanguage": ["ka", "en"],
     }
     if SITE["baseUrl"]:
         payload["url"] = SITE["baseUrl"]
-    return '<script type="application/ld+json">%s</script>' % json.dumps(
-        payload, ensure_ascii=False
+        payload["image"] = SITE["baseUrl"].rstrip("/") + "/assets/img/portrait.jpg"
+    website = {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": meta["siteName"],
+        "alternateName": [meta["nickname"], "Max Darkosadze", "მაქსი დარკოსაძე"],
+        "inLanguage": data["lang"],
+    }
+    if SITE["baseUrl"]:
+        website["url"] = SITE["baseUrl"]
+    return "".join(
+        '<script type="application/ld+json">%s</script>' % json.dumps(p, ensure_ascii=False)
+        for p in (payload, website)
     )
 
 
@@ -431,6 +455,24 @@ def document(data, *, title, description, key, body, depth, active, slug=None, e
 # pages
 # --------------------------------------------------------------------------
 
+def quote_wall(data, depth, limit=6):
+    """Every quotation on the site, gathered from the articles themselves."""
+    found = []
+    for article in data["articles"]:
+        for block in article["blocks"]:
+            if block.get("type") == "quote":
+                found.append((block["text"], article))
+                break
+    cards = []
+    for text, article in found[:limit]:
+        cards.append(
+            '<a class="quote-card" href="%s"><p>%s</p><span>%s</span></a>'
+            % (link(data["lang"], "article", depth, article["slug"]),
+               inline(text), esc(article["title"]))
+        )
+    return "".join(cards)
+
+
 def render_home(data):
     depth = 1
     p = data["pages"]["home"]
@@ -504,6 +546,13 @@ def render_home(data):
 </section>
 
 <section class="section">
+  <div class="wrap">
+    <header class="section-head"><h2>%s</h2></header>
+    <div class="quote-wall">%s</div>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap split">
     <div class="split-media img-slot" data-path="assets/img/foundation.jpg">%s</div>
     <div class="split-body">
@@ -548,6 +597,8 @@ def render_home(data):
         cards,
         inline(p["quote"]),
         esc(p["quoteCite"]),
+        esc(data["ui"]["quotesTitle"]),
+        quote_wall(data, depth),
         img_tag("assets/img/foundation.jpg", p["foundationTitle"], depth),
         esc(p["foundationTitle"]),
         inline(p["foundationText"]),
@@ -776,6 +827,17 @@ def render_article(data, index):
         related,
     )
 
+    crumbs = {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": []}
+    if SITE["baseUrl"]:
+        base = SITE["baseUrl"].rstrip("/")
+        for i, (name, path) in enumerate((
+                (data["meta"]["siteName"], page_path(data["lang"], "home")),
+                (data["pages"]["articles"]["heading"], page_path(data["lang"], "articles")),
+                (plain(article["title"]), page_path(data["lang"], "article", article["slug"])))):
+            crumbs["itemListElement"].append(
+                {"@type": "ListItem", "position": i + 1, "name": name,
+                 "item": "%s/%s" % (base, path)})
+
     jsonld = json.dumps(
         {
             "@context": "https://schema.org",
@@ -798,7 +860,9 @@ def render_article(data, index):
         body=body,
         depth=depth,
         active="articles",
-        extra_head='<script type="application/ld+json">%s</script>' % jsonld,
+        extra_head='<script type="application/ld+json">%s</script>' % jsonld
+        + ('<script type="application/ld+json">%s</script>' % json.dumps(crumbs, ensure_ascii=False)
+           if crumbs["itemListElement"] else ""),
     )
 
 
@@ -872,6 +936,9 @@ def render_press(data):
     <p><a class="btn btn-primary" href="%s" download>%s</a></p>
     <h2>%s</h2>
     <p>%s</p>
+    <ul class="rich-list">%s</ul>
+    <h2>%s</h2>
+    <p>%s</p>
   </div>
 </section>
 """ % (
@@ -882,6 +949,9 @@ def render_press(data):
         esc(p["namesTitle"]), inline(p["names"]),
         esc(p["downloadsTitle"]), inline(p["downloadsText"]),
         asset(archive, depth), esc(p["downloadLabel"]),
+        esc(p["brandTitle"]), inline(p["brandText"]),
+        "".join('<li><a href="%s" download>%s</a></li>' % (asset(href, depth), esc(label))
+                for label, href in p["brandItems"]),
         esc(p["contactTitle"]), inline(p["contactText"]),
     )
     return document(data, title=p["title"], description=plain(p["short"]), key="press",
@@ -1119,11 +1189,12 @@ def render_root_index():
 
 def render_404():
     return """<!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Page not found — Max Darkosadze</title>
+<title>404 — მაქსი დარკოსაძე</title>
+<meta name="robots" content="noindex">
 <link rel="icon" href="/assets/img/favicon.svg">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
@@ -1132,11 +1203,13 @@ def render_404():
     <div class="choose-inner">
       <span class="brand-mark" aria-hidden="true">MD</span>
       <h1>404</h1>
-      <p>This page does not exist.</p>
-      <p lang="ka">ასეთი გვერდი არ არსებობს.</p>
+      <p lang="ka">ეს გვერდი არ არსებობს.<br>
+         მისამართი შეამოწმეთ — ჩეკლისტები სწორედ ამისთვისაა.</p>
+      <p>This page does not exist.<br>
+         Check the address — this is exactly what checklists are for.</p>
       <p class="choose-actions">
-        <a class="btn btn-primary" href="/ka/" lang="ka">ქართული</a>
-        <a class="btn btn-ghost" href="/en/">English</a>
+        <a class="btn btn-primary" href="/ka/" lang="ka">მთავარი გვერდი</a>
+        <a class="btn btn-ghost" href="/en/">Home</a>
       </p>
     </div>
   </main>

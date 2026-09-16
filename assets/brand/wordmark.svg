@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140" role="img" aria-label="MAX DARKOSADZE">
+  <rect x="2" y="24" width="92" height="92" rx="20" fill="none" stroke="#c9a227" stroke-width="3"/>
+  <text x="48" y="80" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700"
+        fill="#c9a227" text-anchor="middle" dominant-baseline="middle">MD</text>
+  <text x="124" y="66" font-family="Georgia, 'Times New Roman', serif" font-size="42" font-weight="700"
+        letter-spacing="2.5" fill="#0d1b2a">MAX DARKOSADZE</text>
+  <line x1="126" y1="84" x2="176" y2="84" stroke="#c9a227" stroke-width="3"/>
+  <text x="190" y="93" font-family="Helvetica, Arial, sans-serif" font-size="19"
+        letter-spacing="4" fill="#c9a227">BATONI MAKSI</text>
+</svg>
