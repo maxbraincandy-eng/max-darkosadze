@@ -30,10 +30,39 @@ Find them all / ყველას პოვნა:
 grep -rn '\[\[' content/
 ```
 
-When a page no longer has placeholders, the yellow highlight and the editor's note
-disappear on their own.
+When a page no longer has placeholders, the yellow highlight and the draft note
+disappear on their own — that already happened for most pages.
+
+### What is verified, and what is still open
+
+Verified from public sources and written in as fact — born in Tbilisi on
+26 August 1995, working between Tbilisi and New York, credited as director,
+writer and actor, *Cowards* (2016), *Star Wars Zero*
+([IMDb](https://www.imdb.com/name/nm8752510/)).
+
+დადასტურებული საჯარო წყაროებიდან და ტექსტში ფაქტად ჩაწერილი — დაბადებული
+თბილისში, 1995 წლის 26 აგვისტოს; მუშაობს თბილისსა და ნიუ-იორკს შორის;
+კრედიტირებულია როგორც რეჟისორი, სცენარისტი და მსახიობი.
+
+Still open, and only you can supply them / ჯერ შესავსები, და მხოლოდ თქვენ იცით:
+
+| What | Where |
+|---|---|
+| Award names, years and awarding bodies | `about → honours`, article `honours` |
+| Book titles and years | article `writer` |
+| Years for: medical qualification, pilot's licence, instructor rating, first book, foundation | `about → timeline` |
+| Three e-mail addresses (press, lectures, foundation) | `contact → cards` |
+
+Send them over and they go straight in. Nothing else is marked.
 
 ---
+
+## Links / ბმულები
+
+The site links to the real profiles, in the footer of every page and on the
+contact page: [Instagram](https://www.instagram.com/maxdarkosadze/) and
+[IMDb](https://www.imdb.com/name/nm8752510/). To add more, edit `social` in
+`content/en.json` and `content/ka.json`.
 
 ## What is in the site / რა არის საიტზე
 
@@ -46,7 +75,7 @@ disappear on their own.
 | Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
 
-Seven long-form articles, each published in both languages / შვიდი ვრცელი სტატია, ორივე ენაზე:
+Eight long-form articles, each published in both languages / რვა ვრცელი სტატია, ორივე ენაზე:
 
 1. **The Surgeon's Hands / ქირურგის ხელები** — `articles/surgeon.html`
 2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
@@ -55,6 +84,7 @@ Seven long-form articles, each published in both languages / შვიდი ვ
 5. **The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
 6. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
 7. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
+8. **The Filmmaker / კინორეჟისორი** — `articles/filmmaker.html` (written from the public IMDb record)
 
 The language switch in the header always moves to the *same* page in the other
 language. `index.html` at the root sends a visitor to Georgian or English
@@ -100,6 +130,9 @@ previous/next links and the sitemap all update themselves.
 
 Block types available in `blocks`: `lead`, `p`, `h2`, `h3`, `quote` (with `cite`),
 `list` (with `items`), `note`, `image` (with `src`, `alt`, `caption`).
+
+Inside any text you can write `[link text](https://example.com)` for a link,
+`*italics*`, `**bold**`, and `[[something]]` for anything still to be filled in.
 
 ---
 

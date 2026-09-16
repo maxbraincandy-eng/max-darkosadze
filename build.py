@@ -36,10 +36,17 @@ def esc(text):
 PLACEHOLDER_RE = re.compile(r"\[\[([^\[\]]*)\]\]")
 
 
+LINK_RE = re.compile(r"\[([^\[\]]+)\]\((https?://[^)\s]+)\)")
+
+
 def inline(text):
-    """Escape, then turn [[placeholder]] into a marked span and **x** into <strong>."""
+    """Escape, then render [text](url) links, **bold**, *italic* and [[placeholders]]."""
     out = esc(text)
+    out = LINK_RE.sub(
+        r'<a href="\2" target="_blank" rel="noopener me">\1</a>', out
+    )
     out = re.sub(r"\*\*(.+?)\*\*", r"<strong>\1</strong>", out)
+    out = re.sub(r"(?<![\w*])\*([^*\n]+)\*(?![\w*])", r"<em>\1</em>", out)
     while True:
         new = PLACEHOLDER_RE.sub(r'<span class="ph">\1</span>', out)
         if new == out:
@@ -105,6 +112,13 @@ def figure(src, alt, caption, depth, classes="fig"):
         '<img src="%s" alt="%s" loading="lazy" decoding="async" data-slot>'
         "</div>%s</figure>"
     ) % (classes, esc(src), asset(src, depth), esc(alt or ""), caption_html)
+
+
+def editor_note(data, *parts):
+    """Show the draft note only while the page still contains placeholders."""
+    if not any("[[" in json.dumps(p, ensure_ascii=False) for p in parts):
+        return ""
+    return '<p class="editor-note">%s</p>' % esc(data["ui"]["editorNote"])
 
 
 def blocks_html(blocks, depth):
@@ -292,6 +306,7 @@ def footer(data, depth):
     </nav>
     <div class="footer-lang">
       <p class="muted">%s</p>
+      <ul class="footer-social">%s</ul>
       <ul>
         <li><a href="%s" hreflang="en" lang="en">English</a></li>
         <li><a href="%s" hreflang="ka" lang="ka">ქართული</a></li>
@@ -310,6 +325,11 @@ def footer(data, depth):
         esc(data["ui"]["menu"]),
         nav_links,
         esc(data["ui"]["langLabel"]),
+        "".join(
+            '<li><a href="%s" rel="me noopener" target="_blank">%s</a></li>' % (esc(url), esc(label))
+            for label, url in (("Instagram", data["meta"]["links"]["instagram"]),
+                               ("IMDb", data["meta"]["links"]["imdb"]))
+        ),
         link("en", "home", depth),
         link("ka", "home", depth),
         date.today().year,
@@ -517,7 +537,7 @@ def render_about(data):
 
 <section class="section">
   <div class="wrap prose">
-    <p class="editor-note">%s</p>
+    %s
     %s
   </div>
 </section>
@@ -545,7 +565,7 @@ def render_about(data):
         esc(p["eyebrow"]),
         inline(p["heading"]),
         inline(p["lead"]),
-        esc(data["ui"]["editorNote"]),
+        editor_note(data, p["blocks"]),
         blocks_html(p["blocks"], depth),
         esc(p["timelineTitle"]),
         inline(p["timelineNote"]),
@@ -639,7 +659,7 @@ def render_article(data, index):
       <p class="eyebrow"><a href="%s">%s</a> <span aria-hidden="true">/</span> %s</p>
       <h1>%s</h1>
       <p class="article-subtitle">%s</p>
-      <p class="article-meta"><span>%s</span><span>%s %s</span></p>
+      <p class="article-meta">%s<span>%s %s</span></p>
     </div>
   </header>
 
@@ -648,7 +668,7 @@ def render_article(data, index):
   </div>
 
   <div class="wrap prose">
-    <p class="editor-note">%s</p>
+    %s
     %s
   </div>
 
@@ -671,7 +691,7 @@ def render_article(data, index):
         esc(article["category"]),
         inline(article["title"]),
         inline(article["subtitle"]),
-        inline(article["date"]),
+        ("<span>%s</span>" % inline(article["date"])) if article.get("date") else "",
         reading_time(article),
         esc(ui["readingTime"]),
         figure(
@@ -681,7 +701,7 @@ def render_article(data, index):
             depth,
             classes="fig fig-hero",
         ),
-        esc(ui["editorNote"]),
+        editor_note(data, article["blocks"], article.get("subtitle"), article.get("summary")),
         blocks_html(article["blocks"], depth),
         link(data["lang"], "articles", depth),
         esc(ui["backToArticles"]),
@@ -725,11 +745,6 @@ def render_foundation(data):
         % (inline(item["title"]), inline(item["text"]))
         for item in p["programmes"]
     )
-    stats = "".join(
-        '<li><strong>%s</strong><span>%s</span></li>'
-        % (inline(s["value"]), inline(s["label"]))
-        for s in p["stats"]
-    )
     body = """
 <section class="page-head">
   <div class="wrap">
@@ -741,7 +756,7 @@ def render_foundation(data):
 
 <section class="section">
   <div class="wrap prose">
-    <p class="editor-note">%s</p>
+    %s
     %s
   </div>
 </section>
@@ -753,26 +768,14 @@ def render_foundation(data):
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>%s</h2>
-      <p>%s</p>
-    </header>
-    <ul class="stats">%s</ul>
-  </div>
-</section>
 """ % (
         esc(p["eyebrow"]),
         inline(p["heading"]),
         inline(p["lead"]),
-        esc(data["ui"]["editorNote"]),
+        editor_note(data, p["blocks"]),
         blocks_html(p["blocks"], depth),
         esc(p["programmesTitle"]),
         programmes,
-        esc(p["statsTitle"]),
-        inline(p["statsNote"]),
-        stats,
     )
     return document(
         data,
@@ -832,9 +835,10 @@ def render_contact(data):
         for c in p["cards"]
     )
     social = "".join(
-        '<li><a href="%s" rel="me noopener">%s</a></li>'
-        % (esc(s["url"]) if not s["url"].startswith("[[") else "#", esc(s["label"]))
+        '<li><a href="%s" rel="me noopener" target="_blank">%s</a></li>'
+        % (esc(s["url"]), esc(s["label"]))
         for s in p["social"]
+        if not s["url"].startswith("[[")
     )
     body = """
 <section class="page-head">
@@ -847,7 +851,7 @@ def render_contact(data):
 
 <section class="section">
   <div class="wrap">
-    <p class="editor-note">%s</p>
+    %s
     <ul class="contact-grid">%s</ul>
   </div>
 </section>
@@ -868,7 +872,7 @@ def render_contact(data):
         esc(p["eyebrow"]),
         inline(p["heading"]),
         inline(p["lead"]),
-        esc(data["ui"]["editorNote"]),
+        editor_note(data, p["cards"]),
         cards,
         esc(p["socialTitle"]),
         social,

@@ -631,3 +631,19 @@ body.choose-lang {
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .card:hover .card-media img, .gal-item:hover img { transform: none; }
 }
+
+/* links inside running text (IMDb, Instagram, and anything added later) */
+.prose a, .note a, .contact-card a, .card-body a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--gold) 45%, transparent);
+  transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
+}
+.prose a:hover, .note a:hover, .contact-card a:hover, .card-body a:hover {
+  text-decoration-color: currentColor;
+}
+
+.footer-social { margin-top: 1.4rem; }
+.footer-social li a { color: var(--gold-bright); }
