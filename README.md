@@ -113,7 +113,7 @@ No rebuild needed.
 
 Every topic carries its own photograph — home page and biography, surgery,
 aviation, lectures, writing, philosophy, sculpture, film, public service and
-honours — plus fifteen pictures in the gallery. Still open: `foundation.jpg`.
+honours — plus sixteen pictures in the gallery. Still open: `foundation.jpg`.
 
 ### The gallery / გალერეა
 

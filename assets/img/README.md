@@ -10,7 +10,7 @@ HTML-ის შეცვლა ან თავიდან აგება ს�
 
 **In place already / უკვე განთავსებულია:** `hero.jpg`, `portrait.jpg`, `og.jpg`, `surgery.jpg`,
 `aviation.jpg`, `writing.jpg`, `philosophy.jpg`, `film.jpg`, `public.jpg`, `honours.jpg`,
-`gallery/01–15.jpg`, `lecture.jpg`, `rescue.jpg`, `rescue-full.jpg`.
+`gallery/01–16.jpg`, `lecture.jpg`, `rescue.jpg`, `rescue-full.jpg`.
 
 **Still empty / ჯერ ცარიელია:** `foundation.jpg` — these show a monogram block
 until a file is dropped in; hover over one to see the file name it expects.
