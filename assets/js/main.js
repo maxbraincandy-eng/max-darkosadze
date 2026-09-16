@@ -156,57 +156,136 @@
     window.addEventListener("resize", update);
   }
 
-  /* ---- gallery lightbox ---------------------------------------------- */
-  var gallery = document.querySelector(".gallery");
+  /* ---- gallery: filters and a lightbox you can walk through ---------- */
+  var gallery = document.querySelector(".gallery[data-lightbox]");
   if (gallery) {
-    var box = null;
+    var tiles = Array.prototype.slice.call(gallery.querySelectorAll(".gal-item"));
+    var labels = {
+      close: gallery.getAttribute("data-label-close") || "Close",
+      prev: gallery.getAttribute("data-label-prev") || "Previous",
+      next: gallery.getAttribute("data-label-next") || "Next"
+    };
+
+    /* --- filter chips --- */
+    var chips = Array.prototype.slice.call(document.querySelectorAll(".chip[data-filter]"));
+    var counter = document.querySelector("[data-gallery-count]");
+    var empty = document.querySelector(".gal-empty");
+    var visible = tiles.slice();
+
+    var applyFilter = function (key) {
+      visible = [];
+      tiles.forEach(function (tile) {
+        var show = key === "all" || tile.getAttribute("data-category") === key;
+        tile.hidden = !show;
+        if (show) visible.push(tile);
+      });
+      chips.forEach(function (chip) {
+        var on = chip.getAttribute("data-filter") === key;
+        chip.classList.toggle("is-on", on);
+        chip.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      if (counter) counter.textContent = visible.length;
+      if (empty) empty.hidden = visible.length > 0;
+    };
+
+    chips.forEach(function (chip) {
+      chip.addEventListener("click", function () {
+        applyFilter(chip.getAttribute("data-filter"));
+      });
+    });
+
+    /* --- lightbox --- */
+    var box = null, current = 0;
+
+    var show = function (index) {
+      if (!visible.length) return;
+      current = (index + visible.length) % visible.length;
+      var tile = visible[current];
+      var img = tile.querySelector("img");
+      var caption = tile.querySelector("figcaption");
+      box.querySelector(".lightbox-figure img").src = img.currentSrc || img.src;
+      box.querySelector(".lightbox-figure img").alt = img.alt || "";
+      box.querySelector(".lightbox-figure figcaption").textContent =
+        caption ? caption.textContent.trim() : "";
+      box.querySelector(".lightbox-counter").textContent =
+        (current + 1) + " / " + visible.length;
+      var solo = visible.length < 2;
+      box.querySelector(".lightbox-prev").hidden = solo;
+      box.querySelector(".lightbox-next").hidden = solo;
+    };
 
     var close = function () {
       if (!box) return;
-      box.classList.remove("is-open");
       var node = box;
       box = null;
+      node.classList.remove("is-open");
+      document.body.style.removeProperty("overflow");
       window.setTimeout(function () { node.remove(); }, 250);
     };
 
-    gallery.addEventListener("click", function (event) {
-      var img = event.target.closest(".gal-item .img-slot:not(.is-missing) img");
-      if (!img) return;
-      var caption = img.closest("figure").querySelector("figcaption");
+    var button = function (cls, label, glyph) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = cls;
+      b.setAttribute("aria-label", label);
+      b.innerHTML = glyph;
+      return b;
+    };
+
+    var open = function (tile) {
       box = document.createElement("div");
       box.className = "lightbox";
       box.setAttribute("role", "dialog");
       box.setAttribute("aria-modal", "true");
+      box.innerHTML =
+        '<figure class="lightbox-figure"><img alt=""><figcaption></figcaption></figure>' +
+        '<p class="lightbox-counter"></p>';
+      var closeButton = button("lightbox-close", labels.close, "&times;");
+      box.appendChild(closeButton);
+      box.appendChild(button("lightbox-prev", labels.prev, "&#8249;"));
+      box.appendChild(button("lightbox-next", labels.next, "&#8250;"));
 
-      var big = document.createElement("img");
-      big.src = img.currentSrc || img.src;
-      big.alt = img.alt;
-      box.appendChild(big);
-
-      if (caption) {
-        var cap = document.createElement("figcaption");
-        cap.textContent = caption.textContent;
-        box.appendChild(cap);
-      }
-
-      var button = document.createElement("button");
-      button.className = "lightbox-close";
-      button.type = "button";
-      button.setAttribute("aria-label", docEl.lang === "ka" ? "დახურვა" : "Close");
-      button.innerHTML = "&times;";
-      box.appendChild(button);
-
-      box.addEventListener("click", function (e) {
-        if (e.target === box || e.target === button) close();
+      box.addEventListener("click", function (event) {
+        var hit = event.target.closest("button");
+        if (hit && hit.classList.contains("lightbox-prev")) return show(current - 1);
+        if (hit && hit.classList.contains("lightbox-next")) return show(current + 1);
+        if (hit && hit.classList.contains("lightbox-close")) return close();
+        if (event.target === box) close();
       });
+
       document.body.appendChild(box);
+      document.body.style.overflow = "hidden";
+      show(visible.indexOf(tile));
       window.requestAnimationFrame(function () { box.classList.add("is-open"); });
-      button.focus();
+      closeButton.focus();
+    };
+
+    gallery.addEventListener("click", function (event) {
+      var opener = event.target.closest(".gal-open");
+      if (!opener) return;
+      var tile = opener.closest(".gal-item");
+      if (tile.querySelector(".img-slot.is-missing")) return;
+      open(tile);
     });
 
     document.addEventListener("keydown", function (event) {
+      if (!box) return;
       if (event.key === "Escape") close();
+      if (event.key === "ArrowRight") show(current + 1);
+      if (event.key === "ArrowLeft") show(current - 1);
     });
+
+    /* --- swipe on a phone --- */
+    var touchX = null;
+    document.addEventListener("touchstart", function (e) {
+      if (box) touchX = e.changedTouches[0].clientX;
+    }, { passive: true });
+    document.addEventListener("touchend", function (e) {
+      if (!box || touchX === null) return;
+      var dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+      touchX = null;
+    }, { passive: true });
   }
 
   /* ---- light / dark switch ------------------------------------------ */

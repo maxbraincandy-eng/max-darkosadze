@@ -10,9 +10,9 @@ HTML-ის შეცვლა ან თავიდან აგება ს�
 
 **In place already / უკვე განთავსებულია:** `hero.jpg`, `portrait.jpg`, `og.jpg`, `surgery.jpg`,
 `aviation.jpg`, `writing.jpg`, `philosophy.jpg`, `film.jpg`, `public.jpg`, `honours.jpg`,
-`gallery/01–14.jpg`, `rescue.jpg`, `rescue-full.jpg`.
+`gallery/01–15.jpg`, `lecture.jpg`, `rescue.jpg`, `rescue-full.jpg`.
 
-**Still empty / ჯერ ცარიელია:** `lecture.jpg` and `foundation.jpg` — these show a monogram block
+**Still empty / ჯერ ცარიელია:** `foundation.jpg` — these show a monogram block
 until a file is dropped in; hover over one to see the file name it expects.
 
 Tall (portrait) photographs are fitted inside the wide article frame over a blurred copy of

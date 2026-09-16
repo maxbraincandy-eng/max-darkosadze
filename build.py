@@ -1015,10 +1015,44 @@ def render_foundation(data):
 def render_gallery(data):
     depth = 1
     p = data["pages"]["gallery"]
-    items = "".join(
-        figure(item["src"], p["heading"], item.get("caption"), depth, classes="gal-item")
-        for item in p["items"]
-    )
+    lb = p["lightbox"]
+
+    counts = {}
+    for item in p["items"]:
+        counts[item.get("category", "life")] = counts.get(item.get("category", "life"), 0) + 1
+
+    chips = []
+    for i, cat in enumerate(p["categories"]):
+        total = len(p["items"]) if cat["key"] == "all" else counts.get(cat["key"], 0)
+        if not total:
+            continue
+        chips.append(
+            '<button class="chip%s" type="button" data-filter="%s" aria-pressed="%s">'
+            '%s<span class="chip-count">%d</span></button>'
+            % (" is-on" if i == 0 else "", esc(cat["key"]), "true" if i == 0 else "false",
+               esc(cat["label"]), total)
+        )
+
+    tiles = []
+    for i, item in enumerate(p["items"]):
+        cat = item.get("category", "life")
+        label = next((c["label"] for c in p["categories"] if c["key"] == cat), cat)
+        caption = item.get("caption") or ""
+        tiles.append(
+            """
+        <figure class="gal-item" data-category="%s" data-index="%d">
+          <button class="gal-open" type="button">
+            <span class="img-slot" data-path="%s">%s</span>
+            <span class="gal-tag">%s</span>
+          </button>
+          <figcaption>%s</figcaption>
+        </figure>""" % (
+                esc(cat), i, esc(item["src"]),
+                img_tag(item["src"], caption or p["heading"], depth),
+                esc(label), inline(caption),
+            )
+        )
+
     body = """
 <section class="page-head">
   <div class="wrap">
@@ -1030,24 +1064,23 @@ def render_gallery(data):
 
 <section class="section">
   <div class="wrap">
-    <div class="gallery">%s</div>
+    <div class="chips" role="group" aria-label="%s">%s</div>
+    <p class="gal-count"><span data-gallery-count>%d</span> %s</p>
+    <div class="gallery" data-lightbox
+         data-label-close="%s" data-label-prev="%s" data-label-next="%s">%s</div>
+    <p class="note gal-empty" hidden>%s</p>
   </div>
 </section>
 """ % (
-        esc(p["eyebrow"]),
-        inline(p["heading"]),
-        inline(p["lead"]),
-        items,
+        esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+        esc(p["heading"]), "".join(chips),
+        len(p["items"]), esc(p["countLabel"]),
+        esc(lb["close"]), esc(lb["prev"]), esc(lb["next"]),
+        "".join(tiles),
+        esc(p["emptyLabel"]),
     )
-    return document(
-        data,
-        title=p["title"],
-        description=plain(p["lead"]),
-        key="gallery",
-        body=body,
-        depth=depth,
-        active="gallery",
-    )
+    return document(data, title=p["title"], description=plain(p["lead"]), key="gallery",
+                    body=body, depth=depth, active="gallery")
 
 
 def contact_form(data, depth):

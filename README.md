@@ -111,9 +111,24 @@ Copy the files into `assets/img/` using the exact names listed in
 a monogram block instead — hover over it to see the file name it is waiting for.
 No rebuild needed.
 
-Every topic now carries its own photograph — home page and biography, surgery,
-aviation, writing, philosophy, film, public service and honours — plus thirteen
-pictures in the gallery. Still open: `lecture.jpg` and `foundation.jpg`.
+Every topic carries its own photograph — home page and biography, surgery,
+aviation, lectures, writing, philosophy, sculpture, film, public service and
+honours — plus fifteen pictures in the gallery. Still open: `foundation.jpg`.
+
+### The gallery / გალერეა
+
+Each gallery picture carries a `category`, and the categories themselves are
+listed in the `categories` block of the same page. The filter chips, their
+counts and the photograph count are all worked out at build time, so adding a
+picture means adding one line:
+
+```json
+{ "src": "assets/img/gallery/16.jpg", "category": "aviation", "caption": "…" }
+```
+
+The pictures are laid out in columns that keep each photograph's own
+proportions, and any of them opens full size with arrows, arrow keys, swipe and
+Escape.
 
 ჩააგდეთ ფაილები `assets/img/`-ში ზუსტად იმ სახელებით, რომლებიც აღწერილია
 [`assets/img/README.md`](assets/img/README.md)-ში. სანამ ფაილი არ არსებობს, გვერდზე

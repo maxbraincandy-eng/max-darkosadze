@@ -99,6 +99,10 @@
   1000,
   1333
  ],
+ "assets/img/gallery/15.jpg": [
+  1000,
+  1333
+ ],
  "assets/img/hero-800.jpg": [
   800,
   400
@@ -112,6 +116,14 @@
   450
  ],
  "assets/img/honours.jpg": [
+  1600,
+  900
+ ],
+ "assets/img/lecture-800.jpg": [
+  800,
+  450
+ ],
+ "assets/img/lecture.jpg": [
   1600,
   900
  ],
