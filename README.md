@@ -1,10 +1,12 @@
 # Max Darkosadze — maxdarkosadze / მაქსი დარკოსაძე
 
-A bilingual (English + Georgian) website about **Max Darkosadze / მაქსი დარკოსაძე** —
-surgeon, aviation instructor, lecturer, writer and public figure.
+A bilingual (English + Georgian) website about **Max Darkosadze / მაქსი დარკოსაძე**,
+known to many simply as **Batoni Maksi / ბატონი მაქსი** — surgeon, aviation
+instructor, lecturer, writer, modern philosopher and public figure.
 
-ორენოვანი (ქართული და ინგლისური) საიტი **მაქს დარკოსაძეზე** — ქირურგი,
-ავიაინსტრუქტორი, ლექტორი, მწერალი და საზოგადო მოღვაწე.
+ორენოვანი (ქართული და ინგლისური) საიტი **მაქს დარკოსაძეზე**, რომელიც ბევრისთვის
+უბრალოდ **„ბატონი მაქსია“** — ქირურგი, ავიაინსტრუქტორი, ლექტორი, მწერალი,
+თანამედროვე ფილოსოფოსი და საზოგადო მოღვაწე.
 
 ---
 
@@ -44,14 +46,15 @@ disappear on their own.
 | Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
 
-Six long-form articles, each published in both languages / ექვსი ვრცელი სტატია, ორივე ენაზე:
+Seven long-form articles, each published in both languages / შვიდი ვრცელი სტატია, ორივე ენაზე:
 
 1. **The Surgeon's Hands / ქირურგის ხელები** — `articles/surgeon.html`
 2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
 3. **The Lecture Hall / აუდიტორია** — `articles/lecturer.html`
 4. **The Written Word / დაწერილი სიტყვა** — `articles/writer.html`
-5. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
-6. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
+5. **The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
+6. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
+7. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
 
 The language switch in the header always moves to the *same* page in the other
 language. `index.html` at the root sends a visitor to Georgian or English
@@ -134,6 +137,12 @@ en/  ka/             the generated pages (committed, so hosting is instant)
 index.html           language chooser and automatic redirect
 sitemap.xml robots.txt 404.html
 ```
+
+Interface details: the header condenses on scroll, sections fade in as they are
+reached, article pages show a reading-progress bar, and gallery photographs open
+in a lightbox. All of it is optional enhancement — the site works with
+JavaScript disabled, and motion is switched off for readers who ask for reduced
+motion.
 
 Accessibility and SEO are built in: skip links, keyboard-operable menu, alt text,
 `hreflang` pairs between the two languages, Open Graph tags, and schema.org

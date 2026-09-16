@@ -16,6 +16,7 @@ HTML-ის შეცვლა ან თავიდან აგება ს�
 | `aviation.jpg` | Article: Wings and Discipline / ფრთები და დისციპლინა | 1600×900 |
 | `lecture.jpg` | Article: The Lecture Hall / აუდიტორია | 1600×900 |
 | `writing.jpg` | Article: The Written Word / დაწერილი სიტყვა | 1600×900 |
+| `philosophy.jpg` | Article: The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია | 1600×900 |
 | `public.jpg` | Article: A Life in Public Service / საზოგადოების სამსახურში | 1600×900 |
 | `honours.jpg` | Article: Honours and Recognition / ჯილდოები და აღიარება | 1600×900 |
 | `foundation.jpg` | Foundation page + home / ფონდის გვერდი და მთავარი | 1600×1200 |

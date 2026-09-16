@@ -6,16 +6,36 @@
   "otherAria": "Switch to Georgian",
   "meta": {
     "siteName": "Max Darkosadze",
-    "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Public figure",
-    "description": "The official site of Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Articles, biography, honours and the work of his foundation, in English and Georgian."
+    "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Public figure",
+    "description": "The official site of Max Darkosadze — known to many as Batoni Maksi — surgeon, aviation instructor, lecturer, writer, modern philosopher and public figure. Articles, biography, honours and the work of his foundation, in English and Georgian.",
+    "nickname": "Batoni Maksi",
+    "nicknameLabel": "Known to many simply as"
   },
   "nav": [
-    { "key": "home", "label": "Home" },
-    { "key": "about", "label": "Biography" },
-    { "key": "articles", "label": "Articles" },
-    { "key": "foundation", "label": "Foundation" },
-    { "key": "gallery", "label": "Gallery" },
-    { "key": "contact", "label": "Contact" }
+    {
+      "key": "home",
+      "label": "Home"
+    },
+    {
+      "key": "about",
+      "label": "Biography"
+    },
+    {
+      "key": "articles",
+      "label": "Articles"
+    },
+    {
+      "key": "foundation",
+      "label": "Foundation"
+    },
+    {
+      "key": "gallery",
+      "label": "Gallery"
+    },
+    {
+      "key": "contact",
+      "label": "Contact"
+    }
   ],
   "ui": {
     "skip": "Skip to content",
@@ -43,17 +63,42 @@
       "heroEyebrow": "Official site",
       "heroTitle": "Max Darkosadze",
       "heroSubtitle": "A surgeon at the operating table, an instructor in the cockpit, a teacher in the lecture hall, a writer at the desk — and a citizen in the public square.",
-      "heroLead": "Few careers touch so many disciplines at once. Max Darkosadze has spent his working life at the meeting point of precision and responsibility: in surgery, where a single decision changes a life; in aviation, where discipline is the difference between routine and disaster; in teaching and writing, where knowledge is passed on; and in public work, where it is returned to the community that made it possible.",
+      "heroLead": "Few careers touch so many disciplines at once. Max Darkosadze — known across Georgia simply as Batoni Maksi — has spent his working life at the meeting point of precision and responsibility: in surgery, where a single decision changes a life; in aviation, where discipline is the difference between routine and disaster; in teaching, writing and philosophy, where experience is turned into something others can use; and in public work, where it is returned to the community that made it possible.",
       "ctaPrimary": "Read the articles",
       "ctaSecondary": "The biography",
-      "pillarsTitle": "Five lives in one",
+      "pillarsTitle": "Six lives in one",
       "pillarsLead": "Each of these fields demands a lifetime. Together they describe one person, and one consistent way of working.",
       "pillars": [
-        { "slug": "surgeon", "label": "Surgeon", "text": "Years spent where precision, nerve and judgement meet — and where the patient, never the procedure, is the point." },
-        { "slug": "aviation-instructor", "label": "Aviation instructor", "text": "Teaching pilots that discipline is not the enemy of confidence but its foundation." },
-        { "slug": "lecturer", "label": "Lecturer", "text": "A lecture hall run like an operating theatre: prepared, exacting, and generous with what is hard-won." },
-        { "slug": "writer", "label": "Writer", "text": "Books and essays that carry the professional’s eye into ordinary language." },
-        { "slug": "public-figure", "label": "Public figure", "text": "A voice in public life, and a foundation that turns that voice into practical help." }
+        {
+          "slug": "surgeon",
+          "label": "Surgeon",
+          "text": "Years spent where precision, nerve and judgement meet — and where the patient, never the procedure, is the point."
+        },
+        {
+          "slug": "aviation-instructor",
+          "label": "Aviation instructor",
+          "text": "Teaching pilots that discipline is not the enemy of confidence but its foundation."
+        },
+        {
+          "slug": "lecturer",
+          "label": "Lecturer",
+          "text": "A lecture hall run like an operating theatre: prepared, exacting, and generous with what is hard-won."
+        },
+        {
+          "slug": "writer",
+          "label": "Writer",
+          "text": "Books and essays that carry the professional’s eye into ordinary language."
+        },
+        {
+          "slug": "philosopher",
+          "label": "Philosopher",
+          "text": "A modern philosophy written from practice rather than from the library — several books on responsibility, attention and how a person decides."
+        },
+        {
+          "slug": "public-figure",
+          "label": "Public figure",
+          "text": "A voice in public life, and a foundation that turns that voice into practical help."
+        }
       ],
       "featuredLead": "Long-form profiles of the work, written in English and Georgian.",
       "foundationTitle": "The Max Darkosadze Foundation",
@@ -69,49 +114,182 @@
       "title": "Biography — Max Darkosadze",
       "eyebrow": "Biography",
       "heading": "The making of Max Darkosadze",
-      "lead": "A life built on one conviction: that mastery is a duty, not a privilege.",
+      "lead": "A life built on one conviction: that mastery is a duty, not a privilege. Known to a generation of students, patients and pilots simply as Batoni Maksi.",
       "blocks": [
-        { "type": "image", "src": "assets/img/portrait.jpg", "alt": "Portrait of Max Darkosadze", "caption": "Max Darkosadze, [[place and year]]." },
-        { "type": "h2", "text": "Early years" },
-        { "type": "p", "text": "Max Darkosadze was born in [[city]] in [[year]], into a family that prized study and service in equal measure. The household rule, as he has described it since, was simple: you may choose your work freely, but once you have chosen it you owe it everything. That rule has followed him into every field he has entered." },
-        { "type": "p", "text": "He attended [[school]], where his interests already ran in two directions at once — the human body and the machines that carry people through the air. He never gave either up. Where most people are asked to choose, he built a life in which the two disciplines taught each other." },
-        { "type": "h2", "text": "Medicine and surgery" },
-        { "type": "p", "text": "He entered [[university]] in [[year]] and qualified in medicine in [[year]], going on to specialise in [[surgical speciality]] under the supervision of [[mentor]]. His residency years at [[hospital]] were, by his own account, the hardest and most formative of his life: long rotations, difficult cases, and the slow accumulation of the one thing a young surgeon cannot be given — judgement." },
-        { "type": "p", "text": "In the decades since he has performed more than [[number]] operations, introduced [[technique or programme]] to [[institution]], and trained a generation of residents who now lead departments of their own. Colleagues describe a surgeon who is unhurried in the most literal sense: he moves at exactly the speed the tissue in front of him allows, and not one step faster." },
-        { "type": "h2", "text": "Aviation" },
-        { "type": "p", "text": "He earned his pilot’s licence in [[year]] and his instructor rating in [[year]], and has since logged more than [[number]] flight hours. For many years he has taught at [[flight school or club]], where his students include airline pilots, agricultural and medical-transport crews, and amateurs who simply wanted to fly well." },
-        { "type": "p", "text": "The link between the two professions is not decorative. Surgery and aviation are the two fields that have thought hardest about human error: checklists, briefings, crew resource management, the honest debrief. Max Darkosadze has spent years carrying the best practice of each discipline into the other, and lecturing on the subject to audiences from both." },
-        { "type": "h2", "text": "Teaching and writing" },
-        { "type": "p", "text": "He has lectured at [[university or academy]] since [[year]], teaching [[subject]] to medical students and [[subject]] to flight cadets. His books — among them [[title]] ([[year]]) and [[title]] ([[year]]) — grew out of those lectures, and out of his conviction that specialists owe the public a readable account of what they do." },
-        { "type": "h2", "text": "Public life" },
-        { "type": "p", "text": "Public work came later and, he says, inevitably. Having spent a career being handed the consequences of decisions taken elsewhere — under-equipped hospitals, undertrained crews, communities without access to either — he began to argue in public for what he had been repairing in private. In [[year]] he established the Max Darkosadze Foundation, which now supports students, clinics and readers across Georgia." },
-        { "type": "quote", "text": "I have never believed that a person is defined by a profession. A person is defined by what they leave behind them in other people.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "Personal" },
-        { "type": "p", "text": "He lives in [[city]]. He is [[family details]]. He reads history, walks in the [[region]] mountains, and still, whenever the weather allows, flies on Saturday mornings." }
+        {
+          "type": "image",
+          "src": "assets/img/portrait.jpg",
+          "alt": "Portrait of Max Darkosadze",
+          "caption": "Max Darkosadze, [[place and year]]."
+        },
+        {
+          "type": "h2",
+          "text": "Early years"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze was born in [[city]] in [[year]], into a family that prized study and service in equal measure. The household rule, as he has described it since, was simple: you may choose your work freely, but once you have chosen it you owe it everything. That rule has followed him into every field he has entered."
+        },
+        {
+          "type": "p",
+          "text": "He attended [[school]], where his interests already ran in two directions at once — the human body and the machines that carry people through the air. He never gave either up. Where most people are asked to choose, he built a life in which the two disciplines taught each other."
+        },
+        {
+          "type": "p",
+          "text": "Somewhere in those years he acquired the name that has followed him ever since. To students, patients, pilots and readers alike he is not “professor” or “doctor” but Batoni Maksi — Mr Maksi — an address that in Georgian carries respect and affection in the same breath. He has never encouraged it and has never managed to stop it."
+        },
+        {
+          "type": "h2",
+          "text": "Medicine and surgery"
+        },
+        {
+          "type": "p",
+          "text": "He entered [[university]] in [[year]] and qualified in medicine in [[year]], going on to specialise in [[surgical speciality]] under the supervision of [[mentor]]. His residency years at [[hospital]] were, by his own account, the hardest and most formative of his life: long rotations, difficult cases, and the slow accumulation of the one thing a young surgeon cannot be given — judgement."
+        },
+        {
+          "type": "p",
+          "text": "In the decades since he has performed more than [[number]] operations, introduced [[technique or programme]] to [[institution]], and trained a generation of residents who now lead departments of their own. Colleagues describe a surgeon who is unhurried in the most literal sense: he moves at exactly the speed the tissue in front of him allows, and not one step faster."
+        },
+        {
+          "type": "h2",
+          "text": "Aviation"
+        },
+        {
+          "type": "p",
+          "text": "He earned his pilot’s licence in [[year]] and his instructor rating in [[year]], and has since logged more than [[number]] flight hours. For many years he has taught at [[flight school or club]], where his students include airline pilots, agricultural and medical-transport crews, and amateurs who simply wanted to fly well."
+        },
+        {
+          "type": "p",
+          "text": "The link between the two professions is not decorative. Surgery and aviation are the two fields that have thought hardest about human error: checklists, briefings, crew resource management, the honest debrief. Max Darkosadze has spent years carrying the best practice of each discipline into the other, and lecturing on the subject to audiences from both."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching and writing"
+        },
+        {
+          "type": "p",
+          "text": "He has lectured at [[university or academy]] since [[year]], teaching [[subject]] to medical students and [[subject]] to flight cadets. His books — among them [[title]] ([[year]]) and [[title]] ([[year]]) — grew out of those lectures, and out of his conviction that specialists owe the public a readable account of what they do."
+        },
+        {
+          "type": "h2",
+          "text": "Philosophy"
+        },
+        {
+          "type": "p",
+          "text": "The books that made him known beyond the professions came later still. Working from four decades of decisions taken under pressure, he began to write about the questions medicine and aviation had forced on him — what responsibility actually requires of a person, how attention is trained, what competence is for, and how anyone decides well when the information is incomplete and the clock is running. [[Title]] ([[year]]) was the first; [[number]] volumes have followed."
+        },
+        {
+          "type": "p",
+          "text": "He resists the word “philosopher” in conversation and accepts it in print. His argument is that philosophy written only from libraries answers questions nobody is standing in front of, and that a person who has spent a career at the point where a decision becomes irreversible has something to contribute that a seminar room cannot supply."
+        },
+        {
+          "type": "h2",
+          "text": "Public life"
+        },
+        {
+          "type": "p",
+          "text": "Public work came later and, he says, inevitably. Having spent a career being handed the consequences of decisions taken elsewhere — under-equipped hospitals, undertrained crews, communities without access to either — he began to argue in public for what he had been repairing in private. In [[year]] he established the Max Darkosadze Foundation, which now supports students, clinics and readers across Georgia."
+        },
+        {
+          "type": "quote",
+          "text": "I have never believed that a person is defined by a profession. A person is defined by what they leave behind them in other people.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "Personal"
+        },
+        {
+          "type": "p",
+          "text": "He lives in [[city]]. He is [[family details]]. He reads history, walks in the [[region]] mountains, and still, whenever the weather allows, flies on Saturday mornings."
+        }
       ],
       "timelineTitle": "A life in dates",
       "timelineNote": "Replace the years and entries below with verified biography.",
       "timeline": [
-        { "year": "[[year]]", "text": "Born in [[city]]." },
-        { "year": "[[year]]", "text": "Enters [[university]] to study medicine." },
-        { "year": "[[year]]", "text": "Qualifies as a doctor; begins surgical residency at [[hospital]]." },
-        { "year": "[[year]]", "text": "Earns his private pilot’s licence." },
-        { "year": "[[year]]", "text": "Appointed [[position]] at [[institution]]." },
-        { "year": "[[year]]", "text": "Qualifies as a flight instructor." },
-        { "year": "[[year]]", "text": "Begins lecturing at [[university or academy]]." },
-        { "year": "[[year]]", "text": "Publishes [[first book title]]." },
-        { "year": "[[year]]", "text": "Establishes the Max Darkosadze Foundation." },
-        { "year": "[[year]]", "text": "Awarded [[honour]]." }
+        {
+          "year": "[[year]]",
+          "text": "Born in [[city]]."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Enters [[university]] to study medicine."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Qualifies as a doctor; begins surgical residency at [[hospital]]."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Earns his private pilot’s licence."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Appointed [[position]] at [[institution]]."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Qualifies as a flight instructor."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Begins lecturing at [[university or academy]]."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Publishes [[first book title]]."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Publishes [[title]], the first of his philosophical books."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Establishes the Max Darkosadze Foundation."
+        },
+        {
+          "year": "[[year]]",
+          "text": "Awarded [[honour]]."
+        }
       ],
       "honoursTitle": "Honours and distinctions",
       "honoursLead": "Recognition from the professions he has served, and from the public he has served through them.",
       "honours": [
-        { "year": "[[year]]", "title": "[[Name of state honour]]", "text": "Awarded by [[awarding body]] for [[reason]]." },
-        { "year": "[[year]]", "title": "[[Name of medical award]]", "text": "For contribution to [[field]] in Georgia." },
-        { "year": "[[year]]", "title": "[[Name of aviation award]]", "text": "For [[number]] hours of accident-free instruction." },
-        { "year": "[[year]]", "title": "Honorary member, [[society or association]]", "text": "Elected in recognition of [[reason]]." },
-        { "year": "[[year]]", "title": "[[Name of literary prize or nomination]]", "text": "For [[book title]]." },
-        { "year": "[[year]]", "title": "[[Name of civic award]]", "text": "For the work of the Max Darkosadze Foundation in [[region]]." }
+        {
+          "year": "[[year]]",
+          "title": "[[Name of state honour]]",
+          "text": "Awarded by [[awarding body]] for [[reason]]."
+        },
+        {
+          "year": "[[year]]",
+          "title": "[[Name of medical award]]",
+          "text": "For contribution to [[field]] in Georgia."
+        },
+        {
+          "year": "[[year]]",
+          "title": "[[Name of aviation award]]",
+          "text": "For [[number]] hours of accident-free instruction."
+        },
+        {
+          "year": "[[year]]",
+          "title": "Honorary member, [[society or association]]",
+          "text": "Elected in recognition of [[reason]]."
+        },
+        {
+          "year": "[[year]]",
+          "title": "[[Name of literary prize or nomination]]",
+          "text": "For [[book title]]."
+        },
+        {
+          "year": "[[year]]",
+          "title": "[[Name of philosophy award]]",
+          "text": "For [[book title]], awarded by [[awarding body]]."
+        },
+        {
+          "year": "[[year]]",
+          "title": "[[Name of civic award]]",
+          "text": "For the work of the Max Darkosadze Foundation in [[region]]."
+        }
       ]
     },
     "articles": {
@@ -126,36 +304,92 @@
       "heading": "The Max Darkosadze Foundation",
       "lead": "Skill is only worth what it gives back.",
       "blocks": [
-        { "type": "image", "src": "assets/img/foundation.jpg", "alt": "The work of the Max Darkosadze Foundation", "caption": "Foundation programme, [[place and year]]." },
-        { "type": "p", "text": "The Max Darkosadze Foundation was established in [[year]] with a single, unglamorous purpose: to put resources where talent already exists but opportunity does not. It works in the three fields its founder knows best — medicine, aviation and literacy — and it works mostly outside the capital, where the gap between ability and access is widest." },
-        { "type": "h2", "text": "What the foundation does" },
-        { "type": "p", "text": "Its programmes are deliberately small, practical and measurable. The foundation does not fund conferences about problems; it funds the specific thing that removes them." },
-        { "type": "h2", "text": "Principles" },
-        { "type": "list", "items": [
-          "Fund people, not prestige. Every lari should end up in the hands of someone doing the work.",
-          "Go where the need is, not where the cameras are.",
-          "Mentorship is part of every grant. Money without guidance is a gesture, not a programme.",
-          "Publish the numbers. Anyone who gives has the right to see where it went."
-        ]},
-        { "type": "h2", "text": "Support the work" },
-        { "type": "p", "text": "The foundation is funded by private donations, by partner clinics and companies, and by the author’s royalties. If you would like to support a scholarship, donate equipment, or offer your own time as a mentor, write to [[foundation@example.com]]." },
-        { "type": "note", "text": "Legal entity: [[registered name]]. Registration number: [[number]]. Registered address: [[address]]. Bank details for donations: [[IBAN]]." }
+        {
+          "type": "image",
+          "src": "assets/img/foundation.jpg",
+          "alt": "The work of the Max Darkosadze Foundation",
+          "caption": "Foundation programme, [[place and year]]."
+        },
+        {
+          "type": "p",
+          "text": "The Max Darkosadze Foundation was established in [[year]] with a single, unglamorous purpose: to put resources where talent already exists but opportunity does not. It works in the three fields its founder knows best — medicine, aviation and literacy — and it works mostly outside the capital, where the gap between ability and access is widest."
+        },
+        {
+          "type": "h2",
+          "text": "What the foundation does"
+        },
+        {
+          "type": "p",
+          "text": "Its programmes are deliberately small, practical and measurable. The foundation does not fund conferences about problems; it funds the specific thing that removes them."
+        },
+        {
+          "type": "h2",
+          "text": "Principles"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fund people, not prestige. Every lari should end up in the hands of someone doing the work.",
+            "Go where the need is, not where the cameras are.",
+            "Mentorship is part of every grant. Money without guidance is a gesture, not a programme.",
+            "Publish the numbers. Anyone who gives has the right to see where it went."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Support the work"
+        },
+        {
+          "type": "p",
+          "text": "The foundation is funded by private donations, by partner clinics and companies, and by the author’s royalties. If you would like to support a scholarship, donate equipment, or offer your own time as a mentor, write to [[foundation@example.com]]."
+        },
+        {
+          "type": "note",
+          "text": "Legal entity: [[registered name]]. Registration number: [[number]]. Registered address: [[address]]. Bank details for donations: [[IBAN]]."
+        }
       ],
       "programmesTitle": "Programmes",
       "programmes": [
-        { "title": "Scholarships in medicine", "text": "Annual scholarships for [[number]] medical students from [[regions]], covering tuition, textbooks and travel to placements." },
-        { "title": "Equipment for regional clinics", "text": "Surgical and diagnostic equipment delivered directly to district hospitals, with training for the staff who will use it." },
-        { "title": "Wings programme", "text": "Subsidised flight training for [[number]] cadets a year who could not otherwise afford a licence, with instruction hours donated by volunteer instructors." },
-        { "title": "Books for regional libraries", "text": "Medical, technical and general-interest titles supplied to school and village libraries across [[region]], in Georgian." },
-        { "title": "The debrief seminars", "text": "Free seminars for hospital teams on checklists, briefings and error prevention — the aviation safety culture applied to clinical work." }
+        {
+          "title": "Scholarships in medicine",
+          "text": "Annual scholarships for [[number]] medical students from [[regions]], covering tuition, textbooks and travel to placements."
+        },
+        {
+          "title": "Equipment for regional clinics",
+          "text": "Surgical and diagnostic equipment delivered directly to district hospitals, with training for the staff who will use it."
+        },
+        {
+          "title": "Wings programme",
+          "text": "Subsidised flight training for [[number]] cadets a year who could not otherwise afford a licence, with instruction hours donated by volunteer instructors."
+        },
+        {
+          "title": "Books for regional libraries",
+          "text": "Medical, technical and general-interest titles supplied to school and village libraries across [[region]], in Georgian."
+        },
+        {
+          "title": "The debrief seminars",
+          "text": "Free seminars for hospital teams on checklists, briefings and error prevention — the aviation safety culture applied to clinical work."
+        }
       ],
       "statsTitle": "The work in numbers",
       "statsNote": "Replace these figures with the foundation’s verified results.",
       "stats": [
-        { "value": "[[000]]", "label": "students supported" },
-        { "value": "[[00]]", "label": "clinics equipped" },
-        { "value": "[[00]]", "label": "cadets trained" },
-        { "value": "[[0000]]", "label": "books donated" }
+        {
+          "value": "[[000]]",
+          "label": "students supported"
+        },
+        {
+          "value": "[[00]]",
+          "label": "clinics equipped"
+        },
+        {
+          "value": "[[00]]",
+          "label": "cadets trained"
+        },
+        {
+          "value": "[[0000]]",
+          "label": "books donated"
+        }
       ]
     },
     "gallery": {
@@ -164,18 +398,54 @@
       "heading": "In pictures",
       "lead": "Photographs from the operating theatre, the airfield, the lecture hall, the writing desk and public life. To publish your own photographs, simply copy them into the folder assets/img/gallery/ using the file names shown below — nothing else needs to be edited.",
       "items": [
-        { "src": "assets/img/gallery/01.jpg", "caption": "[[Caption — for example: after a long operation, [[hospital]], [[year]].]]" },
-        { "src": "assets/img/gallery/02.jpg", "caption": "[[Caption — the surgical team.]]" },
-        { "src": "assets/img/gallery/03.jpg", "caption": "[[Caption — pre-flight briefing with a student.]]" },
-        { "src": "assets/img/gallery/04.jpg", "caption": "[[Caption — in the cockpit.]]" },
-        { "src": "assets/img/gallery/05.jpg", "caption": "[[Caption — lecturing at [[university]].]]" },
-        { "src": "assets/img/gallery/06.jpg", "caption": "[[Caption — a book presentation.]]" },
-        { "src": "assets/img/gallery/07.jpg", "caption": "[[Caption — foundation programme in [[region]].]]" },
-        { "src": "assets/img/gallery/08.jpg", "caption": "[[Caption — receiving [[honour]].]]" },
-        { "src": "assets/img/gallery/09.jpg", "caption": "[[Caption — with students.]]" },
-        { "src": "assets/img/gallery/10.jpg", "caption": "[[Caption — at home in [[city]].]]" },
-        { "src": "assets/img/gallery/11.jpg", "caption": "[[Caption.]]" },
-        { "src": "assets/img/gallery/12.jpg", "caption": "[[Caption.]]" }
+        {
+          "src": "assets/img/gallery/01.jpg",
+          "caption": "[[Caption — for example: after a long operation, [[hospital]], [[year]].]]"
+        },
+        {
+          "src": "assets/img/gallery/02.jpg",
+          "caption": "[[Caption — the surgical team.]]"
+        },
+        {
+          "src": "assets/img/gallery/03.jpg",
+          "caption": "[[Caption — pre-flight briefing with a student.]]"
+        },
+        {
+          "src": "assets/img/gallery/04.jpg",
+          "caption": "[[Caption — in the cockpit.]]"
+        },
+        {
+          "src": "assets/img/gallery/05.jpg",
+          "caption": "[[Caption — lecturing at [[university]].]]"
+        },
+        {
+          "src": "assets/img/gallery/06.jpg",
+          "caption": "[[Caption — a book presentation.]]"
+        },
+        {
+          "src": "assets/img/gallery/07.jpg",
+          "caption": "[[Caption — foundation programme in [[region]].]]"
+        },
+        {
+          "src": "assets/img/gallery/08.jpg",
+          "caption": "[[Caption — receiving [[honour]].]]"
+        },
+        {
+          "src": "assets/img/gallery/09.jpg",
+          "caption": "[[Caption — with students.]]"
+        },
+        {
+          "src": "assets/img/gallery/10.jpg",
+          "caption": "[[Caption — at home in [[city]].]]"
+        },
+        {
+          "src": "assets/img/gallery/11.jpg",
+          "caption": "[[Caption.]]"
+        },
+        {
+          "src": "assets/img/gallery/12.jpg",
+          "caption": "[[Caption.]]"
+        }
       ]
     },
     "contact": {
@@ -184,20 +454,56 @@
       "heading": "Get in touch",
       "lead": "For interviews, lectures, foundation matters and publishing enquiries.",
       "cards": [
-        { "title": "General and press", "lines": ["[[press@example.com]]", "[[+995 000 00 00 00]]"] },
-        { "title": "Lectures and seminars", "lines": ["[[lectures@example.com]]", "Requests should include date, audience and subject."] },
-        { "title": "The foundation", "lines": ["[[foundation@example.com]]", "Donations, partnerships and mentoring."] },
-        { "title": "Publishing", "lines": ["[[publisher@example.com]]", "Rights, translations and new editions."] }
+        {
+          "title": "General and press",
+          "lines": [
+            "[[press@example.com]]",
+            "[[+995 000 00 00 00]]"
+          ]
+        },
+        {
+          "title": "Lectures and seminars",
+          "lines": [
+            "[[lectures@example.com]]",
+            "Requests should include date, audience and subject."
+          ]
+        },
+        {
+          "title": "The foundation",
+          "lines": [
+            "[[foundation@example.com]]",
+            "Donations, partnerships and mentoring."
+          ]
+        },
+        {
+          "title": "Publishing",
+          "lines": [
+            "[[publisher@example.com]]",
+            "Rights, translations and new editions."
+          ]
+        }
       ],
       "socialTitle": "Follow the work",
       "social": [
-        { "label": "Facebook", "url": "[[link]]" },
-        { "label": "Instagram", "url": "[[link]]" },
-        { "label": "LinkedIn", "url": "[[link]]" },
-        { "label": "YouTube", "url": "[[link]]" }
+        {
+          "label": "Facebook",
+          "url": "[[link]]"
+        },
+        {
+          "label": "Instagram",
+          "url": "[[link]]"
+        },
+        {
+          "label": "LinkedIn",
+          "url": "[[link]]"
+        },
+        {
+          "label": "YouTube",
+          "url": "[[link]]"
+        }
       ],
       "pressTitle": "Press kit",
-      "pressText": "High-resolution photographs, a short and long biography and a list of honours are available on request. Editors are asked to use the name in the form “Max Darkosadze” in English and “მაქსი დარკოსაძე” in Georgian."
+      "pressText": "High-resolution photographs, a short and long biography and a list of honours are available on request. Editors are asked to use the name in the form “Max Darkosadze” in English and “მაქსი დარკოსაძე” in Georgian. The nickname Batoni Maksi may be used in Georgian text; in English it is usually rendered “Batoni Maksi” with a short gloss."
     }
   },
   "articles": [
@@ -212,32 +518,96 @@
       "imageAlt": "Max Darkosadze in the operating theatre",
       "imageCaption": "In the operating theatre, [[hospital]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "Ask anyone who has worked beside Max Darkosadze what they remember, and the answer is almost never a particular operation. It is the atmosphere of the room." },
-        { "type": "p", "text": "Operating theatres have a temperature that has nothing to do with the thermostat. Some are loud. Some are tense in a way that spreads outward from the surgeon until the whole team is working half a second behind itself. His are famously quiet: instructions given once, in an ordinary voice, and a pace that never changes whether the case is routine or has just gone wrong." },
-        { "type": "p", "text": "That calm is not temperament. It is method, and he can describe how it was built." },
-        { "type": "h2", "text": "A vocation chosen early" },
-        { "type": "p", "text": "He decided on surgery at [[age]], for a reason he has never dressed up: he wanted work in which the result was visible the same day. Medicine in general offered him meaning. Surgery offered him accountability. In his telling these are not the same thing, and the second is harder." },
-        { "type": "p", "text": "He qualified at [[university]] in [[year]] and began his residency at [[hospital]] under [[mentor]], a surgeon of the old school who, he says, taught him two lessons that outlasted every technique: never begin an operation you have not finished in your head, and never let a patient learn from your face what you have not yet told them in words." },
-        { "type": "h2", "text": "Judgement before technique" },
-        { "type": "p", "text": "Technically, surgery can be taught. Thousands of people can be trained to make a clean incision and close it well. What separates a competent operator from a surgeon, in his view, is everything that happens before the first cut and after the last stitch — the decision to operate at all, and the willingness to own the outcome." },
-        { "type": "p", "text": "He is known among colleagues for a habit that unsettles younger doctors: he is quick to say no. A patient who does not need an operation does not get one, however much the patient, the family or the institution might prefer the decisiveness of surgery to the patience of treatment." },
-        { "type": "quote", "text": "The most difficult operation of my career is the one I decided not to perform. I still believe it was right. I have never stopped checking.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "The cockpit in the operating room" },
-        { "type": "p", "text": "Surgeons and pilots share a professional problem: both work in systems where a competent person, on a normal day, can kill someone through a small and entirely human lapse. Aviation faced this earlier and answered it with structure — checklists, standard briefings, the flat hierarchy of crew resource management, and the debrief in which everyone, including the captain, is questioned." },
-        { "type": "p", "text": "Because he spent his weekends teaching in a cockpit, Max Darkosadze brought that structure back into the hospital long before it was fashionable there. At [[institution]] he introduced [[the briefing or checklist protocol]] in [[year]]: a full team briefing before every list, names said aloud, and a short debrief afterwards in which the most junior person in the room speaks first." },
-        { "type": "list", "items": [
-          "Every member of the team is named and heard before the first incision.",
-          "Anyone in the room may stop the procedure, without needing to be right.",
-          "Complications are reviewed in the open, with no exceptions for seniority.",
-          "The surgeon speaks last in the debrief, not first."
-        ]},
-        { "type": "p", "text": "The results at [[institution]] — [[figure]] — are on the record. The cultural change was harder than the numbers suggest and, he is the first to say, is never finished." },
-        { "type": "h2", "text": "Teaching at the table" },
-        { "type": "p", "text": "He has trained more than [[number]] residents. Several now run departments; several more work abroad. The teaching method is unsentimental. The resident does the work, hands on the instruments, while he narrates. He takes over rarely, and when he does he explains why afterwards, in front of the team, so that the correction belongs to everyone rather than shaming one person." },
-        { "type": "p", "text": "What his former residents describe most often is not the technique but the permission: the discovery that it is professionally acceptable — obligatory, in fact — to say out loud that you do not know." },
-        { "type": "h2", "text": "The patient, not the procedure" },
-        { "type": "p", "text": "The sentence his colleagues quote most is his shortest. The patient is not the case in bed four. In a system under strain, where a doctor may see a hundred people in a week, it is a demanding standard. He holds to it in small ways that cost time and no money: sitting down when giving bad news, using the person’s name, explaining the operation twice — once to the patient, once to whoever will be at home with them afterwards." },
-        { "type": "p", "text": "Four decades in, he still writes the post-operative note himself." }
+        {
+          "type": "lead",
+          "text": "Ask anyone who has worked beside Max Darkosadze what they remember, and the answer is almost never a particular operation. It is the atmosphere of the room."
+        },
+        {
+          "type": "p",
+          "text": "Operating theatres have a temperature that has nothing to do with the thermostat. Some are loud. Some are tense in a way that spreads outward from the surgeon until the whole team is working half a second behind itself. His are famously quiet: instructions given once, in an ordinary voice, and a pace that never changes whether the case is routine or has just gone wrong."
+        },
+        {
+          "type": "p",
+          "text": "That calm is not temperament. It is method, and he can describe how it was built."
+        },
+        {
+          "type": "h2",
+          "text": "A vocation chosen early"
+        },
+        {
+          "type": "p",
+          "text": "He decided on surgery at [[age]], for a reason he has never dressed up: he wanted work in which the result was visible the same day. Medicine in general offered him meaning. Surgery offered him accountability. In his telling these are not the same thing, and the second is harder."
+        },
+        {
+          "type": "p",
+          "text": "He qualified at [[university]] in [[year]] and began his residency at [[hospital]] under [[mentor]], a surgeon of the old school who, he says, taught him two lessons that outlasted every technique: never begin an operation you have not finished in your head, and never let a patient learn from your face what you have not yet told them in words."
+        },
+        {
+          "type": "h2",
+          "text": "Judgement before technique"
+        },
+        {
+          "type": "p",
+          "text": "Technically, surgery can be taught. Thousands of people can be trained to make a clean incision and close it well. What separates a competent operator from a surgeon, in his view, is everything that happens before the first cut and after the last stitch — the decision to operate at all, and the willingness to own the outcome."
+        },
+        {
+          "type": "p",
+          "text": "He is known among colleagues for a habit that unsettles younger doctors: he is quick to say no. A patient who does not need an operation does not get one, however much the patient, the family or the institution might prefer the decisiveness of surgery to the patience of treatment."
+        },
+        {
+          "type": "quote",
+          "text": "The most difficult operation of my career is the one I decided not to perform. I still believe it was right. I have never stopped checking.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The cockpit in the operating room"
+        },
+        {
+          "type": "p",
+          "text": "Surgeons and pilots share a professional problem: both work in systems where a competent person, on a normal day, can kill someone through a small and entirely human lapse. Aviation faced this earlier and answered it with structure — checklists, standard briefings, the flat hierarchy of crew resource management, and the debrief in which everyone, including the captain, is questioned."
+        },
+        {
+          "type": "p",
+          "text": "Because he spent his weekends teaching in a cockpit, Max Darkosadze brought that structure back into the hospital long before it was fashionable there. At [[institution]] he introduced [[the briefing or checklist protocol]] in [[year]]: a full team briefing before every list, names said aloud, and a short debrief afterwards in which the most junior person in the room speaks first."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Every member of the team is named and heard before the first incision.",
+            "Anyone in the room may stop the procedure, without needing to be right.",
+            "Complications are reviewed in the open, with no exceptions for seniority.",
+            "The surgeon speaks last in the debrief, not first."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The results at [[institution]] — [[figure]] — are on the record. The cultural change was harder than the numbers suggest and, he is the first to say, is never finished."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching at the table"
+        },
+        {
+          "type": "p",
+          "text": "He has trained more than [[number]] residents. Several now run departments; several more work abroad. The teaching method is unsentimental. The resident does the work, hands on the instruments, while he narrates. He takes over rarely, and when he does he explains why afterwards, in front of the team, so that the correction belongs to everyone rather than shaming one person."
+        },
+        {
+          "type": "p",
+          "text": "What his former residents describe most often is not the technique but the permission: the discovery that it is professionally acceptable — obligatory, in fact — to say out loud that you do not know."
+        },
+        {
+          "type": "h2",
+          "text": "The patient, not the procedure"
+        },
+        {
+          "type": "p",
+          "text": "The sentence his colleagues quote most is his shortest. The patient is not the case in bed four. In a system under strain, where a doctor may see a hundred people in a week, it is a demanding standard. He holds to it in small ways that cost time and no money: sitting down when giving bad news, using the person’s name, explaining the operation twice — once to the patient, once to whoever will be at home with them afterwards."
+        },
+        {
+          "type": "p",
+          "text": "Four decades in, he still writes the post-operative note himself."
+        }
       ]
     },
     {
@@ -251,30 +621,88 @@
       "imageAlt": "Max Darkosadze as an aviation instructor",
       "imageCaption": "Pre-flight briefing at [[airfield]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "A student pilot who flies with Max Darkosadze for the first time usually expects the aircraft to be the difficult part. It is not. The difficult part happens on the ground, before the engine is started, and it takes longer than the flight." },
-        { "type": "p", "text": "The briefing is thorough to the point of stubbornness: weather, aircraft, fuel, weight, alternates, and then the question students remember for the rest of their flying lives — what will you do today if it goes wrong, and at what point will you decide?" },
-        { "type": "h2", "text": "Learning to fly" },
-        { "type": "p", "text": "He learned to fly at [[flight school]] in [[year]], at an age when most people consider their professional life settled. The reason was not romance. He had spent a decade in surgery watching what happens when experienced people are tired, rushed or unwilling to admit doubt, and he had read enough aviation accident reports to recognise the same pattern with a different vocabulary." },
-        { "type": "p", "text": "He qualified as an instructor in [[year]] and has since flown more than [[number]] hours, the great majority of them from the right-hand seat, teaching. His students include [[airline]] line pilots, agricultural and air-ambulance crews, and dozens of private pilots who came for a licence and stayed for the flying club." },
-        { "type": "h2", "text": "Discipline as freedom" },
-        { "type": "p", "text": "There is a version of aviation culture that treats procedure as bureaucracy and confidence as bravado. He argues the exact opposite, and he argues it every day in the briefing room: the pilot who has genuinely internalised the checklist is the one who is free to handle the situation the checklist does not cover." },
-        { "type": "quote", "text": "Confidence built on procedure survives a bad day. Confidence built on talent only survives a good one.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "How he teaches" },
-        { "type": "list", "items": [
-          "The student flies. The instructor talks only when the aircraft or the lesson requires it.",
-          "Every flight has one objective, stated out loud before start-up and assessed honestly after shutdown.",
-          "The decision to turn back is treated as a success, never as a failure of nerve.",
-          "Every flight is debriefed, including the good ones. Especially the good ones."
-        ]},
-        { "type": "p", "text": "He is exacting about a small ritual that students sometimes resist: writing the debrief down. Memory, he tells them, is the least reliable instrument on board." },
-        { "type": "h2", "text": "The medical link" },
-        { "type": "p", "text": "The traffic between his two professions runs in both directions. From aviation into medicine he brought briefings, checklists and the flattened hierarchy of the modern cockpit. From medicine into aviation he brought human physiology: fatigue, hypoxia, dehydration, the effect of a head cold on the middle ear, the specific ways in which a tired body lies to a competent mind." },
-        { "type": "p", "text": "His seminar on the subject — given at [[institution]] since [[year]] — is one of the few lectures attended by surgeons and pilots in the same room, which is exactly the point." },
-        { "type": "h2", "text": "Mountains and weather" },
-        { "type": "p", "text": "Flying in Georgia is not flying over a plain. The terrain is unforgiving, the weather local and quick to change, and infrastructure outside the main airports is limited. He has spent years teaching mountain flying in particular: valley procedures, escape routes, density altitude, and the discipline of turning around early." },
-        { "type": "p", "text": "In [[number]] years of instruction he records [[figure]] — a statistic he refuses to celebrate, on the grounds that safety records describe the past and pilots fly in the future." },
-        { "type": "h2", "text": "Why he still teaches" },
-        { "type": "p", "text": "He could have stopped instructing long ago. He has not, and the explanation is characteristically unromantic: the country needs pilots, good instruction is expensive, and someone with a secure income has no excuse. Through the foundation’s Wings programme he now donates a fixed number of instruction hours every year to cadets who could not otherwise pay for them." }
+        {
+          "type": "lead",
+          "text": "A student pilot who flies with Max Darkosadze for the first time usually expects the aircraft to be the difficult part. It is not. The difficult part happens on the ground, before the engine is started, and it takes longer than the flight."
+        },
+        {
+          "type": "p",
+          "text": "The briefing is thorough to the point of stubbornness: weather, aircraft, fuel, weight, alternates, and then the question students remember for the rest of their flying lives — what will you do today if it goes wrong, and at what point will you decide?"
+        },
+        {
+          "type": "h2",
+          "text": "Learning to fly"
+        },
+        {
+          "type": "p",
+          "text": "He learned to fly at [[flight school]] in [[year]], at an age when most people consider their professional life settled. The reason was not romance. He had spent a decade in surgery watching what happens when experienced people are tired, rushed or unwilling to admit doubt, and he had read enough aviation accident reports to recognise the same pattern with a different vocabulary."
+        },
+        {
+          "type": "p",
+          "text": "He qualified as an instructor in [[year]] and has since flown more than [[number]] hours, the great majority of them from the right-hand seat, teaching. His students include [[airline]] line pilots, agricultural and air-ambulance crews, and dozens of private pilots who came for a licence and stayed for the flying club."
+        },
+        {
+          "type": "h2",
+          "text": "Discipline as freedom"
+        },
+        {
+          "type": "p",
+          "text": "There is a version of aviation culture that treats procedure as bureaucracy and confidence as bravado. He argues the exact opposite, and he argues it every day in the briefing room: the pilot who has genuinely internalised the checklist is the one who is free to handle the situation the checklist does not cover."
+        },
+        {
+          "type": "quote",
+          "text": "Confidence built on procedure survives a bad day. Confidence built on talent only survives a good one.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "How he teaches"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The student flies. The instructor talks only when the aircraft or the lesson requires it.",
+            "Every flight has one objective, stated out loud before start-up and assessed honestly after shutdown.",
+            "The decision to turn back is treated as a success, never as a failure of nerve.",
+            "Every flight is debriefed, including the good ones. Especially the good ones."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "He is exacting about a small ritual that students sometimes resist: writing the debrief down. Memory, he tells them, is the least reliable instrument on board."
+        },
+        {
+          "type": "h2",
+          "text": "The medical link"
+        },
+        {
+          "type": "p",
+          "text": "The traffic between his two professions runs in both directions. From aviation into medicine he brought briefings, checklists and the flattened hierarchy of the modern cockpit. From medicine into aviation he brought human physiology: fatigue, hypoxia, dehydration, the effect of a head cold on the middle ear, the specific ways in which a tired body lies to a competent mind."
+        },
+        {
+          "type": "p",
+          "text": "His seminar on the subject — given at [[institution]] since [[year]] — is one of the few lectures attended by surgeons and pilots in the same room, which is exactly the point."
+        },
+        {
+          "type": "h2",
+          "text": "Mountains and weather"
+        },
+        {
+          "type": "p",
+          "text": "Flying in Georgia is not flying over a plain. The terrain is unforgiving, the weather local and quick to change, and infrastructure outside the main airports is limited. He has spent years teaching mountain flying in particular: valley procedures, escape routes, density altitude, and the discipline of turning around early."
+        },
+        {
+          "type": "p",
+          "text": "In [[number]] years of instruction he records [[figure]] — a statistic he refuses to celebrate, on the grounds that safety records describe the past and pilots fly in the future."
+        },
+        {
+          "type": "h2",
+          "text": "Why he still teaches"
+        },
+        {
+          "type": "p",
+          "text": "He could have stopped instructing long ago. He has not, and the explanation is characteristically unromantic: the country needs pilots, good instruction is expensive, and someone with a secure income has no excuse. Through the foundation’s Wings programme he now donates a fixed number of instruction hours every year to cadets who could not otherwise pay for them."
+        }
       ]
     },
     {
@@ -288,26 +716,72 @@
       "imageAlt": "Max Darkosadze lecturing",
       "imageCaption": "Lecturing at [[university]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "His lectures begin the same way every year, with a sentence students repeat to each other long afterwards: about half of what I am going to teach you this term will turn out to be wrong. My job is to make sure you can tell which half." },
-        { "type": "p", "text": "It is not a joke, and it sets the terms. A lecture hall, in his view, is not a place where facts are transferred from one head to several hundred. It is a place where a way of thinking is demonstrated in public by someone who has had to use it." },
-        { "type": "h2", "text": "Teaching what cannot be memorised" },
-        { "type": "p", "text": "He has lectured at [[university or academy]] since [[year]], teaching [[subject]]. The syllabus is conventional. The method is not. He teaches by case: a real patient, a real flight, a real decision, presented with only the information that was actually available at the time." },
-        { "type": "p", "text": "Students are asked what they would do, and then — the part they find hardest — why. Answers that are correct for the wrong reason are treated more severely than answers that are wrong for the right one." },
-        { "type": "quote", "text": "I can teach you what to do in the situations I have seen. I cannot teach you the ones you will meet. So we practise the thinking, not the answer.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "The lecture as an operation" },
-        { "type": "p", "text": "He prepares a lecture the way he prepares a list: completely, and in advance. Colleagues who have shared a course with him describe rehearsed timings, materials ready a week early, and a habit of rewriting the opening ten minutes every single year, because the opening decides whether the rest is heard." },
-        { "type": "list", "items": [
-          "One idea per lecture, stated at the beginning and returned to at the end.",
-          "Real cases, including his own mistakes, with names and details removed.",
-          "No question dismissed. A bad question is a diagnosis of the teaching, not the student.",
-          "Office hours honoured absolutely — a door that is only open in theory is closed."
-        ]},
-        { "type": "h2", "text": "Mistakes in public" },
-        { "type": "p", "text": "The most discussed feature of his teaching is that he lectures on his own errors. Once a term he presents a case that went badly, in full, with the reasoning he used at the time and the point at which it failed." },
-        { "type": "p", "text": "Students find it unsettling; that is the intention. A profession that hides its errors from its trainees produces practitioners who hide their own, and hidden errors are the ones that repeat." },
-        { "type": "h2", "text": "Beyond the university" },
-        { "type": "p", "text": "He lectures outside the university as often as inside it — to hospital teams in [[region]], to flying clubs, to school pupils deciding what to study, and to general audiences for whom the science is unfamiliar. He prepares these talks as seriously as any other. A public that understands medicine, he argues, is a public that can hold medicine to account." },
-        { "type": "p", "text": "Since [[year]] the foundation has recorded and published his seminars in Georgian, free of charge, so that a doctor in a district hospital has the same access as a student in the capital." }
+        {
+          "type": "lead",
+          "text": "His lectures begin the same way every year, with a sentence students repeat to each other long afterwards: about half of what I am going to teach you this term will turn out to be wrong. My job is to make sure you can tell which half."
+        },
+        {
+          "type": "p",
+          "text": "It is not a joke, and it sets the terms. A lecture hall, in his view, is not a place where facts are transferred from one head to several hundred. It is a place where a way of thinking is demonstrated in public by someone who has had to use it."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching what cannot be memorised"
+        },
+        {
+          "type": "p",
+          "text": "He has lectured at [[university or academy]] since [[year]], teaching [[subject]]. The syllabus is conventional. The method is not. He teaches by case: a real patient, a real flight, a real decision, presented with only the information that was actually available at the time."
+        },
+        {
+          "type": "p",
+          "text": "Students are asked what they would do, and then — the part they find hardest — why. Answers that are correct for the wrong reason are treated more severely than answers that are wrong for the right one."
+        },
+        {
+          "type": "quote",
+          "text": "I can teach you what to do in the situations I have seen. I cannot teach you the ones you will meet. So we practise the thinking, not the answer.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The lecture as an operation"
+        },
+        {
+          "type": "p",
+          "text": "He prepares a lecture the way he prepares a list: completely, and in advance. Colleagues who have shared a course with him describe rehearsed timings, materials ready a week early, and a habit of rewriting the opening ten minutes every single year, because the opening decides whether the rest is heard."
+        },
+        {
+          "type": "list",
+          "items": [
+            "One idea per lecture, stated at the beginning and returned to at the end.",
+            "Real cases, including his own mistakes, with names and details removed.",
+            "No question dismissed. A bad question is a diagnosis of the teaching, not the student.",
+            "Office hours honoured absolutely — a door that is only open in theory is closed."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Mistakes in public"
+        },
+        {
+          "type": "p",
+          "text": "The most discussed feature of his teaching is that he lectures on his own errors. Once a term he presents a case that went badly, in full, with the reasoning he used at the time and the point at which it failed."
+        },
+        {
+          "type": "p",
+          "text": "Students find it unsettling; that is the intention. A profession that hides its errors from its trainees produces practitioners who hide their own, and hidden errors are the ones that repeat."
+        },
+        {
+          "type": "h2",
+          "text": "Beyond the university"
+        },
+        {
+          "type": "p",
+          "text": "He lectures outside the university as often as inside it — to hospital teams in [[region]], to flying clubs, to school pupils deciding what to study, and to general audiences for whom the science is unfamiliar. He prepares these talks as seriously as any other. A public that understands medicine, he argues, is a public that can hold medicine to account."
+        },
+        {
+          "type": "p",
+          "text": "Since [[year]] the foundation has recorded and published his seminars in Georgian, free of charge, so that a doctor in a district hospital has the same access as a student in the capital."
+        }
       ]
     },
     {
@@ -321,24 +795,160 @@
       "imageAlt": "Max Darkosadze at his writing desk",
       "imageCaption": "At the desk, [[place]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "He started writing for an ordinary reason: the same questions kept being asked in corridors, and the answers were too long for a corridor." },
-        { "type": "p", "text": "His first book, [[title]] ([[year]]), grew out of the notes he kept for his residents. The second, [[title]] ([[year]]), was written for patients and their families — an attempt to explain, in ordinary Georgian, what is actually happening in a hospital, and why the person in the white coat is sometimes unable to promise anything." },
-        { "type": "h2", "text": "The books" },
-        { "type": "list", "items": [
-          "[[Title]] ([[year]]) — [[one-line description]].",
-          "[[Title]] ([[year]]) — [[one-line description]].",
-          "[[Title]] ([[year]]) — [[one-line description]].",
-          "[[Title]] ([[year]]) — [[one-line description]]."
-        ]},
-        { "type": "p", "text": "Between them the books have sold [[number]] copies and been translated into [[languages]]. [[Title]] was [[prize or nomination]] in [[year]]." },
-        { "type": "h2", "text": "A style learned at the table" },
-        { "type": "p", "text": "Critics have noted that his prose reads like his operating: nothing decorative, nothing wasted, and a refusal to hurry the difficult passage. He edits, by his own count, [[number]] times, and cuts most heavily wherever he catches himself sounding impressive." },
-        { "type": "quote", "text": "If a sentence needs the reader to admire the writer, it is doing the wrong job. Clarity is the only respect a writer can offer.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "Writing about the living" },
-        { "type": "p", "text": "Writing from a medical life raises an obvious problem, and he treats it as the central one. Every clinical passage in his books is either published with explicit consent, or altered until the patient could not recognise themselves, or composed from several cases at once. Where he could not do this honestly, the story is not in the book." },
-        { "type": "h2", "text": "Why a surgeon writes" },
-        { "type": "p", "text": "The deeper argument runs through everything he publishes. Specialised knowledge that stays inside the speciality becomes a kind of private property, and private property invites suspicion. Where medicine is not explained, rumour explains it instead — and rumour, in a health system, costs lives." },
-        { "type": "p", "text": "The royalties from his books go to the foundation. He has said in interviews that this is the least interesting fact about them, and that he mentions it only because readers ask." }
+        {
+          "type": "lead",
+          "text": "He started writing for an ordinary reason: the same questions kept being asked in corridors, and the answers were too long for a corridor."
+        },
+        {
+          "type": "p",
+          "text": "His first book, [[title]] ([[year]]), grew out of the notes he kept for his residents. The second, [[title]] ([[year]]), was written for patients and their families — an attempt to explain, in ordinary Georgian, what is actually happening in a hospital, and why the person in the white coat is sometimes unable to promise anything."
+        },
+        {
+          "type": "h2",
+          "text": "The books"
+        },
+        {
+          "type": "list",
+          "items": [
+            "[[Title]] ([[year]]) — [[one-line description]].",
+            "[[Title]] ([[year]]) — [[one-line description]].",
+            "[[Title]] ([[year]]) — [[one-line description]].",
+            "[[Title]] ([[year]]) — [[one-line description]]."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "Between them the books have sold [[number]] copies and been translated into [[languages]]. [[Title]] was [[prize or nomination]] in [[year]]."
+        },
+        {
+          "type": "h2",
+          "text": "A style learned at the table"
+        },
+        {
+          "type": "p",
+          "text": "Critics have noted that his prose reads like his operating: nothing decorative, nothing wasted, and a refusal to hurry the difficult passage. He edits, by his own count, [[number]] times, and cuts most heavily wherever he catches himself sounding impressive."
+        },
+        {
+          "type": "quote",
+          "text": "If a sentence needs the reader to admire the writer, it is doing the wrong job. Clarity is the only respect a writer can offer.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "Writing about the living"
+        },
+        {
+          "type": "p",
+          "text": "Writing from a medical life raises an obvious problem, and he treats it as the central one. Every clinical passage in his books is either published with explicit consent, or altered until the patient could not recognise themselves, or composed from several cases at once. Where he could not do this honestly, the story is not in the book."
+        },
+        {
+          "type": "p",
+          "text": "The philosophical books that followed are treated separately on this site — they belong to a different argument, and they are the reason a surgeon is now read by people who will never set foot in a hospital."
+        },
+        {
+          "type": "h2",
+          "text": "Why a surgeon writes"
+        },
+        {
+          "type": "p",
+          "text": "The deeper argument runs through everything he publishes. Specialised knowledge that stays inside the speciality becomes a kind of private property, and private property invites suspicion. Where medicine is not explained, rumour explains it instead — and rumour, in a health system, costs lives."
+        },
+        {
+          "type": "p",
+          "text": "The royalties from his books go to the foundation. He has said in interviews that this is the least interesting fact about them, and that he mentions it only because readers ask."
+        }
+      ]
+    },
+    {
+      "slug": "philosopher",
+      "category": "Philosophy",
+      "title": "The Philosophy of Batoni Maksi",
+      "subtitle": "A modern philosopher who arrived at the subject through practice rather than the library",
+      "summary": "On the nickname the country gave him, the philosophical books that followed, and a body of thought built around responsibility, attention and deciding well under pressure.",
+      "date": "[[date]]",
+      "image": "assets/img/philosophy.jpg",
+      "imageAlt": "Max Darkosadze, known as Batoni Maksi",
+      "imageCaption": "[[Event]], [[place]], [[year]].",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Nobody decided that Max Darkosadze should be called Batoni Maksi. The name simply settled on him, the way names do when a person occupies a particular place in other people’s lives."
+        },
+        {
+          "type": "p",
+          "text": "It began, as far as anyone can reconstruct, among residents at [[hospital]], spread to the flying club, and was in general use long before the books. In Georgian the address carries two things at once that English separates: respect and affection. Neither is professional rank. That is exactly why it stuck."
+        },
+        {
+          "type": "h2",
+          "text": "A philosopher who did not set out to be one"
+        },
+        {
+          "type": "p",
+          "text": "He resists the word in conversation and accepts it in print, which is a fair description of how he arrived at the subject. He did not study philosophy; he ran out of room without it. Four decades of decisions taken with incomplete information and no possibility of reversal left him with questions that neither medicine nor aviation is equipped to answer, because both are disciplines of method and the questions were about persons."
+        },
+        {
+          "type": "p",
+          "text": "The first book, [[title]] ([[year]]), was written for that reason and to his own surprise found readers far outside the professions. [[number]] volumes have followed, among them [[title]] ([[year]]) and [[title]] ([[year]])."
+        },
+        {
+          "type": "quote",
+          "text": "I did not come to philosophy through books. I came to it because I kept meeting situations in which being technically correct was not enough, and I wanted to know what else was being asked of me.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "What the books argue"
+        },
+        {
+          "type": "p",
+          "text": "The thinking is unusually concrete for the genre. Each of the central ideas can be stated in a sentence, and each was earned somewhere specific — at a bedside, in a cockpit, in front of a lecture hall."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Responsibility is not a feeling.** It is the willingness to be the person who answers afterwards, decided in advance rather than discovered in the moment.",
+            "**Attention is a skill, not a state.** It can be trained, it degrades predictably with fatigue, and a society that does not teach it will keep being surprised by avoidable harm.",
+            "**Competence is held in trust.** Skill is built out of other people’s teaching, other people’s money and other people’s patience, which makes it something you are holding for them rather than something you own.",
+            "**Certainty is not available.** The honest question is never “am I sure?” but “what will I do if I am wrong, and when will I decide that I am?”",
+            "**Character is a habit of small decisions.** Nobody rises to the occasion; people fall back on what they have practised."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Against the seminar room"
+        },
+        {
+          "type": "p",
+          "text": "His sharpest argument is with academic philosophy, and it is made without hostility. Philosophy written only from libraries, he says, becomes very good at questions nobody is standing in front of. His own test for an idea is whether it would still be usable at four in the morning by someone tired, frightened and out of time."
+        },
+        {
+          "type": "p",
+          "text": "Critics have called this a limitation, and he agrees that it is one. [[Critic or publication]] wrote in [[year]] that the books are “ethics for people with their hands full” — a description he has quoted back at interviewers with evident satisfaction."
+        },
+        {
+          "type": "h2",
+          "text": "A Georgian philosophy"
+        },
+        {
+          "type": "p",
+          "text": "The books are written in Georgian first, and he has said he would not write them in any other language. They argue with a Georgian inheritance — hospitality as an obligation rather than a courtesy, the moral weight of the given word, the long habit of holding a community together when institutions are thin — and they argue with it seriously rather than sentimentally."
+        },
+        {
+          "type": "p",
+          "text": "[[title]] has been translated into [[languages]]. The royalties, like those of his other books, go to the foundation."
+        },
+        {
+          "type": "h2",
+          "text": "Why it matters to readers"
+        },
+        {
+          "type": "p",
+          "text": "The letters he receives, by his account, come mostly from people who are not philosophers and not doctors: teachers, engineers, soldiers, parents, and a surprising number of young people who found one of the books at a moment when a decision was in front of them."
+        },
+        {
+          "type": "p",
+          "text": "He answers them. That, several of his students have pointed out, is the whole philosophy in one habit."
+        }
       ]
     },
     {
@@ -352,27 +962,73 @@
       "imageAlt": "Max Darkosadze speaking in public",
       "imageCaption": "[[Event]], [[place]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "He did not go looking for a public role. He was, on his own description, pushed into one by arithmetic." },
-        { "type": "p", "text": "A surgeon in a regional hospital sees the results of decisions taken far away: equipment that was not bought, a road that was not repaired, a training programme that was cut, a village with no clinic within an hour. After enough years the individual cases stop looking individual." },
-        { "type": "h2", "text": "Speaking in public" },
-        { "type": "p", "text": "He began writing and speaking publicly in [[year]], mainly about three things: the equipment gap between the capital and the regions, the absence of a serious safety culture in clinical work, and the cost of training a professional that the professional’s own family is expected to carry alone." },
-        { "type": "p", "text": "He has stayed deliberately outside party politics, and says so whenever asked. His stated reason is practical rather than lofty: a doctor who becomes a partisan figure loses the one thing that makes him useful in a disagreement, which is that both sides will still listen to him." },
-        { "type": "quote", "text": "I am not interested in being right in public. I am interested in the equipment arriving.", "cite": "Max Darkosadze" },
-        { "type": "h2", "text": "The foundation" },
-        { "type": "p", "text": "The Max Darkosadze Foundation was established in [[year]], funded initially from his own income and his book royalties. Its programmes reflect the three things he knows how to do: train doctors, train pilots, and put readable books in front of people who have none." },
-        { "type": "list", "items": [
-          "Scholarships for medical students from [[regions]].",
-          "Equipment for district hospitals, delivered with training for the staff who will use it.",
-          "Subsidised flight training for cadets through the Wings programme.",
-          "Georgian-language books for school and village libraries.",
-          "Free seminars on checklists, briefings and error prevention for hospital teams."
-        ]},
-        { "type": "p", "text": "The foundation publishes its accounts annually. That was his condition for lending it his name." },
-        { "type": "h2", "text": "Mentorship as policy" },
-        { "type": "p", "text": "Every foundation grant carries a mentor. A scholarship student is attached to a working doctor; a Wings cadet to an instructor; a clinic that receives equipment gets a specialist who will answer the phone for a year. Money alone, he argues, is charity — and charity ends when the money does." },
-        { "type": "h2", "text": "What he is asked most often" },
-        { "type": "p", "text": "In interviews he is asked, more than anything else, how one person finds the time for surgery, flying, lecturing, writing and public work. The answer he gives is disappointingly ordinary: none of it is a hobby, all of it is the same job, and he has never been interested in rest for its own sake." },
-        { "type": "p", "text": "The longer answer is in the way his colleagues describe him — as a man who decided early that competence is not something you own, but something you are holding for other people." }
+        {
+          "type": "lead",
+          "text": "He did not go looking for a public role. He was, on his own description, pushed into one by arithmetic."
+        },
+        {
+          "type": "p",
+          "text": "A surgeon in a regional hospital sees the results of decisions taken far away: equipment that was not bought, a road that was not repaired, a training programme that was cut, a village with no clinic within an hour. After enough years the individual cases stop looking individual."
+        },
+        {
+          "type": "h2",
+          "text": "Speaking in public"
+        },
+        {
+          "type": "p",
+          "text": "He began writing and speaking publicly in [[year]], mainly about three things: the equipment gap between the capital and the regions, the absence of a serious safety culture in clinical work, and the cost of training a professional that the professional’s own family is expected to carry alone."
+        },
+        {
+          "type": "p",
+          "text": "He has stayed deliberately outside party politics, and says so whenever asked. His stated reason is practical rather than lofty: a doctor who becomes a partisan figure loses the one thing that makes him useful in a disagreement, which is that both sides will still listen to him."
+        },
+        {
+          "type": "quote",
+          "text": "I am not interested in being right in public. I am interested in the equipment arriving.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The foundation"
+        },
+        {
+          "type": "p",
+          "text": "The Max Darkosadze Foundation was established in [[year]], funded initially from his own income and his book royalties. Its programmes reflect the three things he knows how to do: train doctors, train pilots, and put readable books in front of people who have none."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Scholarships for medical students from [[regions]].",
+            "Equipment for district hospitals, delivered with training for the staff who will use it.",
+            "Subsidised flight training for cadets through the Wings programme.",
+            "Georgian-language books for school and village libraries.",
+            "Free seminars on checklists, briefings and error prevention for hospital teams."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The foundation publishes its accounts annually. That was his condition for lending it his name."
+        },
+        {
+          "type": "h2",
+          "text": "Mentorship as policy"
+        },
+        {
+          "type": "p",
+          "text": "Every foundation grant carries a mentor. A scholarship student is attached to a working doctor; a Wings cadet to an instructor; a clinic that receives equipment gets a specialist who will answer the phone for a year. Money alone, he argues, is charity — and charity ends when the money does."
+        },
+        {
+          "type": "h2",
+          "text": "What he is asked most often"
+        },
+        {
+          "type": "p",
+          "text": "In interviews he is asked, more than anything else, how one person finds the time for surgery, flying, lecturing, writing and public work. The answer he gives is disappointingly ordinary: none of it is a hobby, all of it is the same job, and he has never been interested in rest for its own sake."
+        },
+        {
+          "type": "p",
+          "text": "The longer answer is in the way his colleagues describe him — as a man who decided early that competence is not something you own, but something you are holding for other people."
+        }
       ]
     },
     {
@@ -386,34 +1042,71 @@
       "imageAlt": "Max Darkosadze receiving an award",
       "imageCaption": "Receiving [[honour]], [[place]], [[year]].",
       "blocks": [
-        { "type": "lead", "text": "He keeps the medals in a drawer, which is either modesty or filing, depending on who is telling the story. The record itself matters, because awards are one of the few public statements a profession makes about what it values." },
-        { "type": "h2", "text": "State and civic honours" },
-        { "type": "list", "items": [
-          "[[Name of honour]] ([[year]]) — awarded by [[body]] for [[reason]].",
-          "[[Name of honour]] ([[year]]) — for [[reason]].",
-          "Honorary citizen of [[city]] ([[year]])."
-        ]},
-        { "type": "h2", "text": "Medicine" },
-        { "type": "list", "items": [
-          "[[Award]] ([[year]]) — for contribution to [[speciality]] in Georgia.",
-          "Honorary member of [[society]] ([[year]]).",
-          "[[Award]] ([[year]]) — for the [[programme]] introduced at [[hospital]]."
-        ]},
-        { "type": "h2", "text": "Aviation" },
-        { "type": "list", "items": [
-          "[[Award]] ([[year]]) — for [[number]] hours of accident-free instruction.",
-          "Instructor of the year, [[organisation]] ([[year]]).",
-          "[[Award]] ([[year]]) — for work in mountain flight training."
-        ]},
-        { "type": "h2", "text": "Academic and literary" },
-        { "type": "list", "items": [
-          "[[Title]], [[university]] ([[year]]).",
-          "[[Literary prize or nomination]] ([[year]]) — for [[book]].",
-          "[[Award]] ([[year]]) — for popular science writing in Georgian."
-        ]},
-        { "type": "h2", "text": "What he says about them" },
-        { "type": "quote", "text": "An award is a receipt. It tells you that something was delivered. It does not tell you whether anyone is still using it.", "cite": "Max Darkosadze" },
-        { "type": "p", "text": "Colleagues note that he attends the ceremonies anyway, and always brings students." }
+        {
+          "type": "lead",
+          "text": "He keeps the medals in a drawer, which is either modesty or filing, depending on who is telling the story. The record itself matters, because awards are one of the few public statements a profession makes about what it values."
+        },
+        {
+          "type": "h2",
+          "text": "State and civic honours"
+        },
+        {
+          "type": "list",
+          "items": [
+            "[[Name of honour]] ([[year]]) — awarded by [[body]] for [[reason]].",
+            "[[Name of honour]] ([[year]]) — for [[reason]].",
+            "Honorary citizen of [[city]] ([[year]])."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Medicine"
+        },
+        {
+          "type": "list",
+          "items": [
+            "[[Award]] ([[year]]) — for contribution to [[speciality]] in Georgia.",
+            "Honorary member of [[society]] ([[year]]).",
+            "[[Award]] ([[year]]) — for the [[programme]] introduced at [[hospital]]."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Aviation"
+        },
+        {
+          "type": "list",
+          "items": [
+            "[[Award]] ([[year]]) — for [[number]] hours of accident-free instruction.",
+            "Instructor of the year, [[organisation]] ([[year]]).",
+            "[[Award]] ([[year]]) — for work in mountain flight training."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Academic and literary"
+        },
+        {
+          "type": "list",
+          "items": [
+            "[[Title]], [[university]] ([[year]]).",
+            "[[Literary prize or nomination]] ([[year]]) — for [[book]].",
+            "[[Award]] ([[year]]) — for popular science writing in Georgian."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "What he says about them"
+        },
+        {
+          "type": "quote",
+          "text": "An award is a receipt. It tells you that something was delivered. It does not tell you whether anyone is still using it.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "p",
+          "text": "Colleagues note that he attends the ceremonies anyway, and always brings students."
+        }
       ]
     }
   ]

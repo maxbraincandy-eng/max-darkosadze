@@ -215,7 +215,10 @@ def person_jsonld(data):
         "@context": "https://schema.org",
         "@type": "Person",
         "name": meta["siteName"],
-        "alternateName": "Max Darkosadze" if data["lang"] == "ka" else "მაქსი დარკოსაძე",
+        "alternateName": [
+            "Max Darkosadze" if data["lang"] == "ka" else "მაქსი დარკოსაძე",
+            meta["nickname"],
+        ],
         "description": meta["description"],
         "jobTitle": meta["tagline"].replace(" · ", ", "),
         "nationality": "Georgian",
@@ -258,7 +261,7 @@ def header(data, depth, active, key="home", slug=None):
         esc(data["ui"]["skip"]),
         link(data["lang"], "home", depth),
         esc(data["meta"]["siteName"]),
-        esc(data["meta"]["tagline"]),
+        esc(data["meta"]["nickname"]),
         esc(data["ui"]["menu"]),
         esc(data["ui"]["menu"]),
         "".join(nav_items),
@@ -281,7 +284,7 @@ def footer(data, depth):
   <div class="wrap footer-inner">
     <div class="footer-brand">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <p><strong>%s</strong><br><span>%s</span></p>
+      <p><strong>%s</strong><br><em class="footer-nick">%s</em><br><span>%s</span></p>
       <p class="muted">%s</p>
     </div>
     <nav class="footer-nav" aria-label="%s">
@@ -301,6 +304,7 @@ def footer(data, depth):
   </div>
 </footer>""" % (
         esc(data["meta"]["siteName"]),
+        esc(data["meta"]["nickname"]),
         esc(data["meta"]["tagline"]),
         esc(data["ui"]["footerNote"]),
         esc(data["ui"]["menu"]),
@@ -371,6 +375,7 @@ def render_home(data):
   <div class="wrap hero-inner">
     <p class="eyebrow">%s</p>
     <h1>%s</h1>
+    <p class="nickname"><span>%s</span> <strong>%s</strong></p>
     <p class="hero-subtitle">%s</p>
     <p class="hero-lead">%s</p>
     <p class="hero-actions">
@@ -439,6 +444,8 @@ def render_home(data):
         asset("assets/img/hero.jpg", depth),
         esc(p["heroEyebrow"]),
         esc(p["heroTitle"]),
+        esc(data["meta"]["nicknameLabel"]),
+        esc(data["meta"]["nickname"]),
         inline(p["heroSubtitle"]),
         inline(p["heroLead"]),
         link(data["lang"], "articles", depth),
