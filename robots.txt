@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maxbraincandy-eng.github.io/max-darkosadze/sitemap.xml

@@ -1,0 +1,4 @@
+{
+  "baseUrl": "https://maxbraincandy-eng.github.io/max-darkosadze",
+  "note": "baseUrl is used for canonical links, hreflang tags and sitemap.xml. Change it to your own domain (for example https://maxdarkosadze.ge) and run `python3 build.py` again. Set it to an empty string to build without absolute URLs."
+}

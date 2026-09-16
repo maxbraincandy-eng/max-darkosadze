@@ -1,0 +1,140 @@
+# Max Darkosadze — maxdarkosadze / მაქსი დარკოსაძე
+
+A bilingual (English + Georgian) website about **Max Darkosadze / მაქსი დარკოსაძე** —
+surgeon, aviation instructor, lecturer, writer and public figure.
+
+ორენოვანი (ქართული და ინგლისური) საიტი **მაქს დარკოსაძეზე** — ქირურგი,
+ავიაინსტრუქტორი, ლექტორი, მწერალი და საზოგადო მოღვაწე.
+
+---
+
+## ⚠️ Before publishing / გამოქვეყნებამდე
+
+The articles are written, but every **fact** — dates, names of hospitals and
+universities, numbers, awards, contact details — is a marked placeholder that
+looks like <code>[[this]]</code> and is highlighted in yellow on the page.
+Nothing factual was invented. Replace each one with verified information before
+the site goes public.
+
+სტატიები დაწერილია, მაგრამ ყველა **ფაქტობრივი დეტალი** — თარიღები, კლინიკებისა და
+უნივერსიტეტების სახელები, ციფრები, ჯილდოები, საკონტაქტო ინფორმაცია — დროებით
+ადგილშემნახველად არის მონიშნული <code>[[ასე]]</code> და გვერდზე ყვითლად არის გამოყოფილი.
+არც ერთი ფაქტი გამოგონილი არ არის. გამოქვეყნებამდე თითოეული ჩაანაცვლეთ
+დადასტურებული ინფორმაციით.
+
+Find them all / ყველას პოვნა:
+
+```bash
+grep -rn '\[\[' content/
+```
+
+When a page no longer has placeholders, the yellow highlight and the editor's note
+disappear on their own.
+
+---
+
+## What is in the site / რა არის საიტზე
+
+| Page | English | ქართული |
+|---|---|---|
+| Home / მთავარი | `en/index.html` | `ka/index.html` |
+| Biography, timeline, honours / ბიოგრაფია, ქრონოლოგია, ჯილდოები | `en/about.html` | `ka/about.html` |
+| Articles index / სტატიების სია | `en/articles.html` | `ka/articles.html` |
+| Foundation / ფონდი | `en/foundation.html` | `ka/foundation.html` |
+| Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
+| Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
+
+Six long-form articles, each published in both languages / ექვსი ვრცელი სტატია, ორივე ენაზე:
+
+1. **The Surgeon's Hands / ქირურგის ხელები** — `articles/surgeon.html`
+2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
+3. **The Lecture Hall / აუდიტორია** — `articles/lecturer.html`
+4. **The Written Word / დაწერილი სიტყვა** — `articles/writer.html`
+5. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
+6. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
+
+The language switch in the header always moves to the *same* page in the other
+language. `index.html` at the root sends a visitor to Georgian or English
+according to their browser, and offers both if they prefer to choose.
+
+---
+
+## Adding your photographs / ფოტოების დამატება
+
+Copy the files into `assets/img/` using the exact names listed in
+[`assets/img/README.md`](assets/img/README.md). Until a file exists, the page shows
+a dashed box with the expected path, so nothing is ever broken. No rebuild needed.
+
+ჩააგდეთ ფაილები `assets/img/`-ში ზუსტად იმ სახელებით, რომლებიც აღწერილია
+[`assets/img/README.md`](assets/img/README.md)-ში. სანამ ფაილი არ არსებობს, გვერდზე
+წყვეტილი ჩარჩო აჩვენებს საჭირო მისამართს. თავიდან აგება საჭირო არ არის.
+
+---
+
+## Editing the text / ტექსტის რედაქტირება
+
+All text lives in two files — there is no text inside the HTML:
+
+* `content/en.json` — English
+* `content/ka.json` — ქართული
+* `content/site.json` — the site address used for canonical links and the sitemap
+
+After editing, rebuild / რედაქტირების შემდეგ თავიდან ააგეთ:
+
+```bash
+python3 build.py
+```
+
+That regenerates every page in `en/` and `ka/`. Python 3 is the only requirement —
+no npm, no framework, no internet connection.
+
+### Adding a new article / ახალი სტატიის დამატება
+
+Add one object to the `articles` list in **both** `content/en.json` and
+`content/ka.json`, using the **same `slug`** in each, then run `python3 build.py`.
+The article page, the article index, the cards on the home page, the
+previous/next links and the sitemap all update themselves.
+
+Block types available in `blocks`: `lead`, `p`, `h2`, `h3`, `quote` (with `cite`),
+`list` (with `items`), `note`, `image` (with `src`, `alt`, `caption`).
+
+---
+
+## Previewing locally / ლოკალური გაშვება
+
+```bash
+python3 -m http.server 8000
+# then open http://localhost:8000/
+```
+
+---
+
+## Publishing / გამოქვეყნება
+
+The site is plain static HTML, so it can be hosted anywhere.
+
+**GitHub Pages:** repository *Settings → Pages → Source: Deploy from a branch*,
+choose this branch and the `/` (root) folder. `.nojekyll` is already included.
+
+**Your own domain:** set `baseUrl` in `content/site.json` to the real address
+(for example `https://maxdarkosadze.ge`), run `python3 build.py`, and add a
+`CNAME` file if you use GitHub Pages.
+
+---
+
+## Structure / სტრუქტურა
+
+```
+build.py             the generator — rebuilds every page from content/
+content/             all text, in JSON, one file per language
+assets/css/style.css a single stylesheet (light and dark themes)
+assets/js/main.js    mobile menu and photo-slot hints; no dependencies
+assets/img/          your photographs go here
+en/  ka/             the generated pages (committed, so hosting is instant)
+index.html           language chooser and automatic redirect
+sitemap.xml robots.txt 404.html
+```
+
+Accessibility and SEO are built in: skip links, keyboard-operable menu, alt text,
+`hreflang` pairs between the two languages, Open Graph tags, and schema.org
+`Person`/`Article` data.
