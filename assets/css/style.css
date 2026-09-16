@@ -23,8 +23,10 @@
   --sans: "Noto Sans Georgian", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
+/* Dark theme. Follows the system by default; the header switch overrides it
+   by setting data-theme on <html>. */
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --ink: #060c13;
     --ink-soft: #0e1720;
     --gold: #d8ae3f;
@@ -38,6 +40,21 @@
     --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
     --shadow-lg: 0 2px 4px rgba(0, 0, 0, .45), 0 24px 60px rgba(0, 0, 0, .5);
   }
+}
+
+:root[data-theme="dark"] {
+  --ink: #060c13;
+    --ink-soft: #0e1720;
+    --gold: #d8ae3f;
+    --gold-bright: #e6c15a;
+    --paper: #0b1219;
+    --surface: #121c26;
+    --surface-alt: #0f1821;
+    --text: #e7edf3;
+    --muted: #9aa8b6;
+    --line: #22303d;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 12px 32px rgba(0, 0, 0, .35);
+    --shadow-lg: 0 2px 4px rgba(0, 0, 0, .45), 0 24px 60px rgba(0, 0, 0, .5);
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -660,7 +677,7 @@ body.choose-lang {
 }
 
 /* links inside running text (IMDb, Instagram, and anything added later) */
-.prose a, .note a, .contact-card a, .card-body a {
+.prose a:not(.btn), .note a:not(.btn), .contact-card a:not(.btn), .card-body a:not(.btn) {
   color: var(--gold);
   text-decoration: underline;
   text-underline-offset: .18em;
@@ -668,7 +685,8 @@ body.choose-lang {
   text-decoration-color: color-mix(in srgb, var(--gold) 45%, transparent);
   transition: text-decoration-color .2s var(--ease), color .2s var(--ease);
 }
-.prose a:hover, .note a:hover, .contact-card a:hover, .card-body a:hover {
+.prose a:not(.btn):hover, .note a:not(.btn):hover,
+.contact-card a:not(.btn):hover, .card-body a:not(.btn):hover {
   text-decoration-color: currentColor;
 }
 
@@ -691,3 +709,115 @@ body.choose-lang {
 .fig-portrait img { width: 100%; height: auto; display: block; }
 .fig-portrait figcaption { text-align: center; }
 @media (max-width: 620px) { .fig-portrait { margin-top: -1rem; } }
+
+/* theme switch in the header */
+.theme-toggle {
+  display: grid; place-items: center;
+  width: 38px; height: 38px; flex: none;
+  border-radius: 50%; cursor: pointer;
+  background: none; border: 1px solid rgba(255, 255, 255, .28);
+  color: #fff; padding: 0;
+  transition: border-color .2s var(--ease), background .2s var(--ease);
+}
+.theme-toggle:hover { border-color: var(--gold); background: rgba(201, 162, 39, .15); }
+.theme-toggle svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+.theme-toggle .icon-sun { display: none; }
+:root[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun { display: block; }
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon { display: none; }
+}
+
+/* the motto */
+.motto {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(2.6rem, 6vw, 4.2rem) 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.motto::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(60% 120% at 50% 0%, rgba(201, 162, 39, .22), transparent 70%);
+}
+.motto-inner { position: relative; }
+.motto p {
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 4.6vw, 3rem);
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: .01em;
+}
+.motto .motto-alt {
+  margin-top: .7rem;
+  font-size: clamp(.95rem, 2vw, 1.15rem);
+  color: var(--gold-bright);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-family: var(--sans);
+}
+body.lang-en .motto .motto-alt { text-transform: none; letter-spacing: .04em; }
+.motto-rule {
+  width: 64px; height: 2px; background: var(--gold);
+  margin: 1.6rem auto 0; border: 0;
+}
+
+.nav-tools { display: flex; align-items: center; gap: .7rem; }
+@media (max-width: 900px) {
+  .nav-tools { margin-top: 1rem; justify-content: space-between; }
+  .nav-tools .lang-switch { margin-top: 0; flex: 1; }
+}
+
+/* ---------------------------------------------------------------- news */
+.news { list-style: none; margin: 0; padding: 0; }
+.news-item {
+  padding: 1.6rem 0 1.8rem;
+  border-top: 1px solid var(--line);
+}
+.news-item:first-child { border-top: 0; padding-top: 0; }
+.news-date {
+  font-size: .78rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .5rem;
+}
+body.lang-ka .news-date { text-transform: none; letter-spacing: .05em; }
+.news-item h2 { font-size: 1.35rem; margin: 0 0 .5rem; }
+.news-item p:last-child { margin-bottom: 0; }
+.news-link { color: var(--gold); text-decoration: none; font-weight: 600; }
+.news-link:hover { text-decoration: underline; }
+
+/* --------------------------------------------------------------- press */
+.copyable {
+  background: var(--surface-alt);
+  border: 1px solid var(--line);
+  border-inline-start: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+}
+
+/* ---------------------------------------------------------- contact form */
+.form-wrap { max-width: 44rem; }
+.contact-form {
+  display: grid; gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.contact-form label {
+  display: flex; flex-direction: column; gap: .4rem;
+  font-size: .88rem; color: var(--muted);
+}
+.form-wide, .form-actions { grid-column: 1 / -1; }
+.contact-form input, .contact-form textarea {
+  font: inherit; font-size: 1rem; color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line); border-radius: 10px;
+  padding: .7rem .9rem;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent);
+}
+.contact-form textarea { resize: vertical; min-height: 8rem; }
+.form-actions { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.form-actions .muted { font-size: .85rem; }

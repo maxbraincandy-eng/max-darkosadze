@@ -6,7 +6,7 @@
   "otherAria": "Switch to Georgian",
   "meta": {
     "siteName": "Max Darkosadze",
-    "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Filmmaker",
+    "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Sculptor · Filmmaker",
     "description": "The official site of Max Darkosadze — known to many as Batoni Maksi — surgeon, aviation instructor, lecturer, writer, modern philosopher and public figure. Articles, biography, honours and the work of his foundation, in English and Georgian.",
     "nickname": "Batoni Maksi",
     "nicknameLabel": "Known to many simply as",
@@ -27,6 +27,10 @@
     {
       "key": "articles",
       "label": "Articles"
+    },
+    {
+      "key": "news",
+      "label": "News"
     },
     {
       "key": "foundation",
@@ -59,7 +63,8 @@
     "footerNote": "All materials on this site concern the life and work of Max Darkosadze.",
     "rights": "All rights reserved.",
     "langLabel": "Language",
-    "categoryLabel": "Category"
+    "categoryLabel": "Category",
+    "theme": "Switch between light and dark"
   },
   "pages": {
     "home": {
@@ -70,7 +75,7 @@
       "heroLead": "Few careers touch so many disciplines at once. Max Darkosadze — known across Georgia simply as Batoni Maksi — has spent his working life at the meeting point of precision and responsibility: in surgery, where a single decision changes a life; in aviation, where discipline is the difference between routine and disaster; in teaching, writing and philosophy, where experience is turned into something others can use; and in public work, where it is returned to the community that made it possible.",
       "ctaPrimary": "Read the articles",
       "ctaSecondary": "The biography",
-      "pillarsTitle": "Seven lives in one",
+      "pillarsTitle": "Eight lives in one",
       "pillarsLead": "Each of these fields demands a lifetime. Together they describe one person, and one consistent way of working.",
       "pillars": [
         {
@@ -99,6 +104,11 @@
           "text": "A modern philosophy written from practice rather than from the library — several books on responsibility, attention and how a person decides."
         },
         {
+          "slug": "sculptor",
+          "label": "Sculptor",
+          "text": "Portrait busts in clay and marble — the one craft in which nothing can be added back."
+        },
+        {
           "slug": "public-figure",
           "label": "Public figure",
           "text": "A voice in public life, and a foundation that turns that voice into practical help."
@@ -117,7 +127,11 @@
       "quoteCite": "Max Darkosadze",
       "galleryTeaserTitle": "In pictures",
       "galleryTeaserText": "Photographs from the hospital, the airfield, the lecture hall and public life.",
-      "galleryCta": "Open the gallery"
+      "galleryCta": "Open the gallery",
+      "motto": {
+        "main": "Discipline creates freedom.",
+        "alt": "დისციპლინა ქმნის თავისუფლებას"
+      }
     },
     "about": {
       "title": "Biography — Max Darkosadze",
@@ -464,7 +478,60 @@
         }
       ],
       "pressTitle": "Press kit",
-      "pressText": "High-resolution photographs, a short and long biography and a list of honours are available on request. Editors are asked to use the name in the form “Max Darkosadze” in English and “მაქსი დარკოსაძე” in Georgian. The nickname Batoni Maksi may be used in Georgian text; in English it is usually rendered “Batoni Maksi” with a short gloss."
+      "pressText": "High-resolution photographs, a short and long biography and a list of honours are available on request. Editors are asked to use the name in the form “Max Darkosadze” in English and “მაქსი დარკოსაძე” in Georgian. The nickname Batoni Maksi may be used in Georgian text; in English it is usually rendered “Batoni Maksi” with a short gloss.",
+      "formTitle": "Write a message",
+      "form": {
+        "name": "Your name",
+        "email": "Your e-mail",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send",
+        "note": "The message goes straight to his inbox."
+      }
+    },
+    "news": {
+      "title": "News — Max Darkosadze",
+      "eyebrow": "News",
+      "heading": "News",
+      "lead": "Short notes on new work: films, books, lectures and the foundation.",
+      "empty": "Nothing posted yet.",
+      "entries": [
+        {
+          "date": "16 September 2026",
+          "title": "This site opens",
+          "text": "maxdarkosadze — the official site — is published in English and Georgian: the biography, the articles, the gallery and the work of the foundation. New entries will appear here.",
+          "link": "",
+          "linkLabel": ""
+        }
+      ]
+    },
+    "press": {
+      "title": "Press kit — Max Darkosadze",
+      "eyebrow": "For editors",
+      "heading": "Press kit",
+      "lead": "Everything a newsroom usually asks for, ready to copy. Nothing here needs permission — please credit the photographs to their owner.",
+      "shortTitle": "Short biography (35 words)",
+      "short": "Max Darkosadze, known in Georgia as Batoni Maksi, is a surgeon, aviation instructor, lecturer, writer, philosopher and filmmaker. Born in Tbilisi in 1995, he works between Georgia and New York and runs the foundation that carries his name.",
+      "longTitle": "Longer biography (120 words)",
+      "long": "Max Darkosadze — Batoni Maksi — was born in Tbilisi on 26 August 1995. He trained in medicine and in surgery, learned to fly young and went on to qualify as a flight instructor, and has taught in both lecture halls and briefing rooms ever since. His books, which began as notes for the doctors training beside him, grew into a body of philosophical writing on responsibility, attention and deciding well under pressure. He is also credited as a director, writer and actor, and directed and starred in the romantic comedy Cowards (2016). Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
+      "factsTitle": "Fact sheet",
+      "facts": [
+        "Full name: Max Darkosadze — მაქსი დარკოსაძე",
+        "Known as: Batoni Maksi — ბატონი მაქსი",
+        "Born: 26 August 1995, Tbilisi, Georgia",
+        "Based: Tbilisi and New York",
+        "Fields: surgery · aviation instruction · teaching · writing · philosophy · film",
+        "Foundation: the Max Darkosadze Foundation",
+        "IMDb: imdb.com/name/nm8752510",
+        "Instagram: @maxdarkosadze"
+      ],
+      "namesTitle": "How to write the name",
+      "names": "In English: **Max Darkosadze**, and **Batoni Maksi** for the nickname, with a short gloss on first use (“Batoni Maksi”, roughly “Mr Maksi”). In Georgian: **მაქსი დარკოსაძე**, „ბატონი მაქსი“. Please do not use “Mr Max” or “Maxim”.",
+      "downloadsTitle": "Downloads",
+      "downloadsText": "A single archive with the photographs on this site at full size, for print and web.",
+      "downloadLabel": "Photographs (ZIP)",
+      "contactTitle": "Interviews",
+      "contactText": "Interview and lecture requests go through the contact page."
     }
   },
   "articles": [
@@ -907,6 +974,73 @@
         {
           "type": "p",
           "text": "He answers them. That, several of his students have pointed out, is the whole philosophy in one habit."
+        }
+      ]
+    },
+    {
+      "slug": "sculptor",
+      "category": "Sculpture",
+      "title": "Faces in Stone",
+      "subtitle": "Why a man who spends his week repairing bodies spends his Sundays making them out of marble",
+      "summary": "On the workshop, the chisel, and the one discipline that punishes a careless stroke even more strictly than surgery does.",
+      "date": "",
+      "image": "assets/img/sculpture.jpg",
+      "imageAlt": "Max Darkosadze working on a marble bust",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "There is a workshop, and in it there are faces at every stage of becoming: some still in clay, some roughed out of stone, one or two finished and waiting for someone to come and collect them."
+        },
+        {
+          "type": "p",
+          "text": "He came to sculpture the way he comes to most things — through his hands, and through a problem. A surgeon spends years learning what tissue will tolerate. Marble tolerates nothing, and it tells you immediately."
+        },
+        {
+          "type": "h2",
+          "text": "The discipline of subtraction"
+        },
+        {
+          "type": "p",
+          "text": "Carving is the only craft he practises in which nothing can be added. Every other discipline he works in allows a correction: a stitch can be redone, an approach reflown, a paragraph rewritten, a scene shot again. Stone allows none of it. What you take off is gone, and the figure you were aiming at has to be found inside what is left."
+        },
+        {
+          "type": "quote",
+          "text": "Marble does not forgive an extra stroke. Neither does tissue — it only pretends to, and you find out later.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "p",
+          "text": "That, he says, is why he does it. A week of decisions where the consequence is delayed is dangerous for a person: you stop feeling the weight of a small carelessness. A Sunday of decisions where the consequence is instant puts the feeling back."
+        },
+        {
+          "type": "h2",
+          "text": "How he works"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The clay study first, always. Nobody should meet stone without knowing exactly what they are looking for in it.",
+            "Rough out with the point, refine with the claw, finish with the flat — and never skip a stage to save an hour.",
+            "Stop while still tired rather than push on. Fatigue takes the hand before it takes the mind.",
+            "Measure often. Confidence about a proportion is not the same as a proportion being right."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The busts are mostly portraits, and mostly of people he knows. He does not sell them. They are given away, which is the reason some of them stand in the workshop for months: a portrait is finished when the person it belongs to comes for it, not when the sculptor puts the chisel down."
+        },
+        {
+          "type": "h2",
+          "text": "The same hands"
+        },
+        {
+          "type": "p",
+          "text": "Colleagues who have seen him operate and then seen him carve report the same thing: the grip is different, the tempo is identical. Unhurried, deliberate, and entirely uninterested in an audience."
+        },
+        {
+          "type": "p",
+          "text": "He is modest about the results, and honest about why he keeps at it. It is not a second career and he has never claimed it is one. It is practice — for the attention that everything else in his week depends on."
         }
       ]
     },

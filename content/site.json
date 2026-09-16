@@ -1,4 +1,11 @@
 {
   "baseUrl": "https://maxbraincandy-eng.github.io/max-darkosadze",
-  "note": "baseUrl is used for canonical links, hreflang tags and sitemap.xml. Change it to your own domain (for example https://maxdarkosadze.ge) and run `python3 build.py` again. Set it to an empty string to build without absolute URLs."
+  "note": "baseUrl is used for canonical links, hreflang tags and sitemap.xml. Change it to your own domain (for example https://maxdarkosadze.ge) and run `python3 build.py` again. Set it to an empty string to build without absolute URLs.",
+  "analytics": {
+    "goatcounter": "",
+    "plausible": ""
+  },
+  "analyticsNote": "Leave both empty for no analytics at all. For free, privacy-friendly counting: register a name at goatcounter.com and put it in \"goatcounter\" (just the name, not the URL). For Plausible, put the site domain in \"plausible\". Then run python3 build.py.",
+  "formEndpoint": "",
+  "formNote": "The contact form only appears once this is filled in. Create a free form at formspree.io (or basin.com / getform.io), copy the endpoint it gives you — it looks like https://formspree.io/f/abcdwxyz — paste it here and run python3 build.py. Leave it empty and the contact page simply shows the e-mail and Instagram links."
 }

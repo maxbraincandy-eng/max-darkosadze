@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "foundation", "gallery", "contact"]
+PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -27,6 +27,40 @@ PAGE_KEYS = ["home", "about", "articles", "foundation", "gallery", "contact"]
 def load(name):
     with open(os.path.join(CONTENT_DIR, name), encoding="utf-8") as fh:
         return json.load(fh)
+
+
+IMAGES = {}
+
+
+def load_manifest():
+    """Pixel sizes written by tools/images.py; absent is fine."""
+    path = os.path.join(ROOT, "assets", "img", "manifest.json")
+    if os.path.exists(path):
+        with open(path, encoding="utf-8") as fh:
+            return json.load(fh)
+    return {}
+
+
+def img_tag(src, alt, depth, *, eager=False, extra=""):
+    """An <img> that reserves its own space and offers a phone-sized file."""
+    attrs = [
+        'src="%s"' % asset(src, depth),
+        'alt="%s"' % esc(alt or ""),
+    ]
+    size = IMAGES.get(src)
+    if size:
+        attrs.append('width="%d" height="%d"' % (size[0], size[1]))
+    small = src.rsplit(".", 1)[0] + "-800.jpg"
+    if small in IMAGES and size and size[0] > IMAGES[small][0]:
+        attrs.append('srcset="%s %dw, %s %dw"' % (
+            asset(small, depth), IMAGES[small][0], asset(src, depth), size[0]))
+        attrs.append('sizes="(max-width: 700px) 100vw, %dpx"' % min(size[0], 1140))
+    attrs.append('loading="%s"' % ("eager" if eager else "lazy"))
+    attrs.append('decoding="async"')
+    attrs.append("data-slot")
+    if extra:
+        attrs.append(extra)
+    return "<img %s>" % " ".join(attrs)
 
 
 def esc(text):
@@ -108,10 +142,8 @@ def figure(src, alt, caption, depth, classes="fig"):
     )
     return (
         '<figure class="%s">'
-        '<div class="img-slot" data-path="%s">'
-        '<img src="%s" alt="%s" loading="lazy" decoding="async" data-slot>'
-        "</div>%s</figure>"
-    ) % (classes, esc(src), asset(src, depth), esc(alt or ""), caption_html)
+        '<div class="img-slot" data-path="%s">%s</div>%s</figure>'
+    ) % (classes, esc(src), img_tag(src, alt, depth), caption_html)
 
 
 def editor_note(data, *parts):
@@ -158,9 +190,7 @@ def article_card(data, article, depth):
     href = link(data["lang"], "article", depth, article["slug"])
     return """
       <a class="card" href="%s">
-        <div class="card-media img-slot" data-path="%s">
-          <img src="%s" alt="%s" loading="lazy" decoding="async" data-slot>
-        </div>
+        <div class="card-media img-slot" data-path="%s">%s</div>
         <div class="card-body">
           <span class="tag">%s</span>
           <h3>%s</h3>
@@ -170,8 +200,7 @@ def article_card(data, article, depth):
       </a>""" % (
         href,
         esc(article["image"]),
-        asset(article["image"], depth),
-        esc(article.get("imageAlt", article["title"])),
+        img_tag(article["image"], article.get("imageAlt", article["title"]), depth),
         esc(article["category"]),
         inline(article["title"]),
         inline(article["summary"]),
@@ -219,8 +248,28 @@ def head(data, title, description, depth, key, slug=None):
         "family=Noto+Serif+Georgian:wght@400;600;700&"
         'family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap">',
         '<link rel="stylesheet" href="%s">' % asset("assets/css/style.css", depth),
+        THEME_BOOT,
     ]
+    if SITE.get("analytics", {}).get("goatcounter"):
+        tags.append(
+            '<script data-goatcounter="https://%s.goatcounter.com/count" '
+            'async src="//gc.zgo.at/count.js"></script>'
+            % esc(SITE["analytics"]["goatcounter"])
+        )
+    if SITE.get("analytics", {}).get("plausible"):
+        tags.append(
+            '<script defer data-domain="%s" src="https://plausible.io/js/script.js"></script>'
+            % esc(SITE["analytics"]["plausible"])
+        )
     return "\n  ".join(tags)
+
+
+THEME_BOOT = (
+    "<script>"
+    "try{var t=localStorage.getItem('md-theme');"
+    "if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}"
+    "</script>"
+)
 
 
 def person_jsonld(data):
@@ -268,7 +317,13 @@ def header(data, depth, active, key="home", slug=None):
     </button>
     <nav id="site-nav" class="site-nav" aria-label="%s">
       <ul>%s</ul>
-      <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
+      <div class="nav-tools">
+        <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
+        <button class="theme-toggle" type="button" aria-label="%s" title="%s">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+        </button>
+      </div>
     </nav>
   </div>
 </header>""" % (
@@ -284,6 +339,8 @@ def header(data, depth, active, key="home", slug=None):
         data["other"],
         esc(data["otherAria"]),
         esc(data["otherLabel"]),
+        esc(data["ui"]["theme"]),
+        esc(data["ui"]["theme"]),
     )
 
 
@@ -292,6 +349,8 @@ def footer(data, depth):
         '<li><a href="%s">%s</a></li>'
         % (link(data["lang"], item["key"], depth), esc(item["label"]))
         for item in data["nav"]
+    ) + '<li><a href="%s">%s</a></li>' % (
+        link(data["lang"], "press", depth), esc(data["pages"]["press"]["heading"])
     )
     return """
 <footer class="site-footer">
@@ -389,13 +448,9 @@ def render_home(data):
     cards = "".join(article_card(data, a, depth) for a in data["articles"])
     body = """
 <section class="hero">
-  <div class="hero-media img-slot" data-path="assets/img/hero.jpg">
-    <img src="%s" alt="" loading="eager" decoding="async" data-slot>
-  </div>
+  <div class="hero-media img-slot" data-path="assets/img/hero.jpg">%s</div>
   <div class="wrap hero-inner">
-    <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg">
-      <img src="%s" alt="%s" loading="eager" decoding="async" data-slot>
-    </figure>
+    <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg">%s</figure>
     <div class="hero-text">
     <p class="eyebrow">%s</p>
     <h1>%s</h1>
@@ -421,6 +476,14 @@ def render_home(data):
   </div>
 </section>
 
+<section class="motto">
+  <div class="wrap motto-inner">
+    <p>%s</p>
+    <p class="motto-alt">%s</p>
+    <hr class="motto-rule">
+  </div>
+</section>
+
 <section class="section section-alt">
   <div class="wrap">
     <header class="section-head">
@@ -442,9 +505,7 @@ def render_home(data):
 
 <section class="section">
   <div class="wrap split">
-    <div class="split-media img-slot" data-path="assets/img/foundation.jpg">
-      <img src="%s" alt="%s" loading="lazy" decoding="async" data-slot>
-    </div>
+    <div class="split-media img-slot" data-path="assets/img/foundation.jpg">%s</div>
     <div class="split-body">
       <h2>%s</h2>
       <p>%s</p>
@@ -455,9 +516,7 @@ def render_home(data):
 
 <section class="section section-alt">
   <div class="wrap split split-reverse">
-    <div class="split-media img-slot" data-path="assets/img/gallery/01.jpg">
-      <img src="%s" alt="%s" loading="lazy" decoding="async" data-slot>
-    </div>
+    <div class="split-media img-slot" data-path="assets/img/gallery/01.jpg">%s</div>
     <div class="split-body">
       <h2>%s</h2>
       <p>%s</p>
@@ -466,9 +525,8 @@ def render_home(data):
   </div>
 </section>
 """ % (
-        asset("assets/img/hero.jpg", depth),
-        asset("assets/img/portrait.jpg", depth),
-        esc(data["meta"]["siteName"]),
+        img_tag("assets/img/hero.jpg", "", depth, eager=True),
+        img_tag("assets/img/portrait.jpg", data["meta"]["siteName"], depth, eager=True),
         esc(p["heroEyebrow"]),
         esc(p["heroTitle"]),
         esc(data["meta"]["nicknameLabel"]),
@@ -483,19 +541,19 @@ def render_home(data):
         esc(p["pillarsTitle"]),
         inline(p["pillarsLead"]),
         pillars,
+        inline(p["motto"]["main"]),
+        esc(p["motto"]["alt"]),
         esc(ui["featured"]),
         inline(p["featuredLead"]),
         cards,
         inline(p["quote"]),
         esc(p["quoteCite"]),
-        asset("assets/img/foundation.jpg", depth),
-        esc(p["foundationTitle"]),
+        img_tag("assets/img/foundation.jpg", p["foundationTitle"], depth),
         esc(p["foundationTitle"]),
         inline(p["foundationText"]),
         link(data["lang"], "foundation", depth),
         esc(p["foundationCta"]),
-        asset("assets/img/gallery/01.jpg", depth),
-        esc(p["galleryTeaserTitle"]),
+        img_tag("assets/img/gallery/01.jpg", p["galleryTeaserTitle"], depth),
         esc(p["galleryTeaserTitle"]),
         inline(p["galleryTeaserText"]),
         link(data["lang"], "gallery", depth),
@@ -744,6 +802,92 @@ def render_article(data, index):
     )
 
 
+def render_news(data):
+    depth = 1
+    p = data["pages"]["news"]
+    entries = p.get("entries", [])
+    if entries:
+        items = "".join(
+            """
+        <li class="news-item">
+          <p class="news-date">%s</p>
+          <h2>%s</h2>
+          <p>%s</p>%s
+        </li>""" % (
+                inline(e["date"]),
+                inline(e["title"]),
+                inline(e["text"]),
+                ('<p><a class="news-link" href="%s" target="_blank" rel="noopener">%s <span aria-hidden="true">&rarr;</span></a></p>'
+                 % (esc(e["link"]), esc(e.get("linkLabel") or e["link"]))) if e.get("link") else "",
+            )
+            for e in entries
+        )
+        body_inner = '<ol class="news">%s</ol>' % items
+    else:
+        body_inner = '<p class="note">%s</p>' % esc(p["empty"])
+
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">%s</div>
+</section>
+""" % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]), body_inner)
+    return document(data, title=p["title"], description=plain(p["lead"]), key="news",
+                    body=body, depth=depth, active="news")
+
+
+def render_press(data):
+    depth = 1
+    p = data["pages"]["press"]
+    facts = "".join("<li>%s</li>" % inline(f) for f in p["facts"])
+    archive = "assets/press/max-darkosadze-photos.zip"
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap prose">
+    <h2>%s</h2>
+    <p class="copyable">%s</p>
+    <h2>%s</h2>
+    <p class="copyable">%s</p>
+    <h2>%s</h2>
+    <ul class="rich-list">%s</ul>
+    <h2>%s</h2>
+    <p>%s</p>
+    <h2>%s</h2>
+    <p>%s</p>
+    <p><a class="btn btn-primary" href="%s" download>%s</a></p>
+    <h2>%s</h2>
+    <p>%s</p>
+  </div>
+</section>
+""" % (
+        esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+        esc(p["shortTitle"]), inline(p["short"]),
+        esc(p["longTitle"]), inline(p["long"]),
+        esc(p["factsTitle"]), facts,
+        esc(p["namesTitle"]), inline(p["names"]),
+        esc(p["downloadsTitle"]), inline(p["downloadsText"]),
+        asset(archive, depth), esc(p["downloadLabel"]),
+        esc(p["contactTitle"]), inline(p["contactText"]),
+    )
+    return document(data, title=p["title"], description=plain(p["short"]), key="press",
+                    body=body, depth=depth, active="press")
+
+
 def render_foundation(data):
     depth = 1
     p = data["pages"]["foundation"]
@@ -833,6 +977,32 @@ def render_gallery(data):
     )
 
 
+def contact_form(data, depth):
+    """Rendered only when content/site.json carries a form endpoint, so a
+    visitor never meets a form that goes nowhere."""
+    endpoint = SITE.get("formEndpoint", "").strip()
+    if not endpoint:
+        return ""
+    p = data["pages"]["contact"]
+    f = p["form"]
+    return """
+<section class="section">
+  <div class="wrap form-wrap">
+    <h2>%s</h2>
+    <form class="contact-form" action="%s" method="POST">
+      <label>%s<input type="text" name="name" autocomplete="name" required></label>
+      <label>%s<input type="email" name="email" autocomplete="email" required></label>
+      <label class="form-wide">%s<input type="text" name="subject"></label>
+      <label class="form-wide">%s<textarea name="message" rows="6" required></textarea></label>
+      <p class="form-actions"><button class="btn btn-primary" type="submit">%s</button>
+      <span class="muted">%s</span></p>
+    </form>
+  </div>
+</section>
+""" % (esc(p["formTitle"]), esc(endpoint), esc(f["name"]), esc(f["email"]),
+       esc(f["subject"]), esc(f["message"]), esc(f["send"]), esc(f["note"]))
+
+
 def render_contact(data):
     depth = 1
     p = data["pages"]["contact"]
@@ -863,6 +1033,8 @@ def render_contact(data):
   </div>
 </section>
 
+%s
+
 <section class="section section-alt">
   <div class="wrap split">
     <div class="split-body">
@@ -881,6 +1053,7 @@ def render_contact(data):
         inline(p["lead"]),
         editor_note(data, p["cards"]),
         cards,
+        contact_form(data, depth),
         esc(p["socialTitle"]),
         social,
         esc(p["pressTitle"]),
@@ -1011,6 +1184,8 @@ SITE = {}
 def main():
     global SITE
     SITE = load("site.json")
+    global IMAGES
+    IMAGES = load_manifest()
     datasets = {lang: load("%s.json" % lang) for lang in LANGS}
 
     written = []
@@ -1031,6 +1206,8 @@ def main():
         write(page_path(lang, "home"), render_home(data))
         write(page_path(lang, "about"), render_about(data))
         write(page_path(lang, "articles"), render_articles_index(data))
+        write(page_path(lang, "news"), render_news(data))
+        write(page_path(lang, "press"), render_press(data))
         write(page_path(lang, "foundation"), render_foundation(data))
         write(page_path(lang, "gallery"), render_gallery(data))
         write(page_path(lang, "contact"), render_contact(data))

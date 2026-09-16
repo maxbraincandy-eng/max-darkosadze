@@ -193,6 +193,21 @@
     });
   }
 
+  /* ---- light / dark switch ------------------------------------------ */
+  var themeButton = document.querySelector(".theme-toggle");
+  if (themeButton) {
+    var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+    var currentTheme = function () {
+      return docEl.getAttribute("data-theme") ||
+        (systemDark && systemDark.matches ? "dark" : "light");
+    };
+    themeButton.addEventListener("click", function () {
+      var next = currentTheme() === "dark" ? "light" : "dark";
+      docEl.setAttribute("data-theme", next);
+      try { localStorage.setItem("md-theme", next); } catch (e) { /* private mode */ }
+    });
+  }
+
   /* ---- remember the reader's language choice ------------------------ */
   try {
     var lang = document.documentElement.lang;

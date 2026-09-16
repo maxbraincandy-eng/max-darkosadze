@@ -23,6 +23,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;600;700&family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap">
   <link rel="stylesheet" href="../../assets/css/style.css">
+  <script>try{var t=localStorage.getItem('md-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "ცხოვრება საზოგადოების სამსახურში", "description": "როგორ გადაიქცა კარიერა, გატარებული სხვისი გადაწყვეტილებების შედეგების გამოსწორებაში, საჯარო არგუმენტად — და შემდეგ ფონდად.", "inLanguage": "ka", "about": "მაქსი დარკოსაძე", "author": {"@type": "Person", "name": "მაქსი დარკოსაძე"}}</script>
 </head>
 <body class="lang-ka page-articles">
@@ -41,8 +42,14 @@
       <span></span><span></span><span></span>
     </button>
     <nav id="site-nav" class="site-nav" aria-label="მენიუ">
-      <ul><li><a href="../../ka/index.html">მთავარი</a></li><li><a href="../../ka/about.html">ბიოგრაფია</a></li><li><a class="is-active" href="../../ka/articles.html">სტატიები</a></li><li><a href="../../ka/foundation.html">ფონდი</a></li><li><a href="../../ka/gallery.html">გალერეა</a></li><li><a href="../../ka/contact.html">კონტაქტი</a></li></ul>
-      <a class="lang-switch" href="../../en/articles/public-figure.html" hreflang="en" lang="en" title="Switch to English">English</a>
+      <ul><li><a href="../../ka/index.html">მთავარი</a></li><li><a href="../../ka/about.html">ბიოგრაფია</a></li><li><a class="is-active" href="../../ka/articles.html">სტატიები</a></li><li><a href="../../ka/news.html">სიახლეები</a></li><li><a href="../../ka/foundation.html">ფონდი</a></li><li><a href="../../ka/gallery.html">გალერეა</a></li><li><a href="../../ka/contact.html">კონტაქტი</a></li></ul>
+      <div class="nav-tools">
+        <a class="lang-switch" href="../../en/articles/public-figure.html" hreflang="en" lang="en" title="Switch to English">English</a>
+        <button class="theme-toggle" type="button" aria-label="ნათელი და მუქი თემის გადართვა" title="ნათელი და მუქი თემის გადართვა">
+          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
+        </button>
+      </div>
     </nav>
   </div>
 </header>
@@ -59,7 +66,7 @@
   </header>
 
   <div class="wrap">
-    <figure class="fig fig-hero"><div class="img-slot" data-path="assets/img/public.jpg"><img src="../../assets/img/public.jpg" alt="მაქსი დარკოსაძე საჯარო გამოსვლისას" loading="lazy" decoding="async" data-slot></div></figure>
+    <figure class="fig fig-hero"><div class="img-slot" data-path="assets/img/public.jpg"><img src="../../assets/img/public.jpg" alt="მაქსი დარკოსაძე საჯარო გამოსვლისას" width="1600" height="900" srcset="../../assets/img/public-800.jpg 800w, ../../assets/img/public.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div></figure>
   </div>
 
   <div class="wrap prose">
@@ -85,7 +92,7 @@
     <a class="btn btn-ghost" href="../../ka/articles.html">&larr; სტატიების სიაში დაბრუნება</a>
   </div>
 
-  <nav class="wrap pager" aria-label="ყველა სტატია"><a class="pager-item pager-prev" href="../../ka/articles/philosopher.html"><span>წინა სტატია</span><strong>ბატონი მაქსის ფილოსოფია</strong></a><a class="pager-item pager-next" href="../../ka/articles/two-afternoons.html"><span>შემდეგი სტატია</span><strong>ორი ჩვეულებრივი შუადღე</strong></a></nav>
+  <nav class="wrap pager" aria-label="ყველა სტატია"><a class="pager-item pager-prev" href="../../ka/articles/sculptor.html"><span>წინა სტატია</span><strong>სახეები ქვაში</strong></a><a class="pager-item pager-next" href="../../ka/articles/two-afternoons.html"><span>შემდეგი სტატია</span><strong>ორი ჩვეულებრივი შუადღე</strong></a></nav>
 </article>
 
 <section class="section section-alt">
@@ -93,9 +100,7 @@
     <header class="section-head"><h2>განაგრძეთ კითხვა</h2></header>
     <div class="cards">
       <a class="card" href="../../ka/articles/surgeon.html">
-        <div class="card-media img-slot" data-path="assets/img/surgery.jpg">
-          <img src="../../assets/img/surgery.jpg" alt="მაქსი დარკოსაძე საოპერაციოში" loading="lazy" decoding="async" data-slot>
-        </div>
+        <div class="card-media img-slot" data-path="assets/img/surgery.jpg"><img src="../../assets/img/surgery.jpg" alt="მაქსი დარკოსაძე საოპერაციოში" width="1600" height="900" srcset="../../assets/img/surgery-800.jpg 800w, ../../assets/img/surgery.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
         <div class="card-body">
           <span class="tag">მედიცინა</span>
           <h3>ქირურგის ხელები</h3>
@@ -104,9 +109,7 @@
         </div>
       </a>
       <a class="card" href="../../ka/articles/aviation-instructor.html">
-        <div class="card-media img-slot" data-path="assets/img/aviation.jpg">
-          <img src="../../assets/img/aviation.jpg" alt="მაქსი დარკოსაძე როგორც ავიაინსტრუქტორი" loading="lazy" decoding="async" data-slot>
-        </div>
+        <div class="card-media img-slot" data-path="assets/img/aviation.jpg"><img src="../../assets/img/aviation.jpg" alt="მაქსი დარკოსაძე როგორც ავიაინსტრუქტორი" width="1600" height="900" srcset="../../assets/img/aviation-800.jpg 800w, ../../assets/img/aviation.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
         <div class="card-body">
           <span class="tag">ავიაცია</span>
           <h3>ფრთები და დისციპლინა</h3>
@@ -115,9 +118,7 @@
         </div>
       </a>
       <a class="card" href="../../ka/articles/lecturer.html">
-        <div class="card-media img-slot" data-path="assets/img/lecture.jpg">
-          <img src="../../assets/img/lecture.jpg" alt="მაქსი დარკოსაძე ლექციაზე" loading="lazy" decoding="async" data-slot>
-        </div>
+        <div class="card-media img-slot" data-path="assets/img/lecture.jpg"><img src="../../assets/img/lecture.jpg" alt="მაქსი დარკოსაძე ლექციაზე" loading="lazy" decoding="async" data-slot></div>
         <div class="card-body">
           <span class="tag">განათლება</span>
           <h3>აუდიტორია</h3>
@@ -134,11 +135,11 @@
   <div class="wrap footer-inner">
     <div class="footer-brand">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <p><strong>მაქსი დარკოსაძე</strong><br><em class="footer-nick">ბატონი მაქსი</em><br><span>ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · ფილოსოფოსი · კინორეჟისორი</span></p>
+      <p><strong>მაქსი დარკოსაძე</strong><br><em class="footer-nick">ბატონი მაქსი</em><br><span>ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · ფილოსოფოსი · მოქანდაკე · კინორეჟისორი</span></p>
       <p class="muted">საიტზე განთავსებული ყველა მასალა ეხება მაქს დარკოსაძის ცხოვრებასა და საქმიანობას.</p>
     </div>
     <nav class="footer-nav" aria-label="მენიუ">
-      <ul><li><a href="../../ka/index.html">მთავარი</a></li><li><a href="../../ka/about.html">ბიოგრაფია</a></li><li><a href="../../ka/articles.html">სტატიები</a></li><li><a href="../../ka/foundation.html">ფონდი</a></li><li><a href="../../ka/gallery.html">გალერეა</a></li><li><a href="../../ka/contact.html">კონტაქტი</a></li></ul>
+      <ul><li><a href="../../ka/index.html">მთავარი</a></li><li><a href="../../ka/about.html">ბიოგრაფია</a></li><li><a href="../../ka/articles.html">სტატიები</a></li><li><a href="../../ka/news.html">სიახლეები</a></li><li><a href="../../ka/foundation.html">ფონდი</a></li><li><a href="../../ka/gallery.html">გალერეა</a></li><li><a href="../../ka/contact.html">კონტაქტი</a></li><li><a href="../../ka/press.html">პრეს-პაკეტი</a></li></ul>
     </nav>
     <div class="footer-lang">
       <p class="muted">ენა</p>

@@ -81,19 +81,22 @@ contact page: [Instagram](https://www.instagram.com/maxdarkosadze/) and
 | Articles index / სტატიების სია | `en/articles.html` | `ka/articles.html` |
 | Foundation / ფონდი | `en/foundation.html` | `ka/foundation.html` |
 | Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
+| News / სიახლეები | `en/news.html` | `ka/news.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
+| Press kit / პრეს-პაკეტი | `en/press.html` | `ka/press.html` |
 
-Nine long-form articles, each published in both languages / ცხრა ვრცელი სტატია, ორივე ენაზე:
+Ten long-form articles, each published in both languages / ათი ვრცელი სტატია, ორივე ენაზე:
 
 1. **The Surgeon's Hands / ქირურგის ხელები** — `articles/surgeon.html`
 2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
 3. **The Lecture Hall / აუდიტორია** — `articles/lecturer.html`
 4. **The Written Word / დაწერილი სიტყვა** — `articles/writer.html`
 5. **The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
-6. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
-7. **Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე** — `articles/two-afternoons.html`
-8. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
-9. **The Filmmaker / კინორეჟისორი** — `articles/filmmaker.html` (written from the public IMDb record)
+6. **Faces in Stone / სახეები ქვაში** — `articles/sculptor.html`
+7. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
+8. **Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე** — `articles/two-afternoons.html`
+9. **Honours and Recognition / ჯილდოები და აღიარება** — `articles/honours.html`
+10. **The Filmmaker / კინორეჟისორი** — `articles/filmmaker.html` (written from the public IMDb record)
 
 The language switch in the header always moves to the *same* page in the other
 language. `index.html` at the root sends a visitor to Georgian or English
@@ -155,6 +158,50 @@ Inside any text you can write `[link text](https://example.com)` for a link,
 
 ---
 
+## Posting news / სიახლის დამატება
+
+Add an entry to the top of `entries` in the `news` section of both content files
+and rebuild:
+
+```json
+{ "date": "1 October 2026", "title": "…", "text": "…",
+  "link": "https://…", "linkLabel": "Watch the trailer" }
+```
+
+`link` and `linkLabel` are optional. With no entries at all the page says so
+politely.
+
+## Turning on the contact form / საკონტაქტო ფორმის ჩართვა
+
+The form is written and styled but hidden until it has somewhere to send to, so
+no visitor ever meets a form that goes nowhere. Create a free form at
+[formspree.io](https://formspree.io), paste its endpoint into `formEndpoint` in
+`content/site.json`, run `python3 build.py`, and the form appears on the contact
+page in both languages.
+
+## Visitor statistics / სტატისტიკა
+
+Off by default. For free, privacy-friendly counting register a name at
+[goatcounter.com](https://www.goatcounter.com) and put it in
+`analytics.goatcounter` in `content/site.json` (the name only, not the URL); or
+put your domain in `analytics.plausible`. Rebuild and the script is added to
+every page. Leave both empty and no tracking code is emitted at all.
+
+## Preparing photographs / ფოტოების მომზადება
+
+After adding or replacing anything in `assets/img/`:
+
+```bash
+python3 tools/images.py      # measures every image, writes phone-sized copies
+python3 tools/press_kit.py   # rebuilds the press archive
+python3 build.py
+```
+
+`tools/images.py` needs Pillow (`pip install Pillow`); everything else is the
+standard library. It writes `assets/img/manifest.json`, which lets each page
+reserve the right space for a picture (no jumping while it loads) and offer a
+smaller file to phones.
+
 ## Previewing locally / ლოკალური გაშვება
 
 ```bash
@@ -190,9 +237,10 @@ index.html           language chooser and automatic redirect
 sitemap.xml robots.txt 404.html
 ```
 
-Interface details: the header condenses on scroll, sections fade in as they are
-reached, article pages show a reading-progress bar, and gallery photographs open
-in a lightbox. All of it is optional enhancement — the site works with
+Interface details: the header condenses on scroll and carries a light/dark
+switch (it follows the system until a reader chooses, then remembers), sections
+fade in as they are reached, article pages show a reading-progress bar, and
+gallery photographs open in a lightbox. All of it is optional enhancement — the site works with
 JavaScript disabled, and motion is switched off for readers who ask for reduced
 motion.
 
