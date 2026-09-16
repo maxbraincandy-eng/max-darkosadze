@@ -202,7 +202,7 @@ def head(data, title, description, depth, key, slug=None):
             '<link rel="canonical" href="%s">' % esc(canonical),
             '<link rel="alternate" hreflang="%s" href="%s">' % (lang, esc(alt_self)),
             '<link rel="alternate" hreflang="%s" href="%s">' % (other, esc(alt_other)),
-            '<link rel="alternate" hreflang="x-default" href="%s/">' % esc(base),
+            '<link rel="alternate" hreflang="x-default" href="%s/ka/">' % esc(base),
         ]
     tags += [
         '<meta property="og:type" content="%s">' % ("article" if key == "article" else "website"),
@@ -393,6 +393,10 @@ def render_home(data):
     <img src="%s" alt="" loading="eager" decoding="async" data-slot>
   </div>
   <div class="wrap hero-inner">
+    <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg">
+      <img src="%s" alt="%s" loading="eager" decoding="async" data-slot>
+    </figure>
+    <div class="hero-text">
     <p class="eyebrow">%s</p>
     <h1>%s</h1>
     <p class="nickname"><span>%s</span> <strong>%s</strong></p>
@@ -403,6 +407,7 @@ def render_home(data):
       <a class="btn btn-ghost" href="%s">%s</a>
     </p>
     <p class="hero-roles">%s</p>
+    </div>
   </div>
 </section>
 
@@ -462,6 +467,8 @@ def render_home(data):
 </section>
 """ % (
         asset("assets/img/hero.jpg", depth),
+        asset("assets/img/portrait.jpg", depth),
+        esc(data["meta"]["siteName"]),
         esc(p["heroEyebrow"]),
         esc(p["heroTitle"]),
         esc(data["meta"]["nicknameLabel"]),
@@ -900,20 +907,22 @@ def render_root_index():
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Max Darkosadze / მაქსი დარკოსაძე</title>
+<title>მაქსი დარკოსაძე / Max Darkosadze</title>
 <meta name="description" content="Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Official site in English and Georgian.">
 <link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate" hreflang="en" href="en/index.html">
 <link rel="alternate" hreflang="ka" href="ka/index.html">
+<link rel="alternate" hreflang="en" href="en/index.html">
+<link rel="alternate" hreflang="x-default" href="ka/index.html">
 <link rel="stylesheet" href="assets/css/style.css">
 <script>
+  /* Georgian is the default language of this site. A reader who chose English
+     before is sent back to English; everyone else lands on the Georgian pages. */
   (function () {
+    var target = "ka/";
     try {
-      var langs = (navigator.languages || [navigator.language || "en"]).join(",").toLowerCase();
-      location.replace(langs.indexOf("ka") === 0 || /(^|,)ka\\b/.test(langs) ? "ka/" : "en/");
-    } catch (e) {
-      location.replace("en/");
-    }
+      if (localStorage.getItem("md-lang") === "en") target = "en/";
+    } catch (e) { /* private mode - stay with the default */ }
+    location.replace(target);
   })();
 </script>
 </head>
@@ -921,12 +930,12 @@ def render_root_index():
   <main>
     <div class="choose-inner">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <h1>Max Darkosadze<br><span lang="ka">მაქსი დარკოსაძე</span></h1>
+      <h1><span lang="ka">მაქსი დარკოსაძე</span><br>Max Darkosadze</h1>
       <p>Surgeon · Aviation instructor · Lecturer · Writer · Public figure</p>
       <p lang="ka">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · საზოგადო მოღვაწე</p>
       <p class="choose-actions">
-        <a class="btn btn-primary" href="en/">English</a>
         <a class="btn btn-primary" href="ka/" lang="ka">ქართული</a>
+        <a class="btn btn-ghost" href="en/">English</a>
       </p>
     </div>
   </main>
@@ -953,8 +962,8 @@ def render_404():
       <p>This page does not exist.</p>
       <p lang="ka">ასეთი გვერდი არ არსებობს.</p>
       <p class="choose-actions">
-        <a class="btn btn-primary" href="/en/">English</a>
         <a class="btn btn-primary" href="/ka/" lang="ka">ქართული</a>
+        <a class="btn btn-ghost" href="/en/">English</a>
       </p>
     </div>
   </main>

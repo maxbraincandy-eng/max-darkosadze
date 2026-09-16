@@ -35,22 +35,21 @@
   /* ---- photo slots --------------------------------------------------
      Every image on the site points at a fixed file name. Until that file
      exists, show the path so the photograph can simply be dropped in.    */
-  var hint = document.documentElement.getAttribute("data-img-missing") ||
-    (document.documentElement.lang === "ka"
-      ? "ფოტოს ადგილი — ჩააგდეთ სურათი მისამართზე:"
-      : "Photo slot — place your image at:");
+  var hintLabel = docEl.lang === "ka"
+    ? "ფოტოს ადგილი — ჩააგდეთ სურათი მისამართზე: "
+    : "Photo slot — place your image at: ";
 
   function markMissing(img) {
     var slot = img.closest(".img-slot");
     if (!slot || slot.classList.contains("is-missing")) return;
     slot.classList.add("is-missing");
-    var note = document.createElement("span");
-    note.className = "slot-hint";
-    note.appendChild(document.createTextNode(hint));
-    var code = document.createElement("code");
-    code.textContent = slot.getAttribute("data-path") || "";
-    note.appendChild(code);
-    slot.appendChild(note);
+    var path = slot.getAttribute("data-path") || "";
+    slot.setAttribute("title", hintLabel + path);
+    var mark = document.createElement("span");
+    mark.className = "slot-hint";
+    mark.setAttribute("aria-hidden", "true");
+    mark.textContent = "MD";
+    slot.appendChild(mark);
   }
 
   Array.prototype.forEach.call(document.querySelectorAll("img[data-slot]"), function (img) {

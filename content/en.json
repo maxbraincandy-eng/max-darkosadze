@@ -357,55 +357,27 @@
       "title": "Gallery — Max Darkosadze",
       "eyebrow": "Gallery",
       "heading": "In pictures",
-      "lead": "Photographs from the operating theatre, the airfield, the lecture hall, the writing desk and public life. To publish your own photographs, simply copy them into the folder assets/img/gallery/ using the file names shown below — nothing else needs to be edited. Captions can be added in content/en.json.",
+      "lead": "Photographs from the hospital, the airfield, the writing desk and the film set — and from a Saturday away from all of them.",
       "items": [
         {
           "src": "assets/img/gallery/01.jpg",
-          "caption": ""
+          "caption": "On the course."
         },
         {
           "src": "assets/img/gallery/02.jpg",
-          "caption": ""
+          "caption": "In the hospital."
         },
         {
           "src": "assets/img/gallery/03.jpg",
-          "caption": ""
+          "caption": "Instructing from the right-hand seat."
         },
         {
           "src": "assets/img/gallery/04.jpg",
-          "caption": ""
+          "caption": "At the writing desk."
         },
         {
           "src": "assets/img/gallery/05.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/06.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/07.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/08.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/09.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/10.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/11.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/12.jpg",
-          "caption": ""
+          "caption": "Directing on set."
         }
       ]
     },

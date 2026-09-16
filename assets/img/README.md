@@ -8,6 +8,10 @@ no HTML editing, no rebuild required.
 ქვემოთ მითითებული ზუსტი სახელით და ის ავტომატურად გამოჩნდება ყველგან, სადაც გამოიყენება —
 HTML-ის შეცვლა ან თავიდან აგება საჭირო არ არის.
 
+**In place already / უკვე განთავსებულია:** `portrait.jpg`, `og.jpg`, `surgery.jpg`, `aviation.jpg`, `writing.jpg`, `philosophy.jpg`, `film.jpg`, `gallery/01–05.jpg`.
+
+**Still empty / ჯერ ცარიელია:** `hero.jpg`, `lecture.jpg`, `public.jpg`, `honours.jpg`, `foundation.jpg` — these show a monogram block until a file is dropped in; hover over one to see the file name it expects.
+
 | File / ფაილი | Used on / სად ჩანს | Suggested size |
 |---|---|---|
 | `hero.jpg` | Home page background / მთავარი გვერდის ფონი | 2000×1200, landscape |

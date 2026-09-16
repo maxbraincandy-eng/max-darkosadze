@@ -57,6 +57,14 @@ Send them over and they go straight in. Nothing else is marked.
 
 ---
 
+## Language / ენა
+
+**Georgian is the default.** Opening the site sends a visitor to `/ka/`; the
+header switch moves to English, and that choice is remembered for next time.
+
+**ქართული ნაგულისხმევი ენაა.** საიტზე შესვლისას ვიზიტორი ხვდება `/ka/`-ზე;
+ჰედერის გადამრთველი გადადის ინგლისურზე და ეს არჩევანი მახსოვრდება.
+
 ## Links / ბმულები
 
 The site links to the real profiles, in the footer of every page and on the
@@ -96,11 +104,17 @@ according to their browser, and offers both if they prefer to choose.
 
 Copy the files into `assets/img/` using the exact names listed in
 [`assets/img/README.md`](assets/img/README.md). Until a file exists, the page shows
-a dashed box with the expected path, so nothing is ever broken. No rebuild needed.
+a monogram block instead — hover over it to see the file name it is waiting for.
+No rebuild needed.
+
+Seven photographs are already in place (portrait, surgery, aviation, writing,
+philosophy, film and the five gallery pictures). Still open: `hero.jpg`,
+`lecture.jpg`, `public.jpg`, `honours.jpg`, `foundation.jpg`.
 
 ჩააგდეთ ფაილები `assets/img/`-ში ზუსტად იმ სახელებით, რომლებიც აღწერილია
 [`assets/img/README.md`](assets/img/README.md)-ში. სანამ ფაილი არ არსებობს, გვერდზე
-წყვეტილი ჩარჩო აჩვენებს საჭირო მისამართს. თავიდან აგება საჭირო არ არის.
+მონოგრამის ბლოკი ჩანს — კურსორის მიტანისას გამოჩნდება, რომელ ფაილს ელოდება.
+თავიდან აგება საჭირო არ არის.
 
 ---
 

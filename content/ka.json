@@ -357,55 +357,27 @@
       "title": "გალერეა — მაქსი დარკოსაძე",
       "eyebrow": "გალერეა",
       "heading": "ფოტოები",
-      "lead": "კადრები საოპერაციოდან, აეროდრომიდან, აუდიტორიიდან, საწერი მაგიდიდან და საზოგადოებრივი ცხოვრებიდან. საკუთარი ფოტოების გამოსაქვეყნებლად უბრალოდ ჩააგდეთ ისინი საქაღალდეში assets/img/gallery/ ქვემოთ მითითებული სახელებით — სხვა არაფრის შეცვლა არ დაგჭირდებათ. წარწერების დამატება შეგიძლიათ ფაილში content/ka.json.",
+      "lead": "კადრები კლინიკიდან, აეროდრომიდან, საწერი მაგიდიდან და გადასაღები მოედნიდან — და შაბათიდან, როცა არც ერთი მათგანი არ არის.",
       "items": [
         {
           "src": "assets/img/gallery/01.jpg",
-          "caption": ""
+          "caption": "გოლფის მოედანზე."
         },
         {
           "src": "assets/img/gallery/02.jpg",
-          "caption": ""
+          "caption": "კლინიკაში."
         },
         {
           "src": "assets/img/gallery/03.jpg",
-          "caption": ""
+          "caption": "ინსტრუქტაჟი მარჯვენა სავარძლიდან."
         },
         {
           "src": "assets/img/gallery/04.jpg",
-          "caption": ""
+          "caption": "საწერ მაგიდასთან."
         },
         {
           "src": "assets/img/gallery/05.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/06.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/07.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/08.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/09.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/10.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/11.jpg",
-          "caption": ""
-        },
-        {
-          "src": "assets/img/gallery/12.jpg",
-          "caption": ""
+          "caption": "გადასაღებ მოედანზე."
         }
       ]
     },
