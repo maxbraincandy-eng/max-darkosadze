@@ -137,6 +137,9 @@ def reading_time(article):
 # --------------------------------------------------------------------------
 
 def figure(src, alt, caption, depth, classes="fig"):
+    size = IMAGES.get(src)
+    if size and size[1] > size[0] and "fig-portrait" not in classes:
+        classes += " fig-tall"      # taller than it is wide: do not let it run away
     caption_html = (
         '<figcaption>%s</figcaption>' % inline(caption) if caption else ""
     )

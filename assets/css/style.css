@@ -853,3 +853,11 @@ body.lang-ka .quote-card span { text-transform: none; letter-spacing: .04em; }
 @media (prefers-reduced-motion: reduce) {
   .js .hero .hero-media img, .js .gallery .gal-item:first-child img { animation: none; }
 }
+
+/* a portrait photograph inside running text: centred, never taller than the
+   screen it is read on */
+.fig-tall { max-width: 420px; margin-inline: auto; }
+.fig-tall .img-slot { aspect-ratio: auto; }
+.fig-tall img { width: 100%; height: auto; max-height: 72vh; object-fit: contain; }
+.fig-tall figcaption { text-align: center; }
+@media (max-width: 560px) { .fig-tall { max-width: 100%; } }

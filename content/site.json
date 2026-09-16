@@ -1,6 +1,6 @@
 {
-  "baseUrl": "https://maxbraincandy-eng.github.io/max-darkosadze",
-  "note": "baseUrl is used for canonical links, hreflang tags and sitemap.xml. Change it to your own domain (for example https://maxdarkosadze.ge) and run `python3 build.py` again. Set it to an empty string to build without absolute URLs.",
+  "baseUrl": "https://max-darkosadze-production.up.railway.app",
+  "note": "baseUrl is the live address of the site. It is used for canonical links, hreflang tags, the sitemap, the share cards and the QR code. After buying a domain, put it here (for example https://maxdarkosadze.ge) and run `python3 tools/brand.py && python3 build.py` — everything follows.",
   "analytics": {
     "goatcounter": "",
     "plausible": ""
