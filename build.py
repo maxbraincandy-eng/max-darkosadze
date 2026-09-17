@@ -934,6 +934,7 @@ def render_guestbook(data):
     p = data["pages"]["guestbook"]
     f = p["form"]
     api = SITE.get("guestbookApi", "").strip()
+    post_to = api or SITE.get("guestbookForm", "").strip()   # own server, or a form service
 
     kept = "".join(
         """
@@ -960,8 +961,12 @@ def render_guestbook(data):
       </p>
       <p class="form-status" role="status" aria-live="polite" hidden></p>
     </form>""" % (esc(f["name"]), esc(f["place"]), esc(f["message"]), esc(f["counter"]),
-                  esc(f["send"]), esc(f["note"])) if api else (
-        '<p class="note">%s</p>' % esc(p["disabledNote"]))
+                  esc(f["send"]), esc(f["note"])) if post_to else (
+        """
+    <p>%s</p>
+    <p><a class="btn btn-primary" href="%s" target="_blank" rel="noopener">%s</a></p>""" % (
+            inline(p["disabledNote"]), esc(data["meta"]["links"]["instagram"]),
+            esc(p["disabledCta"])))
 
     body = """
 <section class="page-head">
@@ -974,7 +979,7 @@ def render_guestbook(data):
 
 <section class="section">
   <div class="wrap guest-grid"
-       data-guestbook="%s"
+       data-guestbook="%s" data-guestbook-post="%s" data-guestbook-mode="%s"
        data-msg-sending="%s" data-msg-thanks="%s" data-msg-error="%s" data-msg-long="%s"
        data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s">
     <div class="guest-form-wrap">
@@ -991,6 +996,8 @@ def render_guestbook(data):
 """ % (
         esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
         esc(api),
+        esc(post_to),
+        "api" if api else ("form" if post_to else "off"),
         esc(f["sending"]), esc(f["thanks"]), esc(f["error"]), esc(f["tooLong"]),
         esc(p["empty"]), esc(p["loading"]), esc(p["disabledNote"]),
         esc(p["formTitle"]), form,

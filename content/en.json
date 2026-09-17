@@ -759,9 +759,10 @@
       },
       "entriesTitle": "Notes",
       "empty": "No notes yet. Yours would be the first.",
-      "disabledNote": "The guest book is not accepting notes at the moment.",
+      "disabledNote": "The form is not switched on yet. Until it is, the quickest way to send a note is a message on Instagram — it will be added here.",
       "loading": "Loading the notes…",
-      "entries": []
+      "entries": [],
+      "disabledCta": "Write on Instagram"
     }
   },
   "articles": [

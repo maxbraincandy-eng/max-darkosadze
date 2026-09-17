@@ -30,7 +30,27 @@ import time
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DB_PATH = os.environ.get("GUESTBOOK_DB", os.path.join(os.path.dirname(os.path.abspath(__file__)), "guestbook.db"))
+def _db_path():
+    """Somewhere writable: the configured path, next to this file, or /tmp —
+    a read-only project directory should not stop the server from starting."""
+    candidates = [os.environ.get("GUESTBOOK_DB")] if os.environ.get("GUESTBOOK_DB") else []
+    candidates.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), "guestbook.db"))
+    candidates.append(os.path.join("/tmp", "guestbook.db"))
+    for candidate in candidates:
+        directory = os.path.dirname(candidate) or "."
+        try:
+            os.makedirs(directory, exist_ok=True)
+            probe = os.path.join(directory, ".write-probe")
+            with open(probe, "w") as fh:
+                fh.write("")
+            os.remove(probe)
+            return candidate
+        except OSError:
+            continue
+    return candidates[-1]
+
+
+DB_PATH = _db_path()
 TOKEN = os.environ.get("GUESTBOOK_TOKEN", "")
 PORT = int(os.environ.get("PORT", "8000"))
 
@@ -101,6 +121,8 @@ class Handler(SimpleHTTPRequestHandler):
     # ----------------------------------------------------------------- GET
     def do_GET(self):
         path = self.path.split("?")[0]
+        if path in ("/healthz", "/api/health"):
+            return self.send_json({"ok": True, "db": os.path.basename(DB_PATH)})
         if path == "/api/guestbook":
             with db() as conn:
                 rows = conn.execute(

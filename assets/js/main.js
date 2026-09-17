@@ -292,6 +292,8 @@
   var guest = document.querySelector("[data-guestbook]");
   if (guest) {
     var api = guest.getAttribute("data-guestbook");
+    var postTo = guest.getAttribute("data-guestbook-post") || api;
+    var mode = guest.getAttribute("data-guestbook-mode") || "off";
     var list = guest.querySelector("[data-notes]");
     var emptyNote = guest.querySelector(".guest-empty");
     var form = guest.querySelector(".guest-form");
@@ -381,9 +383,9 @@
 
         button.disabled = true;
         tell(say("sending"));
-        fetch(api, {
+        fetch(postTo, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify(payload)
         }).then(function (r) {
           if (!r.ok) throw new Error("rejected");
