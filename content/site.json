@@ -8,7 +8,7 @@
   "analyticsNote": "Leave both empty for no analytics at all. For free, privacy-friendly counting: register a name at goatcounter.com and put it in \"goatcounter\" (just the name, not the URL). For Plausible, put the site domain in \"plausible\". Then run python3 build.py.",
   "formEndpoint": "",
   "formNote": "The contact form only appears once this is filled in. Create a free form at formspree.io (or basin.com / getform.io), copy the endpoint it gives you — it looks like https://formspree.io/f/abcdwxyz — paste it here and run python3 build.py. Leave it empty and the contact page simply shows the e-mail and Instagram links.",
-  "guestbookApi": "",
+  "guestbookApi": "/api/guestbook",
   "guestbookNote": "Empty means the site is served as plain static files: the guest-book page shows the notes kept in the content files and quietly hides the form. To accept notes live, run server/guestbook.py as the web process (see the README — on Railway that is Settings -> Deploy -> Custom Start Command, NOT a Procfile) and set this to \"/api/guestbook\".",
   "guestbookForm": "",
   "guestbookFormNote": "The quickest way to switch the comment box on, with no change to the deployment: create a free form at formspree.io, copy the endpoint it gives you (https://formspree.io/f/xxxxxxx), paste it here and run python3 build.py. Notes then arrive in your inbox; add the ones you want to keep with python3 tools/add_note.py. For a live guest book that publishes notes itself, use guestbookApi and server/guestbook.py instead."

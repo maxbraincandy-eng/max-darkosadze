@@ -332,7 +332,20 @@
       var note = document.createElement("p");
       note.className = "note";
       note.textContent = guest.getAttribute("data-msg-offline") || "";
+      var url = guest.getAttribute("data-offline-url");
+      var cta = guest.getAttribute("data-offline-cta");
       form.replaceWith(note);
+      if (url && cta) {
+        var link = document.createElement("a");
+        link.className = "btn btn-primary";
+        link.href = url;
+        link.target = "_blank";
+        link.rel = "noopener";
+        link.textContent = cta;
+        var holder = document.createElement("p");
+        holder.appendChild(link);
+        note.after(holder);
+      }
     };
 
     if (api) {

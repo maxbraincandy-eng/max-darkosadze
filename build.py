@@ -981,8 +981,13 @@ def render_guestbook(data):
   <div class="wrap guest-grid"
        data-guestbook="%s" data-guestbook-post="%s" data-guestbook-mode="%s"
        data-msg-sending="%s" data-msg-thanks="%s" data-msg-error="%s" data-msg-long="%s"
-       data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s">
+       data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s"
+       data-offline-url="%s" data-offline-cta="%s">
     <div class="guest-form-wrap">
+      <figure class="guest-portrait img-slot" data-path="assets/img/portrait.jpg">
+        %s
+        <figcaption>%s</figcaption>
+      </figure>
       <h2>%s</h2>
       %s
     </div>
@@ -1000,6 +1005,9 @@ def render_guestbook(data):
         "api" if api else ("form" if post_to else "off"),
         esc(f["sending"]), esc(f["thanks"]), esc(f["error"]), esc(f["tooLong"]),
         esc(p["empty"]), esc(p["loading"]), esc(p["disabledNote"]),
+        esc(data["meta"]["links"]["instagram"]), esc(p["disabledCta"]),
+        img_tag("assets/img/portrait.jpg", data["meta"]["siteName"], depth),
+        inline(p["portraitCaption"]),
         esc(p["formTitle"]), form,
         esc(p["entriesTitle"]), kept,
         "" if not p.get("entries") else " hidden", esc(p["empty"]),

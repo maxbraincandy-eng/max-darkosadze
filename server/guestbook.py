@@ -60,6 +60,9 @@ MAX_PER_DAY = 10
 LINK_RE = re.compile(r"https?://|www\.", re.I)
 
 
+DB_READY = True
+
+
 def db():
     conn = sqlite3.connect(DB_PATH)
     conn.row_factory = sqlite3.Row
@@ -122,8 +125,11 @@ class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
         path = self.path.split("?")[0]
         if path in ("/healthz", "/api/health"):
-            return self.send_json({"ok": True, "db": os.path.basename(DB_PATH)})
+            return self.send_json({"ok": True, "guestbook": DB_READY,
+                                   "db": os.path.basename(DB_PATH)})
         if path == "/api/guestbook":
+            if not DB_READY:
+                return self.send_json({"error": "unavailable"}, 503)
             with db() as conn:
                 rows = conn.execute(
                     "SELECT id, name, place, message, created FROM notes "
@@ -143,6 +149,8 @@ class Handler(SimpleHTTPRequestHandler):
         path = self.path.split("?")[0]
 
         if path == "/api/guestbook":
+            if not DB_READY:
+                return self.send_json({"error": "unavailable"}, 503)
             payload = self.read_json()
             if payload is None:
                 return self.send_json({"error": "bad request"}, 400)
@@ -201,13 +209,24 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_error(404, "Not found")
         return None
 
+    def handle_one_request(self):
+        try:
+            super().handle_one_request()
+        except (BrokenPipeError, ConnectionResetError):
+            pass
+
     def log_message(self, fmt, *args):      # quieter logs
         if "/api/" in (self.path or ""):
             super().log_message(fmt, *args)
 
 
 def main():
-    db().close()
+    global DB_READY
+    try:
+        db().close()
+    except Exception as error:              # noqa: BLE001 - never refuse to serve
+        DB_READY = False
+        print("! the guest book is unavailable (%s) — the site is still served" % error)
     if not TOKEN:
         print("! GUESTBOOK_TOKEN is not set — moderation endpoints are disabled.")
     print("guest book database: %s" % DB_PATH)

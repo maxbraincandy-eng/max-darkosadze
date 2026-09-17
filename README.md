@@ -199,12 +199,20 @@ GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py keep 3
 GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py delete 4
 ```
 
+The page is already pointed at `/api/guestbook`, so **the moment that server is
+the web process the form appears by itself** — no rebuild, no further edit.
+While nothing answers there, the page shows his photograph, says the form is not
+switched on yet, and offers Instagram instead.
+
 **On Railway, do not add a `Procfile` for this.** One was tried and it took the
 whole site down: the file changes how the service is built, not just what it
 runs, and the deploy failed. Change it in the dashboard instead, where it can be
 undone in a click:
 
-1. Settings → Deploy → **Custom Start Command**: `python3 server/guestbook.py`
+1. Settings → Deploy → **Custom Start Command**:
+   `python3 server/guestbook.py || python3 -m http.server $PORT`
+   The second half is a safety net: if the guest-book server cannot start at
+   all, the site is still served as plain files.
 2. Variables → add `GUESTBOOK_TOKEN` (a long secret of your choosing)
 3. Optionally attach a volume and point `GUESTBOOK_DB` at it, so the notes
    survive a redeploy
@@ -213,6 +221,11 @@ undone in a click:
 
 If the deploy goes wrong, clearing the custom start command puts the site back
 exactly as it is now. Standard library only — nothing to install.
+
+The server is built not to take the site down with it: if the database cannot be
+opened it says so on startup, serves every page as normal, answers only the
+guest-book endpoints with 503, and reports `guestbook: false` at `/healthz` —
+tested by forcing the database to fail, with pages still returning 200.
 
 The page keeps working without any of this: if no guest book answers, the notes
 already in the content files still show and the form quietly disappears instead

@@ -1099,3 +1099,13 @@ body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none;
 .note-place { color: var(--muted); }
 .note-place::before { content: "· "; }
 .guest-empty { margin-top: 0; }
+
+/* his photograph beside the guest-book form */
+.guest-portrait { margin: 0 0 1.3rem; }
+.guest-portrait .img-slot, .guest-portrait img {
+  border-radius: calc(var(--radius) - 2px);
+}
+.guest-portrait img { width: 100%; height: auto; display: block; }
+.guest-portrait figcaption {
+  margin-top: .6rem; font-size: .84rem; color: var(--muted); text-align: center;
+}

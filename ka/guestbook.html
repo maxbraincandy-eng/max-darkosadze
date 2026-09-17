@@ -71,14 +71,29 @@
 
 <section class="section">
   <div class="wrap guest-grid"
-       data-guestbook="" data-guestbook-post="" data-guestbook-mode="off"
+       data-guestbook="/api/guestbook" data-guestbook-post="/api/guestbook" data-guestbook-mode="api"
        data-msg-sending="იგზავნება…" data-msg-thanks="გმადლობთ — ჩანაწერი გაიგზავნა და წაკითხვის შემდეგ გამოჩნდება." data-msg-error="ჩანაწერის გაგზავნა ვერ მოხერხდა. სცადეთ მოგვიანებით." data-msg-long="ჩანაწერი ოდნავ გრძელია."
-       data-msg-empty="ჯერ არც ერთი ჩანაწერი არ არის. თქვენი პირველი იქნება." data-msg-loading="იტვირთება…" data-msg-offline="ფორმა ჯერ ჩართული არ არის. სანამ ჩაირთვება, ჩანაწერის გამოგზავნის ყველაზე სწრაფი გზა Instagram-ია — აქვე დაემატება.">
+       data-msg-empty="ჯერ არც ერთი ჩანაწერი არ არის. თქვენი პირველი იქნება." data-msg-loading="იტვირთება…" data-msg-offline="ფორმა ჯერ ჩართული არ არის. სანამ ჩაირთვება, ჩანაწერის გამოგზავნის ყველაზე სწრაფი გზა Instagram-ია — აქვე დაემატება."
+       data-offline-url="https://www.instagram.com/maxdarkosadze/" data-offline-cta="მოგვწერეთ Instagram-ზე">
     <div class="guest-form-wrap">
+      <figure class="guest-portrait img-slot" data-path="assets/img/portrait.jpg">
+        <img src="../assets/img/portrait.jpg" alt="მაქსი დარკოსაძე" width="900" height="1200" loading="lazy" decoding="async" data-slot>
+        <figcaption>ბატონი მაქსი — დაუტოვეთ ორიოდე სიტყვა.</figcaption>
+      </figure>
       <h2>დატოვეთ ჩანაწერი</h2>
       
-    <p>ფორმა ჯერ ჩართული არ არის. სანამ ჩაირთვება, ჩანაწერის გამოგზავნის ყველაზე სწრაფი გზა Instagram-ია — აქვე დაემატება.</p>
-    <p><a class="btn btn-primary" href="https://www.instagram.com/maxdarkosadze/" target="_blank" rel="noopener">მოგვწერეთ Instagram-ზე</a></p>
+    <form class="guest-form" novalidate>
+      <label>თქვენი სახელი ან მეტსახელი<input type="text" name="name" maxlength="40" required autocomplete="nickname"></label>
+      <label>სად შეხვდით (არასავალდებულო)<input type="text" name="place" maxlength="80"></label>
+      <label class="form-wide">თქვენი ჩანაწერი<textarea name="message" rows="5" maxlength="700" required></textarea>
+        <span class="form-counter"><span data-counter>700</span> სიმბოლო დარჩა</span></label>
+      <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form-actions">
+        <button class="btn btn-primary" type="submit">გაგზავნა</button>
+        <span class="muted">ჩანაწერები ქვეყნდება წაკითხვის შემდეგ, ამიტომ თქვენი მაშინვე არ გამოჩნდება.</span>
+      </p>
+      <p class="form-status" role="status" aria-live="polite" hidden></p>
+    </form>
     </div>
     <div class="guest-entries">
       <h2>ჩანაწერები</h2>
