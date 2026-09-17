@@ -72,8 +72,14 @@ PORT = int(os.environ.get("PORT", "8000"))
 # Notes normally wait to be read before they appear. Set GUESTBOOK_AUTO_APPROVE=1
 # and they are published the moment they are written — the length limits, the
 # refusal of links and the one-note-per-minute rule still apply.
-AUTO_APPROVE = os.environ.get("GUESTBOOK_AUTO_APPROVE", "").strip().lower() in (
-    "1", "true", "yes", "on")
+def _switch(name):
+    """A variable typed by hand in a dashboard: quotes and stray spaces happen,
+    and anything that is not plainly 'off' is meant as 'on'."""
+    value = os.environ.get(name, "").strip().strip("\"'").strip().lower()
+    return value not in ("", "0", "false", "no", "off")
+
+
+AUTO_APPROVE = _switch("GUESTBOOK_AUTO_APPROVE")
 
 MAX_NAME, MAX_PLACE, MAX_MESSAGE = 40, 80, 700
 COOLDOWN_SECONDS = 60            # one note per address per minute
