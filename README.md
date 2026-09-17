@@ -191,7 +191,13 @@ Run it (serves the site and the guest book from one process):
 GUESTBOOK_TOKEN=pick-a-long-secret python3 server/guestbook.py
 ```
 
-Read what is waiting, and keep or delete it:
+**Moderating from a browser — `/admin`.** Open
+`https://your-site/admin`, type the token once (it is remembered for the tab),
+and every waiting note appears with **დატოვება** and **წაშლა** buttons. It works
+on a phone, so notes can be approved from anywhere. The page is `noindex` and
+every action is refused without the token.
+
+Or from a terminal:
 
 ```bash
 GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py            # list
@@ -214,10 +220,12 @@ undone in a click:
    The second half is a safety net: if the guest-book server cannot start at
    all, the site is still served as plain files.
 2. Variables → add `GUESTBOOK_TOKEN` (a long secret of your choosing)
-3. Optionally attach a volume and point `GUESTBOOK_DB` at it, so the notes
-   survive a redeploy
-4. Set `guestbookApi` to `/api/guestbook` in `content/site.json`, run
-   `python3 build.py`, and push
+3. Variables → add `DATABASE_URL` as a reference to the Postgres service —
+   in Railway type `${{Postgres.DATABASE_URL}}`. With it the notes live in
+   Postgres and survive every redeploy. Without it the server falls back to
+   SQLite, which needs a volume to survive one.
+4. `guestbookApi` is already `/api/guestbook`, so there is nothing to rebuild —
+   the form appears as soon as the server answers.
 
 If the deploy goes wrong, clearing the custom start command puts the site back
 exactly as it is now. Standard library only — nothing to install.
