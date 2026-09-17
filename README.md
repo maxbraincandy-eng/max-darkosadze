@@ -84,6 +84,7 @@ contact page: [Instagram](https://www.instagram.com/maxdarkosadze/) and
 | News / სიახლეები | `en/news.html` | `ka/news.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
 | The Legend / ლეგენდები | `en/legend.html` | `ka/legend.html` |
+| Guest book / სტუმრების წიგნი | `en/guestbook.html` | `ka/guestbook.html` |
 | Press kit / პრეს-პაკეტი | `en/press.html` | `ka/press.html` |
 
 Ten long-form articles, each published in both languages / ათი ვრცელი სტატია, ორივე ენაზე:
@@ -173,6 +174,46 @@ Inside any text you can write `[link text](https://example.com)` for a link,
 `*italics*`, `**bold**`, and `[[something]]` for anything still to be filled in.
 
 ---
+
+## The guest book / სტუმრების წიგნი
+
+Visitors choose any name they like, say where they met him if they want to, and
+leave a note. **Nothing appears on the site until it has been read and kept** —
+the page cannot be used to publish something in his name behind his back, and it
+cannot be filled with spam.
+
+ვიზიტორი ირჩევს სახელს, წერს ჩანაწერს — და ის საიტზე მხოლოდ მას შემდეგ ჩნდება,
+რაც წაიკითხავთ და დაამტკიცებთ.
+
+Run it (serves the site and the guest book from one process):
+
+```bash
+GUESTBOOK_TOKEN=pick-a-long-secret python3 server/guestbook.py
+```
+
+Read what is waiting, and keep or delete it:
+
+```bash
+GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py            # list
+GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py keep 3
+GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py delete 4
+```
+
+On Railway: set the start command to `python3 server/guestbook.py` (the
+`Procfile` already says so), add `GUESTBOOK_TOKEN` as a variable, and attach a
+volume mounted where `GUESTBOOK_DB` points if the notes should survive a
+redeploy. Standard library only — nothing to install.
+
+The page keeps working without any of this: if no guest book answers, the notes
+already in the content files still show and the form quietly disappears instead
+of failing when someone presses send. To collect notes by e-mail instead, leave
+`guestbookApi` empty and add approved notes to the `entries` list in the content
+files by hand.
+
+What it does about abuse: notes are held for approval, one note per address per
+minute and ten a day, links refused, a hidden honeypot field, lengths capped,
+and every note is rendered as text — a note containing HTML shows the HTML as
+characters rather than running it.
 
 ## The Legend page / „ლეგენდების“ გვერდი
 

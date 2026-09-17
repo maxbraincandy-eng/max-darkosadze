@@ -288,6 +288,117 @@
     }, { passive: true });
   }
 
+  /* ---- guest book ---------------------------------------------------- */
+  var guest = document.querySelector("[data-guestbook]");
+  if (guest) {
+    var api = guest.getAttribute("data-guestbook");
+    var list = guest.querySelector("[data-notes]");
+    var emptyNote = guest.querySelector(".guest-empty");
+    var form = guest.querySelector(".guest-form");
+    var say = function (key) { return guest.getAttribute("data-msg-" + key) || ""; };
+
+    var noteElement = function (note) {
+      var li = document.createElement("li");
+      li.className = "note-card";
+      var text = document.createElement("p");
+      text.className = "note-text";
+      text.textContent = note.message;              // text, never markup
+      var by = document.createElement("p");
+      by.className = "note-by";
+      var name = document.createElement("span");
+      name.className = "note-name";
+      name.textContent = note.name;
+      by.appendChild(name);
+      if (note.place) {
+        var place = document.createElement("span");
+        place.className = "note-place";
+        place.textContent = note.place;
+        by.appendChild(place);
+      }
+      li.appendChild(text);
+      li.appendChild(by);
+      return li;
+    };
+
+    var offline = function () {
+      /* no guest-book service answering: keep whatever notes are already on the
+         page and take the form away rather than leave one that cannot send. */
+      var wrap = guest.querySelector(".guest-form-wrap");
+      if (!wrap) return;
+      var form = wrap.querySelector(".guest-form");
+      if (!form) return;
+      var note = document.createElement("p");
+      note.className = "note";
+      note.textContent = guest.getAttribute("data-msg-offline") || "";
+      form.replaceWith(note);
+    };
+
+    if (api) {
+      fetch(api, { headers: { "Accept": "application/json" } })
+        .then(function (r) {
+          if (!r.ok) throw new Error("no guest book");
+          return r.json();
+        })
+        .then(function (data) {
+          if (!data || !data.notes) return;
+          data.notes.forEach(function (note) { list.appendChild(noteElement(note)); });
+          if (emptyNote) emptyNote.hidden = list.children.length > 0;
+        })
+        .catch(offline);
+    }
+
+    if (form) {
+      var field = form.querySelector("textarea[name=message]");
+      var counter = form.querySelector("[data-counter]");
+      var status = form.querySelector(".form-status");
+      var button = form.querySelector("button[type=submit]");
+
+      if (field && counter) {
+        var count = function () {
+          counter.textContent = Math.max(0, 700 - field.value.length);
+        };
+        field.addEventListener("input", count);
+        count();
+      }
+
+      var tell = function (message, kind) {
+        status.textContent = message;
+        status.hidden = !message;
+        status.className = "form-status" + (kind ? " is-" + kind : "");
+      };
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        var payload = {
+          name: form.name.value.trim(),
+          place: form.place.value.trim(),
+          message: form.message.value.trim(),
+          website: form.website.value,
+          lang: docEl.lang
+        };
+        if (!payload.name || payload.message.length < 2) return;
+        if (payload.message.length > 700) return tell(say("long"), "error");
+
+        button.disabled = true;
+        tell(say("sending"));
+        fetch(api, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        }).then(function (r) {
+          if (!r.ok) throw new Error("rejected");
+          form.reset();
+          if (counter) counter.textContent = "700";
+          tell(say("thanks"), "ok");
+        }).catch(function () {
+          tell(say("error"), "error");
+        }).then(function () {
+          button.disabled = false;
+        });
+      });
+    }
+  }
+
   /* ---- light / dark switch ------------------------------------------ */
   var themeButton = document.querySelector(".theme-toggle");
   if (themeButton) {

@@ -1045,3 +1045,57 @@ body.lang-ka .legend-side h2 { letter-spacing: .1em; text-transform: none; font-
 body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none; }
 .legend-band-title { font-family: var(--serif); font-size: clamp(1.4rem, 3.4vw, 2.1rem); margin-bottom: .5rem; }
 .legend-band-text { color: var(--muted); font-style: italic; max-width: 40rem; margin-inline: auto; }
+
+/* ----------------------------------------------------------- guest book */
+.guest-grid {
+  display: grid; gap: clamp(1.8rem, 5vw, 3.4rem);
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  align-items: start;
+}
+@media (max-width: 860px) { .guest-grid { grid-template-columns: 1fr; } }
+
+.guest-form-wrap {
+  background: var(--surface); border: 1px solid var(--line);
+  border-top: 4px solid var(--gold); border-radius: var(--radius);
+  padding: 1.6rem 1.5rem; position: sticky; top: 100px;
+}
+@media (max-width: 860px) { .guest-form-wrap { position: static; } }
+.guest-form-wrap h2, .guest-entries h2 { font-size: 1.15rem; margin-bottom: 1rem; }
+
+.guest-form { display: grid; gap: .9rem; }
+.guest-form label { display: flex; flex-direction: column; gap: .35rem; font-size: .85rem; color: var(--muted); }
+.guest-form input, .guest-form textarea {
+  font: inherit; font-size: .98rem; color: var(--text);
+  background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  padding: .65rem .8rem;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+.guest-form input:focus, .guest-form textarea:focus {
+  outline: none; border-color: var(--gold);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 20%, transparent);
+}
+.guest-form textarea { resize: vertical; min-height: 7rem; }
+.form-counter { font-size: .75rem; color: var(--muted); align-self: flex-end; }
+.form-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.form-status { font-size: .88rem; margin: 0; padding: .6rem .8rem; border-radius: 10px; }
+.form-status.is-ok { background: color-mix(in srgb, var(--gold) 16%, transparent); color: var(--text); }
+.form-status.is-error { background: color-mix(in srgb, #c0392b 12%, transparent); color: #c0392b; }
+
+.notes { list-style: none; margin: 0; padding: 0; columns: 2 260px; column-gap: 1.1rem; }
+@media (max-width: 620px) { .notes { columns: 1; } }
+.note-card {
+  break-inside: avoid; margin: 0 0 1.1rem;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 1.2rem 1.3rem;
+  position: relative;
+}
+.note-card::before {
+  content: "“"; font-family: var(--serif); font-size: 2.2rem; line-height: .5;
+  color: var(--gold); opacity: .4; display: block; margin-bottom: .5rem;
+}
+.note-text { margin: 0 0 .8rem; font-size: .96rem; line-height: 1.6; white-space: pre-line; }
+.note-by { margin: 0; font-size: .82rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: baseline; }
+.note-name { font-family: var(--serif); font-weight: 600; color: var(--gold); }
+.note-place { color: var(--muted); }
+.note-place::before { content: "· "; }
+.guest-empty { margin-top: 0; }

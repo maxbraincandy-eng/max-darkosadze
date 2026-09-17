@@ -43,6 +43,10 @@
     {
       "key": "contact",
       "label": "Contact"
+    },
+    {
+      "key": "guestbook",
+      "label": "Guest book"
     }
   ],
   "ui": {
@@ -454,6 +458,11 @@
           "src": "assets/img/gallery/16.jpg",
           "category": "life",
           "caption": "Before the ride."
+        },
+        {
+          "src": "assets/img/gallery/17.jpg",
+          "category": "life",
+          "caption": "On the way."
         }
       ],
       "categories": [
@@ -729,6 +738,30 @@
         }
       ],
       "closing": "Everything else on this site is meant seriously. This page is not."
+    },
+    "guestbook": {
+      "title": "Guest book — Max Darkosadze",
+      "eyebrow": "Guest book",
+      "heading": "Guest book",
+      "lead": "Where did you meet Batoni Maksi, and what did you take away from it? Leave a note — a greeting, a story, a line of thanks. Choose any name you like.",
+      "formTitle": "Leave a note",
+      "form": {
+        "name": "Your name or nickname",
+        "place": "Where you met him (optional)",
+        "message": "Your note",
+        "send": "Send",
+        "sending": "Sending…",
+        "note": "Notes are read before they appear, so yours will not show up immediately.",
+        "thanks": "Thank you — your note has been sent and will appear once it has been read.",
+        "error": "The note could not be sent. Please try again later.",
+        "tooLong": "The note is a little too long.",
+        "counter": "characters left"
+      },
+      "entriesTitle": "Notes",
+      "empty": "No notes yet. Yours would be the first.",
+      "disabledNote": "The guest book is not accepting notes at the moment.",
+      "loading": "Loading the notes…",
+      "entries": []
     }
   },
   "articles": [

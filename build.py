@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -926,6 +926,81 @@ def render_news(data):
                     body=body, depth=depth, active="news")
 
 
+def render_guestbook(data):
+    """Notes left by visitors. Entries that have been read and kept live in the
+    content file; if a guest-book API is configured the page also loads the
+    live ones and can post new notes to it."""
+    depth = 1
+    p = data["pages"]["guestbook"]
+    f = p["form"]
+    api = SITE.get("guestbookApi", "").strip()
+
+    kept = "".join(
+        """
+        <li class="note-card">
+          <p class="note-text">%s</p>
+          <p class="note-by"><span class="note-name">%s</span>%s</p>
+        </li>""" % (
+            inline(e["message"]), esc(e["name"]),
+            ('<span class="note-place">%s</span>' % esc(e["place"])) if e.get("place") else "",
+        )
+        for e in p.get("entries", [])
+    )
+
+    form = """
+    <form class="guest-form" novalidate>
+      <label>%s<input type="text" name="name" maxlength="40" required autocomplete="nickname"></label>
+      <label>%s<input type="text" name="place" maxlength="80"></label>
+      <label class="form-wide">%s<textarea name="message" rows="5" maxlength="700" required></textarea>
+        <span class="form-counter"><span data-counter>700</span> %s</span></label>
+      <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form-actions">
+        <button class="btn btn-primary" type="submit">%s</button>
+        <span class="muted">%s</span>
+      </p>
+      <p class="form-status" role="status" aria-live="polite" hidden></p>
+    </form>""" % (esc(f["name"]), esc(f["place"]), esc(f["message"]), esc(f["counter"]),
+                  esc(f["send"]), esc(f["note"])) if api else (
+        '<p class="note">%s</p>' % esc(p["disabledNote"]))
+
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap guest-grid"
+       data-guestbook="%s"
+       data-msg-sending="%s" data-msg-thanks="%s" data-msg-error="%s" data-msg-long="%s"
+       data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s">
+    <div class="guest-form-wrap">
+      <h2>%s</h2>
+      %s
+    </div>
+    <div class="guest-entries">
+      <h2>%s</h2>
+      <ul class="notes" data-notes>%s</ul>
+      <p class="note guest-empty"%s>%s</p>
+    </div>
+  </div>
+</section>
+""" % (
+        esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+        esc(api),
+        esc(f["sending"]), esc(f["thanks"]), esc(f["error"]), esc(f["tooLong"]),
+        esc(p["empty"]), esc(p["loading"]), esc(p["disabledNote"]),
+        esc(p["formTitle"]), form,
+        esc(p["entriesTitle"]), kept,
+        "" if not p.get("entries") else " hidden", esc(p["empty"]),
+    )
+    return document(data, title=p["title"], description=plain(p["lead"]), key="guestbook",
+                    body=body, depth=depth, active="guestbook")
+
+
 def render_legend(data):
     """A magazine-style spread of tall tales — plainly labelled as such."""
     depth = 1
@@ -1391,6 +1466,7 @@ def main():
         write(page_path(lang, "articles"), render_articles_index(data))
         write(page_path(lang, "news"), render_news(data))
         write(page_path(lang, "legend"), render_legend(data))
+        write(page_path(lang, "guestbook"), render_guestbook(data))
         write(page_path(lang, "press"), render_press(data))
         write(page_path(lang, "foundation"), render_foundation(data))
         write(page_path(lang, "gallery"), render_gallery(data))
