@@ -71,24 +71,12 @@
 
 <section class="section">
   <div class="wrap guest-grid"
-       data-guestbook="/api/guestbook"
+       data-guestbook=""
        data-msg-sending="იგზავნება…" data-msg-thanks="გმადლობთ — ჩანაწერი გაიგზავნა და წაკითხვის შემდეგ გამოჩნდება." data-msg-error="ჩანაწერის გაგზავნა ვერ მოხერხდა. სცადეთ მოგვიანებით." data-msg-long="ჩანაწერი ოდნავ გრძელია."
        data-msg-empty="ჯერ არც ერთი ჩანაწერი არ არის. თქვენი პირველი იქნება." data-msg-loading="იტვირთება…" data-msg-offline="სტუმრების წიგნი ამჟამად ჩანაწერებს არ იღებს.">
     <div class="guest-form-wrap">
       <h2>დატოვეთ ჩანაწერი</h2>
-      
-    <form class="guest-form" novalidate>
-      <label>თქვენი სახელი ან მეტსახელი<input type="text" name="name" maxlength="40" required autocomplete="nickname"></label>
-      <label>სად შეხვდით (არასავალდებულო)<input type="text" name="place" maxlength="80"></label>
-      <label class="form-wide">თქვენი ჩანაწერი<textarea name="message" rows="5" maxlength="700" required></textarea>
-        <span class="form-counter"><span data-counter>700</span> სიმბოლო დარჩა</span></label>
-      <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
-      <p class="form-actions">
-        <button class="btn btn-primary" type="submit">გაგზავნა</button>
-        <span class="muted">ჩანაწერები ქვეყნდება წაკითხვის შემდეგ, ამიტომ თქვენი მაშინვე არ გამოჩნდება.</span>
-      </p>
-      <p class="form-status" role="status" aria-live="polite" hidden></p>
-    </form>
+      <p class="note">სტუმრების წიგნი ამჟამად ჩანაწერებს არ იღებს.</p>
     </div>
     <div class="guest-entries">
       <h2>ჩანაწერები</h2>

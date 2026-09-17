@@ -71,24 +71,12 @@
 
 <section class="section">
   <div class="wrap guest-grid"
-       data-guestbook="/api/guestbook"
+       data-guestbook=""
        data-msg-sending="Sending…" data-msg-thanks="Thank you — your note has been sent and will appear once it has been read." data-msg-error="The note could not be sent. Please try again later." data-msg-long="The note is a little too long."
        data-msg-empty="No notes yet. Yours would be the first." data-msg-loading="Loading the notes…" data-msg-offline="The guest book is not accepting notes at the moment.">
     <div class="guest-form-wrap">
       <h2>Leave a note</h2>
-      
-    <form class="guest-form" novalidate>
-      <label>Your name or nickname<input type="text" name="name" maxlength="40" required autocomplete="nickname"></label>
-      <label>Where you met him (optional)<input type="text" name="place" maxlength="80"></label>
-      <label class="form-wide">Your note<textarea name="message" rows="5" maxlength="700" required></textarea>
-        <span class="form-counter"><span data-counter>700</span> characters left</span></label>
-      <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
-      <p class="form-actions">
-        <button class="btn btn-primary" type="submit">Send</button>
-        <span class="muted">Notes are read before they appear, so yours will not show up immediately.</span>
-      </p>
-      <p class="form-status" role="status" aria-live="polite" hidden></p>
-    </form>
+      <p class="note">The guest book is not accepting notes at the moment.</p>
     </div>
     <div class="guest-entries">
       <h2>Notes</h2>

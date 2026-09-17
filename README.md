@@ -199,10 +199,20 @@ GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py keep 3
 GUESTBOOK_TOKEN=pick-a-long-secret python3 server/moderate.py delete 4
 ```
 
-On Railway: set the start command to `python3 server/guestbook.py` (the
-`Procfile` already says so), add `GUESTBOOK_TOKEN` as a variable, and attach a
-volume mounted where `GUESTBOOK_DB` points if the notes should survive a
-redeploy. Standard library only — nothing to install.
+**On Railway, do not add a `Procfile` for this.** One was tried and it took the
+whole site down: the file changes how the service is built, not just what it
+runs, and the deploy failed. Change it in the dashboard instead, where it can be
+undone in a click:
+
+1. Settings → Deploy → **Custom Start Command**: `python3 server/guestbook.py`
+2. Variables → add `GUESTBOOK_TOKEN` (a long secret of your choosing)
+3. Optionally attach a volume and point `GUESTBOOK_DB` at it, so the notes
+   survive a redeploy
+4. Set `guestbookApi` to `/api/guestbook` in `content/site.json`, run
+   `python3 build.py`, and push
+
+If the deploy goes wrong, clearing the custom start command puts the site back
+exactly as it is now. Standard library only — nothing to install.
 
 The page keeps working without any of this: if no guest book answers, the notes
 already in the content files still show and the form quietly disappears instead
