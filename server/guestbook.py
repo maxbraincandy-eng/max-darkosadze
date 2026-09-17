@@ -769,7 +769,26 @@ class Handler(SimpleHTTPRequestHandler):
         self.send_error(404, "Not found")
         return None
 
+    # Nothing here is fingerprinted, so a browser must not be left holding a page
+    # from before the last deploy: pages and scripts are revalidated every time
+    # (a 304 costs nothing), while photographs and fonts may be kept.
+    LONG_LIVED = (".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".ico",
+                  ".woff", ".woff2", ".ttf")
+
+    def send_header(self, keyword, value):
+        if keyword.lower() == "cache-control":
+            self._cache_told = True
+        super().send_header(keyword, value)
+
+    def end_headers(self):
+        if not getattr(self, "_cache_told", False):
+            ext = os.path.splitext(self.path.split("?")[0])[1].lower()
+            self.send_header("Cache-Control",
+                             "public, max-age=604800" if ext in self.LONG_LIVED else "no-cache")
+        super().end_headers()
+
     def handle_one_request(self):
+        self._cache_told = False
         try:
             super().handle_one_request()
         except (BrokenPipeError, ConnectionResetError):
