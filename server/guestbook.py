@@ -39,12 +39,10 @@ import urllib.request
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
-psycopg = None
-if DATABASE_URL:
-    try:
-        import psycopg                      # the Railway Postgres service
-    except ImportError:
-        psycopg = None
+try:
+    import psycopg                          # the Railway Postgres service
+except ImportError:
+    psycopg = None
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 def _db_path():
@@ -568,8 +566,13 @@ class Handler(SimpleHTTPRequestHandler):
             self.wfile.write(body)
             return
         if path in ("/healthz", "/api/health"):
+            # booleans only: enough to see what is set up, nothing to give away
             return self.send_json({"ok": True, "guestbook": DB_READY,
-                                   "store": "postgres" if USING_POSTGRES else "sqlite"})
+                                   "store": "postgres" if USING_POSTGRES else "sqlite",
+                                   "databaseUrl": bool(DATABASE_URL),
+                                   "psycopg": bool(psycopg),
+                                   "autoApprove": AUTO_APPROVE,
+                                   "token": bool(TOKEN)})
         if path == "/api/guestbook":
             if not DB_READY:
                 return self.send_json({"error": "unavailable"}, 503)
@@ -788,6 +791,10 @@ def main():
         print("notifications: webhook")
     if DATABASE_URL and not psycopg:
         print("! DATABASE_URL is set but psycopg is not installed — using SQLite instead")
+    if not DATABASE_URL:
+        print("! DATABASE_URL is not set — notes are kept in SQLite inside the container "
+              "and are LOST on the next deploy. On Railway add the variable as "
+              "${{Postgres.DATABASE_URL}}.")
     print("guest book storage: %s" % ("PostgreSQL" if USING_POSTGRES else "SQLite at %s" % DB_PATH))
     print("serving %s on http://0.0.0.0:%d" % (ROOT, PORT))
     ThreadingHTTPServer(("0.0.0.0", PORT), Handler).serve_forever()
