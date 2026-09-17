@@ -65,7 +65,8 @@
     "langLabel": "Language",
     "categoryLabel": "Category",
     "theme": "Switch between light and dark",
-    "quotesTitle": "In his own words"
+    "quotesTitle": "In his own words",
+    "legendCta": "Read the legend"
   },
   "pages": {
     "home": {
@@ -626,6 +627,108 @@
           "assets/brand/email-signature.html"
         ]
       ]
+    },
+    "legend": {
+      "title": "The Legend — Max Darkosadze",
+      "eyebrow": "Unofficial",
+      "masthead": "THE LEGEND",
+      "heading": "The Legend of Batoni Maksi",
+      "strapline": "An unofficial chronicle · Collected from people who swear they were there",
+      "lead": "None of what follows is confirmed. Some of it Max Darkosadze first heard about himself, years after it supposedly happened.",
+      "quote": "Some of these are exaggerated. I am not going to tell you which.",
+      "quoteCite": "Batoni Maksi",
+      "entriesTitle": "The file",
+      "entries": [
+        {
+          "tag": "Mountain flying, 2021",
+          "title": "The cloud that apologised",
+          "text": "Witnesses in the valley maintain that the cloud moved first. Batoni Maksi maintains that he turned back early, which is what he teaches, and that clouds do not apologise. The witnesses are not persuaded."
+        },
+        {
+          "tag": "Chess",
+          "title": "The game he won without sitting down",
+          "text": "He walked past the board on the way to the theatre, said one word, and kept walking. The player he said it to resigned eleven moves later and has never explained why."
+        },
+        {
+          "tag": "Testimony",
+          "title": "The anaesthetist's statement",
+          "text": "Asked to account for an unusually smooth induction, the anaesthetist wrote in the record that no additional agent had been required: the patient had fallen asleep out of sheer respect."
+        },
+        {
+          "tag": "The workshop",
+          "title": "The marble that named itself",
+          "text": "He had the chisel raised when, by his own account, the stone made its preference known. He put the chisel down and started again. The bust took four months longer and is the only one he has refused to give away."
+        },
+        {
+          "tag": "Tbilisi",
+          "title": "The kitten came back",
+          "text": "Three weeks after being carried down the ladder, the cat was found sitting outside a building it had no reason to know, waiting. It is said to have looked mildly annoyed about the wait."
+        },
+        {
+          "tag": "Briefing room",
+          "title": "The four-second pause",
+          "text": "Students time it. The record stands at four seconds of silence before an answer, after which the student in question changed their own answer twice, unprompted, and arrived at the right one."
+        },
+        {
+          "tag": "Kakheti",
+          "title": "The horse",
+          "text": "The horse has a documented objection to being saddled by anyone else, which the owner describes as a personality flaw and Max Darkosadze describes as good judgement."
+        },
+        {
+          "tag": "The university",
+          "title": "The nine minutes",
+          "text": "A lecture once ran nine minutes over. Rather than ask him to finish on time, the department moved the following class. The timetable has never been moved back."
+        },
+        {
+          "tag": "A wedding",
+          "title": "The checklist at the top table",
+          "text": "The best man lost his speech. Batoni Maksi is said to have handed him a napkin with four words on it. Guests report the speech was better than the original, and considerably shorter."
+        },
+        {
+          "tag": "The airline",
+          "title": "Still doing it his way",
+          "text": "A captain on a scheduled route was observed briefing his crew in a sequence not found in any manual. Asked about it, he named his first instructor and declined to discuss the matter further."
+        },
+        {
+          "tag": "The engraver",
+          "title": "First time right",
+          "text": "The plaque reads DISCIPLINE CREATES FREEDOM. The engraver got it right at the first attempt, which the engraver says has not happened before or since."
+        },
+        {
+          "tag": "Unverifiable",
+          "title": "The one he will not discuss",
+          "text": "There is a twelfth story. Everyone who tells it tells it differently, and he answers all of them the same way: by asking whether you have eaten."
+        }
+      ],
+      "recordsTitle": "Records",
+      "recordsNote": "Held, claimed or invented — in no particular order.",
+      "records": [
+        {
+          "name": "Longest recorded briefing-room silence",
+          "value": "4 seconds · unconfirmed"
+        },
+        {
+          "name": "Saturdays flown without incident",
+          "value": "all of them"
+        },
+        {
+          "name": "Cats brought down from trees",
+          "value": "1 · so far"
+        },
+        {
+          "name": "Operations declined on principle",
+          "value": "not counted"
+        },
+        {
+          "name": "Times he has mentioned any of this himself",
+          "value": "0"
+        },
+        {
+          "name": "Clouds apologised to",
+          "value": "disputed"
+        }
+      ],
+      "closing": "Everything else on this site is meant seriously. This page is not."
     }
   },
   "articles": [

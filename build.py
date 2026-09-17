@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -376,8 +376,10 @@ def footer(data, depth):
         '<li><a href="%s">%s</a></li>'
         % (link(data["lang"], item["key"], depth), esc(item["label"]))
         for item in data["nav"]
-    ) + '<li><a href="%s">%s</a></li>' % (
-        link(data["lang"], "press", depth), esc(data["pages"]["press"]["heading"])
+    ) + "".join(
+        '<li><a href="%s">%s</a></li>' % (link(data["lang"], key, depth), esc(label))
+        for key, label in (("legend", data["pages"]["legend"]["masthead"]),
+                           ("press", data["pages"]["press"]["heading"]))
     )
     return """
 <footer class="site-footer">
@@ -566,6 +568,15 @@ def render_home(data):
   </div>
 </section>
 
+<section class="legend-band">
+  <div class="wrap">
+    <p class="legend-band-eyebrow">%s</p>
+    <p class="legend-band-title">%s</p>
+    <p class="legend-band-text">%s</p>
+    <p><a class="btn btn-ghost" href="%s">%s</a></p>
+  </div>
+</section>
+
 <section class="section section-alt">
   <div class="wrap split split-reverse">
     <div class="split-media img-slot" data-path="assets/img/gallery/01.jpg">%s</div>
@@ -607,6 +618,11 @@ def render_home(data):
         inline(p["foundationText"]),
         link(data["lang"], "foundation", depth),
         esc(p["foundationCta"]),
+        esc(data["pages"]["legend"]["eyebrow"]),
+        esc(data["pages"]["legend"]["heading"]),
+        inline(data["pages"]["legend"]["quote"]),
+        link(data["lang"], "legend", depth),
+        esc(data["ui"]["legendCta"]),
         img_tag("assets/img/gallery/01.jpg", p["galleryTeaserTitle"], depth),
         esc(p["galleryTeaserTitle"]),
         inline(p["galleryTeaserText"]),
@@ -908,6 +924,64 @@ def render_news(data):
 """ % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]), body_inner)
     return document(data, title=p["title"], description=plain(p["lead"]), key="news",
                     body=body, depth=depth, active="news")
+
+
+def render_legend(data):
+    """A magazine-style spread of tall tales — plainly labelled as such."""
+    depth = 1
+    p = data["pages"]["legend"]
+
+    entries = "".join(
+        """
+        <article class="tale">
+          <p class="tale-tag">%s</p>
+          <h2>%s</h2>
+          <p>%s</p>
+        </article>""" % (esc(e["tag"]), inline(e["title"]), inline(e["text"]))
+        for e in p["entries"]
+    )
+    records = "".join(
+        '<li><span class="rec-name">%s</span><span class="rec-value">%s</span></li>'
+        % (inline(r["name"]), inline(r["value"]))
+        for r in p["records"]
+    )
+
+    body = """
+<section class="legend-head">
+  <div class="wrap">
+    <p class="legend-eyebrow">%s</p>
+    <p class="legend-masthead">%s</p>
+    <h1>%s</h1>
+    <p class="legend-strap">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap legend-grid">
+    <div class="legend-main">
+      <p class="legend-lead">%s</p>
+      <blockquote class="legend-quote"><p>%s</p><cite>%s</cite></blockquote>
+      <h2 class="legend-section">%s</h2>
+      <div class="tales">%s</div>
+      <p class="legend-closing">%s</p>
+    </div>
+    <aside class="legend-side">
+      <h2>%s</h2>
+      <p class="muted">%s</p>
+      <ul class="records">%s</ul>
+      <div class="legend-portrait img-slot" data-path="assets/img/gallery/07.jpg">%s</div>
+    </aside>
+  </div>
+</section>
+""" % (
+        esc(p["eyebrow"]), esc(p["masthead"]), inline(p["heading"]), inline(p["strapline"]),
+        inline(p["lead"]), inline(p["quote"]), esc(p["quoteCite"]),
+        esc(p["entriesTitle"]), entries, inline(p["closing"]),
+        esc(p["recordsTitle"]), inline(p["recordsNote"]), records,
+        img_tag("assets/img/gallery/07.jpg", p["heading"], depth),
+    )
+    return document(data, title=p["title"], description=plain(p["lead"]), key="legend",
+                    body=body, depth=depth, active="legend")
 
 
 def render_press(data):
@@ -1316,6 +1390,7 @@ def main():
         write(page_path(lang, "about"), render_about(data))
         write(page_path(lang, "articles"), render_articles_index(data))
         write(page_path(lang, "news"), render_news(data))
+        write(page_path(lang, "legend"), render_legend(data))
         write(page_path(lang, "press"), render_press(data))
         write(page_path(lang, "foundation"), render_foundation(data))
         write(page_path(lang, "gallery"), render_gallery(data))

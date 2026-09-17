@@ -942,3 +942,106 @@ body.lang-ka .quote-card span { text-transform: none; letter-spacing: .04em; }
 .fig-tall img { width: 100%; height: auto; max-height: 72vh; object-fit: contain; }
 .fig-tall figcaption { text-align: center; }
 @media (max-width: 560px) { .fig-tall { max-width: 100%; } }
+
+/* ==========================================================================
+   The Legend — a magazine spread, clearly marked as tall tales
+   ========================================================================== */
+
+.legend-head {
+  background: var(--ink);
+  color: #fff;
+  padding: clamp(2.6rem, 6vw, 4rem) 0 clamp(2rem, 4vw, 2.6rem);
+  border-bottom: 5px double var(--gold);
+}
+.legend-eyebrow {
+  font-size: .72rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 1rem;
+}
+body.lang-ka .legend-eyebrow { letter-spacing: .14em; text-transform: none; }
+.legend-masthead {
+  font-family: var(--serif); font-weight: 700;
+  font-size: clamp(2.4rem, 9vw, 5.5rem); line-height: .95;
+  letter-spacing: .04em; margin: 0 0 .6rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .22);
+  padding-bottom: .5rem;
+}
+.legend-head h1 { font-size: clamp(1.3rem, 3vw, 2rem); margin: .8rem 0 .3rem; font-weight: 600; }
+.legend-strap { color: rgba(255, 255, 255, .6); font-size: .9rem; margin: 0; }
+
+.legend-grid { display: grid; gap: clamp(1.8rem, 5vw, 3.4rem); grid-template-columns: minmax(0, 1fr) 300px; align-items: start; }
+@media (max-width: 900px) { .legend-grid { grid-template-columns: 1fr; } }
+
+.legend-lead {
+  font-family: var(--serif); font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.5; margin-bottom: 1.6rem;
+}
+.legend-lead::first-letter {
+  float: inline-start; font-size: 3.6em; line-height: .82;
+  padding-inline-end: .12em; padding-top: .06em; color: var(--gold);
+  font-weight: 700;
+}
+.legend-quote {
+  margin: 0 0 2.4rem; padding: 1.1rem 1.3rem;
+  border-block: 1px solid var(--line);
+  font-family: var(--serif);
+}
+.legend-quote p { font-size: 1.2rem; margin: 0 0 .4rem; }
+.legend-quote cite { font-style: normal; font-size: .85rem; color: var(--gold); }
+
+.legend-section {
+  font-size: .8rem; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--muted); border-bottom: 1px solid var(--line);
+  padding-bottom: .6rem; margin-bottom: 1.6rem;
+}
+body.lang-ka .legend-section { letter-spacing: .12em; text-transform: none; }
+
+.tales { columns: 2 260px; column-gap: 2.2rem; }
+@media (max-width: 620px) { .tales { columns: 1; } }
+.tale { break-inside: avoid; margin: 0 0 1.7rem; }
+.tale-tag {
+  font-size: .7rem; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold); margin: 0 0 .25rem;
+}
+body.lang-ka .tale-tag { letter-spacing: .06em; text-transform: none; }
+.tale h2 { font-size: 1.12rem; margin: 0 0 .4rem; }
+.tale p { font-size: .95rem; margin: 0; color: var(--text); }
+
+.legend-closing {
+  margin-top: 1.6rem; padding-top: 1.2rem; border-top: 3px double var(--line);
+  font-size: .9rem; color: var(--muted); font-style: italic;
+}
+
+.legend-side {
+  background: var(--surface); border: 1px solid var(--line);
+  border-top: 4px solid var(--gold); border-radius: var(--radius);
+  padding: 1.5rem 1.4rem;
+  position: sticky; top: 100px;
+}
+@media (max-width: 900px) { .legend-side { position: static; } }
+.legend-side h2 {
+  font-size: .82rem; letter-spacing: .24em; text-transform: uppercase;
+  margin-bottom: .4rem;
+}
+body.lang-ka .legend-side h2 { letter-spacing: .1em; text-transform: none; font-size: 1rem; }
+.legend-side .muted { font-size: .82rem; margin-bottom: 1.1rem; }
+.records { list-style: none; margin: 0 0 1.4rem; padding: 0; }
+.records li { padding: .7rem 0; border-top: 1px solid var(--line); }
+.rec-name { display: block; font-size: .88rem; line-height: 1.4; }
+.rec-value { display: block; font-family: var(--serif); color: var(--gold); font-size: .92rem; margin-top: .15rem; }
+.legend-portrait { border-radius: var(--radius); overflow: hidden; }
+.legend-portrait img { width: 100%; height: auto; display: block; }
+
+/* the way in from the home page */
+.legend-band {
+  background: var(--surface-alt);
+  border-block: 1px solid var(--line);
+  padding: clamp(2.2rem, 5vw, 3.2rem) 0;
+  text-align: center;
+}
+.legend-band-eyebrow {
+  font-size: .72rem; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: .6rem;
+}
+body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none; }
+.legend-band-title { font-family: var(--serif); font-size: clamp(1.4rem, 3.4vw, 2.1rem); margin-bottom: .5rem; }
+.legend-band-text { color: var(--muted); font-style: italic; max-width: 40rem; margin-inline: auto; }

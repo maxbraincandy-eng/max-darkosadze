@@ -83,6 +83,7 @@ contact page: [Instagram](https://www.instagram.com/maxdarkosadze/) and
 | Gallery / გალერეა | `en/gallery.html` | `ka/gallery.html` |
 | News / სიახლეები | `en/news.html` | `ka/news.html` |
 | Contact / კონტაქტი | `en/contact.html` | `ka/contact.html` |
+| The Legend / ლეგენდები | `en/legend.html` | `ka/legend.html` |
 | Press kit / პრეს-პაკეტი | `en/press.html` | `ka/press.html` |
 
 Ten long-form articles, each published in both languages / ათი ვრცელი სტატია, ორივე ენაზე:
@@ -172,6 +173,20 @@ Inside any text you can write `[link text](https://example.com)` for a link,
 `*italics*`, `**bold**`, and `[[something]]` for anything still to be filled in.
 
 ---
+
+## The Legend page / „ლეგენდების“ გვერდი
+
+A magazine-style spread of tall tales, written in his own voice and labelled as
+such: the lead says nothing on the page is confirmed, and the last line says
+plainly that everything else on the site is meant seriously and this page is
+not. It is comedy published under his own name — not invented coverage
+attributed to outlets, journals or experts that do not exist.
+
+ხუმრობის გვერდი, ჟურნალის მაკეტით. შესავალშივე წერია, რომ არც ერთი ამბავი არ
+არის დადასტურებული, ბოლო ხაზში კი — რომ საიტის დანარჩენი ნაწილი სერიოზულია.
+
+Entries and the "records" list live in the `legend` block of both content
+files; add or remove either and rebuild.
 
 ## Posting news / სიახლის დამატება
 
