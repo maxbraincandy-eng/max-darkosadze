@@ -197,6 +197,36 @@ and every waiting note appears with **დატოვება** and **წაშ
 on a phone, so notes can be approved from anywhere. The page is `noindex` and
 every action is refused without the token.
 
+**Why a note does not appear at once.** That is the default and it is on
+purpose: the note is saved, but it waits for you. Open `/admin`, press
+**დატოვება**, and it is on the page. `/admin` *is* the account — there is no
+other login: the "password" is the `GUESTBOOK_TOKEN` you set in Railway →
+Variables. The same page also lists everything already published, so a note can
+be taken down later.
+
+რატომ არ ჩნდება ჩანაწერი მაშინვე: ის შენახულია, მაგრამ ელოდება თქვენს
+დადასტურებას. გახსენით `/admin`, შეიყვანეთ `GUESTBOOK_TOKEN` (ეს არის თქვენი
+„ექაუნთი“ — სხვა შესასვლელი არ არის) და დააჭირეთ **დატოვება**.
+
+**Or publish every note the moment it is written.** Railway → Variables → add
+`GUESTBOOK_AUTO_APPROVE=1`. Notes then go up instantly — the page even shows the
+new note without a reload — and the wording under the form changes by itself to
+say so. Everything else still guards it: links refused, one note per address per
+minute and ten a day, the honeypot, the length caps, and text-only rendering.
+`/admin` keeps working, now as the place to delete anything unwanted.
+
+თუ გინდათ, რომ ჩანაწერი მაშინვე გამოქვეყნდეს — Railway → Variables →
+`GUESTBOOK_AUTO_APPROVE=1`.
+
+**Being told when a note arrives.** Set either of these and a message is sent
+the moment a note or an invitation comes in (it never delays or breaks the
+visitor's request):
+
+* `TELEGRAM_BOT_TOKEN` and `TELEGRAM_CHAT_ID` — from @BotFather; write to the
+  bot once and read the chat id from
+  `https://api.telegram.org/bot<TOKEN>/getUpdates`
+* `NOTIFY_WEBHOOK` — any address that accepts a JSON `{"title", "text"}` POST
+
 Or from a terminal:
 
 ```bash
@@ -246,6 +276,21 @@ minute and ten a day, links refused, a hidden honeypot field, lengths capped,
 and every note is rendered as text — a note containing HTML shows the HTML as
 characters rather than running it.
 
+## Invitations / მოწვევები
+
+`/ka/booking.html` and `/en/booking.html` are the page for anyone who wants to
+invite him — a lecture, a class, a talk, a conference. The form asks who is
+asking, how to reach them, the organisation, the wanted date, the audience and
+the subject, and it goes to the same server as the guest book (`POST
+/api/booking`). Requests are never public: they sit in `/admin` →
+**მოწვევები**, each with **დამუშავებულია** and **წაშლა**, and, if
+notifications are on, a message arrives the moment one comes in. With no server
+answering, the page offers Instagram instead — it never shows a form that
+cannot send.
+
+მოწვევის გვერდი: ვინც ლექციაზე ან შეხვედრაზე ეპატიჟება, აქ წერს. განაცხადები
+საჯარო არასდროსაა — ისინი ჩანს მხოლოდ `/admin`-ში.
+
 ## The Legend page / „ლეგენდების“ გვერდი
 
 A magazine-style spread of tall tales, written in his own voice and labelled as
@@ -283,7 +328,13 @@ page in both languages.
 
 ## Visitor statistics / სტატისტიკა
 
-Off by default. For free, privacy-friendly counting register a name at
+**Built in, if the guest-book server is the web process.** Every page quietly
+counts itself: `POST /api/hit` stores the day, the page and the language — no
+address, no cookie, no fingerprint — and Do Not Track is honoured. Open `/admin`
+→ **სტატისტიკა** for the total, the last fourteen days, the most-read pages and
+where the visitors came from. Nothing is sent to anyone else.
+
+**Or an outside counter.** Off by default. For free, privacy-friendly counting register a name at
 [goatcounter.com](https://www.goatcounter.com) and put it in
 `analytics.goatcounter` in `content/site.json` (the name only, not the URL); or
 put your domain in `analytics.plausible`. Rebuild and the script is added to
@@ -300,9 +351,31 @@ python3 tools/brand.py     # 2. redraws the QR code, the card and the signature
 python3 build.py           # 3. rewrites canonical links, hreflang, sitemap, share cards
 ```
 
-Then add a `CNAME` file containing the bare domain, point the DNS at GitHub
-Pages, and register the site in Google Search Console so that searches for the
-name find it.
+Then point the domain at the host. On Railway: Settings → Networking → **Custom
+Domain**, type the domain, and copy the `CNAME` target it shows into your
+registrar's DNS (for a bare `maxdarkosadze.ge` use the registrar's ALIAS/ANAME
+record, or `www` plus a redirect). The certificate is issued automatically; give
+DNS an hour.
+
+**Google Search Console** — this is what makes searches for the name find the
+site:
+
+1. [search.google.com/search-console](https://search.google.com/search-console)
+   → Add property → **URL prefix** → the full address.
+2. Choose **HTML tag**. It gives a tag like
+   `<meta name="google-site-verification" content="AbC123…">`.
+3. Put **only the code** — `AbC123…` — into `googleVerification` in
+   `content/site.json`, run `python3 build.py`, push, wait for the deploy, then
+   press **Verify**. The tag is written into every page and survives every
+   rebuild.
+4. In Search Console → Sitemaps, submit `sitemap.xml`. It already lists every
+   page in both languages, and `robots.txt` points at it.
+5. Ask for the two front pages to be read at once: paste the address into the
+   search bar at the top → **Request indexing**, for `/ka/` and `/en/`.
+
+Google-ის ძიებაში გამოსაჩენად: Search Console → HTML tag → კოდი ჩასვით
+`content/site.json`-ში (`googleVerification`), გაუშვით `python3 build.py`,
+ატვირთეთ და დააჭირეთ Verify. შემდეგ Sitemaps → `sitemap.xml`.
 
 დომენის ყიდვის შემდეგ: შეცვალეთ `baseUrl` ფაილში `content/site.json`, გაუშვით ეს
 ორი ბრძანება და მორჩა — QR-კოდი, ვიზიტკა, ბმულები და sitemap თავისით განახლდება.

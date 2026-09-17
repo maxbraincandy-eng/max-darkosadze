@@ -32,7 +32,10 @@ import json
 import os
 import re
 import sqlite3
+import threading
 import time
+import urllib.parse
+import urllib.request
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 
 DATABASE_URL = os.environ.get("DATABASE_URL", "").strip()
@@ -68,6 +71,12 @@ DB_PATH = _db_path()
 TOKEN = os.environ.get("GUESTBOOK_TOKEN", "")
 PORT = int(os.environ.get("PORT", "8000"))
 
+# Notes normally wait to be read before they appear. Set GUESTBOOK_AUTO_APPROVE=1
+# and they are published the moment they are written — the length limits, the
+# refusal of links and the one-note-per-minute rule still apply.
+AUTO_APPROVE = os.environ.get("GUESTBOOK_AUTO_APPROVE", "").strip().lower() in (
+    "1", "true", "yes", "on")
+
 MAX_NAME, MAX_PLACE, MAX_MESSAGE = 40, 80, 700
 COOLDOWN_SECONDS = 60            # one note per address per minute
 MAX_PER_DAY = 10
@@ -80,117 +89,253 @@ ADMIN_PAGE = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>სტუმრების წიგნი — მოდერაცია</title>
+<title>მაქსი დარკოსაძე — მართვა</title>
 <style>
   :root { color-scheme: dark; }
   body { margin:0; padding:1.4rem; background:#0b1219; color:#e7edf3;
          font:16px/1.6 system-ui, -apple-system, "Noto Sans Georgian", sans-serif; }
-  .wrap { max-width:46rem; margin-inline:auto; }
-  h1 { font-size:1.3rem; margin:0 0 1.2rem; }
+  .wrap { max-width:50rem; margin-inline:auto; }
+  h1 { font-size:1.25rem; margin:0 0 1.1rem; }
   h1 span { color:#d8ae3f; }
   input, button { font:inherit; border-radius:10px; }
-  input { width:100%; padding:.7rem .9rem; background:#121c26; color:inherit;
-          border:1px solid #22303d; }
-  button { cursor:pointer; padding:.5rem 1rem; border:1px solid #22303d;
-           background:#121c26; color:inherit; }
+  input { width:100%; padding:.7rem .9rem; background:#121c26; color:inherit; border:1px solid #22303d; }
+  button { cursor:pointer; padding:.5rem 1rem; border:1px solid #22303d; background:#121c26; color:inherit; }
   button.keep { border-color:#d8ae3f; color:#d8ae3f; }
   button.drop { border-color:#7a3b34; color:#e08b80; }
-  .note { border:1px solid #22303d; border-top:3px solid #d8ae3f; border-radius:12px;
+  .tabs { display:flex; gap:.5rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .tabs button.on { border-color:#d8ae3f; color:#d8ae3f; }
+  .badge { background:rgba(216,174,63,.18); color:#d8ae3f; border-radius:999px;
+           padding:.05rem .5rem; font-size:.78rem; margin-inline-start:.4rem; }
+  .card { border:1px solid #22303d; border-top:3px solid #d8ae3f; border-radius:12px;
           padding:1rem 1.1rem; margin-bottom:1rem; background:#121c26; }
+  .card.done { border-top-color:#3c4b59; opacity:.65; }
   .who { color:#d8ae3f; font-weight:600; }
-  .where, .when { color:#9aa8b6; font-size:.85rem; }
-  .actions { display:flex; gap:.6rem; margin-top:.9rem; }
+  .meta { color:#9aa8b6; font-size:.85rem; }
+  .actions { display:flex; gap:.6rem; margin-top:.9rem; flex-wrap:wrap; }
   .msg { white-space:pre-line; margin:.6rem 0 0; }
   .empty, .hint { color:#9aa8b6; }
+  table { width:100%; border-collapse:collapse; font-size:.92rem; }
+  td, th { text-align:start; padding:.4rem .2rem; border-bottom:1px solid #1b2733; }
+  th { color:#9aa8b6; font-weight:500; }
+  .bar { background:#d8ae3f; height:8px; border-radius:4px; display:block; min-width:2px; }
+  .tiles { display:flex; gap:.8rem; flex-wrap:wrap; margin-bottom:1.2rem; }
+  .tile { flex:1 1 8rem; border:1px solid #22303d; border-radius:12px; padding:.9rem 1rem; background:#121c26; }
+  .tile b { display:block; font-size:1.6rem; color:#d8ae3f; line-height:1.2; }
+  .tile span { color:#9aa8b6; font-size:.82rem; }
 </style>
 </head>
 <body>
 <div class="wrap">
-  <h1>სტუმრების წიგნი — <span>მოდერაცია</span></h1>
+  <h1>მაქსი დარკოსაძე — <span>მართვა</span></h1>
   <p id="gate">
     <label>ტოკენი (GUESTBOOK_TOKEN)<br><input id="token" type="password" autocomplete="off"></label>
     <button id="go" style="margin-top:.7rem">შესვლა</button>
   </p>
-  <p class="hint" id="hint" hidden>ჩანაწერი გამოქვეყნდება მხოლოდ „დატოვება“-ზე დაჭერის შემდეგ.</p>
-  <div id="list"></div>
+  <div id="app" hidden>
+    <div class="tabs">
+      <button data-tab="notes" class="on">ჩანაწერები<span class="badge" id="b-notes">0</span></button>
+      <button data-tab="bookings">მოწვევები<span class="badge" id="b-bookings">0</span></button>
+      <button data-tab="stats">სტატისტიკა</button>
+    </div>
+    <p class="hint" id="mode"></p>
+    <div id="view"></div>
+  </div>
 </div>
 <script>
 (function () {
-  var list = document.getElementById("list");
-  var gate = document.getElementById("gate");
-  var hint = document.getElementById("hint");
   var token = "";
   try { token = sessionStorage.getItem("gb-token") || ""; } catch (e) {}
+  var view = document.getElementById("view");
+  var app = document.getElementById("app");
+  var gate = document.getElementById("gate");
+  var tab = "notes";
+  var auto = false;
 
   function call(path, method) {
     return fetch(path, { method: method || "GET", headers: { "X-Token": token } });
   }
+  function el(tag, cls, text) {
+    var node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  }
+  function when(seconds) { return new Date(seconds * 1000).toLocaleString(); }
 
-  function load() {
+  function counts() {
+    return call("/api/stats").then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
+      if (!s) return;
+      document.getElementById("b-notes").textContent = s.notesWaiting;
+      document.getElementById("b-bookings").textContent = s.bookingsOpen;
+      auto = !!s.autoApprove;
+      var flag = document.getElementById("mode");
+      flag.textContent = auto
+        ? "რეჟიმი: ჩანაწერები ქვეყნდება მაშინვე."
+        : "რეჟიმი: ჩანაწერი ელოდება თქვენს დადასტურებას.";
+    });
+  }
+
+  function notes() {
     call("/api/guestbook/pending").then(function (r) {
-      if (r.status === 401) { alert("ტოკენი არ ემთხვევა."); gate.hidden = false; return null; }
+      if (r.status === 401) { alert("ტოკენი არ ემთხვევა."); gate.hidden = false; app.hidden = true; return null; }
       return r.json();
     }).then(function (data) {
       if (!data) return;
-      gate.hidden = true;
-      hint.hidden = false;
+      gate.hidden = true; app.hidden = false;
       try { sessionStorage.setItem("gb-token", token); } catch (e) {}
-      list.textContent = "";
-      if (!data.notes.length) {
-        var empty = document.createElement("p");
-        empty.className = "empty";
-        empty.textContent = "ახალი ჩანაწერი არ არის.";
-        list.appendChild(empty);
-        return;
+      view.textContent = "";
+      if (!auto) {
+        view.appendChild(el("h2", "", "ელოდება"));
+        view.appendChild(el("p", "hint", "ჩანაწერი გამოქვეყნდება მხოლოდ „დატოვება“-ზე დაჭერის შემდეგ."));
       }
+      if (!data.notes.length) { view.appendChild(el("p", "empty", "ახალი ჩანაწერი არ არის.")); }
       data.notes.forEach(function (note) {
-        var box = document.createElement("div");
-        box.className = "note";
-        var who = document.createElement("p");
-        var name = document.createElement("span");
-        name.className = "who";
-        name.textContent = note.name;
-        var place = document.createElement("span");
-        place.className = "where";
-        place.textContent = note.place ? " · " + note.place : "";
-        who.appendChild(name);
-        who.appendChild(place);
-        var msg = document.createElement("p");
-        msg.className = "msg";
-        msg.textContent = note.message;
-        var when = document.createElement("p");
-        when.className = "when";
-        when.textContent = new Date(note.created * 1000).toLocaleString();
-        var actions = document.createElement("p");
-        actions.className = "actions";
-        var keep = document.createElement("button");
-        keep.className = "keep";
-        keep.textContent = "დატოვება";
-        keep.onclick = function () {
-          call("/api/guestbook/" + note.id + "/approve", "POST").then(load);
-        };
-        var drop = document.createElement("button");
-        drop.className = "drop";
-        drop.textContent = "წაშლა";
-        drop.onclick = function () {
-          if (confirm("წავშალოთ?")) call("/api/guestbook/" + note.id, "DELETE").then(load);
-        };
-        actions.appendChild(keep);
-        actions.appendChild(drop);
-        box.appendChild(who);
-        box.appendChild(msg);
-        box.appendChild(when);
+        var box = el("div", "card");
+        var head = el("p");
+        head.appendChild(el("span", "who", note.name));
+        head.appendChild(el("span", "meta", note.place ? " · " + note.place : ""));
+        box.appendChild(head);
+        box.appendChild(el("p", "msg", note.message));
+        box.appendChild(el("p", "meta", when(note.created)));
+        var actions = el("p", "actions");
+        var keep = el("button", "keep", "დატოვება");
+        keep.onclick = function () { call("/api/guestbook/" + note.id + "/approve", "POST").then(render); };
+        var drop = el("button", "drop", "წაშლა");
+        drop.onclick = function () { if (confirm("წავშალოთ?")) call("/api/guestbook/" + note.id, "DELETE").then(render); };
+        actions.appendChild(keep); actions.appendChild(drop);
         box.appendChild(actions);
-        list.appendChild(box);
+        view.appendChild(box);
+      });
+      published();
+    });
+  }
+
+  function published() {
+    /* what the visitors see right now — so it can be taken down from here too */
+    call("/api/guestbook").then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      if (!data) return;
+      view.appendChild(el("h2", "", "გამოქვეყნებული"));
+      if (!data.notes.length) { view.appendChild(el("p", "empty", "ჯერ არც ერთი.")); return; }
+      data.notes.forEach(function (note) {
+        var box = el("div", "card done");
+        var head = el("p");
+        head.appendChild(el("span", "who", note.name));
+        head.appendChild(el("span", "meta", note.place ? " · " + note.place : ""));
+        box.appendChild(head);
+        box.appendChild(el("p", "msg", note.message));
+        box.appendChild(el("p", "meta", when(note.created)));
+        var actions = el("p", "actions");
+        var drop = el("button", "drop", "წაშლა");
+        drop.onclick = function () { if (confirm("წავშალოთ?")) call("/api/guestbook/" + note.id, "DELETE").then(render); };
+        actions.appendChild(drop);
+        box.appendChild(actions);
+        view.appendChild(box);
       });
     });
   }
 
-  document.getElementById("go").onclick = function () {
+  function bookings() {
+    call("/api/bookings").then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
+      if (!data) return;
+      view.textContent = "";
+      if (!data.bookings.length) { view.appendChild(el("p", "empty", "მოწვევები ჯერ არ არის.")); return; }
+      data.bookings.forEach(function (row) {
+        var box = el("div", "card" + (row.done ? " done" : ""));
+        var head = el("p");
+        head.appendChild(el("span", "who", row.name));
+        head.appendChild(el("span", "meta", row.org ? " · " + row.org : ""));
+        box.appendChild(head);
+        box.appendChild(el("p", "meta", row.contact));
+        if (row.topic) box.appendChild(el("p", "", row.topic));
+        var bits = [];
+        if (row.wanted) bits.push("თარიღი: " + row.wanted);
+        if (row.audience) bits.push("აუდიტორია: " + row.audience);
+        if (bits.length) box.appendChild(el("p", "meta", bits.join(" · ")));
+        if (row.message) box.appendChild(el("p", "msg", row.message));
+        box.appendChild(el("p", "meta", when(row.created)));
+        var actions = el("p", "actions");
+        if (!row.done) {
+          var done = el("button", "keep", "დამუშავებულია");
+          done.onclick = function () { call("/api/bookings/" + row.id + "/done", "POST").then(render); };
+          actions.appendChild(done);
+        }
+        var drop = el("button", "drop", "წაშლა");
+        drop.onclick = function () { if (confirm("წავშალოთ?")) call("/api/bookings/" + row.id, "DELETE").then(render); };
+        actions.appendChild(drop);
+        box.appendChild(actions);
+        view.appendChild(box);
+      });
+    });
+  }
+
+  function stats() {
+    call("/api/stats").then(function (r) { return r.ok ? r.json() : null; }).then(function (s) {
+      if (!s) return;
+      view.textContent = "";
+      var tiles = el("div", "tiles");
+      [[s.total, "ნახვა სულ"], [s.notesWaiting, "ჩანაწერი ელოდება"], [s.bookingsOpen, "ღია მოწვევა"]]
+        .forEach(function (pair) {
+          var tile = el("div", "tile");
+          tile.appendChild(el("b", "", String(pair[0])));
+          tile.appendChild(el("span", "", pair[1]));
+          tiles.appendChild(tile);
+        });
+      view.appendChild(tiles);
+
+      function table(title, rows, key) {
+        if (!rows.length) return;
+        view.appendChild(el("h2", "", title));
+        var max = rows.reduce(function (m, r) { return Math.max(m, Number(r.n)); }, 1);
+        var t = el("table");
+        rows.forEach(function (row) {
+          var tr = el("tr");
+          tr.appendChild(el("td", "", row[key]));
+          var td = el("td");
+          var bar = el("span", "bar");
+          bar.style.width = Math.max(2, Math.round(Number(row.n) / max * 100)) + "%";
+          td.appendChild(bar);
+          tr.appendChild(td);
+          tr.appendChild(el("td", "meta", String(row.n)));
+          t.appendChild(tr);
+        });
+        view.appendChild(t);
+      }
+      table("ბოლო 14 დღე", s.days, "day");
+      table("გვერდები", s.pages, "path");
+      table("საიდან მოდიან", s.referrers, "domain");
+      if (!s.total) view.appendChild(el("p", "empty", "ნახვები ჯერ არ დაფიქსირებულა."));
+    });
+  }
+
+  function render() {
+    /* the counts also tell us which mode the guest book is in, so they come first */
+    return counts().then(function () {
+      if (tab === "notes") return notes();
+      if (tab === "bookings") return bookings();
+      return stats();
+    });
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (button) {
+    button.onclick = function () {
+      Array.prototype.forEach.call(document.querySelectorAll(".tabs button"), function (b) {
+        b.classList.remove("on");
+      });
+      button.classList.add("on");
+      tab = button.getAttribute("data-tab");
+      render();
+    };
+  });
+
+  var enter = function () {
     token = document.getElementById("token").value.trim();
-    load();
+    render();
   };
-  if (token) load();
+  document.getElementById("go").onclick = enter;
+  document.getElementById("token").addEventListener("keydown", function (event) {
+    if (event.key === "Enter") { event.preventDefault(); enter(); }
+  });
+  if (token) render();
 })();
 </script>
 </body>
@@ -200,6 +345,58 @@ ADMIN_PAGE = """<!DOCTYPE html>
 
 DB_READY = True
 USING_POSTGRES = bool(DATABASE_URL and psycopg)
+
+SQLITE_EXTRA = [
+    """CREATE TABLE IF NOT EXISTS views (
+        day   TEXT NOT NULL,
+        path  TEXT NOT NULL,
+        lang  TEXT NOT NULL DEFAULT '',
+        hits  INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (day, path, lang))""",
+    """CREATE TABLE IF NOT EXISTS referrers (
+        day    TEXT NOT NULL,
+        domain TEXT NOT NULL,
+        hits   INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (day, domain))""",
+    """CREATE TABLE IF NOT EXISTS bookings (
+        id       INTEGER PRIMARY KEY AUTOINCREMENT,
+        name     TEXT NOT NULL,
+        contact  TEXT NOT NULL,
+        org      TEXT NOT NULL DEFAULT '',
+        wanted   TEXT NOT NULL DEFAULT '',
+        audience TEXT NOT NULL DEFAULT '',
+        topic    TEXT NOT NULL DEFAULT '',
+        message  TEXT NOT NULL DEFAULT '',
+        lang     TEXT NOT NULL DEFAULT '',
+        created  BIGINT NOT NULL,
+        done     INTEGER NOT NULL DEFAULT 0)""",
+]
+
+POSTGRES_EXTRA = [
+    """CREATE TABLE IF NOT EXISTS views (
+        day   TEXT NOT NULL,
+        path  TEXT NOT NULL,
+        lang  TEXT NOT NULL DEFAULT '',
+        hits  INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (day, path, lang))""",
+    """CREATE TABLE IF NOT EXISTS referrers (
+        day    TEXT NOT NULL,
+        domain TEXT NOT NULL,
+        hits   INTEGER NOT NULL DEFAULT 0,
+        PRIMARY KEY (day, domain))""",
+    """CREATE TABLE IF NOT EXISTS bookings (
+        id       SERIAL PRIMARY KEY,
+        name     TEXT NOT NULL,
+        contact  TEXT NOT NULL,
+        org      TEXT NOT NULL DEFAULT '',
+        wanted   TEXT NOT NULL DEFAULT '',
+        audience TEXT NOT NULL DEFAULT '',
+        topic    TEXT NOT NULL DEFAULT '',
+        message  TEXT NOT NULL DEFAULT '',
+        lang     TEXT NOT NULL DEFAULT '',
+        created  BIGINT NOT NULL,
+        done     INTEGER NOT NULL DEFAULT 0)""",
+]
 
 SQLITE_SCHEMA = """
     CREATE TABLE IF NOT EXISTS notes (
@@ -244,6 +441,8 @@ class Store:
     def setup(self):
         with self.connect() as conn:
             self._execute(conn, POSTGRES_SCHEMA if self.postgres else SQLITE_SCHEMA, ())
+            for statement in (POSTGRES_EXTRA if self.postgres else SQLITE_EXTRA):
+                self._execute(conn, statement, ())
 
     def _execute(self, conn, sql, params):
         if self.postgres:
@@ -264,6 +463,54 @@ class Store:
 
 
 STORE = Store()
+
+
+NOTIFY_WEBHOOK = os.environ.get("NOTIFY_WEBHOOK", "").strip()
+TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+TELEGRAM_CHAT = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+
+
+def notify(title, body):
+    """Tell him something arrived. Never blocks or breaks the request."""
+    def send():
+        text = "%s\n%s" % (title, body)
+        try:
+            if TELEGRAM_TOKEN and TELEGRAM_CHAT:
+                payload = json.dumps({"chat_id": TELEGRAM_CHAT, "text": text,
+                                      "disable_web_page_preview": True}).encode("utf-8")
+                request = urllib.request.Request(
+                    "https://api.telegram.org/bot%s/sendMessage" % TELEGRAM_TOKEN,
+                    data=payload, headers={"Content-Type": "application/json"})
+                urllib.request.urlopen(request, timeout=8).close()
+            if NOTIFY_WEBHOOK:
+                payload = json.dumps({"title": title, "text": body,
+                                      "content": text}).encode("utf-8")
+                request = urllib.request.Request(
+                    NOTIFY_WEBHOOK, data=payload,
+                    headers={"Content-Type": "application/json"})
+                urllib.request.urlopen(request, timeout=8).close()
+        except Exception:                   # noqa: BLE001 - a failed ping is not an error
+            pass
+
+    if TELEGRAM_TOKEN or NOTIFY_WEBHOOK:
+        threading.Thread(target=send, daemon=True).start()
+
+
+def today():
+    return time.strftime("%Y-%m-%d", time.gmtime())
+
+
+def referrer_domain(value):
+    value = str(value or "").strip()[:200]
+    if not value:
+        return ""
+    try:
+        host = urllib.parse.urlparse(value).netloc.lower()
+    except ValueError:
+        return ""
+    if host.startswith("www."):
+        host = host[4:]
+    return host[:80]
 
 
 def clean(value, limit):
@@ -328,7 +575,40 @@ class Handler(SimpleHTTPRequestHandler):
                 return self.send_json({"error": "unavailable"}, 503)
             rows = STORE.rows("SELECT id, name, place, message, created FROM notes "
                               "WHERE approved = 1 ORDER BY id DESC LIMIT 200")
-            return self.send_json({"notes": rows})
+            return self.send_json({"notes": rows, "moderated": not AUTO_APPROVE})
+        if path == "/api/stats":
+            if not self.authorised():
+                return self.send_json({"error": "unauthorised"}, 401)
+            if not DB_READY:
+                return self.send_json({"error": "unavailable"}, 503)
+            since = time.strftime("%Y-%m-%d", time.gmtime(time.time() - 14 * 86400))
+            return self.send_json({
+                "total": STORE.rows("SELECT COALESCE(SUM(hits), 0) AS n FROM views")[0]["n"],
+                "days": STORE.rows(
+                    "SELECT day, SUM(hits) AS n FROM views WHERE day >= ? "
+                    "GROUP BY day ORDER BY day", (since,)),
+                "pages": STORE.rows(
+                    "SELECT path, SUM(hits) AS n FROM views WHERE day >= ? "
+                    "GROUP BY path ORDER BY n DESC LIMIT 12", (since,)),
+                "referrers": STORE.rows(
+                    "SELECT domain, SUM(hits) AS n FROM referrers WHERE day >= ? "
+                    "GROUP BY domain ORDER BY n DESC LIMIT 10", (since,)),
+                "notesWaiting": STORE.rows(
+                    "SELECT COUNT(*) AS n FROM notes WHERE approved = 0")[0]["n"],
+                "bookingsOpen": STORE.rows(
+                    "SELECT COUNT(*) AS n FROM bookings WHERE done = 0")[0]["n"],
+                "autoApprove": AUTO_APPROVE,
+            })
+
+        if path == "/api/bookings":
+            if not self.authorised():
+                return self.send_json({"error": "unauthorised"}, 401)
+            if not DB_READY:
+                return self.send_json({"error": "unavailable"}, 503)
+            return self.send_json({"bookings": STORE.rows(
+                "SELECT id, name, contact, org, wanted, audience, topic, message, created, done "
+                "FROM bookings ORDER BY done, id DESC LIMIT 200")})
+
         if path == "/api/guestbook/pending":
             if not self.authorised():
                 return self.send_json({"error": "unauthorised"}, 401)
@@ -364,16 +644,93 @@ class Handler(SimpleHTTPRequestHandler):
                 "SELECT created FROM notes WHERE source_ip = ? ORDER BY id DESC LIMIT 1", (ip,))
             if recent and now - recent[0]["created"] < COOLDOWN_SECONDS:
                 return self.send_json({"error": "too soon"}, 429)
-            today = STORE.rows(
+            posted_today = STORE.rows(
                 "SELECT COUNT(*) AS n FROM notes WHERE source_ip = ? AND created > ?",
                 (ip, now - 86400))[0]["n"]
-            if today >= MAX_PER_DAY:
+            if posted_today >= MAX_PER_DAY:
                 return self.send_json({"error": "too many"}, 429)
             STORE.run(
                 "INSERT INTO notes (name, place, message, lang, source_ip, created, approved)"
-                " VALUES (?, ?, ?, ?, ?, ?, 0)",
-                (name, place, message, clean(payload.get("lang"), 5), ip, now))
+                " VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (name, place, message, clean(payload.get("lang"), 5), ip, now,
+                 1 if AUTO_APPROVE else 0))
+            notify("ახალი ჩანაწერი / New note", "%s%s\n%s" % (
+                name, (" · " + place) if place else "", message[:300]))
+            if AUTO_APPROVE:
+                # hand the note straight back so the page can show it at once
+                return self.send_json({"ok": True, "pending": False,
+                                       "note": {"name": name, "place": place,
+                                                "message": message}})
             return self.send_json({"ok": True, "pending": True})
+
+        if path == "/api/hit":
+            # one anonymous count per page view: no address, no fingerprint
+            if not DB_READY:
+                return self.send_json({"ok": False})
+            payload = self.read_json() or {}
+            page = clean(payload.get("path"), 120)
+            if not page.startswith("/"):
+                return self.send_json({"ok": False})
+            lang = clean(payload.get("lang"), 5)
+            day = today()
+            if STORE.postgres:
+                STORE.run("INSERT INTO views (day, path, lang, hits) VALUES (?, ?, ?, 1) "
+                          "ON CONFLICT (day, path, lang) DO UPDATE SET hits = views.hits + 1",
+                          (day, page, lang))
+            else:
+                STORE.run("INSERT INTO views (day, path, lang, hits) VALUES (?, ?, ?, 1) "
+                          "ON CONFLICT (day, path, lang) DO UPDATE SET hits = hits + 1",
+                          (day, page, lang))
+            domain = referrer_domain(payload.get("ref"))
+            if domain:
+                if STORE.postgres:
+                    STORE.run("INSERT INTO referrers (day, domain, hits) VALUES (?, ?, 1) "
+                              "ON CONFLICT (day, domain) DO UPDATE SET hits = referrers.hits + 1",
+                              (day, domain))
+                else:
+                    STORE.run("INSERT INTO referrers (day, domain, hits) VALUES (?, ?, 1) "
+                              "ON CONFLICT (day, domain) DO UPDATE SET hits = hits + 1",
+                              (day, domain))
+            return self.send_json({"ok": True})
+
+        if path == "/api/booking":
+            if not DB_READY:
+                return self.send_json({"error": "unavailable"}, 503)
+            payload = self.read_json()
+            if payload is None:
+                return self.send_json({"error": "bad request"}, 400)
+            if clean(payload.get("website"), 10):            # honeypot
+                return self.send_json({"ok": True})
+            name = clean(payload.get("name"), 80)
+            contact = clean(payload.get("contact"), 120)
+            message = clean(payload.get("message"), 900)
+            if not name or not contact:
+                return self.send_json({"error": "name and contact are required"}, 400)
+
+            now = int(time.time())
+            ip = self.client_ip()
+            recent = STORE.rows(
+                "SELECT created FROM bookings WHERE contact = ? ORDER BY id DESC LIMIT 1",
+                (contact,))
+            if recent and now - recent[0]["created"] < COOLDOWN_SECONDS:
+                return self.send_json({"error": "too soon"}, 429)
+
+            STORE.run(
+                "INSERT INTO bookings (name, contact, org, wanted, audience, topic, message,"
+                " lang, created, done) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 0)",
+                (name, contact, clean(payload.get("org"), 120), clean(payload.get("wanted"), 60),
+                 clean(payload.get("audience"), 120), clean(payload.get("topic"), 160),
+                 message, clean(payload.get("lang"), 5), now))
+            notify("ახალი მოწვევა / New request", "%s (%s)\n%s\n%s" % (
+                name, contact, clean(payload.get("topic"), 160), message[:300]))
+            return self.send_json({"ok": True})
+
+        match = re.match(r"^/api/bookings/(\d+)/done$", path)
+        if match:
+            if not self.authorised():
+                return self.send_json({"error": "unauthorised"}, 401)
+            STORE.run("UPDATE bookings SET done = 1 WHERE id = ?", (int(match.group(1)),))
+            return self.send_json({"ok": True})
 
         match = re.match(r"^/api/guestbook/(\d+)/approve$", path)
         if match:
@@ -386,13 +743,18 @@ class Handler(SimpleHTTPRequestHandler):
 
     # -------------------------------------------------------------- DELETE
     def do_DELETE(self):
-        match = re.match(r"^/api/guestbook/(\d+)$", self.path.split("?")[0])
-        if not match:
-            return self.send_json({"error": "not found"}, 404)
+        path = self.path.split("?")[0]
         if not self.authorised():
             return self.send_json({"error": "unauthorised"}, 401)
-        STORE.run("DELETE FROM notes WHERE id = ?", (int(match.group(1)),))
-        return self.send_json({"ok": True})
+        match = re.match(r"^/api/guestbook/(\d+)$", path)
+        if match:
+            STORE.run("DELETE FROM notes WHERE id = ?", (int(match.group(1)),))
+            return self.send_json({"ok": True})
+        match = re.match(r"^/api/bookings/(\d+)$", path)
+        if match:
+            STORE.run("DELETE FROM bookings WHERE id = ?", (int(match.group(1)),))
+            return self.send_json({"ok": True})
+        return self.send_json({"error": "not found"}, 404)
 
     def list_directory(self, path):         # no directory listings
         self.send_error(404, "Not found")
@@ -418,6 +780,12 @@ def main():
         print("! the guest book is unavailable (%s) — the site is still served" % error)
     if not TOKEN:
         print("! GUESTBOOK_TOKEN is not set — moderation endpoints are disabled.")
+    print("notes: %s" % ("published at once (GUESTBOOK_AUTO_APPROVE)"
+                         if AUTO_APPROVE else "held until approved at /admin"))
+    if TELEGRAM_TOKEN and TELEGRAM_CHAT:
+        print("notifications: Telegram")
+    elif NOTIFY_WEBHOOK:
+        print("notifications: webhook")
     if DATABASE_URL and not psycopg:
         print("! DATABASE_URL is set but psycopg is not installed — using SQLite instead")
     print("guest book storage: %s" % ("PostgreSQL" if USING_POSTGRES else "SQLite at %s" % DB_PATH))

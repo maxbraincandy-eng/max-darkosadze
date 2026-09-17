@@ -2,3 +2,5 @@
 # the guest book database is per-deployment, never committed
 server/*.db
 server/*.db-journal
+__pycache__/
+*.pyc

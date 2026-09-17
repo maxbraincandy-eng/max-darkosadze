@@ -1109,3 +1109,20 @@ body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none;
 .guest-portrait figcaption {
   margin-top: .6rem; font-size: .84rem; color: var(--muted); text-align: center;
 }
+
+/* --------------------------------------------------------- invitations */
+.booking-grid {
+  display: grid; gap: clamp(1.8rem, 5vw, 3.2rem);
+  grid-template-columns: minmax(0, 1fr) 300px; align-items: start;
+}
+@media (max-width: 900px) { .booking-grid { grid-template-columns: 1fr; } }
+.booking-main h2, .booking-aside h2 { font-size: 1.15rem; margin-bottom: 1rem; }
+.booking-form { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.booking-aside {
+  background: var(--surface); border: 1px solid var(--line);
+  border-top: 4px solid var(--gold); border-radius: var(--radius);
+  padding: 1.5rem 1.4rem;
+}
+.booking-aside .rich-list li { font-size: .93rem; }
+.booking-portrait { margin-top: 1.2rem; border-radius: var(--radius); overflow: hidden; }
+.booking-portrait img { width: 100%; height: auto; display: block; }

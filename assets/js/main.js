@@ -358,6 +358,11 @@
           if (!data || !data.notes) return;
           data.notes.forEach(function (note) { list.appendChild(noteElement(note)); });
           if (emptyNote) emptyNote.hidden = list.children.length > 0;
+          if (data.moderated === false) {
+            /* notes go up at once: do not promise a wait that will not happen */
+            var hint = guest.querySelector("[data-form-note]");
+            if (hint && say("instant")) hint.textContent = say("instant");
+          }
         })
         .catch(offline);
     }
@@ -401,18 +406,132 @@
           headers: { "Content-Type": "application/json", "Accept": "application/json" },
           body: JSON.stringify(payload)
         }).then(function (r) {
-          if (!r.ok) throw new Error("rejected");
+          if (!r.ok) {
+            /* say which rule stopped it, not just "it failed" */
+            return r.json().catch(function () { return {}; }).then(function (body) {
+              var reason = (body && body.error) || "";
+              var key = reason === "too soon" ? "soon"
+                      : reason === "too many" ? "many"
+                      : reason === "links are not accepted" ? "links" : "";
+              var message = key && say(key);
+              throw new Error(message || "rejected");
+            });
+          }
+          return r.json().catch(function () { return {}; });
+        }).then(function (data) {
           form.reset();
           if (counter) counter.textContent = "700";
-          tell(say("thanks"), "ok");
-        }).catch(function () {
-          tell(say("error"), "error");
+          if (data && data.pending === false) {
+            /* the server published it straight away: put it on the page now */
+            if (data.note && list) {
+              list.insertBefore(noteElement(data.note), list.firstChild);
+              if (emptyNote) emptyNote.hidden = true;
+            }
+            tell(say("published") || say("thanks"), "ok");
+          } else {
+            tell(say("thanks"), "ok");
+          }
+        }).catch(function (problem) {
+          var message = problem && problem.message;
+          tell(message && message !== "rejected" ? message : say("error"), "error");
         }).then(function () {
           button.disabled = false;
         });
       });
     }
   }
+
+  /* ---- invitation form ----------------------------------------------- */
+  var booking = document.querySelector("[data-booking]");
+  if (booking) {
+    var target = booking.getAttribute("data-booking");
+    var scope = booking.closest("[data-msg-sending]") || booking;
+    var speak = function (key) { return scope.getAttribute("data-msg-" + key) || ""; };
+    var state = booking.querySelector(".form-status");
+    var sendButton = booking.querySelector("button[type=submit]");
+
+    var report = function (message, kind) {
+      state.textContent = message;
+      state.hidden = !message;
+      state.className = "form-status" + (kind ? " is-" + kind : "");
+    };
+
+    booking.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var payload = {
+        name: booking.name.value.trim(),
+        contact: booking.contact.value.trim(),
+        org: booking.org.value.trim(),
+        wanted: booking.wanted.value.trim(),
+        audience: booking.audience.value.trim(),
+        topic: booking.topic.value.trim(),
+        message: booking.message.value.trim(),
+        website: booking.website.value,
+        lang: docEl.lang
+      };
+      if (!payload.name || !payload.contact) return;
+      sendButton.disabled = true;
+      report(speak("sending"));
+      fetch(target, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      }).then(function (r) {
+        if (!r.ok) throw new Error("rejected");
+        booking.reset();
+        report(speak("thanks"), "ok");
+      }).catch(function () {
+        report(speak("error"), "error");
+      }).then(function () {
+        sendButton.disabled = false;
+      });
+    });
+
+    /* nothing listening: offer Instagram rather than a form that cannot send */
+    fetch(target.replace("/api/booking", "/api/guestbook"), { method: "GET" })
+      .then(function (r) { if (!r.ok) throw new Error("no server"); })
+      .catch(function () {
+        var note = document.createElement("p");
+        note.className = "note";
+        note.textContent = scope.getAttribute("data-msg-offline") || "";
+        var url = scope.getAttribute("data-offline-url");
+        var cta = scope.getAttribute("data-offline-cta");
+        booking.replaceWith(note);
+        if (url && cta) {
+          var link = document.createElement("a");
+          link.className = "btn btn-primary";
+          link.href = url;
+          link.target = "_blank";
+          link.rel = "noopener";
+          link.textContent = cta;
+          var holder = document.createElement("p");
+          holder.appendChild(link);
+          note.after(holder);
+        }
+      });
+  }
+
+  /* ---- one anonymous count per page view ------------------------------
+     No address, no cookie, no fingerprint: the page tells the site's own
+     server which page was opened, and nothing else. Quietly does nothing
+     when there is no server, or when the reader asks not to be tracked.  */
+  try {
+    var doNotTrack = navigator.doNotTrack === "1" || window.doNotTrack === "1";
+    if (!doNotTrack && location.protocol.indexOf("http") === 0) {
+      var sameSiteReferrer = document.referrer &&
+        document.referrer.indexOf(location.origin) === 0;
+      fetch("/api/hit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          path: location.pathname,
+          lang: docEl.lang,
+          ref: sameSiteReferrer ? "" : document.referrer
+        }),
+        keepalive: true
+      }).catch(function () { /* no counter running */ });
+    }
+  } catch (e) { /* never let counting break a page */ }
 
   /* ---- light / dark switch ------------------------------------------ */
   var themeButton = document.querySelector(".theme-toggle");

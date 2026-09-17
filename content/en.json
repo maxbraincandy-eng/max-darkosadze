@@ -752,9 +752,14 @@
         "send": "Send",
         "sending": "Sending…",
         "note": "Notes are read before they appear, so yours will not show up immediately.",
+        "noteInstant": "Your note appears on the page straight away.",
         "thanks": "Thank you — your note has been sent and will appear once it has been read.",
+        "published": "Thank you — your note is on the page.",
         "error": "The note could not be sent. Please try again later.",
         "tooLong": "The note is a little too long.",
+        "tooSoon": "One note a minute, please — try again in a moment.",
+        "tooMany": "That is a few notes for one day. Please try again tomorrow.",
+        "noLinks": "Links are not accepted — take the link out and send it again.",
         "counter": "characters left"
       },
       "entriesTitle": "Notes",
@@ -764,6 +769,36 @@
       "entries": [],
       "disabledCta": "Write on Instagram",
       "portraitCaption": "Batoni Maksi — leave him a couple of lines."
+    },
+    "booking": {
+      "title": "Invite him to speak — Max Darkosadze",
+      "eyebrow": "Invitations",
+      "heading": "Invite him to speak",
+      "lead": "Lectures, seminars and briefings — for a university, a hospital team, a flying club or a company. Tell him what the occasion is and he will answer himself.",
+      "formTitle": "The request",
+      "form": {
+        "name": "Your name",
+        "contact": "E-mail or phone",
+        "org": "Organisation (optional)",
+        "wanted": "Date you have in mind",
+        "audience": "Who will be listening",
+        "topic": "Subject",
+        "message": "Anything else he should know",
+        "send": "Send the request",
+        "sending": "Sending…",
+        "note": "It goes straight to him. Expect an answer, not an assistant.",
+        "thanks": "Thank you — the request has been sent. He answers these himself, so give him a day or two.",
+        "error": "The request could not be sent. Please try again later."
+      },
+      "asideTitle": "What he is usually asked for",
+      "aside": [
+        "Decision-making under pressure — the same talk for surgeons and for pilots.",
+        "Checklists, briefings and the debrief: the aviation safety culture in clinical work.",
+        "Philosophy for people with their hands full — responsibility, attention, and deciding well.",
+        "For students: what the training is actually for."
+      ],
+      "disabledNote": "Requests are not being taken through the site at the moment. Instagram reaches him directly.",
+      "disabledCta": "Write on Instagram"
     }
   },
   "articles": [

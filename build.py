@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "booking", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -234,6 +234,9 @@ def head(data, title, description, depth, key, slug=None):
         '<meta name="author" content="%s">' % esc(data["meta"]["siteName"]),
         '<meta name="theme-color" content="#0d1b2a">',
     ]
+    if SITE.get("googleVerification", "").strip():
+        tags.append('<meta name="google-site-verification" content="%s">'
+                    % esc(SITE["googleVerification"].strip()))
     if canonical:
         tags += [
             '<link rel="canonical" href="%s">' % esc(canonical),
@@ -379,6 +382,7 @@ def footer(data, depth):
     ) + "".join(
         '<li><a href="%s">%s</a></li>' % (link(data["lang"], key, depth), esc(label))
         for key, label in (("legend", data["pages"]["legend"]["masthead"]),
+                           ("booking", data["pages"]["booking"]["heading"]),
                            ("press", data["pages"]["press"]["heading"]))
     )
     return """
@@ -926,6 +930,76 @@ def render_news(data):
                     body=body, depth=depth, active="news")
 
 
+def render_booking(data):
+    """Invitations to lecture. Uses the same server as the guest book, and shows
+    the form only when something is there to receive it."""
+    depth = 1
+    p = data["pages"]["booking"]
+    f = p["form"]
+    api = SITE.get("guestbookApi", "").strip()
+    post_to = ("/api/booking" if api else SITE.get("bookingForm", "").strip())
+
+    if post_to:
+        form = """
+    <form class="guest-form booking-form" data-booking="%s" novalidate>
+      <label>%s<input type="text" name="name" maxlength="80" required autocomplete="name"></label>
+      <label>%s<input type="text" name="contact" maxlength="120" required></label>
+      <label>%s<input type="text" name="org" maxlength="120" autocomplete="organization"></label>
+      <label>%s<input type="text" name="wanted" maxlength="60" placeholder="2026-11-14"></label>
+      <label>%s<input type="text" name="audience" maxlength="120"></label>
+      <label>%s<input type="text" name="topic" maxlength="160"></label>
+      <label class="form-wide">%s<textarea name="message" rows="5" maxlength="900"></textarea></label>
+      <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+      <p class="form-actions">
+        <button class="btn btn-primary" type="submit">%s</button>
+        <span class="muted" data-form-note>%s</span>
+      </p>
+      <p class="form-status" role="status" aria-live="polite" hidden></p>
+    </form>""" % (esc(post_to), esc(f["name"]), esc(f["contact"]), esc(f["org"]), esc(f["wanted"]),
+                  esc(f["audience"]), esc(f["topic"]), esc(f["message"]), esc(f["send"]),
+                  esc(f["note"]))
+    else:
+        form = ('<p>%s</p><p><a class="btn btn-primary" href="%s" target="_blank" rel="noopener">%s</a></p>'
+                % (inline(p["disabledNote"]), esc(data["meta"]["links"]["instagram"]),
+                   esc(p["disabledCta"])))
+
+    topics = "".join("<li>%s</li>" % inline(item) for item in p["aside"])
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap booking-grid"
+       data-msg-sending="%s" data-msg-thanks="%s" data-msg-error="%s"
+       data-offline-url="%s" data-offline-cta="%s" data-msg-offline="%s">
+    <div class="booking-main">
+      <h2>%s</h2>
+      %s
+    </div>
+    <aside class="booking-aside">
+      <h2>%s</h2>
+      <ul class="rich-list">%s</ul>
+      <div class="booking-portrait img-slot" data-path="assets/img/lecture.jpg">%s</div>
+    </aside>
+  </div>
+</section>
+""" % (
+        esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+        esc(f["sending"]), esc(f["thanks"]), esc(f["error"]),
+        esc(data["meta"]["links"]["instagram"]), esc(p["disabledCta"]), esc(p["disabledNote"]),
+        esc(p["formTitle"]), form,
+        esc(p["asideTitle"]), topics,
+        img_tag("assets/img/lecture.jpg", p["heading"], depth),
+    )
+    return document(data, title=p["title"], description=plain(p["lead"]), key="booking",
+                    body=body, depth=depth, active="booking")
+
+
 def render_guestbook(data):
     """Notes left by visitors. Entries that have been read and kept live in the
     content file; if a guest-book API is configured the page also loads the
@@ -957,7 +1031,7 @@ def render_guestbook(data):
       <p class="form-hp" aria-hidden="true"><label>Leave this field empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
       <p class="form-actions">
         <button class="btn btn-primary" type="submit">%s</button>
-        <span class="muted">%s</span>
+        <span class="muted" data-form-note>%s</span>
       </p>
       <p class="form-status" role="status" aria-live="polite" hidden></p>
     </form>""" % (esc(f["name"]), esc(f["place"]), esc(f["message"]), esc(f["counter"]),
@@ -980,8 +1054,9 @@ def render_guestbook(data):
 <section class="section">
   <div class="wrap guest-grid"
        data-guestbook="%s" data-guestbook-post="%s" data-guestbook-mode="%s"
-       data-msg-sending="%s" data-msg-thanks="%s" data-msg-error="%s" data-msg-long="%s"
-       data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s"
+       data-msg-sending="%s" data-msg-thanks="%s" data-msg-published="%s" data-msg-error="%s" data-msg-long="%s"
+       data-msg-empty="%s" data-msg-loading="%s" data-msg-offline="%s" data-msg-instant="%s"
+       data-msg-soon="%s" data-msg-many="%s" data-msg-links="%s"
        data-offline-url="%s" data-offline-cta="%s">
     <div class="guest-form-wrap">
       <figure class="guest-portrait img-slot" data-path="assets/img/portrait.jpg">
@@ -1003,8 +1078,11 @@ def render_guestbook(data):
         esc(api),
         esc(post_to),
         "api" if api else ("form" if post_to else "off"),
-        esc(f["sending"]), esc(f["thanks"]), esc(f["error"]), esc(f["tooLong"]),
+        esc(f["sending"]), esc(f["thanks"]), esc(f.get("published", f["thanks"])),
+        esc(f["error"]), esc(f["tooLong"]),
         esc(p["empty"]), esc(p["loading"]), esc(p["disabledNote"]),
+        esc(f.get("noteInstant", "")),
+        esc(f.get("tooSoon", "")), esc(f.get("tooMany", "")), esc(f.get("noLinks", "")),
         esc(data["meta"]["links"]["instagram"]), esc(p["disabledCta"]),
         img_tag("assets/img/portrait.jpg", data["meta"]["siteName"], depth),
         inline(p["portraitCaption"]),
@@ -1482,6 +1560,7 @@ def main():
         write(page_path(lang, "news"), render_news(data))
         write(page_path(lang, "legend"), render_legend(data))
         write(page_path(lang, "guestbook"), render_guestbook(data))
+        write(page_path(lang, "booking"), render_booking(data))
         write(page_path(lang, "press"), render_press(data))
         write(page_path(lang, "foundation"), render_foundation(data))
         write(page_path(lang, "gallery"), render_gallery(data))
