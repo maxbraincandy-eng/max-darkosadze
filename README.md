@@ -276,6 +276,28 @@ minute and ten a day, links refused, a hidden honeypot field, lengths capped,
 and every note is rendered as text — a note containing HTML shows the HTML as
 characters rather than running it.
 
+### Checking the setup / შემოწმება
+
+Open `https://your-site/healthz`. It answers with booleans only — nothing
+secret — and they say exactly how the running server is set up:
+
+```json
+{"ok": true, "guestbook": true, "store": "postgres",
+ "databaseUrl": true, "psycopg": true, "autoApprove": false, "token": true}
+```
+
+* `"store": "sqlite"` with `"databaseUrl": false` — **the notes are inside the
+  container and the next deploy erases them.** Add `DATABASE_URL` as
+  `${{Postgres.DATABASE_URL}}` to the *web* service (not to the Postgres one).
+* `"databaseUrl": true` but `"psycopg": false` — the variable is there but the
+  library is not installed; `requirements.txt` must be picked up by the build.
+* `"autoApprove": false` — notes wait for you at `/admin`; `true` — they are
+  published the moment they are written.
+* `"token": false` — `GUESTBOOK_TOKEN` is not set, so `/admin` cannot be used.
+
+`/healthz` გახსენით და ნახავთ, როგორ არის რეალურად აწყობილი სერვერი: სად ინახება
+ჩანაწერები, ჩართულია თუ არა მაშინვე გამოქვეყნება და დაყენებულია თუ არა ტოკენი.
+
 ## Invitations / მოწვევები
 
 `/ka/booking.html` and `/en/booking.html` are the page for anyone who wants to
