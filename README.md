@@ -451,6 +451,42 @@ python3 tools/og_images.py      # writes assets/og/<lang>-<page>.jpg
 Run it again after changing a title. `build.py` picks the file up automatically
 and falls back to `assets/img/og.jpg` if one is missing.
 
+## Typefaces / შრიფტები
+
+The two Georgian faces are served from this site, not fetched from Google:
+fewer round trips before the first letter is drawn, and no visitor announced to
+a third party. `tools/webfonts.py` cuts Noto Serif Georgian and Noto Sans
+Georgian (both under the SIL Open Font License) down to the characters the
+content actually uses and writes them to `assets/fonts` as `.woff2` — 79 KB and
+53 KB, one file per family covering every weight.
+
+```bash
+pip install fonttools brotli     # once
+python3 tools/webfonts.py        # after adding text in a new alphabet
+```
+
+The stylesheet declares them and every page preloads them; there is nothing to
+change in the HTML. Verified with a browser: zero requests leave the site.
+
+## Questions / ხშირი კითხვები
+
+`/ka/faq.html` and `/en/faq.html` answer what people actually ask — who he is,
+where the name Batoni Maksi comes from, how to invite him, whether the Legend
+page is true. Each answer can point at the page that says more: add `"link"`
+with a page key (`booking`, `press`, `gallery`…) to an item in
+`pages.faq.items` and the link appears by itself.
+
+The page also carries a `FAQPage` record, which is the form Google reads when
+it shows questions and answers directly in the search results.
+
+## Search / ძებნა
+
+`/ka/search.html` searches the whole site with no server behind it. `build.py`
+writes `assets/search-ka.json` and `assets/search-en.json` — every page and
+every article as plain text — and the page filters them in the visitor's own
+browser as they type. A search is linkable (`search.html?q=ავიაცია`), and the
+index is rebuilt with the site, so it can never fall behind the text.
+
 ## Brand kit / ბრენდის მასალები
 
 ```bash
@@ -461,6 +497,17 @@ writes into `assets/brand/`: the wordmark (SVG, light and dark), a business card
 front and back at 85×55 mm / 300 dpi ready for a printer, a QR code pointing at
 the site, an e-mail signature to paste into Gmail or Outlook, and six Instagram
 highlight covers. They are all linked from the press-kit page as well.
+
+### Quotation cards for Instagram / ციტატების ბარათები
+
+`python3 tools/brand.py` also writes `assets/brand/quotes/` — every quotation
+already on the site as a card in the site's own colours: `*-post.jpg` at
+1080×1080 for the feed and `*-story.jpg` at 1080×1920 for stories, in both
+languages, each carrying the name and the address. Write a new quotation into an
+article (a block of `"type": "quote"`) and the next run makes its cards too.
+
+ციტატების ბარათები Instagram-ისთვის: `assets/brand/quotes/` — კვადრატული
+ფიდისთვის, ვერტიკალური სთორისთვის, ქართულად და ინგლისურად.
 
 ## Preparing photographs / ფოტოების მომზადება
 

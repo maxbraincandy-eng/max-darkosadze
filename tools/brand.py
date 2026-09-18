@@ -212,6 +212,96 @@ def signature(url):
     return path
 
 
+# --------------------------------------------------------------- quote cards --
+
+def wrap(draw, text, face, max_width):
+    """Break a line of Georgian or English so that it fits the card."""
+    words, lines, line = text.split(), [], ""
+    for word in words:
+        trial = (line + " " + word).strip()
+        if draw.textlength(trial, font=face) <= max_width or not line:
+            line = trial
+        else:
+            lines.append(line)
+            line = word
+    if line:
+        lines.append(line)
+    return lines
+
+
+def quotes_from(data, limit=8):
+    """The quotations the site already carries: the one on the home page, then
+    one from each article that has one."""
+    found = [(data["pages"]["home"]["quote"], data["pages"]["home"]["quoteCite"])]
+    for article in data["articles"]:
+        for para in article["blocks"]:
+            if para.get("type") == "quote":
+                found.append((para["text"], article["title"]))
+                break
+    cleaned = []
+    for text, cite in found:
+        text = text.replace("[[", "").replace("]]", "").strip()
+        if text and text not in [t for t, _ in cleaned]:
+            cleaned.append((text, cite.replace("[[", "").replace("]]", "").strip()))
+    return cleaned[:limit]
+
+
+def quote_card(text, cite, name, url, size, tall=False):
+    """One card for Instagram: the words, the name, the address. Nothing else."""
+    width, height = size
+    img = Image.new("RGB", (width, height), INK)
+    d = ImageDraw.Draw(img)
+
+    margin = int(width * 0.11)
+    d.rectangle((0, 0, width, int(height * 0.012)), fill=GOLD)
+    d.text((margin, margin), "MD", font=font("NotoSerifGeorgian.ttf", int(width * 0.055), 700),
+           fill=GOLD)
+
+    body = int(width * (0.088 if tall else 0.072))   # stories carry bigger type
+    for attempt in range(14):                      # shrink until the words fit
+        face = font("NotoSerifGeorgian.ttf", body, 500)
+        lines = wrap(d, "„%s“" % text, face, width - margin * 2)
+        step = int(body * 1.42)
+        block_height = len(lines) * step
+        room = height * (0.52 if tall else 0.46)
+        if block_height <= room:
+            break
+        body = int(body * 0.9)
+
+    top = (height - block_height) / 2 + (height * 0.02 if tall else 0)
+    for i, line in enumerate(lines):
+        d.text((margin, top + i * step), line, font=face, fill="#f4f6f8")
+
+    rule = top + block_height + int(height * 0.045)
+    d.line([(margin, rule), (margin + int(width * 0.09), rule)], fill=GOLD, width=4)
+    d.text((margin, rule + int(height * 0.022)), cite,
+           font=font("NotoSansGeorgian.ttf", int(width * 0.032), 500), fill=GOLD)
+    d.text((margin, height - margin - int(width * 0.03)), name,
+           font=font("NotoSerifGeorgian.ttf", int(width * 0.036), 600), fill="#ffffff")
+    d.text((margin, height - margin + int(width * 0.015)), url,
+           font=font("NotoSansGeorgian.ttf", int(width * 0.026), 400), fill="#8fa0b3")
+    return img
+
+
+def quote_cards(url):
+    """A square for the feed and a tall one for stories, per quotation, in both
+    languages."""
+    made = []
+    folder = os.path.join(OUT, "quotes")
+    os.makedirs(folder, exist_ok=True)
+    for lang in ("ka", "en"):
+        data = content(lang)
+        name = data["meta"]["siteName"]
+        for i, (text, cite) in enumerate(quotes_from(data), start=1):
+            for shape, size, tall in (("post", (1080, 1080), False),
+                                      ("story", (1080, 1920), True)):
+                card = quote_card(text, cite, name, pretty_url(url), size, tall)
+                path = os.path.join(folder, "%s-%02d-%s.jpg" % (lang, i, shape))
+                card.save(path, "JPEG", quality=90, optimize=True)
+                made.append(path)
+    return made
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     url = site()["baseUrl"].rstrip("/") or "https://example.com"
@@ -225,11 +315,14 @@ def main():
 
     signature(url)
     covers()
+    cards = quote_cards(url)
 
     print("brand kit written to assets/brand/ for %s" % pretty_url(url))
     print("  wordmark.svg, wordmark-light.svg")
     print("  business-card-front.png, business-card-back.png (85×55mm at 300dpi)")
     print("  qr.png, email-signature.html, instagram-*.jpg")
+    print("  quotes/ — %d quotation cards (1080×1080 for the feed, 1080×1920 for stories)"
+          % len(cards))
     print("After buying the domain: update baseUrl in content/site.json and run this again.")
 
 

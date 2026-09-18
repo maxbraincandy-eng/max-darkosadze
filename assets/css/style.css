@@ -1,3 +1,23 @@
+/* The two Georgian faces, served from this site rather than fetched from
+   Google: fewer round trips before the first letter appears, and no visitor
+   announced to a third party. Built by tools/webfonts.py (SIL Open Font
+   License); one file covers every weight. */
+
+@font-face {
+  font-family: "Noto Serif Georgian";
+  src: url("../fonts/noto-serif-georgian.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Noto Sans Georgian";
+  src: url("../fonts/noto-sans-georgian.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
    Max Darkosadze — site styles
    Edit the tokens in :root to restyle the whole site.
@@ -1144,4 +1164,54 @@ body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none;
 }
 @media (min-width: 60rem) {
   .film-frame { max-width: 62rem; margin-inline: auto; }
+}
+
+/* ------------------------------------------------- questions and search */
+
+.faq-wrap { max-width: 50rem; }
+.faq-item {
+  border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--surface); margin-bottom: .8rem; overflow: hidden;
+}
+.faq-item + .faq-item { margin-top: 0; }
+.faq-item summary {
+  cursor: pointer; list-style: none; padding: 1rem 1.2rem;
+  font-family: var(--serif); font-weight: 600; font-size: 1.05rem;
+  display: flex; align-items: center; gap: .8rem;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+"; margin-inline-start: auto; color: var(--gold);
+  font-size: 1.3rem; line-height: 1; transition: transform .2s var(--ease);
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-item summary:hover { background: var(--surface-alt); }
+.faq-item summary:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.faq-answer { padding: 0 1.2rem 1.1rem; color: var(--muted); }
+.faq-answer p { margin: 0; }
+.faq-more { margin-top: .7rem !important; }
+.faq-more a { color: var(--gold); font-weight: 600; }
+
+.search-wrap { max-width: 50rem; }
+.search-form input[type="search"] {
+  width: 100%; padding: .9rem 1.1rem; font: inherit; color: var(--text);
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; box-shadow: var(--shadow);
+}
+.search-form input[type="search"]:focus-visible {
+  outline: 2px solid var(--gold); outline-offset: 2px;
+}
+.search-count { color: var(--muted); font-size: .92rem; margin: .9rem 0 1.2rem; }
+.search-results { list-style: none; padding: 0; margin: 0; display: grid; gap: .7rem; }
+.search-results a {
+  display: block; padding: .9rem 1.1rem; border: 1px solid var(--line);
+  border-radius: var(--radius); background: var(--surface); color: inherit;
+  text-decoration: none; transition: border-color .2s var(--ease), transform .2s var(--ease);
+}
+.search-results a:hover { border-color: var(--gold); transform: translateY(-1px); }
+.search-results strong { display: block; font-family: var(--serif); font-size: 1.05rem; }
+.search-results span { display: block; color: var(--muted); font-size: .92rem; margin-top: .25rem; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
 }

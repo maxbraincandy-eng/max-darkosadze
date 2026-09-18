@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "booking", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "booking", "faq", "search", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -259,11 +259,10 @@ def head(data, title, description, depth, key, slug=None):
         '<link rel="icon" href="%s">' % asset("assets/img/favicon.svg", depth),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["imdb"]),
-        '<link rel="preconnect" href="https://fonts.googleapis.com">',
-        '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>',
-        '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-        "family=Noto+Serif+Georgian:wght@400;600;700&"
-        'family=Noto+Sans+Georgian:wght@300;400;500;600&display=swap">',
+        '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
+        % asset("assets/fonts/noto-serif-georgian.woff2", depth),
+        '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
+        % asset("assets/fonts/noto-sans-georgian.woff2", depth),
         '<link rel="stylesheet" href="%s">' % asset("assets/css/style.css", depth),
         THEME_BOOT,
     ]
@@ -439,6 +438,8 @@ def footer(data, depth):
         '<li><a href="%s">%s</a></li>' % (link(data["lang"], key, depth), esc(label))
         for key, label in (("legend", data["pages"]["legend"]["masthead"]),
                            ("booking", data["pages"]["booking"]["heading"]),
+                           ("faq", data["pages"]["faq"]["heading"]),
+                           ("search", data["pages"]["search"]["heading"]),
                            ("press", data["pages"]["press"]["heading"]))
     )
     return """
@@ -1555,6 +1556,141 @@ def render_404():
 """
 
 
+def render_faq(data):
+    """The questions people actually ask, answered plainly — and handed to
+    Google in the form it reads."""
+    depth = 1
+    p = data["pages"]["faq"]
+
+    blocks = []
+    for item in p["items"]:
+        more = ""
+        if item.get("link"):
+            key = item["link"]
+            label = data["ui"]["faqMore"]
+            more = '<p class="faq-more"><a href="%s">%s &rarr;</a></p>' % (
+                link(data["lang"], key, depth), esc(label))
+        blocks.append("""
+      <details class="faq-item">
+        <summary><span>%s</span></summary>
+        <div class="faq-answer"><p>%s</p>%s</div>
+      </details>""" % (inline(item["q"]), inline(item["a"]), more))
+
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap faq-wrap">%s
+  </div>
+</section>
+""" % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]), "".join(blocks))
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {"@type": "Question", "name": plain(item["q"]),
+             "acceptedAnswer": {"@type": "Answer", "text": plain(item["a"])}}
+            for item in p["items"]
+        ],
+    }
+    return document(data, title=p["title"], description=plain(p["lead"]), key="faq",
+                    body=body, depth=depth, active="faq",
+                    extra_head='<script type="application/ld+json">%s</script>'
+                               % json.dumps(schema, ensure_ascii=False))
+
+
+def search_index(data):
+    """What the search box looks through: every page and every article, as
+    plain text. Written once at build time, read once in the browser."""
+    entries = []
+
+    def add(key, title, lead, text, slug=None):
+        words = " ".join(text.split())
+        entries.append({
+            "t": plain(title),
+            "u": page_path(data["lang"], key, slug),
+            "s": plain(lead)[:180],
+            "x": plain(words).lower()[:2400],
+        })
+
+    pages = data["pages"]
+    for key in ("home", "about", "articles", "news", "foundation", "gallery",
+                "legend", "guestbook", "booking", "faq", "contact", "press"):
+        p = pages.get(key)
+        if not p:
+            continue
+        title = p.get("heading") or p.get("heroTitle") or p.get("title", "")
+        lead = p.get("lead") or p.get("heroLead") or p.get("description", "")
+        bag = [title, lead]
+        for value in p.values():
+            if isinstance(value, str):
+                bag.append(value)
+            elif isinstance(value, list):
+                for item in value:
+                    if isinstance(item, str):
+                        bag.append(item)
+                    elif isinstance(item, dict):
+                        bag.extend(v for v in item.values() if isinstance(v, str))
+        add(key, title, lead, " ".join(bag))
+
+    for article in data["articles"]:
+        bits = [article["title"], article.get("subtitle", ""), article.get("summary", "")]
+        for block in article.get("blocks", []):
+            if not isinstance(block, dict):
+                continue
+            for value in block.values():
+                if isinstance(value, str) and value not in ("p", "h2", "lead", "quote", "list"):
+                    bits.append(value)
+                elif isinstance(value, list):
+                    bits.extend(v for v in value if isinstance(v, str))
+        add("article", article["title"], article.get("summary", ""),
+            " ".join(bits), article["slug"])
+
+    return json.dumps(entries, ensure_ascii=False, separators=(",", ":"))
+
+
+def render_search(data):
+    """A search box with no server behind it: the index is a file, the work
+    happens in the visitor's own browser."""
+    depth = 1
+    p = data["pages"]["search"]
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap search-wrap" data-search="%s"
+       data-msg-empty="%s" data-msg-start="%s"
+       data-msg-one="%s" data-msg-many="%s">
+    <form class="search-form" role="search" novalidate>
+      <label class="sr-only" for="q">%s</label>
+      <input id="q" type="search" name="q" autocomplete="off" placeholder="%s" autofocus>
+    </form>
+    <p class="search-count" role="status" aria-live="polite">%s</p>
+    <ul class="search-results" data-results></ul>
+    <noscript><p class="note">%s</p></noscript>
+  </div>
+</section>
+""" % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+       esc(asset("assets/search-%s.json" % data["lang"], depth)),
+       esc(p["empty"]), esc(p["start"]), esc(p["countOne"]), esc(p["countMany"]),
+       esc(p["label"]), esc(p["placeholder"]), esc(p["start"]), esc(p["start"]))
+    return document(data, title=p["title"], description=plain(p["lead"]), key="search",
+                    body=body, depth=depth, active="search")
+
+
 def render_sitemap(datasets):
     base = SITE["baseUrl"].rstrip("/")
     urls = []
@@ -1621,6 +1757,9 @@ def main():
         write(page_path(lang, "guestbook"), render_guestbook(data))
         write(page_path(lang, "booking"), render_booking(data))
         write(page_path(lang, "press"), render_press(data))
+        write(page_path(lang, "faq"), render_faq(data))
+        write(page_path(lang, "search"), render_search(data))
+        write("assets/search-%s.json" % lang, search_index(data))
         write(page_path(lang, "foundation"), render_foundation(data))
         write(page_path(lang, "gallery"), render_gallery(data))
         write(page_path(lang, "contact"), render_contact(data))

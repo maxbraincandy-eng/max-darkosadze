@@ -70,7 +70,8 @@
     "categoryLabel": "Category",
     "theme": "Switch between light and dark",
     "quotesTitle": "In his own words",
-    "legendCta": "Read the legend"
+    "legendCta": "Read the legend",
+    "faqMore": "Read more"
   },
   "film": {
     "eyebrow": "The film",
@@ -652,6 +653,74 @@
           "assets/brand/email-signature.html"
         ]
       ]
+    },
+    "faq": {
+      "title": "Frequently asked questions — Max Darkosadze",
+      "eyebrow": "Questions",
+      "heading": "Frequently asked questions",
+      "lead": "Short answers to what people ask most often about Batoni Maksi.",
+      "items": [
+        {
+          "q": "Who is Max Darkosadze?",
+          "a": "A surgeon, an aviation instructor and a lecturer, a writer and a modern philosopher, a sculptor and a filmmaker. He is 31. What holds these far-apart trades together is one thing: precision, and the responsibility that comes with it.",
+          "link": "about"
+        },
+        {
+          "q": "Where does the name Batoni Maksi come from?",
+          "a": "Students and colleagues gave it to him — a courteous form of address in Georgian that stuck until it worked like a name. He is known by both: Max Darkosadze and Batoni Maksi."
+        },
+        {
+          "q": "What does he lecture on?",
+          "a": "Medicine and how decisions get made under pressure, aviation and discipline, ethics and responsibility, and the making of things. The rooms vary: a university, a school, a professional meeting, a conference.",
+          "link": "articles"
+        },
+        {
+          "q": "How do I invite him to speak?",
+          "a": "Use the invitation form — who is asking, the date you have in mind, the audience and the subject. Requests are never made public.",
+          "link": "booking"
+        },
+        {
+          "q": "Where can I see his film work?",
+          "a": "His film credits are on IMDb; the link is at the foot of every page. Photographs from the set are in the gallery.",
+          "link": "gallery"
+        },
+        {
+          "q": "What does the foundation do?",
+          "a": "It backs the work he follows himself — education, medicine and culture.",
+          "link": "foundation"
+        },
+        {
+          "q": "Is the Legend page true?",
+          "a": "No — and the page says so itself. It collects the tall tales people tell about him, told with a straight face. The rest of the site is the serious part.",
+          "link": "legend"
+        },
+        {
+          "q": "Can I leave a note?",
+          "a": "Yes. In the guest book you pick any name you like and write a few words — where you met him, and what stayed with you.",
+          "link": "guestbook"
+        },
+        {
+          "q": "What languages is the site in?",
+          "a": "Georgian and English. The switch is in the top corner, and it always takes you to the same page in the other language."
+        },
+        {
+          "q": "May I use the photographs and text?",
+          "a": "There is a press kit for journalists and organisers — a biography, photographs and the short facts. For anything else, please ask first.",
+          "link": "press"
+        }
+      ]
+    },
+    "search": {
+      "title": "Search — Max Darkosadze",
+      "eyebrow": "Search",
+      "heading": "Search the site",
+      "lead": "Type a word — the articles and pages filter as you go.",
+      "placeholder": "for example: aviation, foundation, lecture",
+      "label": "Search term",
+      "empty": "Nothing matched. Try another word.",
+      "start": "Start typing and the results appear here.",
+      "countOne": "1 page found",
+      "countMany": "%d pages found"
     },
     "legend": {
       "title": "The Legend — Max Darkosadze",
