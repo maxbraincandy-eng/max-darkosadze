@@ -1126,3 +1126,22 @@ body.lang-ka .legend-band-eyebrow { letter-spacing: .12em; text-transform: none;
 .booking-aside .rich-list li { font-size: .93rem; }
 .booking-portrait { margin-top: 1.2rem; border-radius: var(--radius); overflow: hidden; }
 .booking-portrait img { width: 100%; height: auto; display: block; }
+
+/* ----------------------------------------------------------------- film */
+
+.film-frame {
+  margin: 0; border-radius: var(--radius); overflow: hidden;
+  background: var(--ink); box-shadow: var(--shadow-lg);
+  border-top: 3px solid var(--gold);
+}
+.film-video {
+  display: block; width: 100%; height: auto; aspect-ratio: 16 / 9;
+  background: var(--ink);
+}
+.film-frame figcaption {
+  color: rgba(255, 255, 255, .72); font-size: .92rem;
+  padding: .85rem 1.1rem; background: var(--ink);
+}
+@media (min-width: 60rem) {
+  .film-frame { max-width: 62rem; margin-inline: auto; }
+}

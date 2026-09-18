@@ -402,6 +402,42 @@ Google-ის ძიებაში გამოსაჩენად: Search Co
 დომენის ყიდვის შემდეგ: შეცვალეთ `baseUrl` ფაილში `content/site.json`, გაუშვით ეს
 ორი ბრძანება და მორჩა — QR-კოდი, ვიზიტკა, ბმულები და sitemap თავისით განახლდება.
 
+## The short film / მოკლე ფილმი
+
+A half-minute film is built from the photographs already in `assets/img`: a slow
+drift across each picture, a dissolve between them, one word on screen for each
+life, the name at the front and the address at the end. It is silent on purpose,
+so it can sit on a page without ambushing anyone with sound.
+
+```bash
+pip install Pillow imageio-ffmpeg     # once
+python3 tools/video.py                # both languages, ~1 min per language
+python3 tools/video.py --fast         # quarter size, for checking the cut
+python3 build.py
+```
+
+It writes `assets/video/showreel-ka.mp4` and `.webm` (and the English pair) plus
+`showreel-poster.jpg`, and the home page and the gallery pick them up by name —
+if the files are not there, the section simply does not appear. To change which
+photographs are used, or the word shown over each, edit the `SHOTS` list at the
+top of `tools/video.py`. The closing card reads the address from
+`content/site.json`, so it follows the domain by itself.
+
+ფილმი იქმნება იმ ფოტოებისგან, რომლებიც უკვე საიტზეა: ნელი მოძრაობა თითოეულ
+კადრზე, რბილი გადასვლები, ერთი სიტყვა ეკრანზე. ხმა განზრახ არ აქვს. კადრების
+თანმიმდევრობა და წარწერები იცვლება `tools/video.py`-ის `SHOTS` სიაში.
+
+**Adding music.** A film on a personal site is better with a track you have the
+right to use — buy one, or use a piece licensed for the purpose — then:
+
+```bash
+ffmpeg -i assets/video/showreel-ka.mp4 -i track.mp3 -shortest \
+       -c:v copy -c:a aac -b:a 160k showreel-ka-music.mp4
+```
+
+Do not take a track off YouTube or a film: the site carries his name, and a
+copyright claim against it is the one kind of attention it does not need.
+
 ## Share images / გაზიარების სურათები
 
 Every page and every article has its own picture for when the link is posted to

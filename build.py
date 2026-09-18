@@ -289,6 +289,62 @@ THEME_BOOT = (
 )
 
 
+def film_section(data, depth, alt=False):
+    """The short film, if it has been rendered. The page never shows a player
+    with nothing behind it: no file, no section."""
+    f = data.get("film")
+    lang = data["lang"]
+    name = "assets/video/showreel-%s.mp4" % lang
+    if not f or not os.path.exists(os.path.join(ROOT, name)):
+        return ""
+    up = "../" * depth
+    poster = "assets/video/showreel-poster.jpg"
+    poster_tag = (' poster="%s%s"' % (up, poster)) if os.path.exists(os.path.join(ROOT, poster)) else ""
+    webm = name.replace(".mp4", ".webm")
+    webm_source = ('\n        <source src="%s%s" type="video/webm">' % (up, webm)
+                   if os.path.exists(os.path.join(ROOT, webm)) else "")
+    return """
+<section class="section film%s" id="film">
+  <div class="wrap">
+    <header class="section-head">
+      <p class="eyebrow">%s</p>
+      <h2>%s</h2>
+      <p>%s</p>
+    </header>
+    <figure class="film-frame">
+      <video class="film-video" controls playsinline preload="none"
+             width="1280" height="720"%s>
+        <source src="%s%s" type="video/mp4">%s
+      </video>
+      <figcaption>%s</figcaption>
+    </figure>
+  </div>
+</section>
+""" % (" section-alt" if alt else "", esc(f["eyebrow"]), inline(f["title"]), inline(f["lead"]),
+       poster_tag, up, name, webm_source, inline(f["caption"]))
+
+
+def film_jsonld(data):
+    """Tells Google there is a film here, and what it shows."""
+    f = data.get("film")
+    name = "assets/video/showreel-%s.mp4" % data["lang"]
+    base = SITE["baseUrl"].rstrip("/")
+    full = os.path.join(ROOT, name)
+    if not f or not base or not os.path.exists(full):
+        return ""
+    payload = {
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": plain(f["title"]),
+        "description": plain(f["lead"]),
+        "thumbnailUrl": "%s/assets/video/showreel-poster.jpg" % base,
+        "contentUrl": "%s/%s" % (base, name),
+        "uploadDate": date.fromtimestamp(os.path.getmtime(full)).isoformat(),
+        "inLanguage": data["lang"],
+    }
+    return '<script type="application/ld+json">%s</script>' % json.dumps(payload, ensure_ascii=False)
+
+
 def person_jsonld(data):
     meta = data["meta"]
     payload = {
@@ -633,6 +689,8 @@ def render_home(data):
         link(data["lang"], "gallery", depth),
         esc(p["galleryCta"]),
     )
+    body = body.replace('<section class="motto">',
+                        film_section(data, depth) + '<section class="motto">', 1)
     return document(
         data,
         title=p["title"],
@@ -641,7 +699,7 @@ def render_home(data):
         body=body,
         depth=depth,
         active="home",
-        extra_head=person_jsonld(data),
+        extra_head=person_jsonld(data) + film_jsonld(data),
     )
 
 
@@ -1321,6 +1379,7 @@ def render_gallery(data):
         "".join(tiles),
         esc(p["emptyLabel"]),
     )
+    body += film_section(data, depth, alt=True)
     return document(data, title=p["title"], description=plain(p["lead"]), key="gallery",
                     body=body, depth=depth, active="gallery")
 
