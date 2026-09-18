@@ -53,6 +53,7 @@ SHOTS = [
     ("public.jpg",      ("საზოგადო მოღვაწე", "Public figure"),        "in"),
     ("honours.jpg",     ("აღიარება", "Recognition"),                 "out"),
     ("gallery/16.jpg",  ("", ""),                                    "left"),
+    ("gallery/19.jpg",  ("", ""),                                    "in"),
 ]
 
 TITLE = {
@@ -114,6 +115,8 @@ def drift(image, move, t, scale):
     """One frame of the slow travel across a photograph."""
     zoom_from, zoom_to = (1.16, 1.02) if move in ("in", "left") else (1.02, 1.16)
     zoom = zoom_from + (zoom_to - zoom_from) * ease(t)
+    if image.width / image.height < 0.72:     # only the narrow, phone-shaped ones are
+        return standing(image, zoom, scale)   # letterboxed; the rest fill the screen
     view_w = min(image.width, int(image.width / zoom))
     view_h = int(view_w * HEIGHT / WIDTH)
     if view_h > image.height:
@@ -130,6 +133,29 @@ def drift(image, move, t, scale):
     y = slack_y * 0.42                      # faces sit above the middle
     box = (int(x), int(y), int(x) + view_w, int(y) + view_h)
     return image.crop(box).resize((int(WIDTH * scale), int(HEIGHT * scale)), Image.LANCZOS)
+
+
+def standing(image, zoom, scale):
+    """A photograph taller than the screen is kept whole and set over a blurred,
+    darkened copy of itself — the same thing the pages do, so nothing is cut."""
+    out_w, out_h = int(WIDTH * scale), int(HEIGHT * scale)
+
+    fill = max(out_w / image.width, out_h / image.height) * 1.08
+    back = image.resize((max(1, int(image.width * fill)), max(1, int(image.height * fill))),
+                        Image.LANCZOS)
+    left = (back.width - out_w) // 2
+    top = int((back.height - out_h) * 0.35)
+    back = back.crop((left, top, left + out_w, top + out_h))
+    back = back.filter(ImageFilter.GaussianBlur(radius=max(6, int(26 * scale))))
+    back = Image.blend(back, Image.new("RGB", back.size, INK), 0.55)
+
+    tall_h = int(out_h * (1.0 + (zoom - 1.0) * 0.35))     # a much gentler move
+    tall_w = max(1, int(image.width * tall_h / image.height))
+    front = image.resize((tall_w, tall_h), Image.LANCZOS)
+    cut = (front.height - out_h) // 2
+    front = front.crop((0, cut, front.width, cut + out_h))
+    back.paste(front, ((out_w - front.width) // 2, 0))
+    return back
 
 
 def shade(frame, scale):
