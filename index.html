@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>მაქსი დარკოსაძე / Max Darkosadze</title>
+<meta name="description" content="Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Official site in English and Georgian.">
+<link rel="icon" href="assets/img/favicon.svg">
+<link rel="alternate" hreflang="ka" href="ka/index.html">
+<link rel="alternate" hreflang="en" href="en/index.html">
+<link rel="alternate" hreflang="x-default" href="ka/index.html">
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  /* Georgian is the default language of this site. A reader who chose English
+     before is sent back to English; everyone else lands on the Georgian pages. */
+  (function () {
+    var target = "ka/";
+    try {
+      if (localStorage.getItem("md-lang") === "en") target = "en/";
+    } catch (e) { /* private mode - stay with the default */ }
+    location.replace(target);
+  })();
+</script>
+</head>
+<body class="choose-lang">
+  <main>
+    <div class="choose-inner">
+      <span class="brand-mark" aria-hidden="true">MD</span>
+      <h1><span lang="ka">მაქსი დარკოსაძე</span><br>Max Darkosadze</h1>
+      <p>Surgeon · Aviation instructor · Lecturer · Writer · Public figure</p>
+      <p lang="ka">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · საზოგადო მოღვაწე</p>
+      <p class="choose-actions">
+        <a class="btn btn-primary" href="ka/" lang="ka">ქართული</a>
+        <a class="btn btn-ghost" href="en/">English</a>
+      </p>
+    </div>
+  </main>
+</body>
+</html>
