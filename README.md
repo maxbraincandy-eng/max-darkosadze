@@ -572,6 +572,12 @@ photograph, drawn by:
 python3 tools/og_images.py      # writes assets/og/<lang>-<page>.jpg
 ```
 
+Each card is the site in miniature: the ink panel carries the title (Newsreader
+for Latin, Noto Serif Georgian for Georgian) over the violet glow, the
+photograph keeps its own frame at full colour on the right, and a violet seam
+runs between them. Nothing is faded across a face, and the mark is the same one
+the browser tab shows.
+
 Run it again after changing a title. `build.py` picks the file up automatically
 and falls back to `assets/img/og.jpg` if one is missing.
 
@@ -672,8 +678,11 @@ python3 tools/brand.py
 
 writes into `assets/brand/`: the wordmark (SVG, light and dark), a business card
 front and back at 85×55 mm / 300 dpi ready for a printer, a QR code pointing at
-the site, an e-mail signature to paste into Gmail or Outlook, and six Instagram
-highlight covers. They are all linked from the press-kit page as well.
+the site, an e-mail signature to paste into Gmail or Outlook, and seven
+Instagram highlight covers. They are all linked from the press-kit page as well.
+Everything is drawn in the site's own colours — ink, paper and violet — and the
+wordmark carries the mark's own letters as outlines, so it looks the same on a
+slide where Newsreader is not installed.
 
 ### Quotation cards for Instagram / ციტატების ბარათები
 

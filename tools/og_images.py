@@ -12,6 +12,7 @@ Needs Pillow. Run it again after changing a title.
 
 import json
 import os
+import re
 
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont
 
@@ -20,13 +21,36 @@ FONTS = os.path.join(ROOT, "tools", "fonts")
 OUT = os.path.join(ROOT, "assets", "og")
 
 W, H = 1200, 630
-INK = (13, 27, 42)
-INK_SOFT = (22, 40, 60)
-GOLD = (201, 162, 39)
-GOLD_LIGHT = (230, 193, 90)
-WHITE = (255, 255, 255)
-MUTED = (168, 182, 196)
+INK = (8, 9, 11)                  # the site's own ground
+INK_SOFT = (17, 19, 24)
+VIOLET = (124, 92, 255)
+VIOLET_SOFT = (154, 130, 255)
+PAPER = (242, 242, 240)
+MUTED = (154, 157, 165)
 PAD = 68
+
+GEORGIAN = re.compile(r"[\u10A0-\u10FF\u1C90-\u1CBF]")
+
+
+def display(text, size):
+    """The site sets Latin in Newsreader and Georgian in Noto Serif Georgian.
+    One file cannot draw both, so the text itself chooses."""
+    if GEORGIAN.search(text):
+        return font("NotoSerifGeorgian.ttf", size, 600)
+    return ImageFont.truetype(os.path.join(FONTS, "Newsreader-SemiBold.ttf"), size)
+
+
+def spaced(draw, xy, text, fnt, fill, tracking, anchor_mid=False):
+    """Pillow has no letter-spacing, and the small capitals on this site live by
+    it. Drawn letter by letter, returning the width it used."""
+    width = sum(draw.textlength(ch, font=fnt) + tracking for ch in text) - tracking
+    x, y = xy
+    if anchor_mid:
+        y -= fnt.size / 2
+    for ch in text:
+        draw.text((x, y), ch, font=fnt, fill=fill)
+        x += draw.textlength(ch, font=fnt) + tracking
+    return width
 
 
 def font(name, size, weight=None):
@@ -77,65 +101,87 @@ def fit(draw, text, fnt, width):
     return text.rstrip(" ·-—") + "…"
 
 
+SPLIT = 744                       # where the ink panel ends and the photograph starts
+
+
 def background(photo_path):
-    """Ink gradient, with the page's own photograph fading in from the right."""
+    """Two panels, the way the site itself sets a page: the words on the ink
+    ground, the photograph in its own frame beside them at full colour. Nothing
+    fades across the face, and nothing is greyed out."""
     base = Image.new("RGB", (W, H), INK)
     grad = Image.new("L", (W, 1))
     for x in range(W):
-        grad.putpixel((x, 0), int(255 * (x / W) ** 1.4))
-    grad = grad.resize((W, H))
-    base = Image.composite(Image.new("RGB", (W, H), INK_SOFT), base, grad)
+        grad.putpixel((x, 0), int(255 * (x / SPLIT) ** 1.5) if x < SPLIT else 255)
+    base = Image.composite(Image.new("RGB", (W, H), INK_SOFT), base, grad.resize((W, H)))
+
+    # the violet the site uses for emphasis, low and behind the words
+    glow = Image.new("RGB", (W, H), (40, 28, 96))
+    gmask = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(gmask).ellipse((-460, 120, 520, 900), fill=120)
+    base = Image.composite(glow, base, gmask.filter(ImageFilter.GaussianBlur(150)))
 
     if photo_path and os.path.exists(photo_path):
+        frame_w = W - SPLIT
         with Image.open(photo_path) as im:
             photo = im.convert("RGB")
-        ratio = max(W / photo.width, H / photo.height)
-        photo = photo.resize((int(photo.width * ratio), int(photo.height * ratio)), Image.LANCZOS)
-        left = (photo.width - W) // 2
-        photo = photo.crop((left, 0, left + W, H))
-        photo = ImageEnhance.Color(photo).enhance(0.75)
-        mask = Image.new("L", (W, 1))
-        for x in range(W):
-            t = max(0.0, (x - W * 0.42) / (W * 0.58))
-            mask.putpixel((x, 0), int(235 * (t ** 1.6)))
-        base = Image.composite(photo, base, mask.resize((W, H)))
+        ratio = max(frame_w / photo.width, H / photo.height)
+        photo = photo.resize((max(frame_w, int(photo.width * ratio)),
+                              max(H, int(photo.height * ratio))), Image.LANCZOS)
+        left = (photo.width - frame_w) // 2
+        top = int((photo.height - H) * 0.32)        # faces sit above the middle
+        base.paste(photo.crop((left, top, left + frame_w, top + H)), (SPLIT, 0))
 
-    glow = Image.new("RGB", (W, H), (60, 48, 12))
-    gmask = Image.new("L", (W, H), 0)
-    ImageDraw.Draw(gmask).ellipse((-360, -460, 620, 300), fill=95)
-    base = Image.composite(glow, base, gmask.filter(ImageFilter.GaussianBlur(120)))
+        # a hairline where the two panels meet, and the ink reaching a little
+        # way into the picture so the join is a seam and not a cut
+        veil = Image.new("RGB", (W, H), INK)
+        vmask = Image.new("L", (W, 1), 0)
+        for x in range(W):
+            if SPLIT <= x < SPLIT + 90:
+                vmask.putpixel((x, 0), int(190 * (1 - (x - SPLIT) / 90) ** 1.4))
+        base = Image.composite(veil, base, vmask.resize((W, H)))
+        ImageDraw.Draw(base).rectangle((SPLIT, 0, SPLIT + 2, H), fill=VIOLET)
     return base
 
 
+def monogram(img, x, y, size=78):
+    """The mark itself, so the card and the browser tab show one thing."""
+    path = os.path.join(ROOT, "assets", "icons", "icon-192.png")
+    if not os.path.exists(path):
+        return
+    with Image.open(path) as im:
+        mark = im.convert("RGB").resize((size, size), Image.LANCZOS)
+    img.paste(mark, (x, y))
+
+
 def card(title, eyebrow, footer, photo, out_path, lang):
-    serif = "NotoSerifGeorgian.ttf"
     sans = "NotoSansGeorgian.ttf"
     img = background(photo)
     d = ImageDraw.Draw(img)
 
-    # monogram
-    d.rounded_rectangle((PAD, PAD, PAD + 78, PAD + 78), radius=18, outline=GOLD, width=3)
-    mono = font(serif, 34, 700)
-    d.text((PAD + 39, PAD + 41), "MD", font=mono, fill=GOLD_LIGHT, anchor="mm")
+    monogram(img, PAD, PAD)
+    d = ImageDraw.Draw(img)
 
     if eyebrow:
-        f_eye = font(sans, 25, 600)
-        label = clean(eyebrow).upper() if lang == "en" else clean(eyebrow)
-        d.text((PAD + 100, PAD + 40), fit(d, label, f_eye, W - PAD * 2 - 100),
-               font=f_eye, fill=GOLD_LIGHT, anchor="lm")
+        f_eye = font(sans, 23, 600)
+        label = clean(eyebrow)
+        if lang == "en":
+            label = label.upper()
+        spaced(d, (PAD + 100, PAD + 39 - f_eye.size * 0.05), fit(d, label, f_eye, SPLIT - PAD * 2 - 100),
+               f_eye, MUTED, 2.6 if lang == "en" else 1.0, anchor_mid=True)
 
-    size = 70 if len(title) < 46 else (58 if len(title) < 78 else 48)
-    f_title = font(serif, size, 700)
-    text_width = int(W * 0.74)
-    lines = wrap(d, clean(title), f_title, text_width, 3)
-    line_height = int(size * 1.22)
-    top = H - PAD - 104 - line_height * len(lines)
+    column = SPLIT - PAD * 2
+    size = 66 if len(title) < 40 else (56 if len(title) < 72 else 46)
+    f_title = display(clean(title), size)
+    lines = wrap(d, clean(title), f_title, column, 3)
+    line_height = int(size * 1.2)
+    top = H - PAD - 118 - line_height * len(lines)
     for i, line in enumerate(lines):
-        d.text((PAD, top + i * line_height), line, font=f_title, fill=WHITE)
+        d.text((PAD, top + i * line_height), line, font=f_title, fill=PAPER)
 
-    d.line((PAD, H - PAD - 74, PAD + 92, H - PAD - 74), fill=GOLD, width=4)
-    f_foot = font(sans, 26, 500)
-    d.text((PAD, H - PAD - 42), fit(d, clean(footer), f_foot, int(W * 0.8)),
+    # the short violet rule the site puts under everything it means
+    d.rectangle((PAD, H - PAD - 86, PAD + 88, H - PAD - 82), fill=VIOLET)
+    f_foot = font(sans, 25, 500)
+    d.text((PAD, H - PAD - 56), fit(d, clean(footer), f_foot, SPLIT - PAD * 2),
            font=f_foot, fill=MUTED)
 
     img.save(out_path, "JPEG", quality=88, optimize=True, progressive=True)

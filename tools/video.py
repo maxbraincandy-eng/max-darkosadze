@@ -17,6 +17,7 @@ one that comes with imageio-ffmpeg:  pip install imageio-ffmpeg
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -36,9 +37,11 @@ HOLD = 2.9                      # seconds a photograph is on screen
 DISSOLVE = 0.7                  # seconds of overlap between two photographs
 CARD = 3.2                      # seconds for the title and the closing card
 
-INK = (13, 27, 42)              # the site's own dark blue
-GOLD = (216, 174, 63)
-PAPER = (231, 237, 243)
+INK = (8, 9, 11)                # the site's own ground
+VIOLET = (124, 92, 255)         # the accent it puts under everything it means
+PAPER = (242, 242, 240)
+
+GEORGIAN = re.compile(r"[\u10A0-\u10FF\u1C90-\u1CBF]")
 
 # photograph, the word on screen (Georgian, English), and which way the eye moves
 SHOTS = [
@@ -170,15 +173,23 @@ def shade(frame, scale):
     return frame
 
 
+def display(text, size):
+    """Georgian in Noto Serif Georgian, Latin in Newsreader — the two faces the
+    site itself sets its headings in."""
+    if GEORGIAN.search(text):
+        return font("NotoSerifGeorgian.ttf", int(size), 600)
+    return ImageFont.truetype(os.path.join(FONTS, "Newsreader-SemiBold.ttf"), int(size))
+
+
 def caption(frame, text, alpha, scale):
     if not text or alpha <= 0.01:
         return frame
     layer = Image.new("RGBA", frame.size, (0, 0, 0, 0))
     draw = ImageDraw.Draw(layer)
-    face = font("NotoSerifGeorgian.ttf", int(46 * scale), 600)
+    face = display(text, 46 * scale)
     x, y = int(72 * scale), frame.height - int(118 * scale)
     draw.line([(x, y - int(26 * scale)), (x + int(54 * scale), y - int(26 * scale))],
-              fill=GOLD + (int(255 * alpha),), width=max(1, int(3 * scale)))
+              fill=VIOLET + (int(255 * alpha),), width=max(1, int(3 * scale)))
     draw.text((x, y), text, font=face, fill=PAPER + (int(255 * alpha),))
     return Image.alpha_composite(frame.convert("RGBA"), layer).convert("RGB")
 
@@ -192,7 +203,7 @@ def title_card(lang, t, scale, closing=False):
     ink = int(255 * alpha)
 
     lines = CLOSING[lang] if closing else TITLE[lang][:2]
-    name = font("NotoSerifGeorgian.ttf", int(74 * scale), 700)
+    name = display(lines[0], 74 * scale)
     small = font("NotoSansGeorgian.ttf", int(30 * scale), 400)
     middle = frame.height // 2
 
@@ -201,11 +212,11 @@ def title_card(lang, t, scale, closing=False):
               fill=PAPER + (ink,))
     draw.line([(frame.width / 2 - int(40 * scale), middle + int(16 * scale)),
                (frame.width / 2 + int(40 * scale), middle + int(16 * scale))],
-              fill=GOLD + (ink,), width=max(1, int(3 * scale)))
+              fill=VIOLET + (ink,), width=max(1, int(3 * scale)))
     second = lines[1]
     w = draw.textlength(second, font=small)
     draw.text(((frame.width - w) / 2, middle + int(38 * scale)), second, font=small,
-              fill=GOLD + (ink,))
+              fill=VIOLET + (ink,))
 
     tail = site_url() if closing else TITLE[lang][2]
     if tail:
