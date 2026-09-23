@@ -816,36 +816,6 @@ def render_home(data):
 </section>""" % (archive_head(a["writing"]["eyebrow"], a["writing"]["title"], a["writing"]["lead"]),
                  "".join(entries), link(data["lang"], "articles", depth), esc(a["writing"]["cta"]))
 
-    # 09 — the book
-    b = a["book"]
-    book = """
-<section class="section book" id="book" data-reveal>
-  <div class="wrap book-grid">
-    <div class="book-cover" aria-hidden="true">
-      <span class="book-spine"></span>
-      <span class="book-title">%s</span>
-    </div>
-    <div class="book-body">
-      <p class="eyebrow">%s</p>
-      <h2 class="sec-title">%s</h2>
-      <p class="book-alt">%s</p>
-      <p class="sec-text">%s</p>
-      <div class="book-facts">
-        <div><p class="fact-label">%s</p><ul class="tag-list">%s</ul></div>
-        <div><p class="fact-label">%s</p><p>%s</p></div>
-        <div><p class="fact-label">%s</p><p>%s</p></div>
-      </div>
-      <blockquote class="statement"><p>%s</p></blockquote>
-    </div>
-  </div>
-</section>""" % (
-        inline(b["title"]), esc(b["eyebrow"]), inline(b["title"]), esc(b["titleAlt"]),
-        inline(b["concept"]),
-        esc(b["themesTitle"]), "".join("<li>%s</li>" % esc(t) for t in b["themes"]),
-        esc(b["chaptersTitle"]), inline(" · ".join(b["chapters"])),
-        esc(b["statusTitle"]), inline(b["status"]),
-        inline(b["excerpt"]))
-
     # 10 — projects
     project_rows = "".join("""
       <article class="project">
@@ -950,7 +920,7 @@ def render_home(data):
         esc(data["meta"]["links"]["instagram"]),
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-    body = (hero + featured_band(data, depth) + intro + worlds + about + disciplines + writing + book
+    body = (hero + featured_band(data, depth) + intro + worlds + about + disciplines + writing
             + film_section(data, depth) + projects + library + gallery
             + journey + notes_section + contact)
 
@@ -974,7 +944,7 @@ def render_about(data):
         % (inline(row["year"]), inline(row["text"]))
         for row in p["timeline"]
     )
-    honours = "".join(
+    rows = "".join(
         """
         <li class="honour">
           <span class="honour-year">%s</span>
@@ -986,6 +956,17 @@ def render_about(data):
         % (inline(h["year"]), inline(h["title"]), inline(h["text"]))
         for h in p["honours"]
     )
+    # nothing verified to list yet: the section stays away rather than stand empty
+    honours = ("""
+<section class="section">
+  <div class="wrap">
+    <header class="section-head">
+      <h2>%s</h2>
+      <p>%s</p>
+    </header>
+    <ul class="honours">%s</ul>
+  </div>
+</section>""" % (esc(p["honoursTitle"]), inline(p["honoursLead"]), rows)) if rows else ""
     body = """
 <section class="page-head">
   <div class="wrap">
@@ -1019,15 +1000,7 @@ def render_about(data):
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>%s</h2>
-      <p>%s</p>
-    </header>
-    <ul class="honours">%s</ul>
-  </div>
-</section>
+%s
 """ % (
         esc(p["eyebrow"]),
         inline(p["heading"]),
@@ -1040,8 +1013,6 @@ def render_about(data):
         esc(p["timelineTitle"]),
         inline(p["timelineNote"]),
         timeline,
-        esc(p["honoursTitle"]),
-        inline(p["honoursLead"]),
         honours,
     )
     return document(

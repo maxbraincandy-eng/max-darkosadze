@@ -163,16 +163,16 @@
       "text": "What matters most in surgery is not what happens at the table but what was settled before it: a plan that already contains what to do if something goes wrong.",
       "points": [
         {
-          "h": "Professional background",
-          "t": "[[Add verified information: training, hospital, speciality]]"
+          "h": "At the table",
+          "t": "An operation begins with a plan rather than an incision: the order of the steps, the fallback, and the minute where you stop and look again."
         },
         {
-          "h": "Areas of interest",
-          "t": "Decision-making under incomplete information; how a team communicates in an operating room."
+          "h": "Deciding",
+          "t": "The information is never complete. The skill that matters is knowing which step can wait and which one cannot."
         },
         {
-          "h": "Research and publications",
-          "t": "[[Add verified publications or research]]"
+          "h": "The team",
+          "t": "The most dangerous words in an operating room are “I assumed you knew”. Which is why the obvious is said out loud too."
         },
         {
           "h": "Philosophy of medicine",
@@ -189,16 +189,16 @@
       "text": "A flight is preceded by a briefing that often takes longer than the flight itself. Aviation teaches that confidence is born of preparation, never the other way round.",
       "points": [
         {
-          "h": "Flying",
-          "t": "[[Add verified information: experience, aircraft types, hours]]"
+          "h": "The briefing",
+          "t": "Before the flight: weather, weight, fuel, the alternate — and the question a student remembers for a career: what will you do if something goes wrong, and at what moment will you decide it?"
         },
         {
-          "h": "Instruction",
-          "t": "[[Add verified qualification and training organisation]]"
+          "h": "Instructing",
+          "t": "An instructor's work is to leave the student able to think when the right-hand seat is empty. So you ask rather than answer."
         },
         {
           "h": "Philosophy of flight",
-          "t": "The checklist exists not because the pilot is not trusted, but because memory never is."
+          "t": "The checklist exists not because the pilot is not trusted, but because memory never is. Discipline here is not the opposite of freedom; it is its condition."
         }
       ],
       "image": "assets/img/aviation.jpg",
@@ -222,7 +222,21 @@
         "Meaning"
       ],
       "image": "assets/img/philosophy.jpg",
-      "cta": "Read the article"
+      "cta": "Read the article",
+      "points": [
+        {
+          "h": "The reading",
+          "t": "Nietzsche, Schopenhauer, Plato, Hegel — not as authorities but as people who asked the same questions first."
+        },
+        {
+          "h": "The questions",
+          "t": "What obligation does freedom leave behind; where will ends and habit begins; how meaning differs from explanation."
+        },
+        {
+          "h": "Where it shows",
+          "t": "In the operating room and the cockpit — wherever a decision has to be made without the full answer. Philosophy is the preparation for that minute."
+        }
+      ]
     },
     "writing": {
       "eyebrow": "The archive",
@@ -231,71 +245,55 @@
       "cta": "All writing",
       "read": "Read"
     },
-    "book": {
-      "eyebrow": "The book",
-      "title": "Hermeneutics of the Übermensch",
-      "titleAlt": "ზეკაცის ჰერმენევტიკა",
-      "concept": "The book reads Nietzsche's Übermensch not as a programme of power but as a problem of interpretation: what does it mean to overcome oneself once values no longer arrive ready-made?",
-      "themesTitle": "Themes",
-      "themes": [
-        "Interpretation",
-        "Will",
-        "The revaluation of values",
-        "Freedom and responsibility",
-        "Solitude",
-        "Creation"
-      ],
-      "chaptersTitle": "Structure",
-      "chapters": [
-        "[[Chapter list — add from the manuscript]]"
-      ],
-      "excerptTitle": "Excerpt",
-      "excerpt": "[[Paste an excerpt from the manuscript]]",
-      "statusTitle": "Status",
-      "status": "[[Add: stage of work, publication date, publisher]]"
-    },
     "projects": {
       "eyebrow": "The archive",
       "title": "Projects",
-      "lead": "Experiments between thought and technology — some finished, some deliberately left open.",
+      "lead": "What is already being made — and what you will find on this site.",
       "items": [
         {
           "n": "01",
-          "title": "Library of the Void",
-          "kind": "Digital archive",
-          "text": "An infinite library of ideas: fragments, notes, quotations and texts, linked to one another.",
-          "status": "In progress"
+          "title": "The short film",
+          "kind": "Video",
+          "text": "Half a minute built from the photographs on this site: the operating theatre, the cockpit, the lecture hall, the studio, the set. Two languages, no sound.",
+          "status": "Published"
         },
         {
           "n": "02",
-          "title": "Void Mafia",
-          "kind": "Creative project",
-          "text": "[[Describe the project: form, intent, status]]",
-          "status": "[[Status]]"
+          "title": "The Max Darkosadze Foundation",
+          "kind": "Public work",
+          "text": "Support for the three things he follows himself: education, medicine and culture.",
+          "status": "Ongoing"
         },
         {
           "n": "03",
-          "title": "Hermeneutics of the Übermensch",
-          "kind": "Book",
-          "text": "A philosophical text on interpretation, will and the revaluation of values.",
-          "status": "In progress"
+          "title": "Lectures and seminars",
+          "kind": "Teaching",
+          "text": "A university, a school, a professional meeting or a conference — subjects from medicine and aviation to ethics and the making of things. Invitations are sent from this site.",
+          "status": "Open to invitations"
+        },
+        {
+          "n": "04",
+          "title": "The essays",
+          "kind": "Writing",
+          "text": "Long pieces, each following one question to the end, from surgery to philosophy. In Georgian and English.",
+          "status": "Growing"
         }
       ]
     },
     "library": {
       "eyebrow": "The space",
       "title": "The Library of the Void",
-      "subtitle": "An infinite archive of ideas.",
-      "text": "Imagine a library without walls: shelves holding not books but thoughts — some finished, some cut off mid-sentence. This is where what has not yet become text is kept.",
+      "subtitle": "An archive of ideas.",
+      "text": "The other name for this site. It gathers what is on the way from a thought to a text: essays, fragments, quotations, photographs and the film — linked to one another, unfinished, and deliberately left open.",
       "tabs": [
-        "Books",
-        "Ideas",
-        "Fragments",
-        "Philosophy",
-        "Fiction",
-        "Notes"
+        "Essays",
+        "Notes",
+        "Quotations",
+        "Photographs",
+        "Film",
+        "Lectures"
       ],
-      "note": "The space is being built — it will open as an interactive archive."
+      "note": "Every new text, photograph or note is added here."
     },
     "gallery": {
       "eyebrow": "The archive",
@@ -304,29 +302,29 @@
       "cta": "Open the gallery"
     },
     "timeline": {
-      "eyebrow": "Chronology",
-      "title": "The journey",
-      "lead": "Dates and events — to be filled in with verified information.",
+      "eyebrow": "The path",
+      "title": "Four stages",
+      "lead": "One line running from medicine to the page — asking the same question at every stage.",
       "entries": [
         {
-          "year": "[[Year]]",
-          "title": "[[Event]]",
-          "text": "[[Description — education]]"
+          "year": "01",
+          "title": "Medicine",
+          "text": "It began at the operating table, where preparation and calm turned out to be two names for the same skill."
         },
         {
-          "year": "[[Year]]",
-          "title": "[[Event]]",
-          "text": "[[Description — professional step]]"
+          "year": "02",
+          "title": "Aviation",
+          "text": "The cockpit repeated the lesson in another language, and showed that discipline is the only reliable form of freedom."
         },
         {
-          "year": "[[Year]]",
-          "title": "[[Event]]",
-          "text": "[[Description — aviation]]"
+          "year": "03",
+          "title": "The lecture hall",
+          "text": "Teaching forced what the hands already knew into words — which turns out to be the hardest part."
         },
         {
-          "year": "[[Year]]",
-          "title": "[[Event]]",
-          "text": "[[Description — a book or project]]"
+          "year": "04",
+          "title": "The page",
+          "text": "Whatever would not fit into a lecture became text: essays on medicine, aviation, will and responsibility."
         }
       ]
     },
@@ -550,61 +548,21 @@
           }
         ]
       },
-      "timelineTitle": "A life in dates",
-      "timelineNote": "Entries marked in yellow are still waiting for the real year — send them and they go straight in.",
+      "timelineTitle": "Verified dates",
+      "timelineNote": "This list is deliberately short: only what can be verified appears here. The rest of the story is in the text above.",
       "timeline": [
         {
           "year": "1995",
           "text": "Born in Tbilisi on 26 August."
         },
         {
-          "year": "[[year]]",
-          "text": "Qualifies in medicine and begins training in surgery."
-        },
-        {
-          "year": "[[year]]",
-          "text": "Earns his pilot’s licence."
-        },
-        {
           "year": "2016",
           "text": "Directs and stars in the romantic comedy Cowards."
-        },
-        {
-          "year": "[[year]]",
-          "text": "Qualifies as a flight instructor."
-        },
-        {
-          "year": "[[year]]",
-          "text": "Publishes his first book."
-        },
-        {
-          "year": "[[year]]",
-          "text": "Publishes his first philosophical book."
-        },
-        {
-          "year": "[[year]]",
-          "text": "Establishes the Max Darkosadze Foundation."
         }
       ],
       "honoursTitle": "Honours and distinctions",
       "honoursLead": "Recognition from the professions he has served. The list below is kept short on purpose: only what can be documented belongs on it.",
-      "honours": [
-        {
-          "year": "[[year]]",
-          "title": "[[Name of the award]]",
-          "text": "Awarded by [[awarding body]] for [[reason]]."
-        },
-        {
-          "year": "[[year]]",
-          "title": "[[Name of the award]]",
-          "text": "Awarded by [[awarding body]] for [[reason]]."
-        },
-        {
-          "year": "[[year]]",
-          "title": "[[Name of the award]]",
-          "text": "Awarded by [[awarding body]] for [[reason]]."
-        }
-      ]
+      "honours": []
     },
     "articles": {
       "title": "Articles — Max Darkosadze",
@@ -839,29 +797,29 @@
         {
           "title": "General and press",
           "lines": [
-            "Message on [Instagram](https://www.instagram.com/maxdarkosadze/) — @maxdarkosadze",
-            "[[press e-mail address]]"
+            "Write on [Instagram](https://www.instagram.com/maxdarkosadze/) — @maxdarkosadze",
+            "For editors there is a [press kit](press.html): biography, photographs and the short facts."
           ]
         },
         {
           "title": "Film",
           "lines": [
             "Credits and filmography on [IMDb](https://www.imdb.com/name/nm8752510/)",
-            "Enquiries via [Instagram](https://www.instagram.com/maxdarkosadze/)"
+            "Questions — [Instagram](https://www.instagram.com/maxdarkosadze/)"
           ]
         },
         {
           "title": "Lectures and seminars",
           "lines": [
-            "[[e-mail address]]",
-            "Requests should include date, audience and subject."
+            "Use the [invitation form](booking.html) — the reply comes to you directly.",
+            "Give the date, the audience and the subject."
           ]
         },
         {
           "title": "The foundation",
           "lines": [
-            "[[e-mail address]]",
-            "Donations, partnerships and mentoring."
+            "[The foundation page](foundation.html) — its directions and programmes.",
+            "Donations, partnerships or mentoring — reach us on Instagram."
           ]
         }
       ],
@@ -1592,14 +1550,15 @@
         },
         {
           "type": "h2",
-          "text": "The books"
+          "text": "What he writes about"
         },
         {
-          "type": "list",
-          "items": [
-            "[[Title]] ([[year]]) — [[one-line description]].",
-            "[[Title]] ([[year]]) — [[one-line description]]."
-          ]
+          "type": "p",
+          "text": "The books and the long pieces ask one question in three languages: how does a person decide when the full answer is not available? In medicine it is called risk, in aviation procedure, in philosophy will."
+        },
+        {
+          "type": "p",
+          "text": "The text rarely offers advice and never a diagnosis. It shows what the work looks like from the inside, and leaves the question with the reader."
         },
         {
           "type": "p",
@@ -1991,15 +1950,15 @@
         },
         {
           "type": "h2",
-          "text": "The record"
+          "text": "What recognition means"
         },
         {
-          "type": "list",
-          "items": [
-            "[[Name of the award]] ([[year]]) — awarded by [[awarding body]] for [[reason]].",
-            "[[Name of the award]] ([[year]]) — awarded by [[awarding body]] for [[reason]].",
-            "[[Name of the award]] ([[year]]) — awarded by [[awarding body]] for [[reason]]."
-          ]
+          "type": "p",
+          "text": "There is deliberately no list of awards on this page. The recognition Max Darkosadze counts shows up elsewhere: in a patient who comes back years later; in a student who now teaches; in someone who asks, after a lecture, the question you do not have an answer ready for."
+        },
+        {
+          "type": "p",
+          "text": "Verified entries — dates, bodies, wording — are added to the press kit when they can be checked. Until then nothing extra is written here."
         },
         {
           "type": "h2",
