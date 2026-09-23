@@ -11,22 +11,27 @@
   var nav = document.getElementById("site-nav");
 
   if (toggle && nav) {
-    toggle.addEventListener("click", function () {
-      var open = nav.classList.toggle("is-open");
+    var setMenu = function (open) {
+      document.body.classList.toggle("nav-open", open);
+      nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      if (open) {
+        var first = nav.querySelector("a");
+        if (first) window.setTimeout(function () { first.focus(); }, 180);
+      }
+    };
+
+    toggle.addEventListener("click", function () {
+      setMenu(!document.body.classList.contains("nav-open"));
     });
 
     nav.addEventListener("click", function (event) {
-      if (event.target.closest("a")) {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
+      if (event.target.closest("a")) setMenu(false);
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && nav.classList.contains("is-open")) {
-        nav.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
+      if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
+        setMenu(false);
         toggle.focus();
       }
     });
@@ -64,7 +69,7 @@
   var header = document.querySelector(".site-header");
   if (header) {
     var onScroll = function () {
-      header.classList.toggle("is-scrolled", window.scrollY > 24);
+      header.classList.toggle("is-stuck", window.scrollY > 24);
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -75,7 +80,8 @@
      scroll can move an element past the observer between two computations,
      which would leave that section invisible for good.                     */
   var revealTargets = Array.prototype.slice.call(document.querySelectorAll(
-    ".section-head, .pillar, .card, .programme, .honour, .gal-item, .stats li, .timeline li, .split-body, .split-media, .contact-card, .big-quote"
+    "[data-reveal], .section-head, .pillar, .card, .programme, .honour, .gal-item, " +
+    ".timeline li, .split-body, .split-media, .contact-card, .big-quote, .world, .entry, .project"
   ));
 
   if (!reduced && revealTargets.length) {
@@ -117,22 +123,6 @@
     window.addEventListener("load", check);
     window.addEventListener("beforeprint", revealAll);
     check();
-  }
-
-  /* ---- the hero photograph drifts slightly behind the words ---------- */
-  var heroMedia = document.querySelector(".hero .hero-media");
-  if (heroMedia && !reduced) {
-    var parallaxQueued = false;
-    var moveHero = function () {
-      parallaxQueued = false;
-      var y = window.scrollY;
-      if (y > window.innerHeight * 1.2) return;
-      heroMedia.style.transform = "translate3d(0, " + (y * 0.18).toFixed(1) + "px, 0)";
-    };
-    window.addEventListener("scroll", function () {
-      if (!parallaxQueued) { parallaxQueued = true; window.requestAnimationFrame(moveHero); }
-    }, { passive: true });
-    moveHero();
   }
 
   /* ---- reading progress on article pages ----------------------------- */
@@ -534,8 +524,8 @@
   } catch (e) { /* never let counting break a page */ }
 
   /* ---- the film, running quietly behind the title -------------------- */
-  var heroMedia = document.querySelector(".hero .hero-media[data-hero-film]");
-  if (heroMedia) {
+  var filmSlot = document.querySelector(".hero .hero-media[data-hero-film]");
+  if (filmSlot) {
     var wideEnough = window.matchMedia && window.matchMedia("(min-width: 60rem)").matches;
     var calmPlease = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var link = navigator.connection || {};
@@ -555,7 +545,7 @@
       film.setAttribute("playsinline", "");
       film.setAttribute("aria-hidden", "true");
       film.setAttribute("tabindex", "-1");
-      var webm = heroMedia.getAttribute("data-hero-film-webm");
+      var webm = filmSlot.getAttribute("data-hero-film-webm");
       if (webm) {
         var vp9 = document.createElement("source");
         vp9.src = webm;
@@ -563,15 +553,15 @@
         film.appendChild(vp9);
       }
       var h264 = document.createElement("source");
-      h264.src = heroMedia.getAttribute("data-hero-film");
+      h264.src = filmSlot.getAttribute("data-hero-film");
       h264.type = "video/mp4";
       film.appendChild(h264);
 
       var button = document.createElement("button");
       button.type = "button";
       button.className = "hero-film-toggle";
-      var pauseLabel = heroMedia.getAttribute("data-film-pause") || "Pause";
-      var playLabel = heroMedia.getAttribute("data-film-play") || "Play";
+      var pauseLabel = filmSlot.getAttribute("data-film-pause") || "Pause";
+      var playLabel = filmSlot.getAttribute("data-film-play") || "Play";
       var mark = function () {
         var paused = film.paused;
         button.setAttribute("aria-label", paused ? playLabel : pauseLabel);
@@ -584,22 +574,22 @@
       });
 
       film.addEventListener("playing", function () {
-        heroMedia.classList.add("has-film");
+        filmSlot.classList.add("has-film");
         mark();
       });
       film.addEventListener("pause", mark);
       film.addEventListener("error", function () {
-        heroMedia.classList.remove("has-film");
+        filmSlot.classList.remove("has-film");
         if (button.parentNode) button.parentNode.removeChild(button);
       });
 
-      heroMedia.appendChild(film);
+      filmSlot.appendChild(film);
       var hero = document.querySelector(".hero");
       if (hero) hero.appendChild(button);
       mark();
       film.play().catch(function () {
         /* the browser refused to start it on its own: keep the photograph */
-        heroMedia.classList.remove("has-film");
+        filmSlot.classList.remove("has-film");
         if (button.parentNode) button.parentNode.removeChild(button);
       });
     }
@@ -688,31 +678,130 @@
     });
   }
 
-  /* ---- light / dark switch ------------------------------------------ */
-  var themeButton = document.querySelector(".theme-toggle");
-  if (themeButton) {
-    var systemDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
-    var currentTheme = function () {
-      return docEl.getAttribute("data-theme") ||
-        (systemDark && systemDark.matches ? "dark" : "light");
+  /* ---- the cursor ----------------------------------------------------
+     A dot that follows exactly and a ring that lags behind it, naming what
+     a link would do. Pointer devices only, and never when less motion is
+     asked for.                                                            */
+  var finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  if (finePointer && !reduced) {
+    var dot = document.createElement("div");
+    dot.className = "cursor-dot";
+    dot.setAttribute("aria-hidden", "true");
+    var ring = document.createElement("div");
+    ring.className = "cursor-ring";
+    ring.setAttribute("aria-hidden", "true");
+    document.body.appendChild(dot);
+    document.body.appendChild(ring);
+
+    var mouseX = 0, mouseY = 0, ringX = 0, ringY = 0, running = false;
+    var words = {
+      view: docEl.lang === "ka" ? "ნახვა" : "View",
+      open: docEl.lang === "ka" ? "გახსნა" : "Open"
     };
-    themeButton.addEventListener("click", function () {
-      var next = currentTheme() === "dark" ? "light" : "dark";
-      docEl.setAttribute("data-theme", next);
-      try { localStorage.setItem("md-theme", next); } catch (e) { /* private mode */ }
+
+    var frame = function () {
+      ringX += (mouseX - ringX) * 0.18;
+      ringY += (mouseY - ringY) * 0.18;
+      dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px)";
+      ring.style.transform = "translate(" + ringX + "px," + ringY + "px)";
+      if (Math.abs(mouseX - ringX) > 0.3 || Math.abs(mouseY - ringY) > 0.3) {
+        window.requestAnimationFrame(frame);
+      } else {
+        running = false;
+      }
+    };
+
+    document.addEventListener("mousemove", function (event) {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
+      document.body.classList.add("has-cursor");
+      if (!running) { running = true; window.requestAnimationFrame(frame); }
+    }, { passive: true });
+
+    document.addEventListener("mouseleave", function () {
+      document.body.classList.remove("has-cursor");
+    });
+
+    document.addEventListener("mouseover", function (event) {
+      var target = event.target.closest("a, button, summary, .gal-open, input, textarea");
+      if (!target) {
+        document.body.classList.remove("cursor-active");
+        ring.textContent = "";
+        return;
+      }
+      document.body.classList.add("cursor-active");
+      ring.textContent = target.closest(".gal-open, .strip-item")
+        ? words.view
+        : (target.tagName === "A" ? words.open : "");
     });
   }
 
-  /* ---- keeping the site on a phone ----------------------------------- */
-  /* The worker only helps when there is no network; every page is still
-     fetched fresh first, so nothing can be served from yesterday. */
-  if ("serviceWorker" in navigator &&
-      (location.protocol === "https:" || location.hostname === "localhost" ||
-       location.hostname === "127.0.0.1")) {
-    window.addEventListener("load", function () {
-      navigator.serviceWorker.register("/sw.js").catch(function () {
-        /* no worker: the site simply behaves as it always did */
+  /* ---- buttons that lean towards the cursor -------------------------- */
+  if (finePointer && !reduced) {
+    Array.prototype.forEach.call(document.querySelectorAll(".btn, .link-arrow, .brand-mark"),
+      function (el) {
+        el.addEventListener("mousemove", function (event) {
+          var box = el.getBoundingClientRect();
+          var x = (event.clientX - box.left - box.width / 2) * 0.18;
+          var y = (event.clientY - box.top - box.height / 2) * 0.22;
+          el.style.transform = "translate(" + x.toFixed(2) + "px," + y.toFixed(2) + "px)";
+        });
+        el.addEventListener("mouseleave", function () { el.style.transform = ""; });
       });
+  }
+
+  /* ---- the portrait drifts with the cursor, the words do not ---------- */
+  var parallax = document.querySelector("[data-parallax]");
+  if (parallax && finePointer && !reduced) {
+    var target = parallax.querySelector(".hero-media") || parallax;
+    var glow = parallax.querySelector(".hero-glow");
+    var ticking = false, px = 0, py = 0;
+    window.addEventListener("mousemove", function (event) {
+      px = (event.clientX / window.innerWidth - 0.5);
+      py = (event.clientY / window.innerHeight - 0.5);
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () {
+        ticking = false;
+        target.style.transform = "translate3d(" + (px * -14).toFixed(2) + "px," +
+          (py * -12).toFixed(2) + "px,0)";
+        if (glow) {
+          glow.style.transform = "translate3d(" + (px * 26).toFixed(2) + "px," +
+            (py * 22).toFixed(2) + "px,0)";
+        }
+      });
+    }, { passive: true });
+  }
+
+  /* ---- leaving a page ------------------------------------------------
+     A black panel rises, a thin violet line crosses it, the next page
+     opens. Half a second, and only between pages of this site.           */
+  if (!reduced) {
+    var veil = document.createElement("div");
+    veil.className = "veil";
+    veil.setAttribute("aria-hidden", "true");
+    document.body.appendChild(veil);
+    window.requestAnimationFrame(function () { veil.classList.add("is-in"); });
+
+    document.addEventListener("click", function (event) {
+      var link = event.target.closest("a");
+      if (!link || event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return;
+      var href = link.getAttribute("href") || "";
+      if (!href || href.charAt(0) === "#" || link.target === "_blank" ||
+          href.indexOf("mailto:") === 0 || href.indexOf("tel:") === 0) return;
+      if (link.origin && link.origin !== location.origin) return;
+      if (link.pathname === location.pathname && link.search === location.search) return;
+      event.preventDefault();
+      veil.classList.remove("is-in");
+      veil.classList.add("is-out");
+      window.setTimeout(function () { location.href = link.href; }, 380);
+    });
+
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted) {
+        veil.classList.remove("is-out");
+        veil.classList.add("is-in");
+      }
     });
   }
 

@@ -29,8 +29,8 @@
   <link rel="manifest" href="../manifest.webmanifest">
   <link rel="me" href="https://www.instagram.com/maxdarkosadze/">
   <link rel="me" href="https://www.imdb.com/name/nm8752510/">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/noto-serif-georgian.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/noto-sans-georgian.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/cormorant-latin.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../assets/fonts/inter-latin.woff2">
   <link rel="stylesheet" href="../assets/css/style.css">
   <script>try{var t=localStorage.getItem('md-theme');if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}</script>
   
@@ -38,28 +38,22 @@
 <body class="lang-en page-articles">
 
 <a class="skip-link" href="#main">Skip to content</a>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="../en/index.html">
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="../en/index.html" aria-label="Max Darkosadze">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <span class="brand-text">
-        <strong>Max Darkosadze</strong>
-        <small>Batoni Maksi</small>
-      </span>
+      <span class="brand-text">Max Darkosadze</span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
     <nav id="site-nav" class="site-nav" aria-label="Menu">
-      <ul><li><a href="../en/index.html">Home</a></li><li><a href="../en/about.html">Biography</a></li><li><a class="is-active" href="../en/articles.html">Articles</a></li><li><a href="../en/news.html">News</a></li><li><a href="../en/foundation.html">Foundation</a></li><li><a href="../en/gallery.html">Gallery</a></li><li><a href="../en/contact.html">Contact</a></li><li><a href="../en/guestbook.html">Guest book</a></li></ul>
-      <div class="nav-tools">
-        <a class="lang-switch" href="../ka/articles.html" hreflang="ka" lang="ka" title="Switch to Georgian">ქართული</a>
-        <button class="theme-toggle" type="button" aria-label="Switch between light and dark" title="Switch between light and dark">
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
-        </button>
-      </div>
+      <ul class="nav-list"><li><a href="../en/about.html"><span>About</span></a></li><li><a class="is-active" href="../en/articles.html"><span>Writing</span></a></li><li><a href="../en/index.html#philosophy"><span>Philosophy</span></a></li><li><a href="../en/index.html#aviation"><span>Aviation</span></a></li><li><a href="../en/index.html#projects"><span>Projects</span></a></li><li><a href="../en/gallery.html"><span>Gallery</span></a></li><li><a href="../en/guestbook.html"><span>Guest book</span></a></li><li><a href="../en/contact.html"><span>Contact</span></a></li></ul>
     </nav>
+    <div class="nav-tools">
+      <a class="lang-switch" href="../ka/articles.html" hreflang="ka" lang="ka" title="Switch to Georgian">ქართული</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="nav-toggle-word">Menu</span>
+      </button>
+    </div>
   </div>
 </header>
 <main id="main">
@@ -180,27 +174,25 @@
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true">MD</span>
-      <p><strong>Max Darkosadze</strong><br><em class="footer-nick">Batoni Maksi</em><br><span>Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Sculptor · Filmmaker</span></p>
-      <p class="muted">All materials on this site concern the life and work of Max Darkosadze.</p>
-    </div>
-    <nav class="footer-nav" aria-label="Menu">
-      <ul><li><a href="../en/index.html">Home</a></li><li><a href="../en/about.html">Biography</a></li><li><a href="../en/articles.html">Articles</a></li><li><a href="../en/news.html">News</a></li><li><a href="../en/foundation.html">Foundation</a></li><li><a href="../en/gallery.html">Gallery</a></li><li><a href="../en/contact.html">Contact</a></li><li><a href="../en/guestbook.html">Guest book</a></li><li><a href="../en/legend.html">THE LEGEND</a></li><li><a href="../en/booking.html">Invite him to speak</a></li><li><a href="../en/faq.html">Frequently asked questions</a></li><li><a href="../en/search.html">Search the site</a></li><li><a href="../en/press.html">Press kit</a></li></ul>
-    </nav>
-    <div class="footer-lang">
-      <p class="muted">Language</p>
+  <div class="footer-top">
+    <p class="footer-mark" aria-hidden="true">MD</p>
+    <p class="footer-name">Max Darkosadze</p>
+    <p class="footer-line">Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Sculptor · Filmmaker</p>
+  </div>
+  <div class="footer-grid">
+    <nav class="footer-nav" aria-label="Menu"><ul><li><a href="../en/about.html">The making of Max Darkosadze</a></li><li><a href="../en/articles.html">Articles</a></li><li><a href="../en/gallery.html">In pictures</a></li><li><a href="../en/guestbook.html">Guest book</a></li><li><a href="../en/booking.html">Invite him to speak</a></li><li><a href="../en/faq.html">Frequently asked questions</a></li><li><a href="../en/press.html">Press kit</a></li><li><a href="../en/contact.html">Get in touch</a></li></ul></nav>
+    <div class="footer-side">
       <ul class="footer-social"><li><a href="https://www.instagram.com/maxdarkosadze/" rel="me noopener" target="_blank">Instagram</a></li><li><a href="https://www.imdb.com/name/nm8752510/" rel="me noopener" target="_blank">IMDb</a></li></ul>
-      <ul>
+      <ul class="footer-lang">
         <li><a href="../en/index.html" hreflang="en" lang="en">English</a></li>
         <li><a href="../ka/index.html" hreflang="ka" lang="ka">ქართული</a></li>
       </ul>
     </div>
   </div>
-  <div class="wrap footer-bottom">
-    <p>&copy; 2026 Max Darkosadze. All rights reserved.</p>
-    <a class="to-top" href="#top">Back to top &uarr;</a>
+  <div class="footer-bottom">
+    <p>&copy; 2026 Max Darkosadze</p>
+    <p class="footer-note">Less noise. More presence.</p>
+    <a class="to-top" href="#top">Back to top</a>
   </div>
 </footer>
 <script src="../assets/js/main.js" defer></script>

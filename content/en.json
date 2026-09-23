@@ -17,36 +17,39 @@
   },
   "nav": [
     {
-      "key": "home",
-      "label": "Home"
-    },
-    {
       "key": "about",
-      "label": "Biography"
+      "label": "About"
     },
     {
       "key": "articles",
-      "label": "Articles"
+      "label": "Writing"
     },
     {
-      "key": "news",
-      "label": "News"
+      "key": "home",
+      "label": "Philosophy",
+      "anchor": "philosophy"
     },
     {
-      "key": "foundation",
-      "label": "Foundation"
+      "key": "home",
+      "label": "Aviation",
+      "anchor": "aviation"
+    },
+    {
+      "key": "home",
+      "label": "Projects",
+      "anchor": "projects"
     },
     {
       "key": "gallery",
       "label": "Gallery"
     },
     {
-      "key": "contact",
-      "label": "Contact"
-    },
-    {
       "key": "guestbook",
       "label": "Guest book"
+    },
+    {
+      "key": "contact",
+      "label": "Contact"
     }
   ],
   "ui": {
@@ -74,6 +77,272 @@
     "faqMore": "Read more",
     "filmPause": "Pause the background film",
     "filmPlay": "Play the background film"
+  },
+  "archive": {
+    "hero": {
+      "eyebrow": "Max Darkosadze",
+      "lines": [
+        "A life between",
+        "science, philosophy",
+        "and the sky."
+      ],
+      "roles": [
+        "Surgeon",
+        "Aviation instructor",
+        "Lecturer",
+        "Writer"
+      ],
+      "statement": "The space where scientific knowledge meets human experience.",
+      "place": "Tbilisi · Georgia",
+      "scroll": "Scroll to explore",
+      "portraitAlt": "Max Darkosadze — Batoni Maksi"
+    },
+    "intro": {
+      "statement": "I am interested in the space where scientific knowledge meets human experience.",
+      "paragraphs": [
+        "An operating table, a cockpit, a lecture hall, a page — worlds that look far apart and are held together by one question: how do we decide when the information is never complete?",
+        "This site is an archive. It gathers what I do, read, write and think about — not because any of it is finished, but because it continues."
+      ]
+    },
+    "worlds": {
+      "eyebrow": "The archive",
+      "title": "The worlds I explore",
+      "items": [
+        {
+          "n": "01",
+          "title": "Surgery",
+          "text": "A precise movement with months of preparation behind it.",
+          "image": "assets/img/surgery.jpg",
+          "key": "article",
+          "slug": "surgeon"
+        },
+        {
+          "n": "02",
+          "title": "Aviation",
+          "text": "The discipline that turns out to be the only reliable form of freedom.",
+          "image": "assets/img/aviation.jpg",
+          "key": "article",
+          "slug": "aviation-instructor"
+        },
+        {
+          "n": "03",
+          "title": "Philosophy",
+          "text": "Questions whose answers are never written once.",
+          "image": "assets/img/philosophy.jpg",
+          "key": "article",
+          "slug": "philosopher"
+        },
+        {
+          "n": "04",
+          "title": "Writing",
+          "text": "The page where thinking becomes responsibility.",
+          "image": "assets/img/writing.jpg",
+          "key": "article",
+          "slug": "writer"
+        },
+        {
+          "n": "05",
+          "title": "Projects",
+          "text": "Experiments between thought and technology.",
+          "image": "assets/img/gallery/17.jpg",
+          "key": "projects",
+          "slug": null
+        }
+      ]
+    },
+    "surgery": {
+      "eyebrow": "Discipline 01",
+      "title": "Surgery",
+      "quote": "An operating room forgives nothing careless — which is exactly why it teaches precision everywhere else.",
+      "text": "What matters most in surgery is not what happens at the table but what was settled before it: a plan that already contains what to do if something goes wrong.",
+      "points": [
+        {
+          "h": "Professional background",
+          "t": "[[Add verified information: training, hospital, speciality]]"
+        },
+        {
+          "h": "Areas of interest",
+          "t": "Decision-making under incomplete information; how a team communicates in an operating room."
+        },
+        {
+          "h": "Research and publications",
+          "t": "[[Add verified publications or research]]"
+        },
+        {
+          "h": "Philosophy of medicine",
+          "t": "A patient is not a case. A patient is a person with a story, whose trust is spent again at every visit."
+        }
+      ],
+      "image": "assets/img/surgery.jpg",
+      "cta": "Read the article"
+    },
+    "aviation": {
+      "eyebrow": "Discipline 02",
+      "title": "Aviation",
+      "quote": "There is a particular kind of silence above the clouds.",
+      "text": "A flight is preceded by a briefing that often takes longer than the flight itself. Aviation teaches that confidence is born of preparation, never the other way round.",
+      "points": [
+        {
+          "h": "Flying",
+          "t": "[[Add verified information: experience, aircraft types, hours]]"
+        },
+        {
+          "h": "Instruction",
+          "t": "[[Add verified qualification and training organisation]]"
+        },
+        {
+          "h": "Philosophy of flight",
+          "t": "The checklist exists not because the pilot is not trusted, but because memory never is."
+        }
+      ],
+      "image": "assets/img/aviation.jpg",
+      "cta": "Read the article"
+    },
+    "philosophy": {
+      "eyebrow": "Discipline 03",
+      "title": "Philosophy",
+      "quote": "To understand a life, one must first understand the ideas that built it.",
+      "text": "Philosophy here is not an academic title. It is a set of questions that follow the day's work around: will, freedom, consciousness, meaning.",
+      "themesTitle": "The reading circle",
+      "themes": [
+        "Nietzsche",
+        "Schopenhauer",
+        "Plato",
+        "Hegel",
+        "Existentialism",
+        "Consciousness",
+        "Will",
+        "Human nature",
+        "Meaning"
+      ],
+      "image": "assets/img/philosophy.jpg",
+      "cta": "Read the article"
+    },
+    "writing": {
+      "eyebrow": "The archive",
+      "title": "Writing",
+      "lead": "Essays and long pieces — each following one question to the end.",
+      "cta": "All writing",
+      "read": "Read"
+    },
+    "book": {
+      "eyebrow": "The book",
+      "title": "Hermeneutics of the Übermensch",
+      "titleAlt": "ზეკაცის ჰერმენევტიკა",
+      "concept": "The book reads Nietzsche's Übermensch not as a programme of power but as a problem of interpretation: what does it mean to overcome oneself once values no longer arrive ready-made?",
+      "themesTitle": "Themes",
+      "themes": [
+        "Interpretation",
+        "Will",
+        "The revaluation of values",
+        "Freedom and responsibility",
+        "Solitude",
+        "Creation"
+      ],
+      "chaptersTitle": "Structure",
+      "chapters": [
+        "[[Chapter list — add from the manuscript]]"
+      ],
+      "excerptTitle": "Excerpt",
+      "excerpt": "[[Paste an excerpt from the manuscript]]",
+      "statusTitle": "Status",
+      "status": "[[Add: stage of work, publication date, publisher]]"
+    },
+    "projects": {
+      "eyebrow": "The archive",
+      "title": "Projects",
+      "lead": "Experiments between thought and technology — some finished, some deliberately left open.",
+      "items": [
+        {
+          "n": "01",
+          "title": "Library of the Void",
+          "kind": "Digital archive",
+          "text": "An infinite library of ideas: fragments, notes, quotations and texts, linked to one another.",
+          "status": "In progress"
+        },
+        {
+          "n": "02",
+          "title": "Void Mafia",
+          "kind": "Creative project",
+          "text": "[[Describe the project: form, intent, status]]",
+          "status": "[[Status]]"
+        },
+        {
+          "n": "03",
+          "title": "Hermeneutics of the Übermensch",
+          "kind": "Book",
+          "text": "A philosophical text on interpretation, will and the revaluation of values.",
+          "status": "In progress"
+        }
+      ]
+    },
+    "library": {
+      "eyebrow": "The space",
+      "title": "The Library of the Void",
+      "subtitle": "An infinite archive of ideas.",
+      "text": "Imagine a library without walls: shelves holding not books but thoughts — some finished, some cut off mid-sentence. This is where what has not yet become text is kept.",
+      "tabs": [
+        "Books",
+        "Ideas",
+        "Fragments",
+        "Philosophy",
+        "Fiction",
+        "Notes"
+      ],
+      "note": "The space is being built — it will open as an interactive archive."
+    },
+    "gallery": {
+      "eyebrow": "The archive",
+      "title": "Visual archive",
+      "text": "Portraits, aviation, the studio, the set, the city.",
+      "cta": "Open the gallery"
+    },
+    "timeline": {
+      "eyebrow": "Chronology",
+      "title": "The journey",
+      "lead": "Dates and events — to be filled in with verified information.",
+      "entries": [
+        {
+          "year": "[[Year]]",
+          "title": "[[Event]]",
+          "text": "[[Description — education]]"
+        },
+        {
+          "year": "[[Year]]",
+          "title": "[[Event]]",
+          "text": "[[Description — professional step]]"
+        },
+        {
+          "year": "[[Year]]",
+          "title": "[[Event]]",
+          "text": "[[Description — aviation]]"
+        },
+        {
+          "year": "[[Year]]",
+          "title": "[[Event]]",
+          "text": "[[Description — a book or project]]"
+        }
+      ]
+    },
+    "notes": {
+      "eyebrow": "Fragments",
+      "title": "Notes from the void",
+      "items": [
+        "The question is not whether we possess freedom, but what we choose to do with the freedom we believe we possess.",
+        "Discipline is not a restriction. It is attention saved for the minute that will need it.",
+        "Every yes is said at the expense of another yes.",
+        "The impossible is usually just a task nobody has divided up yet."
+      ]
+    },
+    "contactBlock": {
+      "eyebrow": "Contact",
+      "title": "Let's talk",
+      "text": "A lecture, a collaboration, an interview — or simply a question. Write.",
+      "locationLabel": "Location",
+      "location": "Tbilisi, Georgia",
+      "emailLabel": "E-mail",
+      "closing": "Less noise. More presence."
+    }
   },
   "film": {
     "eyebrow": "The film",

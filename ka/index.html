@@ -38,102 +38,275 @@
 <body class="lang-ka page-home">
 
 <a class="skip-link" href="#main">გადასვლა ძირითად შინაარსზე</a>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="../ka/index.html">
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="../ka/index.html" aria-label="მაქსი დარკოსაძე">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <span class="brand-text">
-        <strong>მაქსი დარკოსაძე</strong>
-        <small>ბატონი მაქსი</small>
-      </span>
+      <span class="brand-text">მაქსი დარკოსაძე</span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="მენიუ">
-      <span></span><span></span><span></span>
-    </button>
     <nav id="site-nav" class="site-nav" aria-label="მენიუ">
-      <ul><li><a class="is-active" href="../ka/index.html">მთავარი</a></li><li><a href="../ka/about.html">ბიოგრაფია</a></li><li><a href="../ka/articles.html">სტატიები</a></li><li><a href="../ka/news.html">სიახლეები</a></li><li><a href="../ka/foundation.html">ფონდი</a></li><li><a href="../ka/gallery.html">გალერეა</a></li><li><a href="../ka/contact.html">კონტაქტი</a></li><li><a href="../ka/guestbook.html">სტუმრების წიგნი</a></li></ul>
-      <div class="nav-tools">
-        <a class="lang-switch" href="../en/index.html" hreflang="en" lang="en" title="Switch to English">English</a>
-        <button class="theme-toggle" type="button" aria-label="ნათელი და მუქი თემის გადართვა" title="ნათელი და მუქი თემის გადართვა">
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
-        </button>
-      </div>
+      <ul class="nav-list"><li><a href="../ka/about.html"><span>ბიოგრაფია</span></a></li><li><a href="../ka/articles.html"><span>წერა</span></a></li><li><a href="../ka/index.html#philosophy"><span>ფილოსოფია</span></a></li><li><a href="../ka/index.html#aviation"><span>ავიაცია</span></a></li><li><a href="../ka/index.html#projects"><span>პროექტები</span></a></li><li><a href="../ka/gallery.html"><span>გალერეა</span></a></li><li><a href="../ka/guestbook.html"><span>სტუმრების წიგნი</span></a></li><li><a href="../ka/contact.html"><span>კონტაქტი</span></a></li></ul>
     </nav>
+    <div class="nav-tools">
+      <a class="lang-switch" href="../en/index.html" hreflang="en" lang="en" title="Switch to English">English</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="მენიუ">
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="nav-toggle-word">მენიუ</span>
+      </button>
+    </div>
   </div>
 </header>
 <main id="main">
 
-<section class="hero">
-  <div class="hero-media img-slot" data-path="assets/img/hero.jpg" data-hero-film="../assets/video/showreel-ka.mp4" data-hero-film-webm="../assets/video/showreel-ka.webm" data-film-pause="ფონური ვიდეოს შეჩერება" data-film-play="ფონური ვიდეოს ჩართვა"><img src="../assets/img/hero.jpg" alt="" width="2000" height="1000" srcset="../assets/img/hero-800.jpg 800w, ../assets/img/hero.jpg 2000w" sizes="(max-width: 700px) 100vw, 1140px" loading="eager" decoding="async" data-slot></div>
-  <div class="wrap hero-inner">
-    <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg"><img src="../assets/img/portrait.jpg" alt="მაქსი დარკოსაძე" width="900" height="1200" loading="eager" decoding="async" data-slot></figure>
+<section class="hero" id="top">
+  <div class="hero-inner wrap">
     <div class="hero-text">
-    <p class="eyebrow">ოფიციალური საიტი</p>
-    <h1>მაქსი დარკოსაძე</h1>
-    <p class="nickname"><span>ბევრისთვის უბრალოდ —</span> <strong>ბატონი მაქსი</strong></p>
-    <p class="hero-subtitle">ქირურგი საოპერაციო მაგიდასთან, ინსტრუქტორი კაბინაში, მასწავლებელი აუდიტორიაში, მწერალი საწერ მაგიდასთან — და მოქალაქე საზოგადოების წინაშე.</p>
-    <p class="hero-lead">იშვიათია ბიოგრაფია, რომელიც ერთდროულად ამდენ სფეროს ეხება. მაქს დარკოსაძის — რომელსაც საქართველოში უბრალოდ „ბატონ მაქსს“ ეძახიან — შრომითი ცხოვრება იქ მიმდინარეობს, სადაც სიზუსტე და პასუხისმგებლობა ერთმანეთს ხვდება: ქირურგიაში, სადაც ერთი გადაწყვეტილება ცხოვრებას ცვლის; ავიაციაში, სადაც დისციპლინა ჩვეულებრივ ფრენასა და კატასტროფას შორის ზღვარია; სწავლებაში, წერასა და ფილოსოფიაში, სადაც გამოცდილება სხვისთვის გამოსადეგ ცოდნად იქცევა; და საზოგადოებრივ საქმეში, სადაც ეს ყველაფერი უკან უბრუნდება იმ საზოგადოებას, რომელმაც იგი შესაძლებელი გახადა.</p>
-    <p class="hero-actions">
-      <a class="btn btn-primary" href="../ka/articles.html">სტატიების წაკითხვა</a>
-      <a class="btn btn-ghost" href="../ka/about.html">ბიოგრაფია</a>
-    </p>
-    <p class="hero-roles">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · ფილოსოფოსი · მოქანდაკე · კინორეჟისორი</p>
+      <p class="eyebrow hero-eyebrow">მაქსი დარკოსაძე</p>
+      <h1 class="hero-title"><span>ცხოვრება</span><span>მეცნიერებას, ფილოსოფიასა</span><span>და ცას შორის.</span></h1>
+      <p class="hero-roles">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი</p>
+      <p class="hero-statement">სივრცე, სადაც მეცნიერული ცოდნა ადამიანურ გამოცდილებას ხვდება.</p>
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="../ka/about.html">სტატიების წაკითხვა</a>
+        <a class="btn btn-ghost" href="../ka/articles.html">ბიოგრაფია</a>
+      </p>
+    </div>
+    <figure class="hero-figure" data-parallax>
+      <span class="hero-glow" aria-hidden="true"></span>
+      <div class="hero-media img-slot" data-path="assets/img/portrait.jpg"><img src="../assets/img/portrait.jpg" alt="მაქსი დარკოსაძე — ბატონი მაქსი" width="900" height="1200" loading="eager" decoding="async" data-slot></div>
+    </figure>
+  </div>
+  <p class="hero-place" aria-hidden="true">თბილისი · საქართველო</p>
+  <a class="hero-scroll" href="#intro"><span>გადაფურცლეთ</span></a>
+</section>
+<section class="section intro" id="intro" data-reveal>
+  <div class="wrap intro-inner">
+    <p class="intro-statement">მაინტერესებს ის სივრცე, სადაც მეცნიერული ცოდნა ადამიანურ გამოცდილებას ხვდება.</p>
+    <div class="intro-body"><p>საოპერაციო მაგიდა, თვითმფრინავის კაბინა, აუდიტორია, ფურცელი — ერთი შეხედვით შორი სამყაროები, რომლებსაც ერთი და იგივე კითხვა აკავშირებს: როგორ ვიღებთ გადაწყვეტილებას მაშინ, როცა სრული ინფორმაცია არასდროს გვაქვს.</p><p>ეს საიტი არქივია. აქ ერთად დევს ის, რასაც ვაკეთებ, ვკითხულობ, ვწერ და ვფიქრობ — და არა იმიტომ, რომ დასრულებულია, არამედ იმიტომ, რომ გრძელდება.</p></div>
+  </div>
+</section>
+<section class="section worlds" id="worlds" data-reveal>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">არქივი</p>
+      <h2 class="sec-title">სამყაროები, რომლებსაც ვიკვლევ</h2>
+      
+    </header>
+    <div class="world-list">
+      <a class="world" href="../ka/articles/surgeon.html">
+        <span class="world-media" aria-hidden="true"><img src="../assets/img/surgery.jpg" alt="" width="1600" height="900" srcset="../assets/img/surgery-800.jpg 800w, ../assets/img/surgery.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></span>
+        <span class="world-n">01</span>
+        <span class="world-title">ქირურგია</span>
+        <span class="world-text">ზუსტი მოძრაობა, რომელსაც უკან თვეების მომზადება უდგას.</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="world" href="../ka/articles/aviation-instructor.html">
+        <span class="world-media" aria-hidden="true"><img src="../assets/img/aviation.jpg" alt="" width="1600" height="900" srcset="../assets/img/aviation-800.jpg 800w, ../assets/img/aviation.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></span>
+        <span class="world-n">02</span>
+        <span class="world-title">ავიაცია</span>
+        <span class="world-text">დისციპლინა, რომელიც თავისუფლების ერთადერთი საიმედო ფორმაა.</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="world" href="../ka/articles/philosopher.html">
+        <span class="world-media" aria-hidden="true"><img src="../assets/img/philosophy.jpg" alt="" width="1600" height="900" srcset="../assets/img/philosophy-800.jpg 800w, ../assets/img/philosophy.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></span>
+        <span class="world-n">03</span>
+        <span class="world-title">ფილოსოფია</span>
+        <span class="world-text">კითხვები, რომლებზეც პასუხი ერთხელ არ იწერება.</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="world" href="../ka/articles/writer.html">
+        <span class="world-media" aria-hidden="true"><img src="../assets/img/writing.jpg" alt="" width="1600" height="900" srcset="../assets/img/writing-800.jpg 800w, ../assets/img/writing.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></span>
+        <span class="world-n">04</span>
+        <span class="world-title">წერა</span>
+        <span class="world-text">ფურცელი, სადაც ფიქრი პასუხისმგებლობად იქცევა.</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="world" href="#projects">
+        <span class="world-media" aria-hidden="true"><img src="../assets/img/gallery/17.jpg" alt="" width="1347" height="1167" srcset="../assets/img/gallery/17-800.jpg 800w, ../assets/img/gallery/17.jpg 1347w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></span>
+        <span class="world-n">05</span>
+        <span class="world-title">პროექტები</span>
+        <span class="world-text">ექსპერიმენტები აზრსა და ტექნოლოგიას შორის.</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a></div>
+  </div>
+</section>
+<section class="section about-band" id="about" data-reveal>
+  <div class="wrap about-grid">
+    <div class="about-media">
+      <div class="media-frame img-slot" data-path="assets/img/gallery/18.jpg"><img src="../assets/img/gallery/18.jpg" alt="მაქსი დარკოსაძე" width="1086" height="1448" srcset="../assets/img/gallery/18-800.jpg 800w, ../assets/img/gallery/18.jpg 1086w" sizes="(max-width: 700px) 100vw, 1086px" loading="lazy" decoding="async" data-slot></div>
+    </div>
+    <div class="about-body">
+      <p class="eyebrow">ბიოგრაფია</p>
+      <h2 class="sec-title">როგორ ყალიბდებოდა მაქსი დარკოსაძე</h2>
+      <p class="sec-text">ცხოვრება, აგებული ერთ რწმენაზე: ოსტატობა პრივილეგია კი არა, მოვალეობაა. სტუდენტების, პაციენტებისა და პილოტების მთელი თაობისთვის ის უბრალოდ „ბატონი მაქსია“.</p>
+      <p class="sec-actions"><a class="link-arrow" href="../ka/about.html">სტატიის წაკითხვა</a></p>
     </div>
   </div>
 </section>
-
-<section class="section">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>რვა ცხოვრება ერთში</h2>
-      <p>თითოეული ეს სფერო მთელ ცხოვრებას ითხოვს. ერთად კი ისინი ერთ ადამიანს და მუშაობის ერთ თანმიმდევრულ წესს აღწერენ.</p>
-    </header>
-    <div class="pillars">
-        <a class="pillar" href="../ka/articles/surgeon.html">
-          <span class="pillar-index" aria-hidden="true">01</span>
-          <h3>ქირურგი</h3>
-          <p>წლები, გატარებული იქ, სადაც სიზუსტე, სიმტკიცე და განსჯა ერთდება — და სადაც მთავარი პაციენტია და არა ოპერაცია.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/aviation-instructor.html">
-          <span class="pillar-index" aria-hidden="true">02</span>
-          <h3>ავიაინსტრუქტორი</h3>
-          <p>პილოტებს ასწავლის, რომ დისციპლინა თავდაჯერებულობის მტერი კი არა, მისი ერთადერთი საყრდენია.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/lecturer.html">
-          <span class="pillar-index" aria-hidden="true">03</span>
-          <h3>ლექტორი</h3>
-          <p>აუდიტორია, რომელიც საოპერაციოსავით არის მოწყობილი: მომზადებული, მომთხოვნი და გულუხვი ძვირად ნაშოვნი ცოდნის მიმართ.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/writer.html">
-          <span class="pillar-index" aria-hidden="true">04</span>
-          <h3>მწერალი</h3>
-          <p>წიგნები და ესეები, რომლებიც პროფესიონალის თვალს ჩვეულებრივ ენაზე გადმოსცემენ.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/philosopher.html">
-          <span class="pillar-index" aria-hidden="true">05</span>
-          <h3>ფილოსოფოსი</h3>
-          <p>თანამედროვე ფილოსოფია, დაწერილი პრაქტიკიდან და არა ბიბლიოთეკიდან — რამდენიმე წიგნი პასუხისმგებლობაზე, ყურადღებასა და იმაზე, როგორ იღებს ადამიანი გადაწყვეტილებას.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/sculptor.html">
-          <span class="pillar-index" aria-hidden="true">06</span>
-          <h3>მოქანდაკე</h3>
-          <p>პორტრეტული ბიუსტები თიხასა და მარმარილოში — ერთადერთი ხელობა, სადაც ვერაფერს დაუბრუნებ.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/public-figure.html">
-          <span class="pillar-index" aria-hidden="true">07</span>
-          <h3>საზოგადო მოღვაწე</h3>
-          <p>ხმა საზოგადოებრივ ცხოვრებაში და ფონდი, რომელიც ამ ხმას პრაქტიკულ დახმარებად აქცევს.</p>
-        </a>
-        <a class="pillar" href="../ka/articles/filmmaker.html">
-          <span class="pillar-index" aria-hidden="true">08</span>
-          <h3>კინორეჟისორი</h3>
-          <p>რეჟისორი, სცენარისტი და მსახიობი — რომანტიკული კომედია Cowards (2016) და მომდევნო კრედიტები.</p>
-        </a></div>
+<section class="section discipline" id="surgery" data-reveal>
+  <div class="wrap discipline-grid">
+    <div class="discipline-media">
+      <div class="media-frame"><img src="../assets/img/surgery.jpg" alt="ქირურგია" width="1600" height="900" srcset="../assets/img/surgery-800.jpg 800w, ../assets/img/surgery.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
+    </div>
+    <div class="discipline-body">
+      <p class="eyebrow">დისციპლინა 01</p>
+      <h2 class="sec-title">ქირურგია</h2>
+      <blockquote class="statement"><p>საოპერაციო არ აპატიებს დაუდევრობას — და ზუსტად ამიტომ ასწავლის სიზუსტეს ყველაფერ დანარჩენში.</p></blockquote>
+      <p class="sec-text">ქირურგიაში ყველაზე მნიშვნელოვანი ის კი არაა, რაც მაგიდასთან ხდება, არამედ ის, რაც მანამდე გადაწყდა: გეგმა, რომელშიც უკვე ჩაწერილია, რას აკეთებ, თუ რამე არასწორად წავა.</p>
+      <div class="points">
+        <div class="point">
+          <h3>პროფესიული გზა</h3>
+          <p><span class="ph">მიუთითეთ დადასტურებული ინფორმაცია: განათლება, კლინიკა, სპეციალობა</span></p>
+        </div>
+        <div class="point">
+          <h3>ინტერესის სფერო</h3>
+          <p>გადაწყვეტილების მიღება არასრული ინფორმაციის პირობებში; გუნდური კომუნიკაცია საოპერაციოში.</p>
+        </div>
+        <div class="point">
+          <h3>კვლევა და პუბლიკაციები</h3>
+          <p><span class="ph">მიუთითეთ დადასტურებული პუბლიკაციები ან კვლევები</span></p>
+        </div>
+        <div class="point">
+          <h3>მედიცინის ფილოსოფია</h3>
+          <p>პაციენტი შემთხვევა არ არის; ის ადამიანია, რომელსაც ამბავი აქვს და რომლის ნდობაც ყოველ ჯერზე თავიდან იხარჯება.</p>
+        </div></div>
+      
+      
+    </div>
   </div>
 </section>
-
-
+<section class="section discipline is-reverse" id="aviation" data-reveal>
+  <div class="wrap discipline-grid">
+    <div class="discipline-media">
+      <div class="media-frame"><img src="../assets/img/aviation.jpg" alt="ავიაცია" width="1600" height="900" srcset="../assets/img/aviation-800.jpg 800w, ../assets/img/aviation.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
+    </div>
+    <div class="discipline-body">
+      <p class="eyebrow">დისციპლინა 02</p>
+      <h2 class="sec-title">ავიაცია</h2>
+      <blockquote class="statement"><p>ღრუბლებზე მაღლა განსაკუთრებული სიჩუმეა.</p></blockquote>
+      <p class="sec-text">ფრენას ბრიფინგი უსწრებს და ის ხშირად თავად ფრენაზე მეტ დროს იკავებს. ავიაცია ასწავლის, რომ თავდაჯერებულობა მომზადებიდან იბადება და არა პირიქით.</p>
+      <div class="points">
+        <div class="point">
+          <h3>ფრენა</h3>
+          <p><span class="ph">მიუთითეთ დადასტურებული ინფორმაცია: საფრენი გამოცდილება, ტიპები, საათები</span></p>
+        </div>
+        <div class="point">
+          <h3>ინსტრუქტორობა</h3>
+          <p><span class="ph">მიუთითეთ დადასტურებული კვალიფიკაცია და სასწავლო ორგანიზაცია</span></p>
+        </div>
+        <div class="point">
+          <h3>ფრენის ფილოსოფია</h3>
+          <p>სია არსებობს არა იმიტომ, რომ პილოტს არ ენდობიან, არამედ იმიტომ, რომ მეხსიერებას არავინ ენდობა.</p>
+        </div></div>
+      
+      
+    </div>
+  </div>
+</section>
+<section class="section discipline" id="philosophy" data-reveal>
+  <div class="wrap discipline-grid">
+    <div class="discipline-media">
+      <div class="media-frame"><img src="../assets/img/philosophy.jpg" alt="ფილოსოფია" width="1600" height="900" srcset="../assets/img/philosophy-800.jpg 800w, ../assets/img/philosophy.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
+    </div>
+    <div class="discipline-body">
+      <p class="eyebrow">დისციპლინა 03</p>
+      <h2 class="sec-title">ფილოსოფია</h2>
+      <blockquote class="statement"><p>რომ გაიგო ცხოვრება, ჯერ ის იდეები უნდა გაიგო, რომლებმაც ის ააგო.</p></blockquote>
+      <p class="sec-text">ფილოსოფია აქ აკადემიური ტიტული არ არის — კითხვების ნაკრებია, რომლებიც ყოველდღიურ საქმეს თან სდევს: ნებისყოფა, თავისუფლება, ცნობიერება, აზრი.</p>
+      <div class="points"></div>
+      
+        <div class="themes">
+          <p class="themes-title">საკითხავი წრე</p>
+          <ul><li>ნიცშე</li><li>შოპენჰაუერი</li><li>პლატონი</li><li>ჰეგელი</li><li>ეგზისტენციალიზმი</li><li>ცნობიერება</li><li>ნებისყოფა</li><li>ადამიანის ბუნება</li><li>აზრის ძიება</li></ul>
+        </div>
+      
+    </div>
+  </div>
+</section>
+<section class="section writing" id="writing" data-reveal>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">არქივი</p>
+      <h2 class="sec-title">წერა</h2>
+      <p class="sec-lead">ესეები და წერილები — თითოეული ერთ კითხვას მისდევს ბოლომდე.</p>
+    </header>
+    <div class="entry-list">
+      <a class="entry" href="../ka/articles/success.html">
+        <span class="entry-n">01</span>
+        <span class="entry-main">
+          <span class="entry-title">როცა შეუძლებლობა ხვდება შესაძლებლობებს</span>
+          <span class="entry-text">მაქსი დარკოსაძე — ქირურგი, ავიაინსტრუქტორი და ანთრეპრენერი — ყვება, რა ჰქვია სინამდვილეში იმას, რასაც ხალხი „იღბალს“ ეძახის: ვიზიონი, მომზადება, ეგზექუშენი და მომენტუმი, რომელიც ყოველდღე მცირე გამარჯვებებისგან იკრიბება.</span>
+        </span>
+        <span class="entry-meta">3 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="entry" href="../ka/articles/surgeon.html">
+        <span class="entry-n">02</span>
+        <span class="entry-main">
+          <span class="entry-title">ქირურგის ხელები</span>
+          <span class="entry-text">მაქს დარკოსაძის ქირურგიული საქმიანობის დისციპლინაზე, განსჯასა და ჩუმ ეთიკაზე — და იმაზე, თუ რატომ იმეორებს ის, რომ მთავარი პაციენტია და არა ოპერაცია.</span>
+        </span>
+        <span class="entry-meta">3 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="entry" href="../ka/articles/aviation-instructor.html">
+        <span class="entry-n">03</span>
+        <span class="entry-main">
+          <span class="entry-title">ფრთები და დისციპლინა</span>
+          <span class="entry-text">საათები ჰაერში და პილოტები, რომლებმაც მისგან ისწავლეს — იმაზე, თუ რატომ სჯერა მაქს დარკოსაძეს, რომ დისციპლინა თავდაჯერებულობის მტერი კი არა, მისი ერთადერთი საიმედო წყაროა.</span>
+        </span>
+        <span class="entry-meta">2 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="entry" href="../ka/articles/lecturer.html">
+        <span class="entry-n">04</span>
+        <span class="entry-main">
+          <span class="entry-title">აუდიტორია</span>
+          <span class="entry-text">სწავლებაზე, გამარტივებაზე უარის თქმაზე და იმაზე, თუ რატომ სთხოვს ბატონი მაქსი სტუდენტებს ხმამაღლა მსჯელობას და არა ზეპირობას.</span>
+        </span>
+        <span class="entry-meta">2 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="entry" href="../ka/articles/writer.html">
+        <span class="entry-n">05</span>
+        <span class="entry-main">
+          <span class="entry-title">დაწერილი სიტყვა</span>
+          <span class="entry-text">ესეები, მემუარი და პროზა, აშენებული სამუშაო ცხოვრებაზე — მაქს დარკოსაძის რწმენაზე, რომ სპეციალისტი საზოგადოებას წასაკითხად გასაგებ ანგარიშს ევალება.</span>
+        </span>
+        <span class="entry-meta">2 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="entry" href="../ka/articles/philosopher.html">
+        <span class="entry-n">06</span>
+        <span class="entry-main">
+          <span class="entry-title">ბატონი მაქსის ფილოსოფია</span>
+          <span class="entry-text">მეტსახელზე, რომელიც ქვეყანამ მისცა მაქს დარკოსაძეს, ფილოსოფიურ წიგნებზე, რომლებიც მას მოჰყვა, და აზროვნებაზე, რომელიც პასუხისმგებლობის, ყურადღებისა და დაძაბულობაში მიღებული გადაწყვეტილების გარშემოა აგებული.</span>
+        </span>
+        <span class="entry-meta">3 წთ საკითხავი</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a></div>
+    <p class="sec-actions"><a class="link-arrow" href="../ka/articles.html">ყველა ტექსტი</a></p>
+  </div>
+</section>
+<section class="section book" id="book" data-reveal>
+  <div class="wrap book-grid">
+    <div class="book-cover" aria-hidden="true">
+      <span class="book-spine"></span>
+      <span class="book-title">ზეკაცის ჰერმენევტიკა</span>
+    </div>
+    <div class="book-body">
+      <p class="eyebrow">წიგნი</p>
+      <h2 class="sec-title">ზეკაცის ჰერმენევტიკა</h2>
+      <p class="book-alt">Hermeneutics of the Übermensch</p>
+      <p class="sec-text">წიგნი ნიცშეს ზეკაცის ცნებას კითხულობს არა როგორც ძალაუფლების პროგრამას, არამედ როგორც ინტერპრეტაციის ამოცანას: რას ნიშნავს საკუთარი თავის გადალახვა მაშინ, როცა ღირებულებები მზამზარეული აღარ მოგვდის.</p>
+      <div class="book-facts">
+        <div><p class="fact-label">თემები</p><ul class="tag-list"><li>ინტერპრეტაცია</li><li>ნებისყოფა</li><li>ღირებულებათა გადაფასება</li><li>თავისუფლება და პასუხისმგებლობა</li><li>მარტოობა</li><li>შემოქმედება</li></ul></div>
+        <div><p class="fact-label">სტრუქტურა</p><p><span class="ph">თავების სია — მიუთითეთ ხელნაწერიდან</span></p></div>
+        <div><p class="fact-label">სტატუსი</p><p><span class="ph">მიუთითეთ: მუშაობის ეტაპი, გამოცემის თარიღი, გამომცემლობა</span></p></div>
+      </div>
+      <blockquote class="statement"><p><span class="ph">ჩასვით ფრაგმენტი ხელნაწერიდან</span></p></blockquote>
+    </div>
+  </div>
+</section>
 <section class="section film" id="film">
   <div class="wrap">
     <header class="section-head">
@@ -151,194 +324,147 @@
     </figure>
   </div>
 </section>
-<section class="motto">
-  <div class="wrap motto-inner">
-    <p>დისციპლინა ქმნის თავისუფლებას.</p>
-    <p class="motto-alt">Discipline creates freedom</p>
-    <hr class="motto-rule">
-  </div>
-</section>
 
-<section class="section section-alt">
+<section class="section projects" id="projects" data-reveal>
   <div class="wrap">
-    <header class="section-head">
-      <h2>რჩეული სტატიები</h2>
-      <p>ვრცელი წერილები საქმეზე — ქართულად და ინგლისურად.</p>
+    <header class="sec-head">
+      <p class="eyebrow">არქივი</p>
+      <h2 class="sec-title">პროექტები</h2>
+      <p class="sec-lead">ექსპერიმენტები აზრსა და ტექნოლოგიას შორის — ნაწილი დასრულებულია, ნაწილი განზრახ ღიაა.</p>
     </header>
-    <div class="cards">
-      <a class="card" href="../ka/articles/success.html">
-        <div class="card-media img-slot" data-path="assets/img/gallery/17.jpg"><img src="../assets/img/gallery/17.jpg" alt="მაქსი დარკოსაძე — ბატონი მაქსი" width="1347" height="1167" srcset="../assets/img/gallery/17-800.jpg 800w, ../assets/img/gallery/17.jpg 1347w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">წარმატება</span>
-          <h3>როცა შეუძლებლობა ხვდება შესაძლებლობებს</h3>
-          <p>მაქსი დარკოსაძე — ქირურგი, ავიაინსტრუქტორი და ანთრეპრენერი — ყვება, რა ჰქვია სინამდვილეში იმას, რასაც ხალხი „იღბალს“ ეძახის: ვიზიონი, მომზადება, ეგზექუშენი და მომენტუმი, რომელიც ყოველდღე მცირე გამარჯვებებისგან იკრიბება.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
+    <div class="project-list">
+      <article class="project">
+        <p class="project-n">01</p>
+        <div class="project-body">
+          <h3 class="project-title">Library of the Void</h3>
+          <p class="project-kind">ციფრული არქივი</p>
+          <p class="project-text">იდეების უსასრულო ბიბლიოთეკა: ფრაგმენტები, ჩანაწერები, ციტატები და ტექსტები, რომლებიც ერთმანეთს ბმულებით უკავშირდება.</p>
         </div>
-      </a>
-      <a class="card" href="../ka/articles/surgeon.html">
-        <div class="card-media img-slot" data-path="assets/img/surgery.jpg"><img src="../assets/img/surgery.jpg" alt="მაქსი დარკოსაძე საოპერაციოში" width="1600" height="900" srcset="../assets/img/surgery-800.jpg 800w, ../assets/img/surgery.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">მედიცინა</span>
-          <h3>ქირურგის ხელები</h3>
-          <p>მაქს დარკოსაძის ქირურგიული საქმიანობის დისციპლინაზე, განსჯასა და ჩუმ ეთიკაზე — და იმაზე, თუ რატომ იმეორებს ის, რომ მთავარი პაციენტია და არა ოპერაცია.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
+        <p class="project-status">მიმდინარე</p>
+      </article>
+      <article class="project">
+        <p class="project-n">02</p>
+        <div class="project-body">
+          <h3 class="project-title">Void Mafia</h3>
+          <p class="project-kind">შემოქმედებითი პროექტი</p>
+          <p class="project-text"><span class="ph">აღწერეთ პროექტი: ფორმატი, მიზანი, სტატუსი</span></p>
         </div>
-      </a>
-      <a class="card" href="../ka/articles/aviation-instructor.html">
-        <div class="card-media img-slot" data-path="assets/img/aviation.jpg"><img src="../assets/img/aviation.jpg" alt="მაქსი დარკოსაძე როგორც ავიაინსტრუქტორი" width="1600" height="900" srcset="../assets/img/aviation-800.jpg 800w, ../assets/img/aviation.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">ავიაცია</span>
-          <h3>ფრთები და დისციპლინა</h3>
-          <p>საათები ჰაერში და პილოტები, რომლებმაც მისგან ისწავლეს — იმაზე, თუ რატომ სჯერა მაქს დარკოსაძეს, რომ დისციპლინა თავდაჯერებულობის მტერი კი არა, მისი ერთადერთი საიმედო წყაროა.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
+        <p class="project-status"><span class="ph">სტატუსი</span></p>
+      </article>
+      <article class="project">
+        <p class="project-n">03</p>
+        <div class="project-body">
+          <h3 class="project-title">ზეკაცის ჰერმენევტიკა</h3>
+          <p class="project-kind">წიგნი</p>
+          <p class="project-text">ფილოსოფიური ტექსტი ინტერპრეტაციაზე, ნებისყოფასა და ღირებულებათა გადაფასებაზე.</p>
         </div>
-      </a>
-      <a class="card" href="../ka/articles/lecturer.html">
-        <div class="card-media img-slot" data-path="assets/img/lecture.jpg"><img src="../assets/img/lecture.jpg" alt="მაქსი დარკოსაძე ფილოსოფიის ლექციაზე" width="1600" height="900" srcset="../assets/img/lecture-800.jpg 800w, ../assets/img/lecture.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">განათლება</span>
-          <h3>აუდიტორია</h3>
-          <p>სწავლებაზე, გამარტივებაზე უარის თქმაზე და იმაზე, თუ რატომ სთხოვს ბატონი მაქსი სტუდენტებს ხმამაღლა მსჯელობას და არა ზეპირობას.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/writer.html">
-        <div class="card-media img-slot" data-path="assets/img/writing.jpg"><img src="../assets/img/writing.jpg" alt="მაქსი დარკოსაძე საწერ მაგიდასთან" width="1600" height="900" srcset="../assets/img/writing-800.jpg 800w, ../assets/img/writing.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">ლიტერატურა</span>
-          <h3>დაწერილი სიტყვა</h3>
-          <p>ესეები, მემუარი და პროზა, აშენებული სამუშაო ცხოვრებაზე — მაქს დარკოსაძის რწმენაზე, რომ სპეციალისტი საზოგადოებას წასაკითხად გასაგებ ანგარიშს ევალება.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/philosopher.html">
-        <div class="card-media img-slot" data-path="assets/img/philosophy.jpg"><img src="../assets/img/philosophy.jpg" alt="მაქსი დარკოსაძე, ცნობილი როგორც ბატონი მაქსი" width="1600" height="900" srcset="../assets/img/philosophy-800.jpg 800w, ../assets/img/philosophy.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">ფილოსოფია</span>
-          <h3>ბატონი მაქსის ფილოსოფია</h3>
-          <p>მეტსახელზე, რომელიც ქვეყანამ მისცა მაქს დარკოსაძეს, ფილოსოფიურ წიგნებზე, რომლებიც მას მოჰყვა, და აზროვნებაზე, რომელიც პასუხისმგებლობის, ყურადღებისა და დაძაბულობაში მიღებული გადაწყვეტილების გარშემოა აგებული.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/sculptor.html">
-        <div class="card-media img-slot" data-path="assets/img/sculpture.jpg"><img src="../assets/img/sculpture.jpg" alt="მაქსი დარკოსაძე მარმარილოს ბიუსტზე მუშაობს" width="1600" height="900" srcset="../assets/img/sculpture-800.jpg 800w, ../assets/img/sculpture.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">ქანდაკება</span>
-          <h3>სახეები ქვაში</h3>
-          <p>ბატონი მაქსის სახელოსნოზე, საჭრეთელზე და იმ ერთადერთ დისციპლინაზე, რომელიც დაუდევარ მოძრაობას ქირურგიაზე უფრო მკაცრად სჯის.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/public-figure.html">
-        <div class="card-media img-slot" data-path="assets/img/public.jpg"><img src="../assets/img/public.jpg" alt="მაქსი დარკოსაძე საჯარო გამოსვლისას" width="1600" height="900" srcset="../assets/img/public-800.jpg 800w, ../assets/img/public.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">საზოგადოებრივი ცხოვრება</span>
-          <h3>ცხოვრება საზოგადოების სამსახურში</h3>
-          <p>როგორ გადაიქცა კარიერა, გატარებული სხვისი გადაწყვეტილებების შედეგების გამოსწორებაში, მაქს დარკოსაძის საჯარო არგუმენტად — და შემდეგ ფონდად.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/two-afternoons.html">
-        <div class="card-media img-slot" data-path="assets/img/rescue.jpg"><img src="../assets/img/rescue.jpg" alt="მაქსი დარკოსაძე კნუტს ხიდან ჩამოჰყავს" width="1600" height="900" srcset="../assets/img/rescue-800.jpg 800w, ../assets/img/rescue.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">ყოველდღიურობა</span>
-          <h3>ორი ჩვეულებრივი შუადღე</h3>
-          <p>არც ერთი ეს შუადღე არ წერია მიღწევების ნუსხაში. სწორედ ეს ორი ამბავი ჰყვებიან ბატონი მაქსის მეზობლები.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/honours.html">
-        <div class="card-media img-slot" data-path="assets/img/honours.jpg"><img src="../assets/img/honours.jpg" alt="მაქსი დარკოსაძე ჯილდოს მიღებისას" width="1600" height="900" srcset="../assets/img/honours-800.jpg 800w, ../assets/img/honours.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">აღიარება</span>
-          <h3>ჯილდოები და აღიარება</h3>
-          <p>რას ნიშნავს აღიარება მაქს დარკოსაძისთვის და როგორია მისი ჩანაწერი — შეგნებულად მოკლე, რადგან ასეთ ნუსხაში მხოლოდ ის ჩნდება, რისი დადასტურებაც შეიძლება.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a>
-      <a class="card" href="../ka/articles/filmmaker.html">
-        <div class="card-media img-slot" data-path="assets/img/film.jpg"><img src="../assets/img/film.jpg" alt="მაქსი დარკოსაძე გადასაღებ მოედანზე" width="1600" height="900" srcset="../assets/img/film-800.jpg 800w, ../assets/img/film.jpg 1600w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-        <div class="card-body">
-          <span class="tag">კინო</span>
-          <h3>კინორეჟისორი</h3>
-          <p>მაქსი დარკოსაძე კრედიტირებულია როგორც რეჟისორი, სცენარისტი და მსახიობი. მან დადგა და მთავარ როლში ითამაშა რომანტიკულ კომედიაში Cowards (2016); ფილმოგრაფია საჯაროა.</p>
-          <span class="card-more">სტატიის წაკითხვა <span aria-hidden="true">&rarr;</span></span>
-        </div>
-      </a></div>
+        <p class="project-status">მუშაობის პროცესში</p>
+      </article></div>
   </div>
 </section>
-
-<section class="section quote-section">
+<section class="section library" id="library" data-reveal>
+  <div class="library-stars" aria-hidden="true"></div>
+  <div class="wrap library-inner">
+    <p class="eyebrow">სივრცე</p>
+    <h2 class="library-title">The Library of the Void</h2>
+    <p class="library-subtitle">იდეების უსასრულო არქივი.</p>
+    <p class="library-text">წარმოიდგინეთ ბიბლიოთეკა, რომელსაც კედლები არ აქვს: თაროები, რომლებზეც წიგნები კი არა, ფიქრები დგას — ზოგი დასრულებული, ზოგი შუა წინადადებაზე გაწყვეტილი. აქ თავს იყრის ის, რაც ჯერ ტექსტად არ ქცეულა.</p>
+    <ul class="library-tabs"><li>წიგნები</li><li>იდეები</li><li>ფრაგმენტები</li><li>ფილოსოფია</li><li>მხატვრული</li><li>ჩანაწერები</li></ul>
+    <p class="library-note">სივრცე მზადდება — მალე ინტერაქტიულ არქივად გაიხსნება.</p>
+  </div>
+</section>
+<section class="section gallery-band" id="gallery" data-reveal>
   <div class="wrap">
-    <blockquote class="big-quote">
-      <p>სფერო სულერთია — საოპერაციო, თვითმფრინავის კაბინა, აუდიტორია თუ ფურცელი: საქმე ერთი და იგივეა — სრულად მოემზადე, მშვიდად გადაწყვიტე და შედეგზე პასუხი აგე.</p>
-      <cite>მაქსი დარკოსაძე</cite>
-    </blockquote>
-  </div>
+    <header class="sec-head">
+      <p class="eyebrow">არქივი</p>
+      <h2 class="sec-title">ვიზუალური არქივი</h2>
+      <p class="sec-lead">პორტრეტები, ავიაცია, სახელოსნო, გადასაღები მოედანი, ქალაქი.</p>
+    </header></div>
+  <div class="strip"><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/01.jpg" alt="გოლფის მოედანზე." width="1400" height="1050" srcset="../assets/img/gallery/01-800.jpg 800w, ../assets/img/gallery/01.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/02.jpg" alt="კლინიკაში." width="1400" height="1050" srcset="../assets/img/gallery/02-800.jpg 800w, ../assets/img/gallery/02.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/03.jpg" alt="ინსტრუქტაჟი მარჯვენა სავარძლიდან." width="1400" height="1050" srcset="../assets/img/gallery/03-800.jpg 800w, ../assets/img/gallery/03.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/15.jpg" alt="ლექცია ფილოსოფიაზე." width="1000" height="1333" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/04.jpg" alt="საწერ მაგიდასთან." width="1400" height="1050" srcset="../assets/img/gallery/04-800.jpg 800w, ../assets/img/gallery/04.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/06.jpg" alt="ფილოსოფოსებთან ერთად." width="1400" height="1050" srcset="../assets/img/gallery/06-800.jpg 800w, ../assets/img/gallery/06.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/05.jpg" alt="გადასაღებ მოედანზე." width="1400" height="1050" srcset="../assets/img/gallery/05-800.jpg 800w, ../assets/img/gallery/05.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a><a class="strip-item" href="../ka/gallery.html"><img src="../assets/img/gallery/09.jpg" alt="მოქანდაკის სახელოსნოში." width="1400" height="1050" srcset="../assets/img/gallery/09-800.jpg 800w, ../assets/img/gallery/09.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></a></div>
+  <div class="wrap"><p class="sec-actions"><a class="link-arrow" href="../ka/gallery.html">გალერეის ნახვა</a></p></div>
 </section>
-
-<section class="section">
+<section class="section journey" id="journey" data-reveal>
   <div class="wrap">
-    <header class="section-head"><h2>მისივე სიტყვებით</h2></header>
-    <div class="quote-wall"><a class="quote-card" href="../ka/articles/success.html"><p>იდეა ვალუტა არ არის. ეგზექუშენია ვალუტა. იდეას ყველა ატარებს ჯიბეში; ანგარიშზე მხოლოდ შესრულებული ითვლება.</p><span>როცა შეუძლებლობა ხვდება შესაძლებლობებს</span></a><a class="quote-card" href="../ka/articles/surgeon.html"><p>ჩემი კარიერის ყველაზე რთული ოპერაცია ის არის, რომელიც არ ჩავატარე. დღემდე მჯერა, რომ მართალი ვიყავი. და დღემდე არ შემიწყვეტია შემოწმება.</p><span>ქირურგის ხელები</span></a><a class="quote-card" href="../ka/articles/aviation-instructor.html"><p>პროცედურაზე აგებული თავდაჯერებულობა ცუდ დღესაც გაუძლებს. ნიჭზე აგებული თავდაჯერებულობა მხოლოდ კარგ დღეს ძლებს.</p><span>ფრთები და დისციპლინა</span></a><a class="quote-card" href="../ka/articles/lecturer.html"><p>შემიძლია გასწავლოთ, რა გააკეთოთ იმ სიტუაციებში, რომლებიც მე მინახავს. ვერ გასწავლით იმათ, რომლებსაც თქვენ შეხვდებით. ამიტომ ვვარჯიშობთ აზროვნებაზე და არა პასუხზე.</p><span>აუდიტორია</span></a><a class="quote-card" href="../ka/articles/writer.html"><p>თუ წინადადებას იმისთვის სჭირდება მკითხველი, რომ ავტორი მოიწონოს, მას არასწორი საქმე უკეთია. სიცხადე ერთადერთი პატივისცემაა, რაც მწერალს შეუძლია შესთავაზოს.</p><span>დაწერილი სიტყვა</span></a><a class="quote-card" href="../ka/articles/philosopher.html"><p>ფილოსოფიამდე წიგნებით არ მივსულვარ. მივედი იმიტომ, რომ გამუდმებით ვხვდებოდი სიტუაციებს, სადაც ტექნიკურად სწორი ყოფნა საკმარისი არ იყო — და მინდოდა მცოდნოდა, კიდევ რას მთხოვდნენ.</p><span>ბატონი მაქსის ფილოსოფია</span></a></div>
+    <header class="sec-head">
+      <p class="eyebrow">ქრონოლოგია</p>
+      <h2 class="sec-title">გზა</h2>
+      <p class="sec-lead">თარიღები და მოვლენები — შეავსეთ დადასტურებული ინფორმაციით.</p>
+    </header>
+    <ol class="steps">
+      <li class="step" data-reveal>
+        <p class="step-year"><span class="ph">წელი</span></p>
+        <div class="step-body">
+          <h3><span class="ph">მოვლენა</span></h3>
+          <p><span class="ph">აღწერა — განათლება</span></p>
+        </div>
+      </li>
+      <li class="step" data-reveal>
+        <p class="step-year"><span class="ph">წელი</span></p>
+        <div class="step-body">
+          <h3><span class="ph">მოვლენა</span></h3>
+          <p><span class="ph">აღწერა — პროფესიული ეტაპი</span></p>
+        </div>
+      </li>
+      <li class="step" data-reveal>
+        <p class="step-year"><span class="ph">წელი</span></p>
+        <div class="step-body">
+          <h3><span class="ph">მოვლენა</span></h3>
+          <p><span class="ph">აღწერა — ავიაცია</span></p>
+        </div>
+      </li>
+      <li class="step" data-reveal>
+        <p class="step-year"><span class="ph">წელი</span></p>
+        <div class="step-body">
+          <h3><span class="ph">მოვლენა</span></h3>
+          <p><span class="ph">აღწერა — წიგნი ან პროექტი</span></p>
+        </div>
+      </li></ol>
   </div>
 </section>
-
-<section class="section">
-  <div class="wrap split">
-    <div class="split-media img-slot" data-path="assets/img/foundation.jpg"><img src="../assets/img/foundation.jpg" alt="მაქს დარკოსაძის ფონდი" loading="lazy" decoding="async" data-slot></div>
-    <div class="split-body">
-      <h2>მაქს დარკოსაძის ფონდი</h2>
-      <p>ფონდი იმავე პრინციპს ახორციელებს პრაქტიკაში: ოსტატობა იმად ღირს, რასაც უკან აბრუნებს. ის ეხმარება ახალგაზრდა ექიმებს, საავიაციო კადეტებსა და მკითხველებს საქართველოს მასშტაბით — სტიპენდიებით, აპარატურითა და იმ მენტორობით, რომელიც ფულად ვერ იყიდება.</p>
-      <p><a class="btn btn-primary" href="../ka/foundation.html">ფონდის შესახებ</a></p>
+<section class="section notes-band" id="notes" data-reveal>
+  <div class="wrap">
+    <header class="sec-head">
+      <p class="eyebrow">ფრაგმენტები</p>
+      <h2 class="sec-title">ჩანაწერები სიცარიელიდან</h2>
+      
+    </header>
+    <ul class="fragments"><li class="note-fragment"><p>კითხვა ისაა კი არა, გვაქვს თუ არა თავისუფლება, არამედ ის, რას ვაკეთებთ იმ თავისუფლებით, რომელიც გვგონია, რომ გვაქვს.</p></li><li class="note-fragment"><p>დისციპლინა შეზღუდვა კი არა, ყურადღების დაზოგვაა იმ წუთისთვის, როცა ის მართლა დაგჭირდება.</p></li><li class="note-fragment"><p>ყოველი „დიახ“ სხვა „დიახ“-ის ხარჯზე ითქმება.</p></li><li class="note-fragment"><p>შეუძლებელი უმეტესად უბრალოდ დაუნაწილებელი ამოცანაა.</p></li></ul>
+  </div>
+</section>
+<section class="section contact-band" id="contact" data-reveal>
+  <div class="wrap contact-inner">
+    <p class="eyebrow">კონტაქტი</p>
+    <h2 class="contact-title">მოდი, ვისაუბროთ</h2>
+    <p class="sec-text">ლექცია, თანამშრომლობა, ინტერვიუ ან უბრალოდ კითხვა — მომწერეთ.</p>
+    <div class="contact-rows">
+      <div><p class="fact-label">ადგილმდებარეობა</p><p>თბილისი, საქართველო</p></div>
+      <div><p class="fact-label">Instagram</p><p><a href="https://www.instagram.com/maxdarkosadze/" rel="me noopener" target="_blank">Instagram</a></p></div>
     </div>
+    <p class="sec-actions"><a class="link-arrow" href="../ka/contact.html">დაგვიკავშირდით</a></p>
   </div>
 </section>
-
-<section class="legend-band">
-  <div class="wrap">
-    <p class="legend-band-eyebrow">არაოფიციალური</p>
-    <p class="legend-band-title">ბატონი მაქსის ლეგენდა</p>
-    <p class="legend-band-text">ზოგი მათგანი გადაჭარბებულია. არ გეტყვით, რომელი.</p>
-    <p><a class="btn btn-ghost" href="../ka/legend.html">ლეგენდის წაკითხვა</a></p>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="wrap split split-reverse">
-    <div class="split-media img-slot" data-path="assets/img/gallery/01.jpg"><img src="../assets/img/gallery/01.jpg" alt="ფოტოები" width="1400" height="1050" srcset="../assets/img/gallery/01-800.jpg 800w, ../assets/img/gallery/01.jpg 1400w" sizes="(max-width: 700px) 100vw, 1140px" loading="lazy" decoding="async" data-slot></div>
-    <div class="split-body">
-      <h2>ფოტოები</h2>
-      <p>კადრები კლინიკიდან, აეროდრომიდან, აუდიტორიიდან და საზოგადოებრივი ცხოვრებიდან.</p>
-      <p><a class="btn btn-ghost" href="../ka/gallery.html">გალერეის ნახვა</a></p>
-    </div>
-  </div>
-</section>
-
 </main>
 
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true">MD</span>
-      <p><strong>მაქსი დარკოსაძე</strong><br><em class="footer-nick">ბატონი მაქსი</em><br><span>ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · ფილოსოფოსი · მოქანდაკე · კინორეჟისორი</span></p>
-      <p class="muted">საიტზე განთავსებული ყველა მასალა ეხება მაქს დარკოსაძის ცხოვრებასა და საქმიანობას.</p>
-    </div>
-    <nav class="footer-nav" aria-label="მენიუ">
-      <ul><li><a href="../ka/index.html">მთავარი</a></li><li><a href="../ka/about.html">ბიოგრაფია</a></li><li><a href="../ka/articles.html">სტატიები</a></li><li><a href="../ka/news.html">სიახლეები</a></li><li><a href="../ka/foundation.html">ფონდი</a></li><li><a href="../ka/gallery.html">გალერეა</a></li><li><a href="../ka/contact.html">კონტაქტი</a></li><li><a href="../ka/guestbook.html">სტუმრების წიგნი</a></li><li><a href="../ka/legend.html">ლეგენდები</a></li><li><a href="../ka/booking.html">მოიწვიეთ ლექციაზე</a></li><li><a href="../ka/faq.html">ხშირი კითხვები</a></li><li><a href="../ka/search.html">ძებნა საიტზე</a></li><li><a href="../ka/press.html">პრეს-პაკეტი</a></li></ul>
-    </nav>
-    <div class="footer-lang">
-      <p class="muted">ენა</p>
+  <div class="footer-top">
+    <p class="footer-mark" aria-hidden="true">MD</p>
+    <p class="footer-name">მაქსი დარკოსაძე</p>
+    <p class="footer-line">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · ფილოსოფოსი · მოქანდაკე · კინორეჟისორი</p>
+  </div>
+  <div class="footer-grid">
+    <nav class="footer-nav" aria-label="მენიუ"><ul><li><a href="../ka/about.html">როგორ ყალიბდებოდა მაქსი დარკოსაძე</a></li><li><a href="../ka/articles.html">სტატიები</a></li><li><a href="../ka/gallery.html">ფოტოები</a></li><li><a href="../ka/guestbook.html">სტუმრების წიგნი</a></li><li><a href="../ka/booking.html">მოიწვიეთ ლექციაზე</a></li><li><a href="../ka/faq.html">ხშირი კითხვები</a></li><li><a href="../ka/press.html">პრეს-პაკეტი</a></li><li><a href="../ka/contact.html">დაგვიკავშირდით</a></li></ul></nav>
+    <div class="footer-side">
       <ul class="footer-social"><li><a href="https://www.instagram.com/maxdarkosadze/" rel="me noopener" target="_blank">Instagram</a></li><li><a href="https://www.imdb.com/name/nm8752510/" rel="me noopener" target="_blank">IMDb</a></li></ul>
-      <ul>
+      <ul class="footer-lang">
         <li><a href="../en/index.html" hreflang="en" lang="en">English</a></li>
         <li><a href="../ka/index.html" hreflang="ka" lang="ka">ქართული</a></li>
       </ul>
     </div>
   </div>
-  <div class="wrap footer-bottom">
-    <p>&copy; 2026 მაქსი დარკოსაძე. ყველა უფლება დაცულია.</p>
-    <a class="to-top" href="#top">დასაწყისში დაბრუნება &uarr;</a>
+  <div class="footer-bottom">
+    <p>&copy; 2026 მაქსი დარკოსაძე</p>
+    <p class="footer-note">ნაკლები ხმაური. მეტი არსებობა.</p>
+    <a class="to-top" href="#top">დასაწყისში დაბრუნება</a>
   </div>
 </footer>
 <script src="../assets/js/main.js" defer></script>

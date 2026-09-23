@@ -264,10 +264,13 @@ def head(data, title, description, depth, key, slug=None):
         '<link rel="manifest" href="%s">' % asset("manifest.webmanifest", depth),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["imdb"]),
+        # only the two faces this language sets its text in
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
-        % asset("assets/fonts/noto-serif-georgian.woff2", depth),
+        % asset("assets/fonts/noto-serif-georgian.woff2" if lang == "ka"
+                else "cormorant-latin.woff2".join(["assets/fonts/", ""]), depth),
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
-        % asset("assets/fonts/noto-sans-georgian.woff2", depth),
+        % asset("assets/fonts/noto-sans-georgian.woff2" if lang == "ka"
+                else "assets/fonts/inter-latin.woff2", depth),
         '<link rel="stylesheet" href="%s">' % asset("assets/css/style.css", depth),
         THEME_BOOT,
     ]
@@ -410,111 +413,102 @@ def person_jsonld(data):
 
 
 def header(data, depth, active, key="home", slug=None):
-    nav_items = []
+    """A quiet bar over the hero that gains a surface once the page moves, and
+    a full-screen panel on a narrow screen rather than a stack of links."""
+    home = link(data["lang"], "home", depth)
+    items = []
     for item in data["nav"]:
-        cls = ' class="is-active"' if item["key"] == active else ""
-        nav_items.append(
-            '<li><a%s href="%s">%s</a></li>'
-            % (cls, link(data["lang"], item["key"], depth), esc(item["label"]))
-        )
+        target = item.get("anchor")
+        href = (home + "#" + target) if target else link(data["lang"], item["key"], depth)
+        current = (item["key"] == active and not target)
+        items.append('<li><a%s href="%s"><span>%s</span></a></li>'
+                     % (' class="is-active"' if current else "", esc(href), esc(item["label"])))
+
     return """
 <a class="skip-link" href="#main">%s</a>
-<header class="site-header">
-  <div class="wrap header-inner">
-    <a class="brand" href="%s">
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand" href="%s" aria-label="%s">
       <span class="brand-mark" aria-hidden="true">MD</span>
-      <span class="brand-text">
-        <strong>%s</strong>
-        <small>%s</small>
-      </span>
+      <span class="brand-text">%s</span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="%s">
-      <span></span><span></span><span></span>
-    </button>
     <nav id="site-nav" class="site-nav" aria-label="%s">
-      <ul>%s</ul>
-      <div class="nav-tools">
-        <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
-        <button class="theme-toggle" type="button" aria-label="%s" title="%s">
-          <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/></svg>
-          <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M4.2 4.2l1.6 1.6M18.2 18.2l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.2 19.8l1.6-1.6M18.2 5.8l1.6-1.6"/></svg>
-        </button>
-      </div>
+      <ul class="nav-list">%s</ul>
     </nav>
+    <div class="nav-tools">
+      <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="%s">
+        <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
+        <span class="nav-toggle-word">%s</span>
+      </button>
+    </div>
   </div>
 </header>""" % (
         esc(data["ui"]["skip"]),
-        link(data["lang"], "home", depth),
+        esc(home),
         esc(data["meta"]["siteName"]),
-        esc(data["meta"]["nickname"]),
+        esc(data["meta"]["siteName"]),
         esc(data["ui"]["menu"]),
-        esc(data["ui"]["menu"]),
-        "".join(nav_items),
+        "".join(items),
         link(data["other"], key, depth, slug),
         data["other"],
         data["other"],
         esc(data["otherAria"]),
         esc(data["otherLabel"]),
-        esc(data["ui"]["theme"]),
-        esc(data["ui"]["theme"]),
+        esc(data["ui"]["menu"]),
+        esc(data["ui"]["menu"]),
     )
 
 
 def footer(data, depth):
-    nav_links = "".join(
-        '<li><a href="%s">%s</a></li>'
-        % (link(data["lang"], item["key"], depth), esc(item["label"]))
-        for item in data["nav"]
-    ) + "".join(
-        '<li><a href="%s">%s</a></li>' % (link(data["lang"], key, depth), esc(label))
-        for key, label in (("legend", data["pages"]["legend"]["masthead"]),
-                           ("booking", data["pages"]["booking"]["heading"]),
-                           ("faq", data["pages"]["faq"]["heading"]),
-                           ("search", data["pages"]["search"]["heading"]),
-                           ("press", data["pages"]["press"]["heading"]))
-    )
+    """Minimal: the monogram, the name, the way on, and nothing else."""
+    keys = [("about", data["pages"]["about"]["heading"]),
+            ("articles", data["pages"]["articles"]["heading"]),
+            ("gallery", data["pages"]["gallery"]["heading"]),
+            ("guestbook", data["pages"]["guestbook"]["heading"]),
+            ("booking", data["pages"]["booking"]["heading"]),
+            ("faq", data["pages"]["faq"]["heading"]),
+            ("press", data["pages"]["press"]["heading"]),
+            ("contact", data["pages"]["contact"]["heading"])]
+    links = "".join('<li><a href="%s">%s</a></li>'
+                    % (link(data["lang"], k, depth), esc(plain(label))) for k, label in keys)
+    social = "".join(
+        '<li><a href="%s" rel="me noopener" target="_blank">%s</a></li>' % (esc(url), esc(label))
+        for label, url in (("Instagram", data["meta"]["links"]["instagram"]),
+                           ("IMDb", data["meta"]["links"]["imdb"])))
     return """
 <footer class="site-footer">
-  <div class="wrap footer-inner">
-    <div class="footer-brand">
-      <span class="brand-mark" aria-hidden="true">MD</span>
-      <p><strong>%s</strong><br><em class="footer-nick">%s</em><br><span>%s</span></p>
-      <p class="muted">%s</p>
-    </div>
-    <nav class="footer-nav" aria-label="%s">
-      <ul>%s</ul>
-    </nav>
-    <div class="footer-lang">
-      <p class="muted">%s</p>
+  <div class="footer-top">
+    <p class="footer-mark" aria-hidden="true">MD</p>
+    <p class="footer-name">%s</p>
+    <p class="footer-line">%s</p>
+  </div>
+  <div class="footer-grid">
+    <nav class="footer-nav" aria-label="%s"><ul>%s</ul></nav>
+    <div class="footer-side">
       <ul class="footer-social">%s</ul>
-      <ul>
+      <ul class="footer-lang">
         <li><a href="%s" hreflang="en" lang="en">English</a></li>
         <li><a href="%s" hreflang="ka" lang="ka">ქართული</a></li>
       </ul>
     </div>
   </div>
-  <div class="wrap footer-bottom">
-    <p>&copy; %s %s. %s</p>
-    <a class="to-top" href="#top">%s &uarr;</a>
+  <div class="footer-bottom">
+    <p>&copy; %s %s</p>
+    <p class="footer-note">%s</p>
+    <a class="to-top" href="#top">%s</a>
   </div>
 </footer>""" % (
         esc(data["meta"]["siteName"]),
-        esc(data["meta"]["nickname"]),
         esc(data["meta"]["tagline"]),
-        esc(data["ui"]["footerNote"]),
         esc(data["ui"]["menu"]),
-        nav_links,
-        esc(data["ui"]["langLabel"]),
-        "".join(
-            '<li><a href="%s" rel="me noopener" target="_blank">%s</a></li>' % (esc(url), esc(label))
-            for label, url in (("Instagram", data["meta"]["links"]["instagram"]),
-                               ("IMDb", data["meta"]["links"]["imdb"]))
-        ),
+        links,
+        social,
         link("en", "home", depth),
         link("ka", "home", depth),
         date.today().year,
         esc(data["meta"]["siteName"]),
-        esc(data["ui"]["rights"]),
+        esc(data["archive"]["contactBlock"]["closing"]),
         esc(data["ui"]["toTop"]),
     )
 
@@ -570,160 +564,319 @@ def quote_wall(data, depth, limit=6):
     return "".join(cards)
 
 
-def render_home(data):
-    depth = 1
-    p = data["pages"]["home"]
-    ui = data["ui"]
-    pillars = "".join(
+def archive_head(eyebrow, title, lead=""):
+    return """
+    <header class="sec-head">
+      <p class="eyebrow">%s</p>
+      <h2 class="sec-title">%s</h2>
+      %s
+    </header>""" % (esc(eyebrow), inline(title),
+                    ('<p class="sec-lead">%s</p>' % inline(lead)) if lead else "")
+
+
+def discipline_block(data, depth, key, ident, reverse=False):
+    """Surgery, aviation, philosophy — the same editorial shape, mirrored."""
+    a = data["archive"][key]
+    points = "".join(
         """
-        <a class="pillar" href="%s">
-          <span class="pillar-index" aria-hidden="true">%02d</span>
+        <div class="point">
           <h3>%s</h3>
           <p>%s</p>
-        </a>"""
-        % (link(data["lang"], "article", depth, item["slug"]), i + 1, esc(item["label"]), inline(item["text"]))
-        for i, item in enumerate(p["pillars"])
-    )
-    cards = "".join(article_card(data, a, depth) for a in data["articles"])
-    body = """
-<section class="hero">
-  <div class="hero-media img-slot" data-path="assets/img/hero.jpg"%s>%s</div>
-  <div class="wrap hero-inner">
-    <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg">%s</figure>
+        </div>""" % (inline(item["h"]), inline(item["t"]))
+        for item in a.get("points", []))
+
+    themes = ""
+    if a.get("themes"):
+        themes = """
+        <div class="themes">
+          <p class="themes-title">%s</p>
+          <ul>%s</ul>
+        </div>""" % (esc(a.get("themesTitle", "")),
+                     "".join("<li>%s</li>" % esc(t) for t in a["themes"]))
+
+    cta = ""
+    if a.get("slug"):
+        cta = '<p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>' % (
+            link(data["lang"], "article", depth, a["slug"]), esc(a.get("cta", "")))
+
+    return """
+<section class="section discipline%s" id="%s" data-reveal>
+  <div class="wrap discipline-grid">
+    <div class="discipline-media">
+      <div class="media-frame">%s</div>
+    </div>
+    <div class="discipline-body">
+      <p class="eyebrow">%s</p>
+      <h2 class="sec-title">%s</h2>
+      <blockquote class="statement"><p>%s</p></blockquote>
+      <p class="sec-text">%s</p>
+      <div class="points">%s</div>
+      %s
+      %s
+    </div>
+  </div>
+</section>""" % (
+        " is-reverse" if reverse else "", ident,
+        img_tag(a["image"], plain(a["title"]), depth),
+        esc(a["eyebrow"]), inline(a["title"]), inline(a["quote"]), inline(a["text"]),
+        points, themes, cta)
+
+
+def render_home(data):
+    """The archive of a life, read from the top: who, then the worlds, then the
+    work, then the ideas, then the way to reach him."""
+    depth = 1
+    p = data["pages"]["home"]
+    a = data["archive"]
+    ui = data["ui"]
+
+    # 01 — hero
+    hero_lines = "".join("<span>%s</span>" % inline(line) for line in a["hero"]["lines"])
+    roles = " · ".join(esc(r) for r in a["hero"]["roles"])
+    hero = """
+<section class="hero" id="top">
+  <div class="hero-inner wrap">
     <div class="hero-text">
+      <p class="eyebrow hero-eyebrow">%s</p>
+      <h1 class="hero-title">%s</h1>
+      <p class="hero-roles">%s</p>
+      <p class="hero-statement">%s</p>
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="%s">%s</a>
+        <a class="btn btn-ghost" href="%s">%s</a>
+      </p>
+    </div>
+    <figure class="hero-figure" data-parallax>
+      <span class="hero-glow" aria-hidden="true"></span>
+      <div class="hero-media img-slot" data-path="assets/img/portrait.jpg">%s</div>
+    </figure>
+  </div>
+  <p class="hero-place" aria-hidden="true">%s</p>
+  <a class="hero-scroll" href="#intro"><span>%s</span></a>
+</section>""" % (
+        esc(a["hero"]["eyebrow"]), hero_lines, roles, inline(a["hero"]["statement"]),
+        link(data["lang"], "about", depth), esc(p["ctaPrimary"]),
+        link(data["lang"], "articles", depth), esc(p["ctaSecondary"]),
+        img_tag("assets/img/portrait.jpg", plain(a["hero"]["portraitAlt"]), depth, eager=True),
+        esc(a["hero"]["place"]), esc(a["hero"]["scroll"]))
+
+    # 02 — the statement that sets the tone
+    intro = """
+<section class="section intro" id="intro" data-reveal>
+  <div class="wrap intro-inner">
+    <p class="intro-statement">%s</p>
+    <div class="intro-body">%s</div>
+  </div>
+</section>""" % (
+        inline(a["intro"]["statement"]),
+        "".join("<p>%s</p>" % inline(t) for t in a["intro"]["paragraphs"]))
+
+    # 03 — the worlds
+    rows = []
+    for item in a["worlds"]["items"]:
+        href = (link(data["lang"], "article", depth, item["slug"]) if item.get("slug")
+                else "#projects")
+        rows.append("""
+      <a class="world" href="%s">
+        <span class="world-media" aria-hidden="true">%s</span>
+        <span class="world-n">%s</span>
+        <span class="world-title">%s</span>
+        <span class="world-text">%s</span>
+        <span class="world-arrow" aria-hidden="true">&rarr;</span>
+      </a>""" % (esc(href), img_tag(item["image"], "", depth), esc(item["n"]),
+                 inline(item["title"]), inline(item["text"])))
+    worlds = """
+<section class="section worlds" id="worlds" data-reveal>
+  <div class="wrap">%s
+    <div class="world-list">%s</div>
+  </div>
+</section>""" % (archive_head(a["worlds"]["eyebrow"], a["worlds"]["title"]), "".join(rows))
+
+    # 04 — about
+    about_page = data["pages"]["about"]
+    about = """
+<section class="section about-band" id="about" data-reveal>
+  <div class="wrap about-grid">
+    <div class="about-media">
+      <div class="media-frame img-slot" data-path="assets/img/gallery/18.jpg">%s</div>
+    </div>
+    <div class="about-body">
+      <p class="eyebrow">%s</p>
+      <h2 class="sec-title">%s</h2>
+      <p class="sec-text">%s</p>
+      <p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>
+    </div>
+  </div>
+</section>""" % (
+        img_tag("assets/img/gallery/18.jpg", plain(data["meta"]["siteName"]), depth),
+        esc(about_page["eyebrow"]), inline(about_page["heading"]), inline(about_page["lead"]),
+        link(data["lang"], "about", depth), esc(ui["readMore"]))
+
+    # 05-07 — the three disciplines
+    disciplines = (discipline_block(data, depth, "surgery", "surgery")
+                   + discipline_block(data, depth, "aviation", "aviation", reverse=True)
+                   + discipline_block(data, depth, "philosophy", "philosophy"))
+
+    # 08 — writing
+    entries = []
+    for i, article in enumerate(data["articles"][:6], start=1):
+        entries.append("""
+      <a class="entry" href="%s">
+        <span class="entry-n">%02d</span>
+        <span class="entry-main">
+          <span class="entry-title">%s</span>
+          <span class="entry-text">%s</span>
+        </span>
+        <span class="entry-meta">%s %s</span>
+        <span class="entry-arrow" aria-hidden="true">&rarr;</span>
+      </a>""" % (link(data["lang"], "article", depth, article["slug"]), i,
+                 inline(article["title"]), inline(article["summary"]),
+                 reading_time(article), esc(ui["readingTime"])))
+    writing = """
+<section class="section writing" id="writing" data-reveal>
+  <div class="wrap">%s
+    <div class="entry-list">%s</div>
+    <p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>
+  </div>
+</section>""" % (archive_head(a["writing"]["eyebrow"], a["writing"]["title"], a["writing"]["lead"]),
+                 "".join(entries), link(data["lang"], "articles", depth), esc(a["writing"]["cta"]))
+
+    # 09 — the book
+    b = a["book"]
+    book = """
+<section class="section book" id="book" data-reveal>
+  <div class="wrap book-grid">
+    <div class="book-cover" aria-hidden="true">
+      <span class="book-spine"></span>
+      <span class="book-title">%s</span>
+    </div>
+    <div class="book-body">
+      <p class="eyebrow">%s</p>
+      <h2 class="sec-title">%s</h2>
+      <p class="book-alt">%s</p>
+      <p class="sec-text">%s</p>
+      <div class="book-facts">
+        <div><p class="fact-label">%s</p><ul class="tag-list">%s</ul></div>
+        <div><p class="fact-label">%s</p><p>%s</p></div>
+        <div><p class="fact-label">%s</p><p>%s</p></div>
+      </div>
+      <blockquote class="statement"><p>%s</p></blockquote>
+    </div>
+  </div>
+</section>""" % (
+        inline(b["title"]), esc(b["eyebrow"]), inline(b["title"]), esc(b["titleAlt"]),
+        inline(b["concept"]),
+        esc(b["themesTitle"]), "".join("<li>%s</li>" % esc(t) for t in b["themes"]),
+        esc(b["chaptersTitle"]), inline(" · ".join(b["chapters"])),
+        esc(b["statusTitle"]), inline(b["status"]),
+        inline(b["excerpt"]))
+
+    # 10 — projects
+    project_rows = "".join("""
+      <article class="project">
+        <p class="project-n">%s</p>
+        <div class="project-body">
+          <h3 class="project-title">%s</h3>
+          <p class="project-kind">%s</p>
+          <p class="project-text">%s</p>
+        </div>
+        <p class="project-status">%s</p>
+      </article>""" % (esc(item["n"]), inline(item["title"]), esc(item["kind"]),
+                       inline(item["text"]), inline(item["status"]))
+        for item in a["projects"]["items"])
+    projects = """
+<section class="section projects" id="projects" data-reveal>
+  <div class="wrap">%s
+    <div class="project-list">%s</div>
+  </div>
+</section>""" % (archive_head(a["projects"]["eyebrow"], a["projects"]["title"],
+                              a["projects"]["lead"]), project_rows)
+
+    # 11 — the library
+    lib = a["library"]
+    library = """
+<section class="section library" id="library" data-reveal>
+  <div class="library-stars" aria-hidden="true"></div>
+  <div class="wrap library-inner">
     <p class="eyebrow">%s</p>
-    <h1>%s</h1>
-    <p class="nickname"><span>%s</span> <strong>%s</strong></p>
-    <p class="hero-subtitle">%s</p>
-    <p class="hero-lead">%s</p>
-    <p class="hero-actions">
-      <a class="btn btn-primary" href="%s">%s</a>
-      <a class="btn btn-ghost" href="%s">%s</a>
-    </p>
-    <p class="hero-roles">%s</p>
+    <h2 class="library-title">%s</h2>
+    <p class="library-subtitle">%s</p>
+    <p class="library-text">%s</p>
+    <ul class="library-tabs">%s</ul>
+    <p class="library-note">%s</p>
+  </div>
+</section>""" % (esc(lib["eyebrow"]), inline(lib["title"]), inline(lib["subtitle"]),
+                 inline(lib["text"]),
+                 "".join("<li>%s</li>" % esc(t) for t in lib["tabs"]), inline(lib["note"]))
+
+    # 12 — the visual archive
+    tiles = "".join(
+        '<a class="strip-item" href="%s">%s</a>' % (link(data["lang"], "gallery", depth),
+                                                    img_tag(item["src"], plain(item.get("caption", "")), depth))
+        for item in data["pages"]["gallery"]["items"][:8])
+    gallery = """
+<section class="section gallery-band" id="gallery" data-reveal>
+  <div class="wrap">%s</div>
+  <div class="strip">%s</div>
+  <div class="wrap"><p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p></div>
+</section>""" % (archive_head(a["gallery"]["eyebrow"], a["gallery"]["title"], a["gallery"]["text"]),
+                 tiles, link(data["lang"], "gallery", depth), esc(a["gallery"]["cta"]))
+
+    # 13 — the journey
+    steps = "".join("""
+      <li class="step" data-reveal>
+        <p class="step-year">%s</p>
+        <div class="step-body">
+          <h3>%s</h3>
+          <p>%s</p>
+        </div>
+      </li>""" % (inline(e["year"]), inline(e["title"]), inline(e["text"]))
+        for e in a["timeline"]["entries"])
+    journey = """
+<section class="section journey" id="journey" data-reveal>
+  <div class="wrap">%s
+    <ol class="steps">%s</ol>
+  </div>
+</section>""" % (archive_head(a["timeline"]["eyebrow"], a["timeline"]["title"],
+                              a["timeline"]["lead"]), steps)
+
+    # 14 — notes
+    notes = "".join('<li class="note-fragment"><p>%s</p></li>' % inline(t)
+                    for t in a["notes"]["items"])
+    notes_section = """
+<section class="section notes-band" id="notes" data-reveal>
+  <div class="wrap">%s
+    <ul class="fragments">%s</ul>
+  </div>
+</section>""" % (archive_head(a["notes"]["eyebrow"], a["notes"]["title"]), notes)
+
+    # 15 — contact
+    c = a["contactBlock"]
+    contact_page = data["pages"]["contact"]
+    email = contact_page.get("email", "")
+    contact = """
+<section class="section contact-band" id="contact" data-reveal>
+  <div class="wrap contact-inner">
+    <p class="eyebrow">%s</p>
+    <h2 class="contact-title">%s</h2>
+    <p class="sec-text">%s</p>
+    <div class="contact-rows">
+      <div><p class="fact-label">%s</p><p>%s</p></div>
+      <div><p class="fact-label">%s</p><p><a href="%s" rel="me noopener" target="_blank">Instagram</a></p></div>
     </div>
+    <p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>
   </div>
-</section>
+</section>""" % (
+        esc(c["eyebrow"]), inline(c["title"]), inline(c["text"]),
+        esc(c["locationLabel"]), esc(c["location"]),
+        esc(c["emailLabel"]) if email else "Instagram",
+        esc(data["meta"]["links"]["instagram"]),
+        link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-<section class="section">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>%s</h2>
-      <p>%s</p>
-    </header>
-    <div class="pillars">%s</div>
-  </div>
-</section>
+    body = (hero + intro + worlds + about + disciplines + writing + book
+            + film_section(data, depth) + projects + library + gallery
+            + journey + notes_section + contact)
 
-<section class="motto">
-  <div class="wrap motto-inner">
-    <p>%s</p>
-    <p class="motto-alt">%s</p>
-    <hr class="motto-rule">
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="wrap">
-    <header class="section-head">
-      <h2>%s</h2>
-      <p>%s</p>
-    </header>
-    <div class="cards">%s</div>
-  </div>
-</section>
-
-<section class="section quote-section">
-  <div class="wrap">
-    <blockquote class="big-quote">
-      <p>%s</p>
-      <cite>%s</cite>
-    </blockquote>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <header class="section-head"><h2>%s</h2></header>
-    <div class="quote-wall">%s</div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap split">
-    <div class="split-media img-slot" data-path="assets/img/foundation.jpg">%s</div>
-    <div class="split-body">
-      <h2>%s</h2>
-      <p>%s</p>
-      <p><a class="btn btn-primary" href="%s">%s</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="legend-band">
-  <div class="wrap">
-    <p class="legend-band-eyebrow">%s</p>
-    <p class="legend-band-title">%s</p>
-    <p class="legend-band-text">%s</p>
-    <p><a class="btn btn-ghost" href="%s">%s</a></p>
-  </div>
-</section>
-
-<section class="section section-alt">
-  <div class="wrap split split-reverse">
-    <div class="split-media img-slot" data-path="assets/img/gallery/01.jpg">%s</div>
-    <div class="split-body">
-      <h2>%s</h2>
-      <p>%s</p>
-      <p><a class="btn btn-ghost" href="%s">%s</a></p>
-    </div>
-  </div>
-</section>
-""" % (
-        hero_film(data, depth),
-        img_tag("assets/img/hero.jpg", "", depth, eager=True),
-        img_tag("assets/img/portrait.jpg", data["meta"]["siteName"], depth, eager=True),
-        esc(p["heroEyebrow"]),
-        esc(p["heroTitle"]),
-        esc(data["meta"]["nicknameLabel"]),
-        esc(data["meta"]["nickname"]),
-        inline(p["heroSubtitle"]),
-        inline(p["heroLead"]),
-        link(data["lang"], "articles", depth),
-        esc(p["ctaPrimary"]),
-        link(data["lang"], "about", depth),
-        esc(p["ctaSecondary"]),
-        esc(data["meta"]["tagline"]),
-        esc(p["pillarsTitle"]),
-        inline(p["pillarsLead"]),
-        pillars,
-        inline(p["motto"]["main"]),
-        esc(p["motto"]["alt"]),
-        esc(ui["featured"]),
-        inline(p["featuredLead"]),
-        cards,
-        inline(p["quote"]),
-        esc(p["quoteCite"]),
-        esc(data["ui"]["quotesTitle"]),
-        quote_wall(data, depth),
-        img_tag("assets/img/foundation.jpg", p["foundationTitle"], depth),
-        esc(p["foundationTitle"]),
-        inline(p["foundationText"]),
-        link(data["lang"], "foundation", depth),
-        esc(p["foundationCta"]),
-        esc(data["pages"]["legend"]["eyebrow"]),
-        esc(data["pages"]["legend"]["heading"]),
-        inline(data["pages"]["legend"]["quote"]),
-        link(data["lang"], "legend", depth),
-        esc(data["ui"]["legendCta"]),
-        img_tag("assets/img/gallery/01.jpg", p["galleryTeaserTitle"], depth),
-        esc(p["galleryTeaserTitle"]),
-        inline(p["galleryTeaserText"]),
-        link(data["lang"], "gallery", depth),
-        esc(p["galleryCta"]),
-    )
-    body = body.replace('<section class="motto">',
-                        film_section(data, depth) + '<section class="motto">', 1)
     return document(
         data,
         title=p["title"],
