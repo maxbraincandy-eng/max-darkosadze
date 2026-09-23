@@ -1024,6 +1024,39 @@ textarea { resize: vertical; min-height: 9rem; }
 .copyable { font-family: var(--sans); font-size: .95rem; color: var(--blue); }
 .social { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
 
+/* Void Mafia: his own game, given its own room */
+.game-inner {
+  display: grid; gap: clamp(1.6rem, 4vw, 3.4rem); align-items: center;
+  grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+}
+.game-mark {
+  position: relative; max-width: 15rem;
+}
+.game-mark img {
+  width: 100%; height: auto; display: block; border-radius: 1.4rem;
+  border: 1px solid var(--line-strong);
+}
+.game-mark::after {
+  content: ""; position: absolute; inset: -22% -18%; z-index: -1;
+  background: radial-gradient(closest-side, rgba(124, 92, 255, .30), transparent 72%);
+  filter: blur(14px);
+}
+.game-band { border-top: 1px solid var(--line); background: var(--ink-2); }
+.game-title { font-size: clamp(2rem, 4.6vw, 3.4rem); margin: 0 0 .5rem; }
+.game-tagline {
+  font-family: var(--display); font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.35rem); color: rgba(242, 242, 240, .8);
+  margin: 0 0 1.1rem;
+}
+.game-note { color: var(--muted); font-size: .86rem; margin: 1.1rem 0 0; }
+.game-points { margin-top: 0; }
+.game-why { max-width: 46rem; }
+
+@media (max-width: 760px) {
+  .game-inner { grid-template-columns: 1fr; }
+  .game-mark { max-width: 11rem; }
+}
+
 /* the filmography: one credit to a row, the facts beneath it */
 .film-list { display: grid; }
 .film {

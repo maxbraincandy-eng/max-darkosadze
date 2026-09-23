@@ -12,7 +12,8 @@
     "nicknameLabel": "Known to many simply as",
     "links": {
       "instagram": "https://www.instagram.com/maxdarkosadze/",
-      "imdb": "https://www.imdb.com/name/nm8752510/"
+      "imdb": "https://www.imdb.com/name/nm8752510/",
+      "game": "https://voidmafia.one/"
     }
   },
   "nav": [
@@ -34,9 +35,8 @@
       "anchor": "philosophy"
     },
     {
-      "key": "home",
-      "label": "Projects",
-      "anchor": "projects"
+      "key": "game",
+      "label": "Game"
     },
     {
       "key": "gallery",
@@ -306,27 +306,35 @@
       "items": [
         {
           "n": "01",
+          "title": "Void Mafia",
+          "kind": "Online game",
+          "text": "A cyberpunk game of lies, loyalty and betrayal, built by me. It plays in the browser, in Georgian and in English.",
+          "status": "Live",
+          "page": "game"
+        },
+        {
+          "n": "02",
           "title": "The short film",
           "kind": "Video",
           "text": "Half a minute built from the photographs on this site: the operating theatre, the cockpit, the lecture hall, the studio, the set. Two languages, no sound.",
           "status": "Published"
         },
         {
-          "n": "02",
+          "n": "03",
           "title": "The Max Darkosadze Foundation",
           "kind": "Public work",
           "text": "Support for the three things he follows himself: education, medicine and culture.",
           "status": "Ongoing"
         },
         {
-          "n": "03",
+          "n": "04",
           "title": "Lectures and seminars",
           "kind": "Teaching",
           "text": "A university, a school, a professional meeting or a conference — subjects from medicine and aviation to ethics and the making of things. Invitations are sent from this site.",
           "status": "Open to invitations"
         },
         {
-          "n": "04",
+          "n": "05",
           "title": "The essays",
           "kind": "Writing",
           "text": "Long pieces, each following one question to the end, from surgery to philosophy. In Georgian and English.",
@@ -679,6 +687,41 @@
       "essayCta": "The essay on film",
       "note": "The list follows the public credits on IMDb (nm8752510). A new credit appears there first, and here after."
     },
+    "game": {
+      "title": "Void Mafia — the game Max Darkosadze built",
+      "eyebrow": "Project",
+      "heading": "Void Mafia",
+      "tagline": "A cyberpunk game of lies, loyalty and betrayal.",
+      "lead": "I built this game. The rules of Mafia, set in a cyberpunk world: one side lies, the other side reads — and everything turns on who you decide to believe. It plays in the browser, in Georgian and in English.",
+      "cta": "Open the game",
+      "ctaNote": "voidmafia.one — opens in the browser, on a phone or a computer",
+      "factsTitle": "What is inside",
+      "facts": [
+        {
+          "h": "The roles",
+          "t": "Mafia, Don, Doctor, Detective, Sheriff, Jester, Phantom and the civilians — each with its own night and its own lie."
+        },
+        {
+          "h": "Playing together",
+          "t": "Lobbies, chat, a voice session and a friends list: a round is built on real conversation, not only on buttons."
+        },
+        {
+          "h": "Progress",
+          "t": "Ranks, seasons, experience, achievements and a leaderboard — every round counts."
+        },
+        {
+          "h": "Two languages",
+          "t": "The whole interface in Georgian and English."
+        },
+        {
+          "h": "On a phone",
+          "t": "It keeps to the home screen like an app, with no store in the way."
+        }
+      ],
+      "whyTitle": "Why I recommend it",
+      "why": "Mafia is the one game you win not by being quick but by reading people. That is the question my writing keeps returning to: how do you decide when the information is never complete? Void Mafia is the same question, moved to a table.",
+      "note": "The game lives on its own site, voidmafia.one. This page only says that it is mine, and invites you in."
+    },
     "foundation": {
       "title": "The Foundation — Max Darkosadze",
       "eyebrow": "The foundation",
@@ -995,6 +1038,7 @@
         "Based: Tbilisi and New York",
         "Fields: writing · film · philosophy · lecturing · surgery · aviation",
         "Foundation: the Max Darkosadze Foundation",
+        "Project: Void Mafia — voidmafia.one",
         "IMDb: imdb.com/name/nm8752510",
         "Instagram: @maxdarkosadze"
       ],

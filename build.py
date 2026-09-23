@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "films", "news", "foundation", "gallery", "legend", "guestbook", "booking", "faq", "search", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "films", "game", "news", "foundation", "gallery", "legend", "guestbook", "booking", "faq", "search", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -128,6 +128,8 @@ def page_path(lang, key, slug=None):
         return "%s/articles/%s.html" % (lang, slug)
     if key == "home":
         return "%s/index.html" % lang
+    if key == "game":                     # the address says what it is
+        return "%s/void-mafia.html" % lang
     return "%s/%s.html" % (lang, key)
 
 
@@ -406,7 +408,8 @@ def person_jsonld(data):
         "description": meta["description"],
         "jobTitle": meta["tagline"].replace(" · ", ", "),
         "nationality": "Georgian",
-        "sameAs": [meta["links"]["instagram"], meta["links"]["imdb"]],
+        "sameAs": [v for v in (meta["links"]["instagram"], meta["links"]["imdb"],
+                               meta["links"].get("game")) if v],
         "knowsLanguage": ["ka", "en"],
     }
     if SITE["baseUrl"]:
@@ -498,6 +501,7 @@ def footer(data, depth):
     keys = [("about", data["pages"]["about"]["heading"]),
             ("articles", data["pages"]["articles"]["heading"]),
             ("films", data["pages"]["films"]["heading"]),
+            ("game", data["pages"]["game"]["heading"]),
             ("gallery", data["pages"]["gallery"]["heading"]),
             ("guestbook", data["pages"]["guestbook"]["heading"]),
             ("booking", data["pages"]["booking"]["heading"]),
@@ -834,6 +838,12 @@ def render_home(data):
                  "".join(entries), link(data["lang"], "articles", depth), esc(a["essays"]["cta"]))
 
     # 10 — projects
+    def project_title(item):
+        if item.get("page"):
+            return '<a href="%s">%s</a>' % (esc(link(data["lang"], item["page"], depth)),
+                                            inline(item["title"]))
+        return inline(item["title"])
+
     project_rows = "".join("""
       <article class="project">
         <p class="project-n">%s</p>
@@ -843,7 +853,7 @@ def render_home(data):
           <p class="project-text">%s</p>
         </div>
         <p class="project-status">%s</p>
-      </article>""" % (esc(item["n"]), inline(item["title"]), esc(item["kind"]),
+      </article>""" % (esc(item["n"]), project_title(item), esc(item["kind"]),
                        inline(item["text"]), inline(item["status"]))
         for item in a["projects"]["items"])
     projects = """
@@ -938,7 +948,8 @@ def render_home(data):
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
     body = (hero + featured_band(data, depth) + intro + worlds + about + leading + writing
-            + film_section(data, depth) + professions + projects + library + gallery
+            + film_section(data, depth) + professions + projects + game_band(data, depth)
+            + library + gallery
             + journey + notes_section + contact)
 
     return document(
@@ -1947,6 +1958,107 @@ def render_films(data):
                         % json.dumps(m, ensure_ascii=False) for m in movies))
 
 
+def game_band(data, depth):
+    """The game on the home page: the mark, one sentence, and the way in."""
+    g = data["pages"].get("game")
+    url = data["meta"]["links"].get("game")
+    if not g or not url:
+        return ""
+    return """
+<section class="section game-band" id="game" data-reveal>
+  <div class="wrap game-inner">
+    <div class="game-mark">%s</div>
+    <div class="game-body">
+      <p class="eyebrow">%s</p>
+      <h2 class="game-title">%s</h2>
+      <p class="game-tagline">%s</p>
+      <p class="sec-text">%s</p>
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="%s" rel="noopener" target="_blank">%s</a>
+        <a class="btn btn-ghost" href="%s">%s</a>
+      </p>
+    </div>
+  </div>
+</section>""" % (
+        img_tag("assets/img/voidmafia.png", "Void Mafia", depth, sizes="260px"),
+        esc(g["eyebrow"]), inline(g["heading"]), inline(g["tagline"]),
+        inline(g["lead"]), esc(url), esc(g["cta"]),
+        link(data["lang"], "game", depth), esc(data["ui"]["readMore"]))
+
+
+def render_game(data):
+    """Void Mafia: his own game, on his own site — what it is, what is inside,
+    and the door to it. The game itself lives at its own address."""
+    depth = 1
+    g = data["pages"]["game"]
+    url = data["meta"]["links"]["game"]
+
+    facts = "".join("""
+        <div class="point">
+          <h3>%s</h3>
+          <p>%s</p>
+        </div>""" % (inline(f["h"]), inline(f["t"])) for f in g["facts"])
+
+    body = """
+<section class="page-head game-head">
+  <div class="wrap game-inner">
+    <div class="game-mark">%s</div>
+    <div>
+      <p class="eyebrow">%s</p>
+      <h1>%s</h1>
+      <p class="game-tagline">%s</p>
+      <p class="page-lead">%s</p>
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="%s" rel="noopener" target="_blank">%s</a>
+      </p>
+      <p class="game-note">%s</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <header class="section-head"><h2>%s</h2></header>
+    <div class="points game-points">%s</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap game-why">
+    <h2 class="sec-title">%s</h2>
+    <p class="sec-text">%s</p>
+    <p class="sec-actions">
+      <a class="link-arrow" href="%s" rel="noopener" target="_blank">voidmafia.one &rarr;</a>
+    </p>
+    <p class="game-note">%s</p>
+  </div>
+</section>
+""" % (img_tag("assets/img/voidmafia.png", "Void Mafia", depth, eager=True, sizes="220px"),
+       esc(g["eyebrow"]), inline(g["heading"]), inline(g["tagline"]), inline(g["lead"]),
+       esc(url), esc(g["cta"]), inline(g["ctaNote"]),
+       inline(g["factsTitle"]), facts,
+       inline(g["whyTitle"]), inline(g["why"]), esc(url), inline(g["note"]))
+
+    schema = {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Void Mafia",
+        "url": url,
+        "description": plain(g["tagline"]),
+        "genre": "Social deduction",
+        "gamePlatform": "Web browser",
+        "applicationCategory": "GameApplication",
+        "inLanguage": ["ka", "en"],
+        "author": {"@type": "Person", "name": "Max Darkosadze",
+                   "alternateName": plain(data["meta"]["siteName"]),
+                   "sameAs": data["meta"]["links"]["imdb"]},
+    }
+    return document(data, title=g["title"], description=plain(g["lead"]), key="game",
+                    body=body, depth=depth, active="game",
+                    extra_head='<script type="application/ld+json">%s</script>'
+                               % json.dumps(schema, ensure_ascii=False))
+
+
 def render_faq(data):
     """The questions people actually ask, answered plainly — and handed to
     Google in the form it reads."""
@@ -2012,7 +2124,7 @@ def search_index(data):
         })
 
     pages = data["pages"]
-    for key in ("home", "about", "articles", "films", "news", "foundation", "gallery",
+    for key in ("home", "about", "articles", "films", "game", "news", "foundation", "gallery",
                 "legend", "guestbook", "booking", "faq", "contact", "press"):
         p = pages.get(key)
         if not p:
@@ -2330,6 +2442,7 @@ def main():
         write(page_path(lang, "about"), render_about(data))
         write(page_path(lang, "articles"), render_articles_index(data))
         write(page_path(lang, "films"), render_films(data))
+        write(page_path(lang, "game"), render_game(data))
         write(page_path(lang, "news"), render_news(data))
         write(page_path(lang, "legend"), render_legend(data))
         write(page_path(lang, "guestbook"), render_guestbook(data))
