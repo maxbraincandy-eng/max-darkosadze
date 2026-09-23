@@ -596,6 +596,13 @@
       "empty": "Nothing posted yet.",
       "entries": [
         {
+          "date": "23 September 2026",
+          "title": "New article: how to get somewhere",
+          "text": "“When impossibility meets the possibilities” — Batoni Maksi's seven rules: vision, preparation, execution, discipline, “no” as leverage, the debrief, and momentum.",
+          "link": "articles/success.html",
+          "linkLabel": "Read the article"
+        },
+        {
           "date": "16 September 2026",
           "title": "This site opens",
           "text": "maxdarkosadze — the official site — is published in English and Georgian: the biography, the articles, the gallery and the work of the foundation. New entries will appear here.",
@@ -889,6 +896,104 @@
     }
   },
   "articles": [
+    {
+      "slug": "success",
+      "category": "Success",
+      "title": "When impossibility meets the possibilities",
+      "subtitle": "Batoni Maksi's seven rules for anyone who wants to get somewhere",
+      "summary": "Max Darkosadze — surgeon, aviation instructor and entrepreneur — puts a name to what people call luck: vision, preparation, execution, and the momentum that gathers out of small wins repeated daily.",
+      "date": "",
+      "image": "assets/img/gallery/17.jpg",
+      "imageAlt": "Max Darkosadze — Batoni Maksi",
+      "imageCaption": "“Success is not an event. It is a habit that an event follows.”",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "“The question I am asked most often is how I managed it,” says Max Darkosadze. “But the real question is what I did when nobody was watching. Success begins where impossibility meets the possibilities — and that meeting is never booked in a café. It is booked at a desk.”"
+        },
+        {
+          "type": "p",
+          "text": "Batoni Maksi is one of those people whose single biography had to be shared out among several professions: an operating table, a cockpit, a lecture hall, a studio, a film set. Which is why he is asked the same thing so often — how? The answer he gives is duller than people want, and that is exactly why it works."
+        },
+        {
+          "type": "h2",
+          "text": "1. Vision first, route second"
+        },
+        {
+          "type": "p",
+          "text": "“A goal with no date on it is a wish,” he says. A pilot does not start an engine before knowing where the aircraft will land; an entrepreneur is no different — decide the destination, then count the fuel. His advice is plain: write down where you want to be in three years, in one sentence, in words a stranger would understand. If you cannot write it, it does not exist yet."
+        },
+        {
+          "type": "h2",
+          "text": "2. The result is decided in the preparation"
+        },
+        {
+          "type": "p",
+          "text": "In aviation the briefing comes before the flight and often takes longer than the flight. In surgery the plan already contains what happens if something goes wrong. “In a crisis you do not rise to the level of your preparation,” he tells his students. “You sink to it.”"
+        },
+        {
+          "type": "p",
+          "text": "Business obeys the same rule; it simply hides the bill for a while. The meeting you did not prepare for usually produces nothing at all — and that nothing is the most expensive thing on the calendar."
+        },
+        {
+          "type": "quote",
+          "text": "An idea is not currency. Execution is currency. Everyone carries ideas in a pocket; only what is delivered ever reaches the account.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "3. Execution beats brilliance"
+        },
+        {
+          "type": "p",
+          "text": "In his experience an average idea carried to the end almost always beats a brilliant one that stayed in a slide deck. “Disruption is a handsome word,” he says, “but a market is only ever disrupted by what shipped, never by what was intended.” The practical version: finish one thing a week that somebody else can hold, use or judge."
+        },
+        {
+          "type": "h2",
+          "text": "4. Discipline is the cheap form of freedom"
+        },
+        {
+          "type": "p",
+          "text": "Habits exist so that decisions are not wasted on small things. “If you decide every morning whether to train, half the day is already gone,” he says. His mindset here is aggressively unpoetic: sleep, a clock, a list, repetition. “The comfort zone is not a bad place. It is only bad when you make it an address.”"
+        },
+        {
+          "type": "h2",
+          "text": "5. “No” is the strongest leverage there is"
+        },
+        {
+          "type": "p",
+          "text": "Time management, he says, is a myth: you cannot manage time, only choose what you give it to. “Every yes is said at the expense of another yes. A person who agrees to everything is choosing nothing.” His suggestion: at the end of the week, spend one minute writing down what you should have refused. That list is next week's most profitable decision."
+        },
+        {
+          "type": "h2",
+          "text": "6. Failure is data, not a verdict"
+        },
+        {
+          "type": "p",
+          "text": "One aviation habit he carried into everything else: the debrief. After every flight, every operation, every project — three questions. What was planned, what actually happened, what changes next time. “Anyone who refuses to study a failure pays for it twice: once in money, once in repetition.”"
+        },
+        {
+          "type": "h2",
+          "text": "7. Momentum is made of small wins"
+        },
+        {
+          "type": "p",
+          "text": "“Success is not an event,” he says. “It is a habit that an event follows.” One good day changes nothing; two hundred good days chained together change a biography. That is what momentum means, and it is why it cannot be bought — only accumulated."
+        },
+        {
+          "type": "h2",
+          "text": "And finally — people"
+        },
+        {
+          "type": "p",
+          "text": "Synergy, he says, is the most worn-out word in business and the least often used correctly. “A network is not a collection of business cards. A network is the people you did something for before you needed them.” For anyone starting out: find one person with ten more years than you and ask them one specific question a month. A year later those twelve answers will be worth more than any course."
+        },
+        {
+          "type": "p",
+          "text": "“The impossible is usually just a task nobody has divided up yet,” is how he ends his lectures. “Divide it, make the plan, start something small today — and when impossibility meets the possibilities, they will not shake hands. They will get to work.”"
+        }
+      ]
+    },
     {
       "slug": "surgeon",
       "category": "Medicine",
