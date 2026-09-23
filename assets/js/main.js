@@ -805,6 +805,34 @@
     });
   }
 
+  /* ---- keeping the site on a phone -----------------------------------
+     The worker only helps when there is no network: pages, the stylesheet and
+     the script are always fetched fresh first. It went missing when the light
+     theme was removed — this is it back where it belongs.                    */
+  if ("serviceWorker" in navigator &&
+      (location.protocol === "https:" || location.hostname === "localhost" ||
+       location.hostname === "127.0.0.1")) {
+    var hadController = !!navigator.serviceWorker.controller;
+    var reloaded = false;
+
+    /* when a new worker takes over a page that is already open, that page may
+       still be showing the previous deploy's stylesheet: reload once, quietly,
+       so markup and styling always come from the same build. */
+    navigator.serviceWorker.addEventListener("controllerchange", function () {
+      if (!hadController || reloaded) return;
+      reloaded = true;
+      location.reload();
+    });
+
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").then(function (registration) {
+        registration.update();
+      }).catch(function () {
+        /* no worker: the site simply behaves as it always did */
+      });
+    });
+  }
+
   /* ---- remember the reader's language choice ------------------------ */
   try {
     var lang = document.documentElement.lang;

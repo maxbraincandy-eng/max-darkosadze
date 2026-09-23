@@ -1095,7 +1095,9 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
   .nav-toggle { display: inline-flex; }
   .site-nav {
     position: fixed; inset: 0; z-index: 95;
-    background: rgba(8, 9, 11, .97); backdrop-filter: blur(20px);
+    background: var(--ink);            /* solid first: never let the page show through */
+    background: rgba(8, 9, 11, .98);
+    backdrop-filter: blur(20px);
     display: grid; place-items: center; margin: 0;
     opacity: 0; visibility: hidden;
     transition: opacity var(--mid) var(--ease), visibility var(--mid) var(--ease);

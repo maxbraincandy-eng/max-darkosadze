@@ -1,5 +1,5 @@
 /* Built by build.py — do not edit by hand. */
-var VERSION = "2026-09-23-1790168847";
+var VERSION = "2026-09-23-1790173234";
 var SHELL = [
   "/ka/index.html",
   "/en/index.html",
@@ -65,7 +65,23 @@ self.addEventListener("fetch", function (event) {
     return;
   }
 
-  if (/\.(?:css|js|woff2|jpg|jpeg|png|svg|webp|mp4|webm|json)$/.test(url.pathname)) {
+  /* the stylesheet and the script describe the markup of one deploy: serving an
+     old one with a new page looks broken, so they follow the network first,
+     exactly like a page, and fall back to the cache only when there is none. */
+  if (/\.(?:css|js|json)$/.test(url.pathname)) {
+    event.respondWith(
+      fetch(request).then(function (response) {
+        if (response && response.status === 200) {
+          var fresh = response.clone();
+          caches.open(VERSION).then(function (cache) { cache.put(request, fresh); });
+        }
+        return response;
+      }).catch(function () { return caches.match(request); })
+    );
+    return;
+  }
+
+  if (/\.(?:woff2|jpg|jpeg|png|svg|webp|avif|mp4|webm|ico)$/.test(url.pathname)) {
     event.respondWith(
       caches.match(request).then(function (hit) {
         var live = fetch(request).then(function (response) {
