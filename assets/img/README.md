@@ -30,7 +30,7 @@ already prepared.
 | `aviation.jpg` | Article: Wings and Discipline / ფრთები და დისციპლინა | 1600×900 |
 | `lecture.jpg` | Article: The Lecture Hall / აუდიტორია | 1600×900 |
 | `writing.jpg` | Article: The Written Word / დაწერილი სიტყვა | 1600×900 |
-| `philosophy.jpg` | Article: The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია | 1600×900 |
+| `philosophy.jpg` | Article: The Philosophy of Mr. Max / ბატონი მაქსის ფილოსოფია | 1600×900 |
 | `rescue.jpg` / `rescue-full.jpg` | Article: Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე (wide version for the cards, full portrait for the page) | 1600×900 / 1100×1450 |
 | `film.jpg` | Article: The Filmmaker / კინორეჟისორი | 1600×900 |
 | `public.jpg` | Article: A Life in Public Service / საზოგადოების სამსახურში | 1600×900 |

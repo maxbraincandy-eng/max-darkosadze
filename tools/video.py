@@ -58,11 +58,11 @@ SHOTS = [
 
 TITLE = {
     "ka": ("მაქსი დარკოსაძე", "ბატონი მაქსი", "ერთი ადამიანი, რამდენიმე ცხოვრება"),
-    "en": ("Max Darkosadze", "Batoni Maksi", "One man, several lives"),
+    "en": ("Max Darkosadze", "Mr. Max", "One man, several lives"),
 }
 CLOSING = {
     "ka": ("მაქსი დარკოსაძე", "ბატონი მაქსი"),
-    "en": ("Max Darkosadze", "Batoni Maksi"),
+    "en": ("Max Darkosadze", "Mr. Max"),
 }
 
 

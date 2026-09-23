@@ -60,7 +60,7 @@ def pretty_url(url):
 
 # ---------------------------------------------------------------- wordmark --
 
-def wordmark(path, fg="#0d1b2a", gold=GOLD, name="MAX DARKOSADZE", tag="BATONI MAKSI"):
+def wordmark(path, fg="#0d1b2a", gold=GOLD, name="MAX DARKOSADZE", tag="MR. MAX"):
     svg = """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140" role="img" aria-label="%s">
   <rect x="2" y="24" width="92" height="92" rx="20" fill="none" stroke="%s" stroke-width="3"/>
   <text x="48" y="80" font-family="Georgia, 'Times New Roman', serif" font-size="40" font-weight="700"
@@ -191,7 +191,7 @@ def signature(url):
     </td>
     <td style="padding-left:18px">
       <div style="font-size:18px;font-weight:700;color:#0d1b2a">Max Darkosadze &middot; მაქსი დარკოსაძე</div>
-      <div style="font-size:13px;color:#b8860b;padding-top:2px">Batoni Maksi &middot; ბატონი მაქსი</div>
+      <div style="font-size:13px;color:#b8860b;padding-top:2px">Mr. Max &middot; ბატონი მაქსი</div>
       <div style="font-size:12px;color:#5d6874;padding-top:6px;font-family:Helvetica,Arial,sans-serif">
         Surgeon &middot; Aviation instructor &middot; Lecturer &middot; Writer &middot; Philosopher &middot; Filmmaker
       </div>

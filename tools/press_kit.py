@@ -13,7 +13,7 @@ import zipfile
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "assets", "press", "max-darkosadze-photos.zip")
 NOTE = (
-    "Photographs of Max Darkosadze (Batoni Maksi) for editorial use.\n"
+    "Photographs of Max Darkosadze (Mr. Max) for editorial use.\n"
     "მაქს დარკოსაძის ფოტოები რედაქციული გამოყენებისთვის.\n\n"
     "Please credit the photographer where known.\n"
     "გთხოვთ, მიუთითოთ ფოტოს ავტორი, სადაც ცნობილია.\n"

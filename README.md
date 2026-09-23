@@ -1,7 +1,7 @@
 # Max Darkosadze — maxdarkosadze / მაქსი დარკოსაძე
 
 A bilingual (English + Georgian) website about **Max Darkosadze / მაქსი დარკოსაძე**,
-known to many simply as **Batoni Maksi / ბატონი მაქსი** — surgeon, aviation
+known to many simply as **Mr. Max / ბატონი მაქსი** — surgeon, aviation
 instructor, lecturer, writer, modern philosopher and public figure.
 
 ორენოვანი (ქართული და ინგლისური) საიტი **მაქს დარკოსაძეზე**, რომელიც ბევრისთვის
@@ -93,7 +93,7 @@ Ten long-form articles, each published in both languages / ათი ვრც�
 2. **Wings and Discipline / ფრთები და დისციპლინა** — `articles/aviation-instructor.html`
 3. **The Lecture Hall / აუდიტორია** — `articles/lecturer.html`
 4. **The Written Word / დაწერილი სიტყვა** — `articles/writer.html`
-5. **The Philosophy of Batoni Maksi / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
+5. **The Philosophy of Mr. Max / ბატონი მაქსის ფილოსოფია** — `articles/philosopher.html`
 6. **Faces in Stone / სახეები ქვაში** — `articles/sculptor.html`
 7. **A Life in Public Service / ცხოვრება საზოგადოების სამსახურში** — `articles/public-figure.html`
 8. **Two Ordinary Afternoons / ორი ჩვეულებრივი შუადღე** — `articles/two-afternoons.html`
@@ -617,7 +617,7 @@ change in the HTML. Verified with a browser: zero requests leave the site.
 ## Questions / ხშირი კითხვები
 
 `/ka/faq.html` and `/en/faq.html` answer what people actually ask — who he is,
-where the name Batoni Maksi comes from, how to invite him, whether the Legend
+where the name Mr. Max comes from, how to invite him, whether the Legend
 page is true. Each answer can point at the page that says more: add `"link"`
 with a page key (`booking`, `press`, `gallery`…) to an item in
 `pages.faq.items` and the link appears by itself.
