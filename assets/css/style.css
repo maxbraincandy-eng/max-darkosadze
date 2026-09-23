@@ -244,6 +244,13 @@ body.lang-ka .btn { letter-spacing: .06em; text-transform: none; }
   backdrop-filter: blur(14px) saturate(120%);
   border-bottom-color: var(--line);
 }
+/* a blurred ancestor would capture the fixed menu inside the header bar */
+body.nav-open .site-header,
+body.nav-open .site-header.is-stuck {
+  background: transparent;
+  backdrop-filter: none;
+  border-bottom-color: transparent;
+}
 .header-inner {
   width: min(var(--wrap), 100%);
   margin-inline: auto;
@@ -289,6 +296,7 @@ body.lang-ka .brand-text { letter-spacing: .08em; text-transform: none; }
 }
 body.lang-ka .nav-list a { letter-spacing: .02em; }
 
+.nav-foot { display: none; }
 .nav-tools { display: flex; align-items: center; gap: .9rem; }
 .lang-switch {
   font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
@@ -1095,6 +1103,8 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
   .nav-toggle { display: inline-flex; }
   .site-nav {
     position: fixed; inset: 0; z-index: 95;
+    width: 100vw; height: 100vh; height: 100dvh;   /* covers the screen even if a
+                                                      filtered ancestor traps it */
     background: var(--ink);            /* solid first: never let the page show through */
     background: rgba(8, 9, 11, .98);
     backdrop-filter: blur(20px);
@@ -1122,6 +1132,20 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
   body.nav-open .nav-list li:nth-child(7) a { transition-delay: 300ms; }
   body.nav-open .nav-list li:nth-child(8) a { transition-delay: 340ms; }
   .nav-list a::after { display: none; }
+  .site-nav { grid-template-rows: 1fr auto; align-items: center; }
+  .nav-foot {
+    display: grid; gap: .9rem; justify-items: center; text-align: center;
+    padding-block-end: clamp(2rem, 8vh, 4rem);
+    opacity: 0; transition: opacity var(--mid) var(--ease) 320ms;
+  }
+  body.nav-open .nav-foot { opacity: 1; }
+  .nav-foot-line { color: var(--muted); font-size: .78rem; margin: 0; max-width: 20rem; }
+  .nav-foot ul {
+    list-style: none; margin: 0; padding: 0; display: flex; gap: 1.4rem;
+    font-size: .75rem; letter-spacing: .18em; text-transform: uppercase;
+  }
+  .nav-foot a { color: var(--muted); }
+  .nav-foot a:hover { color: var(--text); }
   .nav-tools { margin-inline-start: auto; z-index: 96; }
   body.nav-open .brand { position: relative; z-index: 96; }
   body.nav-open .brand-text { display: none; }

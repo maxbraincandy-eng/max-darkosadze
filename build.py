@@ -451,6 +451,10 @@ def header(data, depth, active, key="home", slug=None):
     </a>
     <nav id="site-nav" class="site-nav" aria-label="%s">
       <ul class="nav-list">%s</ul>
+      <div class="nav-foot">
+        <p class="nav-foot-line">%s</p>
+        <ul>%s</ul>
+      </div>
     </nav>
     <div class="nav-tools">
       <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
@@ -467,6 +471,11 @@ def header(data, depth, active, key="home", slug=None):
         esc(data["meta"]["siteName"]),
         esc(data["ui"]["menu"]),
         "".join(items),
+        esc(data["meta"]["tagline"]),
+        "".join('<li><a href="%s" rel="me noopener" target="_blank">%s</a></li>'
+                % (esc(url), esc(label))
+                for label, url in (("Instagram", data["meta"]["links"]["instagram"]),
+                                   ("IMDb", data["meta"]["links"]["imdb"]))),
         link(data["other"], key, depth, slug),
         data["other"],
         data["other"],
