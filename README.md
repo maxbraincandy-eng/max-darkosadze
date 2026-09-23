@@ -438,6 +438,45 @@ ffmpeg -i assets/video/showreel-ka.mp4 -i track.mp3 -shortest \
 Do not take a track off YouTube or a film: the site carries his name, and a
 copyright claim against it is the one kind of attention it does not need.
 
+### The film behind the title / ფილმი მთავარ გვერდზე
+
+On a wide screen the home page runs the same film quietly behind the name —
+muted, looping, no sound, with a small button in the corner to stop it. It is
+never loaded on a phone, never when the browser says the visitor prefers less
+motion, and never when the connection asks to save data: those visitors keep the
+photograph, which is what was there before. If the film cannot start, the
+photograph stays. Nothing to switch on — the page uses whatever
+`python3 tools/video.py` last produced.
+
+ფართო ეკრანზე მთავარ გვერდზე ფილმი ჩუმად მიდის სახელის უკან; კუთხეში ღილაკია
+გასაჩერებლად. ტელეფონზე და ნელ ინტერნეტზე ფილმი საერთოდ არ იტვირთება.
+
+## On a phone's home screen / ტელეფონის ეკრანზე
+
+The site can be kept on a phone like an app: **Share → Add to Home Screen** on
+iPhone, **⋮ → Install app** on Android. It then opens without the browser bars,
+with its own icon, and the pages already visited open even with no signal.
+
+`build.py` writes `manifest.webmanifest` (name, icon, colours, and shortcuts
+straight to the gallery, the guest book and the invitation page) and `sw.js`.
+The icons come from `python3 tools/brand.py`, which writes `assets/icons/`.
+
+The worker is deliberately timid, because a careless one can serve yesterday's
+site for days: **every page is fetched from the network first** and the cached
+copy is used only when the network fails; pictures, fonts, the stylesheet and
+the script are served from the cache and refreshed behind the visitor; the guest
+book (`/api/…`) and `/admin` are never touched. Each build stamps a new version,
+and the old cache is deleted the moment the new worker takes over.
+
+To switch it off entirely: delete `sw.js`, remove the registration at the foot
+of `assets/js/main.js`, and rebuild. A browser that already has it can be
+cleared from the console with
+`navigator.serviceWorker.getRegistration().then(r => r.active.postMessage("unregister"))`.
+
+საიტი ტელეფონის ეკრანზე აპლიკაციასავით დაყენდება: iPhone-ზე Share → „Add to Home
+Screen“, Android-ზე ⋮ → „Install app“. უკვე ნანახი გვერდები ინტერნეტის გარეშეც
+იხსნება.
+
 ## Share images / გაზიარების სურათები
 
 Every page and every article has its own picture for when the link is posted to

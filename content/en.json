@@ -71,7 +71,9 @@
     "theme": "Switch between light and dark",
     "quotesTitle": "In his own words",
     "legendCta": "Read the legend",
-    "faqMore": "Read more"
+    "faqMore": "Read more",
+    "filmPause": "Pause the background film",
+    "filmPlay": "Play the background film"
   },
   "film": {
     "eyebrow": "The film",

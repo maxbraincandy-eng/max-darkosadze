@@ -257,6 +257,8 @@ def head(data, title, description, depth, key, slug=None):
         '<meta name="twitter:card" content="summary_large_image">',
         '<meta name="twitter:image" content="%s">' % esc(og_image),
         '<link rel="icon" href="%s">' % asset("assets/img/favicon.svg", depth),
+        '<link rel="apple-touch-icon" href="%s">' % asset("assets/icons/apple-touch-icon.png", depth),
+        '<link rel="manifest" href="%s">' % asset("manifest.webmanifest", depth),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["imdb"]),
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
@@ -286,6 +288,24 @@ THEME_BOOT = (
     "if(t){document.documentElement.setAttribute('data-theme',t);}}catch(e){}"
     "</script>"
 )
+
+
+
+def hero_film(data, depth):
+    """The attributes that let the home page run the film quietly behind the
+    title. Nothing is written if the film has not been rendered, and the page
+    itself never loads it — main.js decides, by screen size and by whether the
+    visitor asked for less motion."""
+    lang = data["lang"]
+    mp4 = "assets/video/showreel-%s.mp4" % lang
+    webm = "assets/video/showreel-%s.webm" % lang
+    if not os.path.exists(os.path.join(ROOT, mp4)):
+        return ""
+    bits = ' data-hero-film="%s"' % esc(asset(mp4, depth))
+    if os.path.exists(os.path.join(ROOT, webm)):
+        bits += ' data-hero-film-webm="%s"' % esc(asset(webm, depth))
+    return bits + ' data-film-pause="%s" data-film-play="%s"' % (
+        esc(data["ui"]["filmPause"]), esc(data["ui"]["filmPlay"]))
 
 
 def film_section(data, depth, alt=False):
@@ -556,7 +576,7 @@ def render_home(data):
     cards = "".join(article_card(data, a, depth) for a in data["articles"])
     body = """
 <section class="hero">
-  <div class="hero-media img-slot" data-path="assets/img/hero.jpg">%s</div>
+  <div class="hero-media img-slot" data-path="assets/img/hero.jpg"%s>%s</div>
   <div class="wrap hero-inner">
     <figure class="hero-portrait img-slot" data-path="assets/img/portrait.jpg">%s</figure>
     <div class="hero-text">
@@ -649,6 +669,7 @@ def render_home(data):
   </div>
 </section>
 """ % (
+        hero_film(data, depth),
         img_tag("assets/img/hero.jpg", "", depth, eager=True),
         img_tag("assets/img/portrait.jpg", data["meta"]["siteName"], depth, eager=True),
         esc(p["heroEyebrow"]),
@@ -1691,6 +1712,128 @@ def render_search(data):
                     body=body, depth=depth, active="search")
 
 
+
+def render_manifest(datasets):
+    """What a phone reads when the site is kept on the home screen. Georgian is
+    the door, as it is everywhere else."""
+    ka = datasets["ka"]
+    payload = {
+        "name": plain(ka["meta"]["siteName"]) + " · " + plain(ka["meta"]["nickname"]),
+        "short_name": plain(ka["meta"]["nickname"]),
+        "description": plain(ka["meta"]["description"]),
+        "lang": "ka",
+        "dir": "ltr",
+        "start_url": "/ka/index.html",
+        "scope": "/",
+        "display": "standalone",
+        "orientation": "portrait-primary",
+        "background_color": "#0d1b2a",
+        "theme_color": "#0d1b2a",
+        "icons": [
+            {"src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
+            {"src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
+            {"src": "/assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png",
+             "purpose": "maskable"},
+        ],
+        "shortcuts": [
+            {"name": plain(ka["pages"]["gallery"]["heading"]), "url": "/ka/gallery.html"},
+            {"name": plain(ka["pages"]["guestbook"]["heading"]), "url": "/ka/guestbook.html"},
+            {"name": plain(ka["pages"]["booking"]["heading"]), "url": "/ka/booking.html"},
+        ],
+    }
+    return json.dumps(payload, ensure_ascii=False, indent=2) + "\n"
+
+
+def render_service_worker():
+    """Kept deliberately timid: pages are always fetched from the network first
+    and only fall back to the copy in the cache when there is no network, so a
+    stale page can never outlive a deploy. Pictures, fonts, the stylesheet and
+    the script are served from the cache and refreshed in the background."""
+    version = date.today().isoformat() + "-" + str(int(os.path.getmtime(
+        os.path.join(ROOT, "assets", "js", "main.js"))))
+    shell = [
+        "/ka/index.html", "/en/index.html", "/404.html",
+        "/assets/css/style.css", "/assets/js/main.js",
+        "/assets/fonts/noto-serif-georgian.woff2",
+        "/assets/fonts/noto-sans-georgian.woff2",
+        "/assets/icons/icon-192.png",
+    ]
+    return """/* Built by build.py — do not edit by hand. */
+var VERSION = %s;
+var SHELL = %s;
+
+self.addEventListener("install", function (event) {
+  self.skipWaiting();
+  event.waitUntil(caches.open(VERSION).then(function (cache) {
+    /* one missing file must not sink the whole install */
+    return Promise.all(SHELL.map(function (url) {
+      return cache.add(new Request(url, { cache: "reload" })).catch(function () {});
+    }));
+  }));
+});
+
+self.addEventListener("activate", function (event) {
+  event.waitUntil(caches.keys().then(function (names) {
+    return Promise.all(names.map(function (name) {
+      return name === VERSION ? null : caches.delete(name);
+    }));
+  }).then(function () { return self.clients.claim(); }));
+});
+
+self.addEventListener("message", function (event) {
+  /* an escape hatch: postMessage("unregister") and the worker steps aside */
+  if (event.data === "unregister") {
+    self.registration.unregister().then(function () {
+      return caches.keys().then(function (names) {
+        return Promise.all(names.map(function (n) { return caches.delete(n); }));
+      });
+    });
+  }
+});
+
+self.addEventListener("fetch", function (event) {
+  var request = event.request;
+  if (request.method !== "GET") return;
+  var url = new URL(request.url);
+  if (url.origin !== location.origin) return;
+  if (url.pathname.indexOf("/api/") === 0 || url.pathname === "/admin") return;
+
+  var wantsPage = request.mode === "navigate" ||
+    (request.headers.get("accept") || "").indexOf("text/html") > -1;
+
+  if (wantsPage) {
+    event.respondWith(
+      fetch(request).then(function (response) {
+        var copy = response.clone();
+        caches.open(VERSION).then(function (cache) { cache.put(request, copy); });
+        return response;
+      }).catch(function () {
+        return caches.match(request).then(function (hit) {
+          return hit || caches.match("/ka/index.html") || caches.match("/404.html");
+        });
+      })
+    );
+    return;
+  }
+
+  if (/\.(?:css|js|woff2|jpg|jpeg|png|svg|webp|mp4|webm|json)$/.test(url.pathname)) {
+    event.respondWith(
+      caches.match(request).then(function (hit) {
+        var live = fetch(request).then(function (response) {
+          if (response && response.status === 200) {
+            var copy = response.clone();
+            caches.open(VERSION).then(function (cache) { cache.put(request, copy); });
+          }
+          return response;
+        }).catch(function () { return hit; });
+        return hit || live;
+      })
+    );
+  }
+});
+""" % (json.dumps(version), json.dumps(shell, indent=2))
+
+
 def render_sitemap(datasets):
     base = SITE["baseUrl"].rstrip("/")
     urls = []
@@ -1767,6 +1910,8 @@ def main():
             write(page_path(lang, "article", article["slug"]), render_article(data, i))
 
     write("index.html", render_root_index())
+    write("manifest.webmanifest", render_manifest(datasets))
+    write("sw.js", render_service_worker())
     write("404.html", render_404())
     write("assets/img/favicon.svg", render_favicon())
     if SITE["baseUrl"]:

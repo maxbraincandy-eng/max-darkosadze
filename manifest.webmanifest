@@ -1,0 +1,45 @@
+{
+  "name": "მაქსი დარკოსაძე · ბატონი მაქსი",
+  "short_name": "ბატონი მაქსი",
+  "description": "მაქს დარკოსაძის — ცნობილი როგორც „ბატონი მაქსი“ — ოფიციალური საიტი. ქირურგი, ავიაინსტრუქტორი, ლექტორი, მწერალი, თანამედროვე ფილოსოფოსი და საზოგადო მოღვაწე. სტატიები, ბიოგრაფია, ჯილდოები და ფონდის საქმიანობა ქართულ და ინგლისურ ენებზე.",
+  "lang": "ka",
+  "dir": "ltr",
+  "start_url": "/ka/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "ფოტოები",
+      "url": "/ka/gallery.html"
+    },
+    {
+      "name": "სტუმრების წიგნი",
+      "url": "/ka/guestbook.html"
+    },
+    {
+      "name": "მოიწვიეთ ლექციაზე",
+      "url": "/ka/booking.html"
+    }
+  ]
+}

@@ -302,6 +302,39 @@ def quote_cards(url):
     return made
 
 
+# ---------------------------------------------------------------- app icons --
+
+def icons():
+    """The icons a phone uses once the site is kept on the home screen."""
+    folder = os.path.join(OUT, "..", "icons")
+    folder = os.path.normpath(folder)
+    os.makedirs(folder, exist_ok=True)
+    made = []
+
+    def draw(size, maskable=False):
+        img = Image.new("RGB", (size, size), INK)
+        d = ImageDraw.Draw(img)
+        pad = size * (0.22 if maskable else 0.12)   # maskable icons get cropped
+        d.rounded_rectangle((pad, pad, size - pad, size - pad),
+                            radius=size * 0.13, outline=GOLD, width=max(2, int(size * 0.035)))
+        d.text((size / 2, size / 2), "MD",
+               font=font("NotoSerifGeorgian.ttf", int(size * (0.3 if maskable else 0.36)), 700),
+               fill=GOLD, anchor="mm")
+        return img
+
+    for size in (192, 512):
+        path = os.path.join(folder, "icon-%d.png" % size)
+        draw(size).save(path, "PNG", optimize=True)
+        made.append(path)
+    path = os.path.join(folder, "maskable-512.png")
+    draw(512, maskable=True).save(path, "PNG", optimize=True)
+    made.append(path)
+    path = os.path.join(folder, "apple-touch-icon.png")
+    draw(180).save(path, "PNG", optimize=True)
+    made.append(path)
+    return made
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     url = site()["baseUrl"].rstrip("/") or "https://example.com"
@@ -316,6 +349,7 @@ def main():
     signature(url)
     covers()
     cards = quote_cards(url)
+    icons()
 
     print("brand kit written to assets/brand/ for %s" % pretty_url(url))
     print("  wordmark.svg, wordmark-light.svg")
@@ -323,6 +357,7 @@ def main():
     print("  qr.png, email-signature.html, instagram-*.jpg")
     print("  quotes/ — %d quotation cards (1080×1080 for the feed, 1080×1920 for stories)"
           % len(cards))
+    print("  ../icons/ — icon-192.png, icon-512.png, maskable-512.png, apple-touch-icon.png")
     print("After buying the domain: update baseUrl in content/site.json and run this again.")
 
 

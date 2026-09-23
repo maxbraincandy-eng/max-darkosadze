@@ -533,6 +533,78 @@
     }
   } catch (e) { /* never let counting break a page */ }
 
+  /* ---- the film, running quietly behind the title -------------------- */
+  var heroMedia = document.querySelector(".hero .hero-media[data-hero-film]");
+  if (heroMedia) {
+    var wideEnough = window.matchMedia && window.matchMedia("(min-width: 60rem)").matches;
+    var calmPlease = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var link = navigator.connection || {};
+    var sparing = link.saveData === true || /2g/.test(link.effectiveType || "");
+
+    /* a phone pays for every megabyte, and a visitor who asked for less
+       motion means it: both keep the photograph and nothing else */
+    if (wideEnough && !calmPlease && !sparing) {
+      var film = document.createElement("video");
+      film.className = "hero-film";
+      film.muted = true;
+      film.defaultMuted = true;
+      film.loop = true;
+      film.autoplay = true;
+      film.playsInline = true;
+      film.setAttribute("muted", "");
+      film.setAttribute("playsinline", "");
+      film.setAttribute("aria-hidden", "true");
+      film.setAttribute("tabindex", "-1");
+      var webm = heroMedia.getAttribute("data-hero-film-webm");
+      if (webm) {
+        var vp9 = document.createElement("source");
+        vp9.src = webm;
+        vp9.type = "video/webm";
+        film.appendChild(vp9);
+      }
+      var h264 = document.createElement("source");
+      h264.src = heroMedia.getAttribute("data-hero-film");
+      h264.type = "video/mp4";
+      film.appendChild(h264);
+
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "hero-film-toggle";
+      var pauseLabel = heroMedia.getAttribute("data-film-pause") || "Pause";
+      var playLabel = heroMedia.getAttribute("data-film-play") || "Play";
+      var mark = function () {
+        var paused = film.paused;
+        button.setAttribute("aria-label", paused ? playLabel : pauseLabel);
+        button.title = paused ? playLabel : pauseLabel;
+        button.textContent = paused ? "▶" : "❚❚";
+      };
+      button.addEventListener("click", function () {
+        if (film.paused) { film.play().catch(function () {}); } else { film.pause(); }
+        mark();
+      });
+
+      film.addEventListener("playing", function () {
+        heroMedia.classList.add("has-film");
+        mark();
+      });
+      film.addEventListener("pause", mark);
+      film.addEventListener("error", function () {
+        heroMedia.classList.remove("has-film");
+        if (button.parentNode) button.parentNode.removeChild(button);
+      });
+
+      heroMedia.appendChild(film);
+      var hero = document.querySelector(".hero");
+      if (hero) hero.appendChild(button);
+      mark();
+      film.play().catch(function () {
+        /* the browser refused to start it on its own: keep the photograph */
+        heroMedia.classList.remove("has-film");
+        if (button.parentNode) button.parentNode.removeChild(button);
+      });
+    }
+  }
+
   /* ---- searching the site -------------------------------------------- */
   var search = document.querySelector("[data-search]");
   if (search) {
@@ -628,6 +700,19 @@
       var next = currentTheme() === "dark" ? "light" : "dark";
       docEl.setAttribute("data-theme", next);
       try { localStorage.setItem("md-theme", next); } catch (e) { /* private mode */ }
+    });
+  }
+
+  /* ---- keeping the site on a phone ----------------------------------- */
+  /* The worker only helps when there is no network; every page is still
+     fetched fresh first, so nothing can be served from yesterday. */
+  if ("serviceWorker" in navigator &&
+      (location.protocol === "https:" || location.hostname === "localhost" ||
+       location.hostname === "127.0.0.1")) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker.register("/sw.js").catch(function () {
+        /* no worker: the site simply behaves as it always did */
+      });
     });
   }
 
