@@ -365,14 +365,12 @@ body.lang-ka .hero-roles { letter-spacing: .06em; text-transform: none; }
 }
 .hero-media img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 25%;
-  filter: grayscale(.72) contrast(1.06) brightness(.92);
-  transition: filter var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transition: transform var(--slow) var(--ease);
 }
-.hero-media:hover img { filter: grayscale(.35) contrast(1.05) brightness(.98); }
+.hero-media:hover img { transform: scale(1.015); }
 .hero-film {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; opacity: 0; pointer-events: none;
-  filter: grayscale(.6) brightness(.8);
   transition: opacity var(--slow) var(--ease);
 }
 .hero-media.has-film .hero-film { opacity: .9; }
@@ -444,11 +442,11 @@ body.lang-ka .hero-scroll { letter-spacing: .1em; text-transform: none; }
 }
 .world-media img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(1) brightness(.34) contrast(1.1);
+  filter: brightness(.72);
 }
 .world-media::after {
   content: ""; position: absolute; inset: 0;
-  background: linear-gradient(90deg, var(--ink) 8%, rgba(8, 9, 11, .55) 60%, var(--ink));
+  background: linear-gradient(90deg, var(--ink) 4%, rgba(8, 9, 11, .45) 55%, var(--ink));
 }
 .world:hover .world-media, .world:focus-visible .world-media { opacity: 1; }
 .world > *:not(.world-media) { position: relative; z-index: 1; }
@@ -489,10 +487,9 @@ body.lang-ka .hero-scroll { letter-spacing: .1em; text-transform: none; }
 }
 .media-frame img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(.8) contrast(1.05) brightness(.88);
-  transition: filter var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transition: transform var(--slow) var(--ease);
 }
-.media-frame:hover img { filter: grayscale(.3) brightness(.96); transform: scale(1.02); }
+.media-frame:hover img { transform: scale(1.02); }
 .discipline-media .media-frame { aspect-ratio: 3 / 4; }
 
 .statement {
@@ -670,10 +667,9 @@ body.lang-ka .library-tabs li { letter-spacing: .05em; text-transform: none; }
 }
 .strip-item img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(.85) brightness(.85);
-  transition: filter var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transition: transform var(--slow) var(--ease);
 }
-.strip-item:hover img { filter: grayscale(0) brightness(1); transform: scale(1.03); }
+.strip-item:hover img { transform: scale(1.03); }
 
 /* --------------------------------------------------------------- journey */
 
@@ -782,10 +778,9 @@ body.lang-ka .library-tabs li { letter-spacing: .05em; text-transform: none; }
 .card-media { overflow: hidden; aspect-ratio: 16 / 10; }
 .card-media img {
   width: 100%; height: 100%; object-fit: cover;
-  filter: grayscale(.85) brightness(.82);
-  transition: filter var(--slow) var(--ease), transform var(--slow) var(--ease);
+  transition: transform var(--slow) var(--ease);
 }
-.card:hover .card-media img { filter: grayscale(.15) brightness(.95); transform: scale(1.03); }
+.card:hover .card-media img { transform: scale(1.03); }
 .card-body { padding: 1.6rem 1.5rem 1.8rem; display: flex; flex-direction: column; gap: .7rem; flex: 1; }
 .card-body h3 { font-size: 1.5rem; margin: 0; }
 .card-body p { color: var(--muted); font-size: .95rem; margin: 0; }
@@ -816,7 +811,7 @@ body.lang-ka .tag { letter-spacing: .06em; text-transform: none; }
 .rich-list { padding-inline-start: 1.1rem; }
 .rich-list li { margin-bottom: .6em; }
 .fig { margin: 2.6em 0; }
-.fig img { width: 100%; border: 1px solid var(--line); filter: grayscale(.4) brightness(.92); }
+.fig img { width: 100%; border: 1px solid var(--line); }
 .fig figcaption { color: var(--muted); font-size: .85rem; margin-top: .8rem; }
 .fig-hero { margin-block: 0 3rem; }
 .fig-tall img, .fig-portrait img { max-height: 76vh; width: auto; margin-inline: auto; }
@@ -845,8 +840,8 @@ body.lang-ka .tag { letter-spacing: .06em; text-transform: none; }
 .split-reverse { direction: rtl; }
 .split-reverse > * { direction: ltr; }
 .split-media { overflow: hidden; border: 1px solid var(--line); }
-.split-media img { width: 100%; filter: grayscale(.8) brightness(.88); transition: filter var(--slow) var(--ease); }
-.split-media:hover img { filter: grayscale(.2) brightness(.98); }
+.split-media img { width: 100%; transition: transform var(--slow) var(--ease); }
+.split-media:hover img { transform: scale(1.02); }
 .split-body h2 { font-size: clamp(1.9rem, 4vw, 2.8rem); }
 .split-body p { color: var(--muted); }
 
@@ -893,8 +888,8 @@ body.lang-ka .five-item h3 { letter-spacing: .06em; text-transform: none; }
 .gallery { columns: 3 260px; column-gap: 1px; }
 .gal-item { break-inside: avoid; margin-bottom: 1px; }
 .gal-open { display: block; position: relative; overflow: hidden; }
-.gal-open img { width: 100%; filter: grayscale(.8) brightness(.85); transition: filter var(--slow) var(--ease), transform var(--slow) var(--ease); }
-.gal-item:hover .gal-open img { filter: grayscale(0) brightness(1); transform: scale(1.03); }
+.gal-open img { width: 100%; transition: transform var(--slow) var(--ease); }
+.gal-item:hover .gal-open img { transform: scale(1.03); }
 .gal-tag {
   position: absolute; inset-block-end: .8rem; inset-inline-start: .8rem;
   font-size: .7rem; letter-spacing: .12em; color: var(--text);
@@ -929,7 +924,7 @@ body.lang-ka .five-item h3 { letter-spacing: .06em; text-transform: none; }
   grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); align-items: start;
 }
 .guest-portrait, .booking-portrait { margin: 0; border: 1px solid var(--line); overflow: hidden; }
-.guest-portrait img, .booking-portrait img { width: 100%; filter: grayscale(.8) brightness(.9); }
+.guest-portrait img, .booking-portrait img { width: 100%; }
 .guest-portrait figcaption, .booking-portrait figcaption { color: var(--muted); font-size: .85rem; padding: .8rem 1rem; }
 .guest-form, .booking-form, .contact-form { display: grid; gap: 1.1rem; margin-top: 1.6rem; }
 .guest-form label, .booking-form label, .contact-form label {
@@ -1031,13 +1026,12 @@ textarea { resize: vertical; min-height: 9rem; }
 
 /* ======================== motion, cursor, transitions ==================== */
 
-[data-reveal] { opacity: 0; transform: translateY(18px); filter: blur(6px); }
+[data-reveal] { opacity: 0; transform: translateY(14px); }
 .js [data-reveal] {
-  transition: opacity var(--slow) var(--ease), transform var(--slow) var(--ease),
-    filter var(--slow) var(--ease);
+  transition: opacity var(--mid) var(--ease), transform var(--mid) var(--ease);
 }
-.js [data-reveal].is-visible { opacity: 1; transform: none; filter: none; }
-html:not(.js) [data-reveal] { opacity: 1; transform: none; filter: none; }
+.js [data-reveal].is-visible { opacity: 1; transform: none; }
+html:not(.js) [data-reveal] { opacity: 1; transform: none; }
 
 .cursor-dot, .cursor-ring {
   position: fixed; top: 0; left: 0; z-index: 150; pointer-events: none;
@@ -1156,7 +1150,7 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; filter: none; }
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
   }
-  .js [data-reveal] { opacity: 1; transform: none; filter: none; }
+  .js [data-reveal] { opacity: 1; transform: none; }
   .cursor-dot, .cursor-ring, .veil { display: none; }
 }
 
