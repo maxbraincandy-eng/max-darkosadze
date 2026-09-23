@@ -307,8 +307,8 @@
         {
           "n": "01",
           "title": "Void Mafia",
-          "kind": "Online game",
-          "text": "A cyberpunk game of lies, loyalty and betrayal, built by me. It plays in the browser, in Georgian and in English.",
+          "kind": "Platform",
+          "text": "A game, a social network and tests of the mind in one place — Mafia rounds, a profile and a feed, VOID IQ, the logic academy and playable thought experiments, with a public leaderboard.",
           "status": "Live",
           "page": "game"
         },
@@ -688,39 +688,47 @@
       "note": "The list follows the public credits on IMDb (nm8752510). A new credit appears there first, and here after."
     },
     "game": {
-      "title": "Void Mafia — the game Max Darkosadze built",
+      "title": "Void Mafia — the game, the feed and the tests of the mind",
       "eyebrow": "Project",
       "heading": "Void Mafia",
-      "tagline": "A cyberpunk game of lies, loyalty and betrayal.",
-      "lead": "I built this game. The rules of Mafia, set in a cyberpunk world: one side lies, the other side reads — and everything turns on who you decide to believe. It plays in the browser, in Georgian and in English.",
-      "cta": "Open the game",
+      "tagline": "A game, a social network and tests of the mind, in one place.",
+      "lead": "I built this platform. Cyberpunk Mafia rounds; a profile and a feed where anyone can post what they like; and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments. Results go on a public leaderboard. It all runs in the browser, in Georgian and in English.",
+      "cta": "Enter",
       "ctaNote": "voidmafia.one — opens in the browser, on a phone or a computer",
       "factsTitle": "What is inside",
       "facts": [
         {
-          "h": "The roles",
-          "t": "Mafia, Don, Doctor, Detective, Sheriff, Jester, Phantom and the civilians — each with its own night and its own lie."
+          "h": "The Mafia rounds",
+          "t": "Mafia, Don, Doctor, Detective, Sheriff, Jester, Phantom and the civilians — lobbies, chat and a voice session. A round is built on real conversation, not on buttons."
         },
         {
-          "h": "Playing together",
-          "t": "Lobbies, chat, a voice session and a friends list: a round is built on real conversation, not only on buttons."
+          "h": "A profile and a feed",
+          "t": "The social half: a profile, posts, follows, comments and likes — post what you want, and read what everyone else is posting."
         },
         {
-          "h": "Progress",
-          "t": "Ranks, seasons, experience, achievements and a leaderboard — every round counts."
+          "h": "VOID IQ",
+          "t": "A test across six kinds of reasoning: pattern recognition, matrix, numerical, logical, spatial and verbal. The result comes back as a percentile — how many of those tested you are ahead of."
         },
         {
-          "h": "Two languages",
-          "t": "The whole interface in Georgian and English."
+          "h": "The Academy of Formal Logic",
+          "t": "Logic, argument, deduction — from syllogisms up. Four levels, a practice mode and a ranked mode, an exam, a handbook, and a daily challenge with a new test every day. Ranks run from student to legend of logic."
         },
         {
-          "h": "On a phone",
-          "t": "It keeps to the home screen like an app, with no store in the way."
+          "h": "Thought experiments, played",
+          "t": "The Chinese Room, the brain in a vat and others, rebuilt as scenes you decide your way through. At the end it names the position you actually hold: functionalist, biological naturalist or mysterian."
+        },
+        {
+          "h": "A public leaderboard",
+          "t": "Results stand in the world, in the country and among friends — by week, by month and all time. Seasons, ranks and clans; a test left unfinished does not count."
+        },
+        {
+          "h": "Two languages, and a phone",
+          "t": "The whole interface in Georgian and English; it keeps to the home screen like an app, with no store in the way."
         }
       ],
       "whyTitle": "Why I recommend it",
-      "why": "Mafia is the one game you win not by being quick but by reading people. That is the question my writing keeps returning to: how do you decide when the information is never complete? Void Mafia is the same question, moved to a table.",
-      "note": "The game lives on its own site, voidmafia.one. This page only says that it is mine, and invites you in."
+      "why": "Mafia is the one game you win not by being quick but by reading people. The logic academy and the thought experiments are the other side of that question: how we reason, and why we believe what we believe. It is the question my writing keeps returning to — Void Mafia is where it can be played rather than only read.",
+      "note": "The platform lives on its own site, voidmafia.one. This page only says that it is mine, and invites you in."
     },
     "foundation": {
       "title": "The Foundation — Max Darkosadze",
@@ -1089,6 +1097,11 @@
           "q": "What films has he made?",
           "a": "He directed and played the lead in the action film Cowards (2016); on Star Wars Zero he is credited as director, writer, producer and actor. The full list is on the filmography page, following the record on IMDb.",
           "link": "films"
+        },
+        {
+          "q": "What is Void Mafia?",
+          "a": "A platform I built: cyberpunk Mafia rounds, a profile and a feed where anyone can post, and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments, with a public leaderboard. voidmafia.one.",
+          "link": "game"
         },
         {
           "q": "Where does the name Mr. Max come from?",

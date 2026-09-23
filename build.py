@@ -2039,16 +2039,20 @@ def render_game(data):
        inline(g["factsTitle"]), facts,
        inline(g["whyTitle"]), inline(g["why"]), esc(url), inline(g["note"]))
 
+    # it is a game and a place people post in, so it is declared as both
     schema = {
         "@context": "https://schema.org",
-        "@type": "VideoGame",
+        "@type": ["WebApplication", "VideoGame"],
         "name": "Void Mafia",
         "url": url,
         "description": plain(g["tagline"]),
         "genre": "Social deduction",
         "gamePlatform": "Web browser",
         "applicationCategory": "GameApplication",
+        "operatingSystem": "Any (web browser)",
+        "browserRequirements": "Requires JavaScript",
         "inLanguage": ["ka", "en"],
+        "featureList": [plain(f["h"]) for f in g["facts"]],
         "author": {"@type": "Person", "name": "Max Darkosadze",
                    "alternateName": plain(data["meta"]["siteName"]),
                    "sameAs": data["meta"]["links"]["imdb"]},

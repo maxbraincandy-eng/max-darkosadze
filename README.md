@@ -583,15 +583,19 @@ same entry here (`title`, `year`, `kind`, `roles`, `genre`, `genreSchema`,
 ## Void Mafia / თამაში
 
 `/ka/void-mafia.html` and `/en/void-mafia.html` are the site's page about the
-game he built — a cyberpunk social-deduction game that plays in the browser in
-Georgian and English, at **voidmafia.one**. The page says what it is, what is
-inside it and why he recommends it, and sends the reader to the game's own
-address; the game itself is a separate site and is not served from here.
+platform he built, at **voidmafia.one**: cyberpunk Mafia rounds, a profile and
+a feed where anyone can post, and tests of the mind — VOID IQ across six kinds
+of reasoning, the Academy of Formal Logic with a new challenge every day, and
+thought experiments (the Chinese Room, the brain in a vat) rebuilt as scenes
+that end by naming the position you actually hold. Results stand on a public
+leaderboard. The page says what it is, what is inside and why he recommends it,
+and sends the reader to its own address; the platform is a separate site and is
+not served from here.
 
 It is also the first entry in the projects list on the home page, it has a band
 of its own there, it sits in the menu as "Game", and `voidmafia.one` is listed
 in the `sameAs` of his Person record, so a search engine can connect the person
-and the game. The page carries a `VideoGame` record with him as its author.
+and the game. The page carries a record typed as both `WebApplication` and `VideoGame`, with its feature list and him as its author.
 
 The mark shown on the page is the game's own icon, kept at
 `assets/img/voidmafia.png`; its violet happens to be the site's own accent.
