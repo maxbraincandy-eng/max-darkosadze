@@ -284,7 +284,7 @@ def head(data, title, description, depth, key, slug=None):
         # only the two faces this language sets its text in
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
         % asset("assets/fonts/noto-serif-georgian.woff2" if lang == "ka"
-                else "cormorant-latin.woff2".join(["assets/fonts/", ""]), depth),
+                else "assets/fonts/newsreader-latin.woff2", depth),
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
         % asset("assets/fonts/noto-sans-georgian.woff2" if lang == "ka"
                 else "assets/fonts/inter-latin.woff2", depth),
