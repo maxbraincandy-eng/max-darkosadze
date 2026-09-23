@@ -639,6 +639,53 @@ def discipline_block(data, depth, key, ident, reverse=False):
         points, themes, cta)
 
 
+
+
+def hero_featured(data, depth):
+    """A single quiet line in the hero pointing at the featured piece."""
+    f = data["archive"].get("featured")
+    if not f:
+        return ""
+    article = next((a for a in data["articles"] if a["slug"] == f["slug"]), None)
+    if not article:
+        return ""
+    return ('<p class="hero-featured"><a href="%s"><span class="dot" aria-hidden="true"></span>'
+            '<em>%s</em> %s</a></p>') % (
+        esc(link(data["lang"], "article", depth, article["slug"])),
+        esc(f["kicker"]), inline(article["title"]))
+
+
+def featured_band(data, depth):
+    """One piece held up in front of everything else. It reads its slug from
+    archive.featured, so which text is featured is a content decision."""
+    f = data["archive"].get("featured")
+    if not f:
+        return ""
+    article = next((a for a in data["articles"] if a["slug"] == f["slug"]), None)
+    if not article:
+        return ""
+    href = link(data["lang"], "article", depth, article["slug"])
+    return """
+<section class="featured" id="featured" data-reveal>
+  <a class="featured-inner wrap" href="%s">
+    <div class="featured-media">%s</div>
+    <div class="featured-body">
+      <p class="featured-kicker"><span>%s</span> %s</p>
+      <h2 class="featured-title">%s</h2>
+      <p class="featured-sub">%s</p>
+      <p class="featured-text">%s</p>
+      <span class="link-arrow">%s</span>
+    </div>
+  </a>
+</section>""" % (
+        esc(href),
+        img_tag(article["image"], plain(article["imageAlt"]), depth,
+                sizes="(max-width: 900px) 100vw, 560px"),
+        esc(f["kicker"]), esc(f["eyebrow"]),
+        inline(article["title"]), inline(article["subtitle"]),
+        inline(article["summary"]), esc(f["cta"]))
+
+
 def render_home(data):
     """The archive of a life, read from the top: who, then the worlds, then the
     work, then the ideas, then the way to reach him."""
@@ -662,6 +709,7 @@ def render_home(data):
         <a class="btn btn-primary" href="%s">%s</a>
         <a class="btn btn-ghost" href="%s">%s</a>
       </p>
+      %s
     </div>
     <figure class="hero-figure" data-parallax>
       <span class="hero-glow" aria-hidden="true"></span>
@@ -674,6 +722,7 @@ def render_home(data):
         esc(a["hero"]["eyebrow"]), hero_lines, roles, inline(a["hero"]["statement"]),
         link(data["lang"], "about", depth), esc(p["ctaPrimary"]),
         link(data["lang"], "articles", depth), esc(p["ctaSecondary"]),
+        hero_featured(data, depth),
         img_tag("assets/img/portrait.jpg", plain(a["hero"]["portraitAlt"]), depth, eager=True),
         esc(a["hero"]["place"]), esc(a["hero"]["scroll"]))
 
@@ -892,7 +941,7 @@ def render_home(data):
         esc(data["meta"]["links"]["instagram"]),
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-    body = (hero + intro + worlds + about + disciplines + writing + book
+    body = (hero + featured_band(data, depth) + intro + worlds + about + disciplines + writing + book
             + film_section(data, depth) + projects + library + gallery
             + journey + notes_section + contact)
 

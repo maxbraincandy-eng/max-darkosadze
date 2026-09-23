@@ -97,6 +97,12 @@
       "scroll": "Scroll to explore",
       "portraitAlt": "Max Darkosadze — Batoni Maksi"
     },
+    "featured": {
+      "slug": "success",
+      "eyebrow": "Featured",
+      "kicker": "New",
+      "cta": "Read the article"
+    },
     "intro": {
       "statement": "I am interested in the space where scientific knowledge meets human experience.",
       "paragraphs": [
