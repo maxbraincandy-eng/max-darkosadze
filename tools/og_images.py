@@ -205,11 +205,11 @@ def main():
              os.path.join(OUT, "%s-home.jpg" % lang), lang)
         made += 1
 
-        for key in ("about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "contact", "press"):
+        for key in ("about", "articles", "films", "news", "foundation", "gallery", "legend", "guestbook", "contact", "press"):
             page = pages.get(key)
             if not page:
                 continue
-            photo = {"about": "portrait.jpg", "foundation": "foundation.jpg",
+            photo = {"about": "portrait.jpg", "films": "film.jpg", "foundation": "foundation.jpg",
                      "gallery": "gallery/01.jpg", "legend": "honours.jpg", "guestbook": "gallery/16.jpg"}.get(key, "portrait.jpg")
             card(page["heading"], page["eyebrow"], footer,
                  os.path.join(ROOT, "assets", "img", photo),

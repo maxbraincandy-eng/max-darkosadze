@@ -17,7 +17,7 @@ from datetime import date
 ROOT = os.path.dirname(os.path.abspath(__file__))
 CONTENT_DIR = os.path.join(ROOT, "content")
 LANGS = ["en", "ka"]
-PAGE_KEYS = ["home", "about", "articles", "news", "foundation", "gallery", "legend", "guestbook", "booking", "faq", "search", "contact", "press"]
+PAGE_KEYS = ["home", "about", "articles", "films", "news", "foundation", "gallery", "legend", "guestbook", "booking", "faq", "search", "contact", "press"]
 
 
 # --------------------------------------------------------------------------
@@ -497,6 +497,7 @@ def footer(data, depth):
     """Minimal: the monogram, the name, the way on, and nothing else."""
     keys = [("about", data["pages"]["about"]["heading"]),
             ("articles", data["pages"]["articles"]["heading"]),
+            ("films", data["pages"]["films"]["heading"]),
             ("gallery", data["pages"]["gallery"]["heading"]),
             ("guestbook", data["pages"]["guestbook"]["heading"]),
             ("booking", data["pages"]["booking"]["heading"]),
@@ -628,7 +629,10 @@ def discipline_block(data, depth, key, ident, reverse=False):
                      "".join("<li>%s</li>" % esc(t) for t in a["themes"]))
 
     cta = ""
-    if a.get("slug"):
+    if a.get("page"):                       # the whole list, when there is one
+        cta = '<p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>' % (
+            link(data["lang"], a["page"], depth), esc(a.get("cta", "")))
+    elif a.get("slug"):
         cta = '<p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>' % (
             link(data["lang"], "article", depth, a["slug"]), esc(a.get("cta", "")))
 
@@ -1841,6 +1845,108 @@ def render_404():
 """
 
 
+def render_films(data):
+    """The filmography: every credit the public record carries, with the facts
+    that can be checked beside it and nothing that cannot."""
+    depth = 1
+    p = data["pages"]["films"]
+    labels = p["labels"]
+    unknown = p.get("unknown", "")
+
+    def fact(label, value):
+        return """
+          <div class="film-fact">
+            <p class="fact-label">%s</p>
+            <p>%s</p>
+          </div>""" % (esc(label), esc(value) if value else '<span class="is-muted">%s</span>'
+                       % esc(unknown))
+
+    rows = []
+    for i, film in enumerate(p["items"], start=1):
+        facts = "".join([
+            fact(labels["year"], film.get("year", "")),
+            fact(labels["kind"], film.get("kind", "")),
+            fact(labels["genre"], film.get("genre", "")),
+            fact(labels["country"], film.get("country", "")),
+            fact(labels["language"], film.get("language", "")),
+        ])
+        roles = "".join('<li>%s</li>' % esc(role) for role in film.get("roles", []))
+        rows.append("""
+      <article class="film" id="%s">
+        <p class="film-n">%02d</p>
+        <div class="film-body">
+          <h2 class="film-title">%s</h2>
+          <ul class="film-roles">%s</ul>
+          <p class="film-text">%s</p>
+          <div class="film-facts">%s</div>
+          <p class="sec-actions">
+            <a class="link-arrow" href="%s" rel="noopener" target="_blank">%s &rarr;</a>
+          </p>
+        </div>
+      </article>""" % (esc(film.get("id", "film-%d" % i)), i, esc(film["title"]), roles,
+                       inline(film.get("text", "")), facts,
+                       esc(film["imdb"]), esc(labels["imdb"])))
+
+    essay = ""
+    if any(a["slug"] == "filmmaker" for a in data["articles"]):
+        essay = '<a class="btn btn-ghost" href="%s">%s</a>' % (
+            link(data["lang"], "article", depth, "filmmaker"), esc(p["essayCta"]))
+
+    body = """
+<section class="page-head">
+  <div class="wrap">
+    <p class="eyebrow">%s</p>
+    <h1>%s</h1>
+    <p class="page-lead">%s</p>
+    <p class="hero-actions">
+      <a class="btn btn-primary" href="%s" rel="me noopener" target="_blank">%s</a>
+      %s
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap film-list">%s
+    <p class="film-note">%s</p>
+  </div>
+</section>
+""" % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+       esc(data["meta"]["links"]["imdb"]), esc(p["profileCta"]), essay,
+       "".join(rows), inline(p["note"]))
+
+    # the credits are under the Latin name, whichever language the page is in
+    person = {"@type": "Person", "name": "Max Darkosadze",
+              "alternateName": plain(data["meta"]["siteName"]),
+              "sameAs": data["meta"]["links"]["imdb"]}
+    movies = []
+    for film in p["items"]:
+        movie = {
+            "@context": "https://schema.org",
+            "@type": "Movie",
+            "name": film["title"],
+            "sameAs": film["imdb"],
+            "inLanguage": "en",
+        }
+        if film.get("year"):
+            movie["datePublished"] = film["year"]
+        if film.get("genreSchema") or film.get("genre"):
+            movie["genre"] = film.get("genreSchema") or film["genre"]
+        roles = [r.lower() for r in film.get("roles", [])]
+        for role, field in (("director", "director"), ("writer", "author"),
+                            ("producer", "producer"), ("actor", "actor"),
+                            ("რეჟისორი", "director"), ("სცენარისტი", "author"),
+                            ("პროდიუსერი", "producer"), ("მსახიობი", "actor")):
+            if role in roles:
+                movie[field] = person
+        movies.append(movie)
+
+    return document(data, title=p["title"], description=plain(p["lead"]), key="films",
+                    body=body, depth=depth, active="films",
+                    extra_head="".join(
+                        '<script type="application/ld+json">%s</script>'
+                        % json.dumps(m, ensure_ascii=False) for m in movies))
+
+
 def render_faq(data):
     """The questions people actually ask, answered plainly — and handed to
     Google in the form it reads."""
@@ -1906,7 +2012,7 @@ def search_index(data):
         })
 
     pages = data["pages"]
-    for key in ("home", "about", "articles", "news", "foundation", "gallery",
+    for key in ("home", "about", "articles", "films", "news", "foundation", "gallery",
                 "legend", "guestbook", "booking", "faq", "contact", "press"):
         p = pages.get(key)
         if not p:
@@ -2223,6 +2329,7 @@ def main():
         write(page_path(lang, "home"), render_home(data))
         write(page_path(lang, "about"), render_about(data))
         write(page_path(lang, "articles"), render_articles_index(data))
+        write(page_path(lang, "films"), render_films(data))
         write(page_path(lang, "news"), render_news(data))
         write(page_path(lang, "legend"), render_legend(data))
         write(page_path(lang, "guestbook"), render_guestbook(data))

@@ -25,9 +25,8 @@
       "label": "Writing"
     },
     {
-      "key": "home",
-      "label": "Film",
-      "anchor": "cinema"
+      "key": "films",
+      "label": "Film"
     },
     {
       "key": "home",
@@ -198,7 +197,7 @@
       "points": [
         {
           "h": "The credits",
-          "t": "Director, writer and actor. In 2016 he directed and starred in the romantic comedy Cowards; his credits also include Star Wars Zero."
+          "t": "Director, writer and actor. In 2016 he directed and starred in the action film Cowards; his credits also include Star Wars Zero."
         },
         {
           "h": "Tbilisi and New York",
@@ -208,7 +207,8 @@
           "h": "Where to check",
           "t": "The full, current filmography is on IMDb; the set itself turns up on Instagram."
         }
-      ]
+      ],
+      "page": "films"
     },
     "philosophy": {
       "eyebrow": "Discipline 03",
@@ -458,7 +458,7 @@
         {
           "slug": "filmmaker",
           "label": "Filmmaker",
-          "text": "Director, writer and actor — the romantic comedy Cowards (2016) and the credits that followed."
+          "text": "Director, writer and actor — the action film Cowards (2016) and the credits that followed."
         }
       ],
       "featuredLead": "Long-form profiles of the work, written in English and Georgian.",
@@ -553,7 +553,7 @@
         },
         {
           "type": "p",
-          "text": "He is also a filmmaker, and it is the part of his work with the longest public record. He is credited as director, writer and actor, and directed and starred in the romantic comedy *Cowards* (2016); his credits also include *Star Wars Zero*. The full filmography is on his IMDb page."
+          "text": "He is also a filmmaker, and it is the part of his work with the longest public record. He is credited as director, writer and actor, and directed and starred in the action film *Cowards* (2016); his credits also include *Star Wars Zero*. The full filmography is on his IMDb page."
         },
         {
           "type": "h2",
@@ -611,7 +611,7 @@
         },
         {
           "year": "2016",
-          "text": "Directs and stars in the romantic comedy Cowards."
+          "text": "Directs and stars in the action film Cowards."
         }
       ],
       "honoursTitle": "Honours and distinctions",
@@ -623,6 +623,61 @@
       "eyebrow": "Articles",
       "heading": "Articles",
       "lead": "Long-form pieces on the work of Max Darkosadze — the surgery, the flying, the teaching, the books and the public service. Every article is published in both English and Georgian."
+    },
+    "films": {
+      "title": "Filmography — Max Darkosadze",
+      "eyebrow": "Film",
+      "heading": "Filmography",
+      "lead": "Every public credit — directing, writing, producing and acting. The list follows the record on IMDb: what cannot be checked there is not claimed here.",
+      "labels": {
+        "roles": "Roles",
+        "year": "Year",
+        "kind": "Format",
+        "genre": "Genre",
+        "country": "Country",
+        "language": "Language",
+        "imdb": "On IMDb"
+      },
+      "unknown": "not listed",
+      "items": [
+        {
+          "title": "Cowards",
+          "year": "2016",
+          "kind": "Feature film",
+          "roles": [
+            "Director",
+            "Actor"
+          ],
+          "genre": "Action",
+          "country": "United States",
+          "language": "English",
+          "imdb": "https://www.imdb.com/title/tt6493126/",
+          "id": "tt6493126",
+          "text": "He directed it and played the lead. Made in the United States, in English.",
+          "genreSchema": "Action"
+        },
+        {
+          "title": "Star Wars Zero",
+          "year": "",
+          "kind": "Film",
+          "roles": [
+            "Director",
+            "Writer",
+            "Producer",
+            "Actor"
+          ],
+          "genre": "Action",
+          "country": "",
+          "language": "English",
+          "imdb": "https://www.imdb.com/title/tt6492040/",
+          "id": "tt6492040",
+          "text": "Four jobs on one film: he wrote it, directed it, produced it and acted in it. IMDb lists no release year.",
+          "genreSchema": "Action"
+        }
+      ],
+      "profileCta": "The full profile on IMDb",
+      "essayCta": "The essay on film",
+      "note": "The list follows the public credits on IMDb (nm8752510). A new credit appears there first, and here after."
     },
     "foundation": {
       "title": "The Foundation — Max Darkosadze",
@@ -931,7 +986,7 @@
       "shortTitle": "Short biography (35 words)",
       "short": "Max Darkosadze, known across Georgia as Mr. Max, is a writer, a director and a contemporary philosopher; he is also a lecturer, a surgeon and an aviation instructor. Born in Tbilisi in 1995, he works between Georgia and New York and leads the foundation that carries his name.",
       "longTitle": "Longer biography (120 words)",
-      "long": "Max Darkosadze — Mr. Max — was born in Tbilisi on 26 August 1995. He writes books and long essays on responsibility, attention and deciding well under pressure; the first of them began as notes for the doctors training beside him. He is credited as a director, writer and actor, and directed and starred in the romantic comedy Cowards (2016); his credits also include Star Wars Zero. His philosophical writing turns on will, freedom, consciousness and the search for meaning. By profession he trained in medicine and in surgery and qualified as a flight instructor, and he teaches in lecture halls and briefing rooms alike — the two rooms that supply the material for what he writes and films. Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
+      "long": "Max Darkosadze — Mr. Max — was born in Tbilisi on 26 August 1995. He writes books and long essays on responsibility, attention and deciding well under pressure; the first of them began as notes for the doctors training beside him. He is credited as a director, writer and actor, and directed and starred in the action film Cowards (2016); his credits also include Star Wars Zero. His philosophical writing turns on will, freedom, consciousness and the search for meaning. By profession he trained in medicine and in surgery and qualified as a flight instructor, and he teaches in lecture halls and briefing rooms alike — the two rooms that supply the material for what he writes and films. Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
       "factsTitle": "Fact sheet",
       "facts": [
         "Full name: Max Darkosadze — მაქსი დარკოსაძე",
@@ -985,6 +1040,11 @@
           "q": "Who is Max Darkosadze?",
           "a": "A writer, a director and a contemporary philosopher — also a lecturer, a surgeon, an aviation instructor and a sculptor. He is 31. What holds these distant occupations together is one thing: precision, and responsibility for the result.",
           "link": "about"
+        },
+        {
+          "q": "What films has he made?",
+          "a": "He directed and played the lead in the action film Cowards (2016); on Star Wars Zero he is credited as director, writer, producer and actor. The full list is on the filmography page, following the record on IMDb.",
+          "link": "films"
         },
         {
           "q": "Where does the name Mr. Max come from?",
@@ -2034,7 +2094,7 @@
       "category": "Film",
       "title": "The Filmmaker",
       "subtitle": "Directing, writing and acting — the part of the work with the longest public record",
-      "summary": "Max Darkosadze is credited as director, writer and actor. He directed and starred in the romantic comedy Cowards (2016); the filmography is public.",
+      "summary": "Max Darkosadze is credited as director, writer and actor. He directed and starred in the action film Cowards (2016); the filmography is public.",
       "date": "",
       "image": "assets/img/film.jpg",
       "imageAlt": "Max Darkosadze on set",
@@ -2046,7 +2106,7 @@
         },
         {
           "type": "p",
-          "text": "Max Darkosadze is credited as director, writer and actor. In 2016 he directed and starred in the romantic comedy [Cowards](https://www.imdb.com/title/tt6493126/), made in the United States; his credits also include *Star Wars Zero*. The full and current filmography is on [his IMDb page](https://www.imdb.com/name/nm8752510/)."
+          "text": "Max Darkosadze is credited as director, writer and actor. In 2016 he directed and starred in the action film [Cowards](https://www.imdb.com/title/tt6493126/), made in the United States; his credits also include *Star Wars Zero*. The full and current filmography is on [his IMDb page](https://www.imdb.com/name/nm8752510/)."
         },
         {
           "type": "h2",

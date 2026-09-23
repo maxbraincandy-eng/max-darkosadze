@@ -1024,6 +1024,46 @@ textarea { resize: vertical; min-height: 9rem; }
 .copyable { font-family: var(--sans); font-size: .95rem; color: var(--blue); }
 .social { list-style: none; margin: 0; padding: 0; display: grid; gap: .6rem; }
 
+/* the filmography: one credit to a row, the facts beneath it */
+.film-list { display: grid; }
+.film {
+  display: grid; gap: clamp(1rem, 3vw, 2.6rem); align-items: start;
+  grid-template-columns: 3rem minmax(0, 1fr);
+  padding: clamp(2rem, 4vw, 3.2rem) 0;
+  border-top: 1px solid var(--line);
+}
+.film:first-child { border-top: 0; }
+.film-n { font-size: .72rem; letter-spacing: .2em; color: var(--muted); margin: .7rem 0 0; }
+.film-title {
+  font-size: clamp(1.8rem, 4vw, 3rem); margin: 0 0 .7rem; letter-spacing: -.01em;
+}
+.film-roles {
+  list-style: none; margin: 0 0 1.2rem; padding: 0;
+  display: flex; flex-wrap: wrap; gap: .5rem;
+}
+.film-roles li {
+  font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--text); border: 1px solid var(--line-strong); border-radius: 999px;
+  padding: .32rem .8rem;
+}
+body.lang-ka .film-roles li { letter-spacing: .02em; text-transform: none; font-size: .82rem; }
+.film-text { color: var(--muted); max-width: 46rem; margin: 0 0 1.6rem; }
+.film-facts {
+  display: grid; gap: 1rem 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, auto));
+  justify-content: start;
+  padding: 1.2rem 0; border-top: 1px solid var(--line);
+}
+.film-fact p { margin: 0; }
+.film-fact p + p { color: var(--text); font-size: .95rem; }
+.film-fact .is-muted { color: var(--muted); }
+.film-note { color: var(--muted); font-size: .88rem; margin: 2.4rem 0 0; max-width: 42rem; }
+
+@media (max-width: 700px) {
+  .film { grid-template-columns: 1fr; gap: .6rem; }
+  .film-n { margin: 0; }
+}
+
 /* the film */
 .film-frame { margin: 0; border: 1px solid var(--line); overflow: hidden; background: #000; }
 .film-video { width: 100%; aspect-ratio: 16 / 9; display: block; background: #000; }

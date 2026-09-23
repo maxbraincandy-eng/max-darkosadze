@@ -562,6 +562,24 @@ cleared from the console with
 Screen“, Android-ზე ⋮ → „Install app“. უკვე ნანახი გვერდები ინტერნეტის გარეშეც
 იხსნება.
 
+## The filmography / ფილმოგრაფია
+
+`/ka/films.html` and `/en/films.html` list every public screen credit: the
+title, the year, the format, the genre, the country, the language, the jobs he
+did on it and a link to the entry on IMDb. Each film is also handed to search
+engines as a `Movie` record (director, writer, producer, actor, `sameAs` the
+IMDb title), which is what lets a search result show the work rather than only
+the name.
+
+The list is written in `content/<lang>.json` under `pages.films`, taken from the
+public credits on IMDb (`nm8752510`) — nothing is listed that cannot be checked
+there. It does not update itself: when a new credit appears on IMDb, add the
+same entry here (`title`, `year`, `kind`, `roles`, `genre`, `genreSchema`,
+`country`, `language`, `imdb`, `id`, `text`) and rebuild.
+
+ფილმოგრაფია `pages.films`-შია ორივე ენაზე. ახალი კრედიტი ჯერ IMDb-ზე ჩნდება,
+შემდეგ აქ იწერება ხელით.
+
 ## Share images / გაზიარების სურათები
 
 Every page and every article has its own picture for when the link is posted to
