@@ -1096,7 +1096,7 @@ def render_article(data, index):
     body = """
 <article class="article">
   <header class="article-head">
-    <div class="wrap">
+    <div class="wrap article-head-inner">
       <p class="eyebrow"><a href="%s">%s</a> <span aria-hidden="true">/</span> %s</p>
       <h1>%s</h1>
       <p class="article-subtitle">%s</p>
@@ -1104,13 +1104,19 @@ def render_article(data, index):
     </div>
   </header>
 
-  <div class="wrap">
+  <div class="wrap article-hero">
     %s
   </div>
 
-  <div class="wrap prose">
-    %s
-    %s
+  <div class="wrap article-grid">
+    <aside class="article-rail">
+      <p class="rail-label">%s</p>
+      <nav class="toc" data-toc aria-label="%s"></nav>
+    </aside>
+    <div class="prose">
+      %s
+      %s
+    </div>
   </div>
 
   <div class="wrap article-foot">
@@ -1142,6 +1148,8 @@ def render_article(data, index):
             depth,
             classes="fig fig-portrait" if article.get("imagePortrait") else "fig fig-hero",
         ),
+        esc(ui["contents"]),
+        esc(ui["contents"]),
         editor_note(data, article["blocks"], article.get("subtitle"), article.get("summary")),
         blocks_html(article["blocks"], depth),
         link(data["lang"], "articles", depth),

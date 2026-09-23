@@ -125,6 +125,43 @@
     check();
   }
 
+  /* ---- contents of a long piece --------------------------------------
+     Built from the headings the article already has, so nothing has to be
+     kept in step by hand; the current section is marked as it is reached. */
+  var toc = document.querySelector("[data-toc]");
+  var prose = document.querySelector(".article .prose");
+  if (toc && prose) {
+    var headings = Array.prototype.slice.call(prose.querySelectorAll("h2"));
+    if (headings.length > 1) {
+      headings.forEach(function (heading, i) {
+        if (!heading.id) heading.id = "section-" + (i + 1);
+        var a = document.createElement("a");
+        a.href = "#" + heading.id;
+        a.textContent = heading.textContent;
+        toc.appendChild(a);
+      });
+
+      var links = Array.prototype.slice.call(toc.querySelectorAll("a"));
+      var markCurrent = function () {
+        var current = 0;
+        headings.forEach(function (heading, i) {
+          if (heading.getBoundingClientRect().top < window.innerHeight * 0.4) current = i;
+        });
+        links.forEach(function (a, i) { a.classList.toggle("is-current", i === current); });
+      };
+      var waiting = false;
+      window.addEventListener("scroll", function () {
+        if (waiting) return;
+        waiting = true;
+        window.requestAnimationFrame(function () { waiting = false; markCurrent(); });
+      }, { passive: true });
+      markCurrent();
+    } else {
+      var rail = toc.closest(".article-rail");
+      if (rail) rail.style.display = "none";
+    }
+  }
+
   /* ---- reading progress on article pages ----------------------------- */
   var article = document.querySelector(".article");
   if (article) {
