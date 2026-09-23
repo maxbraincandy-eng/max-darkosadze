@@ -41,7 +41,7 @@ def load_manifest():
     return {}
 
 
-def img_tag(src, alt, depth, *, eager=False, extra=""):
+def img_tag(src, alt, depth, *, eager=False, extra="", sizes=""):
     """An <img> that reserves its own space and offers a phone-sized file."""
     attrs = [
         'src="%s"' % asset(src, depth),
@@ -54,13 +54,30 @@ def img_tag(src, alt, depth, *, eager=False, extra=""):
     if small in IMAGES and size and size[0] > IMAGES[small][0]:
         attrs.append('srcset="%s %dw, %s %dw"' % (
             asset(small, depth), IMAGES[small][0], asset(src, depth), size[0]))
-        attrs.append('sizes="(max-width: 700px) 100vw, %dpx"' % min(size[0], 1140))
+        attrs.append('sizes="%s"' % (sizes or "(max-width: 700px) 100vw, %dpx" % min(size[0], 1140)))
     attrs.append('loading="%s"' % ("eager" if eager else "lazy"))
     attrs.append('decoding="async"')
     attrs.append("data-slot")
     if extra:
         attrs.append(extra)
-    return "<img %s>" % " ".join(attrs)
+    tag = "<img %s>" % " ".join(attrs)
+
+    # the same picture in WebP, when it has been written, for the browsers that
+    # ask for it; everything else takes the JPEG exactly as before
+    webp = src.rsplit(".", 1)[0] + ".webp"
+    small_webp = small.rsplit(".", 1)[0] + ".webp"
+    if webp in IMAGES:
+        if small_webp in IMAGES and size and size[0] > IMAGES[small_webp][0]:
+            srcset = "%s %dw, %s %dw" % (asset(small_webp, depth), IMAGES[small_webp][0],
+                                         asset(webp, depth), IMAGES[webp][0])
+        else:
+            srcset = asset(webp, depth)
+        source = '<source type="image/webp" srcset="%s"%s>' % (
+            srcset,
+            ' sizes="%s"' % (sizes or "(max-width: 700px) 100vw, %dpx" % min(size[0], 1140))
+            if size else "")
+        return "<picture>%s%s</picture>" % (source, tag)
+    return tag
 
 
 def esc(text):
@@ -683,7 +700,7 @@ def render_home(data):
         <span class="world-title">%s</span>
         <span class="world-text">%s</span>
         <span class="world-arrow" aria-hidden="true">&rarr;</span>
-      </a>""" % (esc(href), img_tag(item["image"], "", depth), esc(item["n"]),
+      </a>""" % (esc(href), img_tag(item["image"], "", depth, sizes="800px"), esc(item["n"]),
                  inline(item["title"]), inline(item["text"])))
     worlds = """
 <section class="section worlds" id="worlds" data-reveal>
@@ -811,8 +828,10 @@ def render_home(data):
 
     # 12 — the visual archive
     tiles = "".join(
-        '<a class="strip-item" href="%s">%s</a>' % (link(data["lang"], "gallery", depth),
-                                                    img_tag(item["src"], plain(item.get("caption", "")), depth))
+        '<a class="strip-item" href="%s">%s</a>' % (
+            link(data["lang"], "gallery", depth),
+            img_tag(item["src"], plain(item.get("caption", "")), depth,
+                    sizes="(max-width: 700px) 60vw, 330px"))
         for item in data["pages"]["gallery"]["items"][:8])
     gallery = """
 <section class="section gallery-band" id="gallery" data-reveal>
@@ -1534,7 +1553,8 @@ def render_gallery(data):
           <figcaption>%s</figcaption>
         </figure>""" % (
                 esc(cat), i, esc(item["src"]),
-                img_tag(item["src"], caption or p["heading"], depth),
+                img_tag(item["src"], caption or p["heading"], depth,
+                        sizes="(max-width: 560px) 100vw, (max-width: 1000px) 46vw, 380px"),
                 esc(label), inline(caption),
             )
         )

@@ -544,9 +544,62 @@ python3 tools/og_images.py      # writes assets/og/<lang>-<page>.jpg
 Run it again after changing a title. `build.py` picks the file up automatically
 and falls back to `assets/img/og.jpg` if one is missing.
 
+## The design — THE ARCHIVE / დიზაინი
+
+The site is a dark editorial archive rather than a portfolio: near-black ground,
+hairline borders, one violet and one cold blue used sparingly, and typography
+doing most of the work. Everything is driven by the tokens at the top of
+`assets/css/style.css`:
+
+```css
+--ink: #08090b;  --ink-2: #111318;  --surface: #15171c;
+--text: #f2f2f0; --muted: #9a9da5;  --line: rgba(255,255,255,.10);
+--violet: #7c5cff; --blue: #7ea7ff;
+--display: "Cormorant Garamond", "Noto Serif Georgian", …;
+--sans: "Inter", "Noto Sans Georgian", …;
+```
+
+Change a token and the whole site follows. There is no light theme and no theme
+switch: the archive is dark by design.
+
+**The homepage is one narrative**, built by `render_home()` in `build.py` from
+the `archive` block of `content/ka.json` and `content/en.json`:
+
+> hero → the statement → the five worlds → about → surgery → aviation →
+> philosophy → writing → the book → the film → projects → the Library of the
+> Void → the visual archive → the journey → notes → contact
+
+Each part reads its text from `archive.<name>`; nothing in the layout is
+hard-coded prose. The five disciplines share one renderer
+(`discipline_block()`), so a new one is a content change, not a template change.
+
+**Motion** lives in `assets/js/main.js` and is all optional: sections reveal as
+they approach, a two-part cursor names what a link would do, buttons lean
+towards the pointer, the portrait drifts with it, and a black veil with a thin
+violet line covers a page change. Every one of these is switched off by
+`prefers-reduced-motion`, and the pointer effects only run on a device with a
+fine pointer — a phone gets none of them and pays for none of them.
+
+**Unverified facts are visible, not invented.** Anything written as
+`[[…]]` in the content files renders as marked text on the page: the
+professional background in surgery and aviation, the book's chapters, excerpt
+and status, one project, and every row of the journey. Replace the text between
+the brackets and the mark disappears.
+
+დიზაინი: მუქი, სარედაქციო არქივი. ფერები და შრიფტები ერთ ადგილას წერია
+(`assets/css/style.css`-ის თავში), მთავარი გვერდის თექვსმეტივე ნაწილი კი
+`content/*.json`-ის `archive` ბლოკიდან იკითხება. `[[…]]`-ში ჩასმული ტექსტი
+გვერდზე გამოკვეთილად ჩანს — ეს ის ადგილებია, სადაც დადასტურებული ინფორმაცია
+უნდა ჩაიწეროს.
+
 ## Typefaces / შრიფტები
 
-The two Georgian faces are served from this site, not fetched from Google:
+Four faces are served from this site, never fetched from Google: **Cormorant
+Garamond** and **Inter** for Latin, **Noto Serif Georgian** and **Noto Sans
+Georgian** for Georgian, with the Georgian pair carrying anything the Latin
+faces do not. Each page preloads only the two its own language sets text in.
+
+The Georgian pair is cut to size here:
 fewer round trips before the first letter is drawn, and no visitor announced to
 a third party. `tools/webfonts.py` cuts Noto Serif Georgian and Noto Sans
 Georgian (both under the SIL Open Font License) down to the characters the
@@ -601,6 +654,15 @@ article (a block of `"type": "quote"`) and the next run makes its cards too.
 
 ციტატების ბარათები Instagram-ისთვის: `assets/brand/quotes/` — კვადრატული
 ფიდისთვის, ვერტიკალური სთორისთვის, ქართულად და ინგლისურად.
+
+## Image formats / სურათების ფორმატები
+
+`python3 tools/images.py` writes three things beside every photograph: a
+phone-sized `-800.jpg`, a `.webp`, and a `-800.webp`. The pages serve WebP to
+everything that accepts it and keep the JPEG for anything that does not — the
+homepage went from 1.65 MB to 0.80 MB on that change alone, with no visible
+difference. Drop a new photograph in and run the tool again; nothing else needs
+touching.
 
 ## Preparing photographs / ფოტოების მომზადება
 

@@ -57,6 +57,19 @@ def main():
                     with Image.open(small_path) as small:
                         manifest[small_rel] = list(small.size)
 
+                # WebP beside each JPEG: the same picture, roughly half the
+                # bytes, with the JPEG left in place for anything that cannot
+                # read it.
+                if is_source(name) or VARIANT in name:
+                    webp_rel = rel.rsplit(".", 1)[0] + ".webp"
+                    webp_path = os.path.join(ROOT, webp_rel)
+                    if not os.path.exists(webp_path) or \
+                            os.path.getmtime(webp_path) < os.path.getmtime(path):
+                        im.convert("RGB").save(webp_path, "WEBP", quality=76, method=5)
+                        made += 1
+                    with Image.open(webp_path) as w:
+                        manifest[webp_rel] = list(w.size)
+
     out = os.path.join(IMG, "manifest.json")
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(manifest, fh, indent=1, sort_keys=True)
