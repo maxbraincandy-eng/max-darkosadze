@@ -1,7 +1,7 @@
 {
   "baseUrl": "https://maxdarkosadze.com",
   "note": "baseUrl is the live address of the site. It is used for canonical links, hreflang tags, the sitemap, the share cards, the QR code and the closing card of the film. If it ever changes again, put the new address here and run `python3 tools/brand.py && python3 tools/og_images.py && python3 tools/video.py && python3 build.py` — everything follows.",
-  "googleVerification": "",
+  "googleVerification": "IYAk7Sf4tkxAHyGXTHgTLHdnXwi0-G3qHowAeLnkhTU",
   "googleVerificationNote": "Google Search Console gives you a code that looks like \"abc123…\" in a tag <meta name=\"google-site-verification\" content=\"…\">. Paste only the code between the quotes here and run python3 build.py, then press Verify in Search Console. Leave it empty and no tag is written. Choose the HTML tag method; it survives every rebuild.",
   "bingVerification": "",
   "bingVerificationNote": "Same idea for Bing Webmaster Tools (bing.com/webmasters), which also feeds DuckDuckGo: choose the HTML meta tag, paste only the code here and run python3 build.py.",
