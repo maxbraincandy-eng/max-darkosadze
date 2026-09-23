@@ -692,7 +692,7 @@
       "eyebrow": "Project",
       "heading": "Void Mafia",
       "tagline": "A game, a social network and tests of the mind, in one place.",
-      "lead": "I built this platform. Cyberpunk Mafia rounds; a profile and a feed where anyone can post what they like; and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments. Results go on a public leaderboard. It all runs in the browser, in Georgian and in English.",
+      "lead": "Max Darkosadze built this platform. Cyberpunk Mafia rounds; a profile and a feed where anyone can post what they like; and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments. Results go on a public leaderboard. It all runs in the browser, in Georgian and in English.",
       "cta": "Enter",
       "ctaNote": "voidmafia.one — opens in the browser, on a phone or a computer",
       "factsTitle": "What is inside",
@@ -726,9 +726,9 @@
           "t": "The whole interface in Georgian and English; it keeps to the home screen like an app, with no store in the way."
         }
       ],
-      "whyTitle": "Why I recommend it",
-      "why": "Mafia is the one game you win not by being quick but by reading people. The logic academy and the thought experiments are the other side of that question: how we reason, and why we believe what we believe. It is the question my writing keeps returning to — Void Mafia is where it can be played rather than only read.",
-      "note": "The platform lives on its own site, voidmafia.one. This page only says that it is mine, and invites you in."
+      "whyTitle": "Why he recommends it",
+      "why": "Mafia is the one game you win not by being quick but by reading people. The logic academy and the thought experiments are the other side of that question: how we reason, and why we believe what we believe. It is the question his writing keeps returning to — and Void Mafia is where it can be played rather than only read.",
+      "note": "The platform lives on its own site, voidmafia.one. This page only says that it is his work."
     },
     "foundation": {
       "title": "The Foundation — Max Darkosadze",
@@ -1100,7 +1100,7 @@
         },
         {
           "q": "What is Void Mafia?",
-          "a": "A platform I built: cyberpunk Mafia rounds, a profile and a feed where anyone can post, and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments, with a public leaderboard. voidmafia.one.",
+          "a": "A platform built by Max Darkosadze: cyberpunk Mafia rounds, a profile and a feed where anyone can post, and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments, with a public leaderboard. voidmafia.one.",
           "link": "game"
         },
         {
