@@ -7,7 +7,7 @@
   "meta": {
     "siteName": "Max Darkosadze",
     "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Sculptor · Filmmaker",
-    "description": "The official site of Max Darkosadze — known to many as Batoni Maksi — surgeon, aviation instructor, lecturer, writer, modern philosopher and public figure. Articles, biography, honours and the work of his foundation, in English and Georgian.",
+    "description": "Official website of Max Darkosadze — exploring medicine, aviation, philosophy, writing and creative projects.",
     "nickname": "Batoni Maksi",
     "nicknameLabel": "Known to many simply as",
     "links": {
@@ -352,7 +352,7 @@
   },
   "pages": {
     "home": {
-      "title": "Max Darkosadze (Batoni Maksi) — Surgeon, Aviation Instructor, Lecturer, Writer, Philosopher",
+      "title": "Max Darkosadze — Surgeon, Aviation Instructor, Lecturer & Writer",
       "heroEyebrow": "Official site",
       "heroTitle": "Max Darkosadze",
       "heroSubtitle": "A surgeon at the operating table, an instructor in the cockpit, a teacher in the lecture hall, a writer at the desk — and a citizen in the public square.",
@@ -519,6 +519,31 @@
           "text": "He lives and works between Tbilisi and New York. He reads history, walks in the mountains, and still, whenever the weather allows, flies on Saturday mornings."
         }
       ],
+      "five": {
+        "title": "Five answers",
+        "items": [
+          {
+            "h": "Who I am",
+            "t": "A surgeon, an aviation instructor and a lecturer who also writes. To many people, simply Batoni Maksi."
+          },
+          {
+            "h": "What I do",
+            "t": "I treat, I teach — in the operating room and in the cockpit — and I write about what those two worlds teach each other."
+          },
+          {
+            "h": "What I study",
+            "t": "Decision-making under incomplete information: in medicine, in aviation, in philosophy. One problem in three languages."
+          },
+          {
+            "h": "What I create",
+            "t": "Texts, a film, sculpture, and projects that stand between thought and technology."
+          },
+          {
+            "h": "What I believe",
+            "t": "That mastery is a duty rather than a privilege — and that preparation is the only honest form of what other people call talent."
+          }
+        ]
+      },
       "timelineTitle": "A life in dates",
       "timelineNote": "Entries marked in yellow are still waiting for the real year — send them and they go straight in.",
       "timeline": [
@@ -653,8 +678,8 @@
     },
     "gallery": {
       "title": "Gallery — Max Darkosadze",
-      "eyebrow": "Gallery",
-      "heading": "In pictures",
+      "eyebrow": "The archive",
+      "heading": "Visual archive",
       "lead": "Photographs from the hospital, the airfield, the lecture hall, the writing desk, the film set and the workshop — and from the days away from all of them. Choose a category, or open any picture to see it full size.",
       "items": [
         {

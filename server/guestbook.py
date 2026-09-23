@@ -811,6 +811,14 @@ class Handler(SimpleHTTPRequestHandler):
     LONG_LIVED = (".jpg", ".jpeg", ".png", ".webp", ".avif", ".gif", ".ico",
                   ".woff", ".woff2", ".ttf")
 
+    # a few types older Pythons do not know by heart
+    extensions_map = dict(SimpleHTTPRequestHandler.extensions_map)
+    extensions_map.update({
+        ".webp": "image/webp", ".avif": "image/avif", ".woff2": "font/woff2",
+        ".webmanifest": "application/manifest+json", ".mp4": "video/mp4",
+        ".webm": "video/webm", ".svg": "image/svg+xml",
+    })
+
     def send_header(self, keyword, value):
         if keyword.lower() == "cache-control":
             self._cache_told = True
