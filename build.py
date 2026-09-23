@@ -233,10 +233,13 @@ def head(data, title, description, depth, key, slug=None):
         '<meta name="description" content="%s">' % esc(description),
         '<meta name="author" content="%s">' % esc(data["meta"]["siteName"]),
         '<meta name="theme-color" content="#0d1b2a">',
+        '<meta name="robots" content="index, follow, max-image-preview:large, '
+        'max-snippet:-1, max-video-preview:-1">',
     ]
-    if SITE.get("googleVerification", "").strip():
-        tags.append('<meta name="google-site-verification" content="%s">'
-                    % esc(SITE["googleVerification"].strip()))
+    for field, meta in (("googleVerification", "google-site-verification"),
+                        ("bingVerification", "msvalidate.01")):
+        if SITE.get(field, "").strip():
+            tags.append('<meta name="%s" content="%s">' % (meta, esc(SITE[field].strip())))
     if canonical:
         tags += [
             '<link rel="canonical" href="%s">' % esc(canonical),
@@ -391,7 +394,15 @@ def person_jsonld(data):
         "inLanguage": data["lang"],
     }
     if SITE["baseUrl"]:
+        base = SITE["baseUrl"].rstrip("/")
         website["url"] = SITE["baseUrl"]
+        website["potentialAction"] = {
+            "@type": "SearchAction",
+            "target": {"@type": "EntryPoint",
+                       "urlTemplate": "%s/%s/search.html?q={search_term_string}"
+                                      % (base, data["lang"])},
+            "query-input": "required name=search_term_string",
+        }
     return "".join(
         '<script type="application/ld+json">%s</script>' % json.dumps(p, ensure_ascii=False)
         for p in (payload, website)
@@ -1503,7 +1514,18 @@ def render_contact(data):
 # root files
 # --------------------------------------------------------------------------
 
-def render_root_index():
+def render_root_index(datasets=None):
+    """The address people type and link to. It sends readers on to Georgian, but
+    it carries the name, a canonical link and the identity record itself, so the
+    root of the domain is never an empty doorway to a search engine."""
+    base = SITE["baseUrl"].rstrip("/")
+    head_extra = ""
+    if base:
+        head_extra += '<link rel="canonical" href="%s/ka/index.html">\n' % esc(base)
+    head_extra += ('<meta name="robots" content="index, follow, max-image-preview:large, '
+                   'max-snippet:-1">\n')
+    if datasets:
+        head_extra += person_jsonld(datasets["ka"]) + "\n"
     return """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1512,7 +1534,7 @@ def render_root_index():
 <title>მაქსი დარკოსაძე / Max Darkosadze</title>
 <meta name="description" content="Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Official site in English and Georgian.">
 <link rel="icon" href="assets/img/favicon.svg">
-<link rel="alternate" hreflang="ka" href="ka/index.html">
+%s<link rel="alternate" hreflang="ka" href="ka/index.html">
 <link rel="alternate" hreflang="en" href="en/index.html">
 <link rel="alternate" hreflang="x-default" href="ka/index.html">
 <link rel="stylesheet" href="assets/css/style.css">
@@ -1543,7 +1565,7 @@ def render_root_index():
   </main>
 </body>
 </html>
-"""
+""" % head_extra
 
 
 def render_404():
@@ -1835,22 +1857,75 @@ self.addEventListener("fetch", function (event) {
 
 
 def render_sitemap(datasets):
+    """Every page, in both languages — and the photographs and the film with
+    them, so his own pictures can be found in image and video search rather
+    than only the text."""
     base = SITE["baseUrl"].rstrip("/")
-    urls = []
-    for data in datasets.values():
-        for key in PAGE_KEYS:
-            urls.append(page_path(data["lang"], key))
-        for article in data["articles"]:
-            urls.append(page_path(data["lang"], "article", article["slug"]))
     today = date.today().isoformat()
-    entries = "".join(
-        "\n  <url><loc>%s/%s</loc><lastmod>%s</lastmod></url>" % (base, u, today)
-        for u in urls
-    )
+
+    def full(path):
+        return "%s/%s" % (base, path.lstrip("/"))
+
+    entries = []
+    for data in datasets.values():
+        lang = data["lang"]
+        pages = data["pages"]
+
+        pictures = {}
+        home_images = [("assets/img/hero.jpg", plain(pages["home"]["heroTitle"])),
+                       ("assets/img/portrait.jpg", plain(data["meta"]["siteName"]))]
+        pictures[page_path(lang, "home")] = home_images
+        pictures[page_path(lang, "gallery")] = [
+            (item["src"], plain(item.get("caption", "")))
+            for item in pages["gallery"].get("items", [])
+        ]
+        for article in data["articles"]:
+            if article.get("image"):
+                pictures[page_path(lang, "article", article["slug"])] = [
+                    (article["image"], plain(article.get("imageAlt") or article["title"]))
+                ]
+
+        for key in PAGE_KEYS:
+            entries.append((page_path(lang, key), pictures.get(page_path(lang, key), [])))
+        for article in data["articles"]:
+            path = page_path(lang, "article", article["slug"])
+            entries.append((path, pictures.get(path, [])))
+
+    film = []
+    for data in datasets.values():
+        name = "assets/video/showreel-%s.mp4" % data["lang"]
+        if os.path.exists(os.path.join(ROOT, name)) and data.get("film"):
+            film.append((page_path(data["lang"], "home"), data["film"], name))
+
+    def block(path, images):
+        rows = ["\n  <url><loc>%s</loc><lastmod>%s</lastmod>" % (full(path), today)]
+        for src, caption in images[:40]:            # Google reads up to 1000; 40 is plenty
+            rows.append("\n    <image:image><image:loc>%s</image:loc>%s</image:image>" % (
+                full(src),
+                "<image:title>%s</image:title>" % esc(caption) if caption else ""))
+        for home, f, name in film:
+            if home != path:
+                continue
+            rows.append(
+                "\n    <video:video>"
+                "<video:thumbnail_loc>%s</video:thumbnail_loc>"
+                "<video:title>%s</video:title>"
+                "<video:description>%s</video:description>"
+                "<video:content_loc>%s</video:content_loc>"
+                "<video:family_friendly>yes</video:family_friendly>"
+                "</video:video>" % (
+                    full("assets/video/showreel-poster.jpg"),
+                    esc(plain(f["title"])), esc(plain(f["lead"])), full(name)))
+        rows.append("\n  </url>")
+        return "".join(rows)
+
+    body = "".join(block(path, images) for path, images in entries)
     return (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
-        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">%s\n</urlset>\n'
-        % entries
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n'
+        '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"\n'
+        '        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">%s\n</urlset>\n'
+        % body
     )
 
 
@@ -1909,7 +1984,7 @@ def main():
         for i, article in enumerate(data["articles"]):
             write(page_path(lang, "article", article["slug"]), render_article(data, i))
 
-    write("index.html", render_root_index())
+    write("index.html", render_root_index(datasets))
     write("manifest.webmanifest", render_manifest(datasets))
     write("sw.js", render_service_worker())
     write("404.html", render_404())

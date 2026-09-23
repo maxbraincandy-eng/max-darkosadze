@@ -362,6 +362,60 @@ where the visitors came from. Nothing is sent to anyone else.
 put your domain in `analytics.plausible`. Rebuild and the script is added to
 every page. Leave both empty and no tracking code is emitted at all.
 
+## The address / მისამართი
+
+The site lives at **https://maxdarkosadze.com**. `baseUrl` in
+`content/site.json` is the single place that address is written; canonical
+links, hreflang, the sitemap, the share cards, the QR code, the business card
+and the closing card of the film all follow it. If it ever changes:
+
+```bash
+# 1. put the new address in content/site.json ("baseUrl")
+python3 tools/brand.py       # QR, card, signature, quotation cards
+python3 tools/og_images.py   # the pictures shown when a link is shared
+python3 tools/video.py       # the closing card of the film
+python3 build.py             # canonical links, hreflang, sitemap, robots.txt
+```
+
+**The old Railway address redirects here.** `server/guestbook.py` answers any
+other host — the `*.up.railway.app` one, or a `www.` spelling — with a
+permanent redirect to the address in `baseUrl`, so links and search results
+gather in one place instead of being split between two identical sites. The
+guest book API, `/admin` and `/healthz` are answered wherever they are asked, so
+nothing in flight breaks. Set `CANONICAL_HOST` to override the host it redirects
+to.
+
+**`www.` needs its own entry.** In Railway → Settings → Networking, add
+`www.maxdarkosadze.com` as a second custom domain and point the DNS at what it
+shows; visitors who type `www.` are then redirected to the bare address.
+
+## Being found / ძებნაში პოვნა
+
+What the site already does for itself: both spellings of the name in every
+title, a `Person` record with the Instagram and IMDb links as `sameAs`, a
+`WebSite` record with the site's own search, `FAQPage` answers, an `Article`
+record per article, a sitemap that carries the photographs and the film as well
+as the pages, `robots.txt` pointing at it, and
+`max-image-preview:large` so a picture can appear beside the result.
+
+What has to be done once, by hand:
+
+1. **Google Search Console** — [search.google.com/search-console](https://search.google.com/search-console)
+   → Add property → **URL prefix** → `https://maxdarkosadze.com` → **HTML tag**.
+   Paste only the code (the `content="…"` part) into `googleVerification` in
+   `content/site.json`, run `python3 build.py`, push, wait for the deploy, then
+   press Verify.
+2. **Sitemaps** → submit `sitemap.xml`. Then paste `https://maxdarkosadze.com/ka/`
+   and `/en/` into the bar at the top and press **Request indexing** for each.
+3. **Bing Webmaster Tools** ([bing.com/webmasters](https://www.bing.com/webmasters))
+   — same again into `bingVerification`. It feeds DuckDuckGo too.
+4. **Links from places Google already trusts** — this is what actually decides
+   whether the site comes first. Put the address in the Instagram bio, in the
+   IMDb profile, in an e-mail signature, and anywhere else his name already
+   appears. A handful of real links outrank any amount of markup.
+
+Give it a week or two: a new domain is not ranked the day it is verified.
+
 ## Buying the domain later / დომენის შემდეგ შეძენა
 
 Everything works today on the GitHub Pages address. When the domain is bought,

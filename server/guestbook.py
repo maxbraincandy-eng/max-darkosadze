@@ -81,6 +81,22 @@ def _switch(name):
 
 AUTO_APPROVE = _switch("GUESTBOOK_AUTO_APPROVE")
 
+
+def _canonical_host():
+    """The one address the site should answer on, taken from content/site.json.
+    Everything else — the old deployment address, a www. spelling — is sent
+    there with a permanent redirect, so searches and links pile up in one
+    place instead of being split between two identical sites."""
+    try:
+        with open(os.path.join(ROOT, "content", "site.json"), encoding="utf-8") as fh:
+            base = json.load(fh).get("baseUrl", "")
+    except (OSError, ValueError):
+        return ""
+    return base.split("://")[-1].strip("/").lower()
+
+
+CANONICAL_HOST = os.environ.get("CANONICAL_HOST", "").strip().lower() or _canonical_host()
+
 MAX_NAME, MAX_PLACE, MAX_MESSAGE = 40, 80, 700
 COOLDOWN_SECONDS = 60            # one note per address per minute
 MAX_PER_DAY = 10
@@ -558,8 +574,28 @@ class Handler(SimpleHTTPRequestHandler):
         except (ValueError, UnicodeDecodeError):
             return None
 
+    def redirected(self):
+        """True when the request came in on some other host and has been sent
+        to the canonical one. Health checks are answered where they are asked."""
+        if not CANONICAL_HOST:
+            return False
+        host = (self.headers.get("Host") or "").split(":")[0].lower()
+        if not host or host == CANONICAL_HOST or host in ("localhost", "127.0.0.1"):
+            return False
+        path = self.path.split("?")[0]
+        if path.startswith("/api/") or path in ("/healthz", "/admin"):
+            return False          # a client mid-request is not an audience to move
+        self.send_response(301)
+        self.send_header("Location", "https://%s%s" % (CANONICAL_HOST, self.path))
+        self.send_header("Cache-Control", "no-cache")
+        self.send_header("Content-Length", "0")
+        self.end_headers()
+        return True
+
     # ----------------------------------------------------------------- GET
     def do_GET(self):
+        if self.redirected():
+            return
         path = self.path.split("?")[0]
         if path in ("/admin", "/admin/"):
             body = ADMIN_PAGE.encode("utf-8")
