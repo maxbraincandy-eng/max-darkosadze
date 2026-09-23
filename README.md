@@ -505,6 +505,37 @@ photograph stays. Nothing to switch on — the page uses whatever
 ფართო ეკრანზე მთავარ გვერდზე ფილმი ჩუმად მიდის სახელის უკან; კუთხეში ღილაკია
 გასაჩერებლად. ტელეფონზე და ნელ ინტერნეტზე ფილმი საერთოდ არ იტვირთება.
 
+## The mark / ლოგო
+
+`python3 tools/logo.py` draws the monogram once and exports every shape a
+browser, a phone or Google asks for, so none of them can drift apart:
+
+| file | where it is seen |
+| --- | --- |
+| `favicon.ico` (16, 32, 48) | the browser tab, and the first thing Google reads |
+| `assets/img/favicon.svg` | browsers that prefer vector — also the mark in the site header |
+| `assets/icons/icon-48…512.png` | search results, Android, the manifest |
+| `assets/icons/maskable-512.png` | Android, which crops the corners off |
+| `assets/icons/apple-touch-icon.png` | iPhone home screen |
+| `assets/brand/logo-dark.png`, `logo-light.png` | slides, profiles, print |
+
+It is the site's own alphabet: MD in Newsreader on the ink ground, a violet
+hairline frame, a violet rule beneath the letters. Sixteen pixels cannot hold
+two serif letters and a frame, so that one size keeps only the **M** and the
+rule — the same reason a road sign is not a paragraph.
+
+The letters in the SVG are outlines, not text: a favicon is drawn before any
+web font arrives. The drawing needs `tools/fonts/Newsreader-SemiBold.ttf`, which
+is the self-hosted web font instanced at weight 600, and Pillow.
+
+Google shows the icon beside the result only after it crawls the site again,
+and only if it stays square, a multiple of 48 px, reachable at the same
+address and unchanged for a while. Nothing to press — it appears on its own.
+
+ლოგო ერთხელ იხატება და ყველა ზომაში ერთნაირია: ჩანართში, Google-ის შედეგთან,
+ტელეფონის ეკრანზე. Google-ს თავისი გრაფიკი აქვს — ხელახალი ინდექსაციის შემდეგ
+გამოჩნდება.
+
 ## On a phone's home screen / ტელეფონის ეკრანზე
 
 The site can be kept on a phone like an app: **Share → Add to Home Screen** on
@@ -513,7 +544,7 @@ with its own icon, and the pages already visited open even with no signal.
 
 `build.py` writes `manifest.webmanifest` (name, icon, colours, and shortcuts
 straight to the gallery, the guest book and the invitation page) and `sw.js`.
-The icons come from `python3 tools/brand.py`, which writes `assets/icons/`.
+The icons come from `python3 tools/logo.py` — see **The mark** below.
 
 The worker is deliberately timid, because a careless one can serve yesterday's
 site for days: **every page is fetched from the network first** and the cached

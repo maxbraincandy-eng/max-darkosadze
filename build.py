@@ -249,7 +249,7 @@ def head(data, title, description, depth, key, slug=None):
         "<title>%s</title>" % esc(title),
         '<meta name="description" content="%s">' % esc(description),
         '<meta name="author" content="%s">' % esc(data["meta"]["siteName"]),
-        '<meta name="theme-color" content="#0d1b2a">',
+        '<meta name="theme-color" content="#08090b">',
         '<meta name="robots" content="index, follow, max-image-preview:large, '
         'max-snippet:-1, max-video-preview:-1">',
     ]
@@ -276,7 +276,13 @@ def head(data, title, description, depth, key, slug=None):
         '<meta property="og:image:alt" content="%s">' % esc(title),
         '<meta name="twitter:card" content="summary_large_image">',
         '<meta name="twitter:image" content="%s">' % esc(og_image),
-        '<link rel="icon" href="%s">' % asset("assets/img/favicon.svg", depth),
+        # the mark, in the shapes each reader needs: .ico for the tab and for
+        # Google, which reads it before anything else; the SVG for browsers that
+        # take vector; a 96 and a 192 for search results and phone home screens
+        '<link rel="icon" href="%s" sizes="any">' % asset("favicon.ico", depth),
+        '<link rel="icon" type="image/svg+xml" href="%s">' % asset("assets/img/favicon.svg", depth),
+        '<link rel="icon" type="image/png" sizes="96x96" href="%s">' % asset("assets/icons/icon-96.png", depth),
+        '<link rel="icon" type="image/png" sizes="192x192" href="%s">' % asset("assets/icons/icon-192.png", depth),
         '<link rel="apple-touch-icon" href="%s">' % asset("assets/icons/apple-touch-icon.png", depth),
         '<link rel="manifest" href="%s">' % asset("manifest.webmanifest", depth),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
@@ -446,7 +452,7 @@ def header(data, depth, active, key="home", slug=None):
 <header class="site-header" data-header>
   <div class="header-inner">
     <a class="brand" href="%s" aria-label="%s">
-      <span class="brand-mark" aria-hidden="true">MD</span>
+      <img class="brand-mark" src="%s" alt="" width="34" height="34" aria-hidden="true">
       <span class="brand-text">%s</span>
     </a>
     <nav id="site-nav" class="site-nav" aria-label="%s">
@@ -468,6 +474,7 @@ def header(data, depth, active, key="home", slug=None):
         esc(data["ui"]["skip"]),
         esc(home),
         esc(data["meta"]["siteName"]),
+        esc(asset("assets/img/favicon.svg", depth)),
         esc(data["meta"]["siteName"]),
         esc(data["ui"]["menu"]),
         "".join(items),
@@ -1758,7 +1765,10 @@ def render_root_index(datasets=None):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>მაქსი დარკოსაძე / Max Darkosadze</title>
 <meta name="description" content="Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Official site in English and Georgian.">
-<link rel="icon" href="assets/img/favicon.svg">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="assets/icons/icon-96.png">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
 %s<link rel="alternate" hreflang="ka" href="ka/index.html">
 <link rel="alternate" hreflang="en" href="en/index.html">
 <link rel="alternate" hreflang="x-default" href="ka/index.html">
@@ -1778,7 +1788,7 @@ def render_root_index(datasets=None):
 <body class="choose-lang">
   <main>
     <div class="choose-inner">
-      <span class="brand-mark" aria-hidden="true">MD</span>
+      <img class="brand-mark brand-mark-lg" src="assets/img/favicon.svg" alt="" width="64" height="64">
       <h1><span lang="ka">მაქსი დარკოსაძე</span><br>Max Darkosadze</h1>
       <p>Surgeon · Aviation instructor · Lecturer · Writer · Public figure</p>
       <p lang="ka">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · საზოგადო მოღვაწე</p>
@@ -1801,13 +1811,14 @@ def render_404():
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>404 — მაქსი დარკოსაძე</title>
 <meta name="robots" content="noindex">
-<link rel="icon" href="/assets/img/favicon.svg">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
 <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body class="choose-lang">
   <main>
     <div class="choose-inner">
-      <span class="brand-mark" aria-hidden="true">MD</span>
+      <img class="brand-mark brand-mark-lg" src="/assets/img/favicon.svg" alt="" width="64" height="64">
       <h1>404</h1>
       <p lang="ka">ეს გვერდი არ არსებობს.<br>
          მისამართი შეამოწმეთ — ჩეკლისტები სწორედ ამისთვისაა.</p>
@@ -1974,9 +1985,13 @@ def render_manifest(datasets):
         "scope": "/",
         "display": "standalone",
         "orientation": "portrait-primary",
-        "background_color": "#0d1b2a",
-        "theme_color": "#0d1b2a",
+        "background_color": "#08090b",
+        "theme_color": "#08090b",
         "icons": [
+            {"src": "/favicon.ico", "sizes": "48x48", "type": "image/x-icon"},
+            {"src": "/assets/img/favicon.svg", "sizes": "any", "type": "image/svg+xml"},
+            {"src": "/assets/icons/icon-96.png", "sizes": "96x96", "type": "image/png"},
+            {"src": "/assets/icons/icon-144.png", "sizes": "144x144", "type": "image/png"},
             {"src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png"},
             {"src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png"},
             {"src": "/assets/icons/maskable-512.png", "sizes": "512x512", "type": "image/png",
@@ -2170,15 +2185,6 @@ def render_sitemap(datasets):
     )
 
 
-def render_favicon():
-    return """<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="12" fill="#0d1b2a"/>
-  <text x="32" y="42" font-family="Georgia, 'Times New Roman', serif" font-size="28"
-        font-weight="700" fill="#c9a227" text-anchor="middle">MD</text>
-</svg>
-"""
-
-
 # --------------------------------------------------------------------------
 # main
 # --------------------------------------------------------------------------
@@ -2229,7 +2235,6 @@ def main():
     write("manifest.webmanifest", render_manifest(datasets))
     write("sw.js", render_service_worker())
     write("404.html", render_404())
-    write("assets/img/favicon.svg", render_favicon())
     if SITE["baseUrl"]:
         write("sitemap.xml", render_sitemap(datasets))
         write("robots.txt", "User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n" % SITE["baseUrl"].rstrip("/"))

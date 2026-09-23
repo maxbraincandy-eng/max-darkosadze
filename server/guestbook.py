@@ -816,7 +816,7 @@ class Handler(SimpleHTTPRequestHandler):
     extensions_map.update({
         ".webp": "image/webp", ".avif": "image/avif", ".woff2": "font/woff2",
         ".webmanifest": "application/manifest+json", ".mp4": "video/mp4",
-        ".webm": "video/webm", ".svg": "image/svg+xml",
+        ".webm": "video/webm", ".svg": "image/svg+xml", ".ico": "image/x-icon",
     })
 
     def send_header(self, keyword, value):
