@@ -345,11 +345,19 @@ body.nav-open .nav-toggle-bars i:last-child { transform: translateY(-3px) rotate
 body.lang-ka .hero-title { font-size: clamp(2.1rem, 4.4vw, 4rem); }
 .hero-title span { display: block; }
 .hero-title span + span { color: rgba(242, 242, 240, .82); }
+/* the three occupations he leads with: read them, do not squint at them */
 .hero-roles {
-  font-size: .8rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--muted); margin-bottom: 1.6rem;
+  display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .95rem;
+  font-size: .95rem; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--text); margin-bottom: 1.6rem;
 }
-body.lang-ka .hero-roles { letter-spacing: .06em; text-transform: none; }
+.hero-roles .role-dot {
+  width: 4px; height: 4px; border-radius: 50%; background: var(--violet);
+  flex: none;
+}
+body.lang-ka .hero-roles {
+  font-size: 1.05rem; letter-spacing: .02em; text-transform: none;
+}
 .hero-statement {
   font-family: var(--display); font-size: clamp(1.15rem, 2.2vw, 1.6rem);
   font-style: italic; color: rgba(242, 242, 240, .78); max-width: 34rem;

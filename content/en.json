@@ -6,8 +6,8 @@
   "otherAria": "Switch to Georgian",
   "meta": {
     "siteName": "Max Darkosadze",
-    "tagline": "Surgeon · Aviation instructor · Lecturer · Writer · Philosopher · Sculptor · Filmmaker",
-    "description": "Official website of Max Darkosadze — exploring medicine, aviation, philosophy, writing and creative projects.",
+    "tagline": "Writer · Director · Philosopher",
+    "description": "Official website of Max Darkosadze — writer, director and contemporary philosopher. Books, essays, filmography, lectures and the foundation, in English and Georgian.",
     "nickname": "Mr. Max",
     "nicknameLabel": "Known to many simply as",
     "links": {
@@ -26,13 +26,13 @@
     },
     {
       "key": "home",
-      "label": "Philosophy",
-      "anchor": "philosophy"
+      "label": "Film",
+      "anchor": "cinema"
     },
     {
       "key": "home",
-      "label": "Aviation",
-      "anchor": "aviation"
+      "label": "Philosophy",
+      "anchor": "philosophy"
     },
     {
       "key": "home",
@@ -84,16 +84,15 @@
       "eyebrow": "Max Darkosadze",
       "lines": [
         "A life between",
-        "science, philosophy",
-        "and the sky."
+        "the word, the frame",
+        "and the question."
       ],
       "roles": [
-        "Surgeon",
-        "Aviation instructor",
-        "Lecturer",
-        "Writer"
+        "Writer",
+        "Director",
+        "Philosopher"
       ],
-      "statement": "The space where scientific knowledge meets human experience.",
+      "statement": "The space where the written word, the filmed frame and the open question meet.",
       "place": "Tbilisi · Georgia",
       "scroll": "Scroll to explore",
       "portraitAlt": "Max Darkosadze — Mr. Max"
@@ -105,9 +104,9 @@
       "cta": "Read the article"
     },
     "intro": {
-      "statement": "I am interested in the space where scientific knowledge meets human experience.",
+      "statement": "I am interested in the space where the written word meets human experience.",
       "paragraphs": [
-        "An operating table, a cockpit, a lecture hall, a page — worlds that look far apart and are held together by one question: how do we decide when the information is never complete?",
+        "A page, a film set, a lecture hall — and, in other rooms, an operating table and a cockpit: worlds that look far apart and are held together by one question: how do we decide when the information is never complete?",
         "This site is an archive. It gathers what I do, read, write and think about — not because any of it is finished, but because it continues."
       ]
     },
@@ -117,19 +116,19 @@
       "items": [
         {
           "n": "01",
-          "title": "Surgery",
-          "text": "A precise movement with months of preparation behind it.",
-          "image": "assets/img/surgery.jpg",
+          "title": "Writing",
+          "text": "The page where thinking becomes responsibility.",
+          "image": "assets/img/writing.jpg",
           "key": "article",
-          "slug": "surgeon"
+          "slug": "writer"
         },
         {
           "n": "02",
-          "title": "Aviation",
-          "text": "The discipline that turns out to be the only reliable form of freedom.",
-          "image": "assets/img/aviation.jpg",
+          "title": "Film",
+          "text": "Directing, screenwriting and acting — the work with a public record.",
+          "image": "assets/img/film.jpg",
           "key": "article",
-          "slug": "aviation-instructor"
+          "slug": "filmmaker"
         },
         {
           "n": "03",
@@ -141,14 +140,22 @@
         },
         {
           "n": "04",
-          "title": "Writing",
-          "text": "The page where thinking becomes responsibility.",
-          "image": "assets/img/writing.jpg",
+          "title": "Surgery",
+          "text": "A precise movement with months of preparation behind it.",
+          "image": "assets/img/surgery.jpg",
           "key": "article",
-          "slug": "writer"
+          "slug": "surgeon"
         },
         {
           "n": "05",
+          "title": "Aviation",
+          "text": "The discipline that turns out to be the only reliable form of freedom.",
+          "image": "assets/img/aviation.jpg",
+          "key": "article",
+          "slug": "aviation-instructor"
+        },
+        {
+          "n": "06",
           "title": "Projects",
           "text": "Experiments between thought and technology.",
           "image": "assets/img/gallery/17.jpg",
@@ -157,53 +164,51 @@
         }
       ]
     },
-    "surgery": {
+    "writing": {
       "eyebrow": "Discipline 01",
-      "title": "Surgery",
-      "quote": "An operating room forgives nothing careless — which is exactly why it teaches precision everywhere else.",
-      "text": "What matters most in surgery is not what happens at the table but what was settled before it: a plan that already contains what to do if something goes wrong.",
+      "title": "Writing",
+      "quote": "The same questions kept coming back in the corridor — and the answers were far too long for a corridor.",
+      "text": "The books and the long essays ask one question in several languages: how does a person decide without the full answer? The text does not diagnose the reader. It shows what the work looks like from the inside and leaves the question where it belongs.",
+      "image": "assets/img/writing.jpg",
+      "cta": "Read the article",
+      "slug": "writer",
       "points": [
         {
-          "h": "At the table",
-          "t": "An operation begins with a plan rather than an incision: the order of the steps, the fallback, and the minute where you stop and look again."
+          "h": "Where it began",
+          "t": "The first book grew out of notes made for the doctors training beside him, then was written for patients and their families."
         },
         {
-          "h": "Deciding",
-          "t": "The information is never complete. The skill that matters is knowing which step can wait and which one cannot."
+          "h": "The style",
+          "t": "Nothing decorative, nothing spare, and a refusal to hurry the difficult passage. He revises heavily, and cuts most where he felt impressive."
         },
         {
-          "h": "The team",
-          "t": "The most dangerous words in an operating room are “I assumed you knew”. Which is why the obvious is said out loud too."
-        },
-        {
-          "h": "Philosophy of medicine",
-          "t": "A patient is not a case. A patient is a person with a story, whose trust is spent again at every visit."
+          "h": "Who reads it",
+          "t": "The books found readers well outside the professions they describe — which, he says, is a remark about the public's appetite rather than about him."
         }
-      ],
-      "image": "assets/img/surgery.jpg",
-      "cta": "Read the article"
+      ]
     },
-    "aviation": {
+    "cinema": {
       "eyebrow": "Discipline 02",
-      "title": "Aviation",
-      "quote": "There is a particular kind of silence above the clouds.",
-      "text": "A flight is preceded by a briefing that often takes longer than the flight itself. Aviation teaches that confidence is born of preparation, never the other way round.",
+      "title": "Film",
+      "quote": "A crew, a plan, a briefing, and one person answerable for the result.",
+      "text": "Directing, screenwriting and acting — the part of the work with the longest public record: the credits are dated, listed and anyone's to check.",
+      "image": "assets/img/film.jpg",
+      "cta": "The filmography",
+      "slug": "filmmaker",
       "points": [
         {
-          "h": "The briefing",
-          "t": "Before the flight: weather, weight, fuel, the alternate — and the question a student remembers for a career: what will you do if something goes wrong, and at what moment will you decide it?"
+          "h": "The credits",
+          "t": "Director, writer and actor. In 2016 he directed and starred in the romantic comedy Cowards; his credits also include Star Wars Zero."
         },
         {
-          "h": "Instructing",
-          "t": "An instructor's work is to leave the student able to think when the right-hand seat is empty. So you ask rather than answer."
+          "h": "Tbilisi and New York",
+          "t": "Both cities show up in the work differently: one supplies the material, the other the industry."
         },
         {
-          "h": "Philosophy of flight",
-          "t": "The checklist exists not because the pilot is not trusted, but because memory never is. Discipline here is not the opposite of freedom; it is its condition."
+          "h": "Where to check",
+          "t": "The full, current filmography is on IMDb; the set itself turns up on Instagram."
         }
-      ],
-      "image": "assets/img/aviation.jpg",
-      "cta": "Read the article"
+      ]
     },
     "philosophy": {
       "eyebrow": "Discipline 03",
@@ -239,12 +244,60 @@
         }
       ]
     },
-    "writing": {
+    "essays": {
       "eyebrow": "The archive",
       "title": "Writing",
       "lead": "Essays and long pieces — each following one question to the end.",
       "cta": "All writing",
       "read": "Read"
+    },
+    "surgery": {
+      "eyebrow": "Discipline 04",
+      "title": "Surgery",
+      "quote": "An operating room forgives nothing careless — which is exactly why it teaches precision everywhere else.",
+      "text": "What matters most in surgery is not what happens at the table but what was settled before it: a plan that already contains what to do if something goes wrong.",
+      "points": [
+        {
+          "h": "At the table",
+          "t": "An operation begins with a plan rather than an incision: the order of the steps, the fallback, and the minute where you stop and look again."
+        },
+        {
+          "h": "Deciding",
+          "t": "The information is never complete. The skill that matters is knowing which step can wait and which one cannot."
+        },
+        {
+          "h": "The team",
+          "t": "The most dangerous words in an operating room are “I assumed you knew”. Which is why the obvious is said out loud too."
+        },
+        {
+          "h": "Philosophy of medicine",
+          "t": "A patient is not a case. A patient is a person with a story, whose trust is spent again at every visit."
+        }
+      ],
+      "image": "assets/img/surgery.jpg",
+      "cta": "Read the article"
+    },
+    "aviation": {
+      "eyebrow": "Discipline 05",
+      "title": "Aviation",
+      "quote": "There is a particular kind of silence above the clouds.",
+      "text": "A flight is preceded by a briefing that often takes longer than the flight itself. Aviation teaches that confidence is born of preparation, never the other way round.",
+      "points": [
+        {
+          "h": "The briefing",
+          "t": "Before the flight: weather, weight, fuel, the alternate — and the question a student remembers for a career: what will you do if something goes wrong, and at what moment will you decide it?"
+        },
+        {
+          "h": "Instructing",
+          "t": "An instructor's work is to leave the student able to think when the right-hand seat is empty. So you ask rather than answer."
+        },
+        {
+          "h": "Philosophy of flight",
+          "t": "The checklist exists not because the pilot is not trusted, but because memory never is. Discipline here is not the opposite of freedom; it is its condition."
+        }
+      ],
+      "image": "assets/img/aviation.jpg",
+      "cta": "Read the article"
     },
     "projects": {
       "eyebrow": "The archive",
@@ -357,11 +410,11 @@
   },
   "pages": {
     "home": {
-      "title": "Max Darkosadze — Surgeon, Aviation Instructor, Lecturer & Writer",
+      "title": "Max Darkosadze — Writer, Director & Philosopher",
       "heroEyebrow": "Official site",
       "heroTitle": "Max Darkosadze",
-      "heroSubtitle": "A surgeon at the operating table, an instructor in the cockpit, a teacher in the lecture hall, a writer at the desk — and a citizen in the public square.",
-      "heroLead": "Few careers touch so many disciplines at once. Max Darkosadze — known across Georgia simply as Mr. Max — has spent his working life at the meeting point of precision and responsibility: in surgery, where a single decision changes a life; in aviation, where discipline is the difference between routine and disaster; in teaching, writing and philosophy, where experience is turned into something others can use; and in public work, where it is returned to the community that made it possible.",
+      "heroSubtitle": "A writer at the desk, a director on set, a philosopher in front of the question — and a teacher in the lecture hall.",
+      "heroLead": "Max Darkosadze — known across Georgia simply as Mr. Max — does three things first: he writes, he makes films, and he thinks in public. Books and essays that put a professional's eye into ordinary language; films in which he is credited as director, writer and actor; and a contemporary philosophy written out of practice rather than out of a library. The material for all of it comes from where he works — the operating room, the cockpit and the lecture hall.",
       "ctaPrimary": "Read the articles",
       "ctaSecondary": "The biography",
       "pillarsTitle": "Eight lives in one",
@@ -529,11 +582,11 @@
         "items": [
           {
             "h": "Who I am",
-            "t": "A surgeon, an aviation instructor and a lecturer who also writes. To many people, simply Mr. Max."
+            "t": "A writer, a director and a contemporary philosopher — also a lecturer, a surgeon and an aviation instructor. To many, simply Mr. Max."
           },
           {
             "h": "What I do",
-            "t": "I treat, I teach — in the operating room and in the cockpit — and I write about what those two worlds teach each other."
+            "t": "I write books and essays, I direct and act in films, I lecture — and I work in the rooms all of it draws on: the operating theatre and the cockpit."
           },
           {
             "h": "What I study",
@@ -876,16 +929,16 @@
       "heading": "Press kit",
       "lead": "Everything a newsroom usually asks for, ready to copy. Nothing here needs permission — please credit the photographs to their owner.",
       "shortTitle": "Short biography (35 words)",
-      "short": "Max Darkosadze, known in Georgia as Mr. Max, is a surgeon, aviation instructor, lecturer, writer, philosopher and filmmaker. Born in Tbilisi in 1995, he works between Georgia and New York and runs the foundation that carries his name.",
+      "short": "Max Darkosadze, known across Georgia as Mr. Max, is a writer, a director and a contemporary philosopher; he is also a lecturer, a surgeon and an aviation instructor. Born in Tbilisi in 1995, he works between Georgia and New York and leads the foundation that carries his name.",
       "longTitle": "Longer biography (120 words)",
-      "long": "Max Darkosadze — Mr. Max — was born in Tbilisi on 26 August 1995. He trained in medicine and in surgery, learned to fly young and went on to qualify as a flight instructor, and has taught in both lecture halls and briefing rooms ever since. His books, which began as notes for the doctors training beside him, grew into a body of philosophical writing on responsibility, attention and deciding well under pressure. He is also credited as a director, writer and actor, and directed and starred in the romantic comedy Cowards (2016). Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
+      "long": "Max Darkosadze — Mr. Max — was born in Tbilisi on 26 August 1995. He writes books and long essays on responsibility, attention and deciding well under pressure; the first of them began as notes for the doctors training beside him. He is credited as a director, writer and actor, and directed and starred in the romantic comedy Cowards (2016); his credits also include Star Wars Zero. His philosophical writing turns on will, freedom, consciousness and the search for meaning. By profession he trained in medicine and in surgery and qualified as a flight instructor, and he teaches in lecture halls and briefing rooms alike — the two rooms that supply the material for what he writes and films. Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
       "factsTitle": "Fact sheet",
       "facts": [
         "Full name: Max Darkosadze — მაქსი დარკოსაძე",
         "Known as: Mr. Max — ბატონი მაქსი",
         "Born: 26 August 1995, Tbilisi, Georgia",
         "Based: Tbilisi and New York",
-        "Fields: surgery · aviation instruction · teaching · writing · philosophy · film",
+        "Fields: writing · film · philosophy · lecturing · surgery · aviation",
         "Foundation: the Max Darkosadze Foundation",
         "IMDb: imdb.com/name/nm8752510",
         "Instagram: @maxdarkosadze"
@@ -930,7 +983,7 @@
       "items": [
         {
           "q": "Who is Max Darkosadze?",
-          "a": "A surgeon, an aviation instructor and a lecturer, a writer and a modern philosopher, a sculptor and a filmmaker. He is 31. What holds these far-apart trades together is one thing: precision, and the responsibility that comes with it.",
+          "a": "A writer, a director and a contemporary philosopher — also a lecturer, a surgeon, an aviation instructor and a sculptor. He is 31. What holds these distant occupations together is one thing: precision, and responsibility for the result.",
           "link": "about"
         },
         {
@@ -1160,7 +1213,7 @@
       "category": "Success",
       "title": "When impossibility meets the possibilities",
       "subtitle": "Mr. Max's seven rules for anyone who wants to get somewhere",
-      "summary": "Max Darkosadze — surgeon, aviation instructor and entrepreneur — puts a name to what people call luck: vision, preparation, execution, and the momentum that gathers out of small wins repeated daily.",
+      "summary": "Max Darkosadze — writer, director and entrepreneur — puts a name to what people call luck: vision, preparation, execution, and the momentum that gathers out of small wins repeated daily.",
       "date": "",
       "image": "assets/img/gallery/17.jpg",
       "imageAlt": "Max Darkosadze — Mr. Max",

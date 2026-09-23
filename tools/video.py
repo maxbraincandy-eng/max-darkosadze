@@ -43,13 +43,13 @@ PAPER = (231, 237, 243)
 # photograph, the word on screen (Georgian, English), and which way the eye moves
 SHOTS = [
     ("portrait.jpg",    ("", ""),                                    "in"),
+    ("writing.jpg",     ("მწერალი", "Writer"),                       "left"),
+    ("film.jpg",        ("რეჟისორი", "Director"),                    "out"),
+    ("philosophy.jpg",  ("ფილოსოფოსი", "Philosopher"),               "right"),
+    ("lecture.jpg",     ("ლექტორი", "Lecturer"),                     "in"),
     ("surgery.jpg",     ("ქირურგი", "Surgeon"),                      "left"),
     ("aviation.jpg",    ("ავიაინსტრუქტორი", "Aviation instructor"),  "out"),
-    ("lecture.jpg",     ("ლექტორი", "Lecturer"),                     "right"),
-    ("writing.jpg",     ("მწერალი", "Writer"),                       "in"),
-    ("philosophy.jpg",  ("ფილოსოფოსი", "Philosopher"),               "left"),
-    ("sculpture.jpg",   ("მოქანდაკე", "Sculptor"),                   "out"),
-    ("film.jpg",        ("კინორეჟისორი", "Filmmaker"),               "right"),
+    ("sculpture.jpg",   ("მოქანდაკე", "Sculptor"),                   "right"),
     ("public.jpg",      ("საზოგადო მოღვაწე", "Public figure"),        "in"),
     ("honours.jpg",     ("აღიარება", "Recognition"),                 "out"),
     ("gallery/16.jpg",  ("", ""),                                    "left"),

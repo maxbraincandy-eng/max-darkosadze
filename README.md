@@ -1,12 +1,12 @@
 # Max Darkosadze — maxdarkosadze / მაქსი დარკოსაძე
 
 A bilingual (English + Georgian) website about **Max Darkosadze / მაქსი დარკოსაძე**,
-known to many simply as **Mr. Max / ბატონი მაქსი** — surgeon, aviation
-instructor, lecturer, writer, modern philosopher and public figure.
+known to many simply as **Mr. Max / ბატონი მაქსი** — writer, director and
+contemporary philosopher; also a lecturer, a surgeon and an aviation instructor.
 
 ორენოვანი (ქართული და ინგლისური) საიტი **მაქს დარკოსაძეზე**, რომელიც ბევრისთვის
-უბრალოდ **„ბატონი მაქსია“** — ქირურგი, ავიაინსტრუქტორი, ლექტორი, მწერალი,
-თანამედროვე ფილოსოფოსი და საზოგადო მოღვაწე.
+უბრალოდ **„ბატონი მაქსია“** — მწერალი, რეჟისორი და თანამედროვე ფილოსოფოსი;
+ასევე ლექტორი, ქირურგი და ავიაინსტრუქტორი.
 
 ---
 

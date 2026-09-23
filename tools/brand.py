@@ -112,9 +112,9 @@ def card_front(url):
     d.text((x, int(21 * MM)), "მაქსი დარკოსაძე",
            font=font("NotoSerifGeorgian.ttf", int(3.4 * MM), 500), fill=INK_SOFT, anchor="ls")
     d.line((x, int(24 * MM), x + int(12 * MM), int(24 * MM)), fill=GOLD_DEEP, width=3)
-    d.text((x, int(30 * MM)), "ქირურგი · ავიაინსტრუქტორი · ლექტორი",
+    d.text((x, int(30 * MM)), "მწერალი · რეჟისორი · ფილოსოფოსი",
            font=font("NotoSansGeorgian.ttf", int(2.5 * MM), 400), fill=INK_SOFT, anchor="ls")
-    d.text((x, int(34 * MM)), "მწერალი · ფილოსოფოსი · კინორეჟისორი",
+    d.text((x, int(34 * MM)), "ლექტორი · ქირურგი · ავიაინსტრუქტორი",
            font=font("NotoSansGeorgian.ttf", int(2.5 * MM), 400), fill=INK_SOFT, anchor="ls")
     url_font = fit_font(d, pretty_url(url), "NotoSansGeorgian.ttf", 2.8 * MM, 600,
                         w - x - int(6 * MM))
@@ -151,12 +151,13 @@ def card_back(url):
 # ------------------------------------------------- instagram highlight covers
 
 COVERS = [
-    ("surgery", "ქირურგია", "✚"),
-    ("aviation", "ავიაცია", "✈"),
-    ("lectures", "ლექციები", "✎"),
     ("books", "წიგნები", "❦"),
     ("film", "კინო", "▣"),
-    ("foundation", "ფონდი", "✦"),
+    ("philosophy", "ფილოსოფია", "✦"),
+    ("lectures", "ლექციები", "✎"),
+    ("surgery", "ქირურგია", "✚"),
+    ("aviation", "ავიაცია", "✈"),
+    ("foundation", "ფონდი", "✧"),
 ]
 
 
@@ -193,7 +194,7 @@ def signature(url):
       <div style="font-size:18px;font-weight:700;color:#0d1b2a">Max Darkosadze &middot; მაქსი დარკოსაძე</div>
       <div style="font-size:13px;color:#b8860b;padding-top:2px">Mr. Max &middot; ბატონი მაქსი</div>
       <div style="font-size:12px;color:#5d6874;padding-top:6px;font-family:Helvetica,Arial,sans-serif">
-        Surgeon &middot; Aviation instructor &middot; Lecturer &middot; Writer &middot; Philosopher &middot; Filmmaker
+        Writer &middot; Director &middot; Philosopher &middot; Lecturer &middot; Surgeon &middot; Aviation instructor
       </div>
       <div style="font-size:12px;padding-top:8px;font-family:Helvetica,Arial,sans-serif">
         <a href="%s" style="color:#b8860b;text-decoration:none">%s</a>

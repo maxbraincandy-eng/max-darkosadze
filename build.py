@@ -712,7 +712,9 @@ def render_home(data):
 
     # 01 — hero
     hero_lines = "".join("<span>%s</span>" % inline(line) for line in a["hero"]["lines"])
-    roles = " · ".join(esc(r) for r in a["hero"]["roles"])
+    # the three he leads with, set as their own line with a mark between them
+    roles = '<span class="role-dot" aria-hidden="true"></span>'.join(
+        "<span>%s</span>" % esc(r) for r in a["hero"]["roles"])
     hero = """
 <section class="hero" id="top">
   <div class="hero-inner wrap">
@@ -794,12 +796,16 @@ def render_home(data):
         esc(about_page["eyebrow"]), inline(about_page["heading"]), inline(about_page["lead"]),
         link(data["lang"], "about", depth), esc(ui["readMore"]))
 
-    # 05-07 — the three disciplines
-    disciplines = (discipline_block(data, depth, "surgery", "surgery")
-                   + discipline_block(data, depth, "aviation", "aviation", reverse=True)
-                   + discipline_block(data, depth, "philosophy", "philosophy"))
+    # 05-07 — what he leads with: the writing, the films, the thinking
+    leading = (discipline_block(data, depth, "writing", "writing")
+               + discipline_block(data, depth, "cinema", "cinema", reverse=True)
+               + discipline_block(data, depth, "philosophy", "philosophy"))
 
-    # 08 — writing
+    # 09-10 — the professions the work above is drawn from, further down the page
+    professions = (discipline_block(data, depth, "surgery", "surgery")
+                   + discipline_block(data, depth, "aviation", "aviation", reverse=True))
+
+    # 08 — the pieces themselves
     entries = []
     for i, article in enumerate(data["articles"][:6], start=1):
         entries.append("""
@@ -815,13 +821,13 @@ def render_home(data):
                  inline(article["title"]), inline(article["summary"]),
                  reading_time(article), esc(ui["readingTime"])))
     writing = """
-<section class="section writing" id="writing" data-reveal>
+<section class="section writing" id="essays" data-reveal>
   <div class="wrap">%s
     <div class="entry-list">%s</div>
     <p class="sec-actions"><a class="link-arrow" href="%s">%s</a></p>
   </div>
-</section>""" % (archive_head(a["writing"]["eyebrow"], a["writing"]["title"], a["writing"]["lead"]),
-                 "".join(entries), link(data["lang"], "articles", depth), esc(a["writing"]["cta"]))
+</section>""" % (archive_head(a["essays"]["eyebrow"], a["essays"]["title"], a["essays"]["lead"]),
+                 "".join(entries), link(data["lang"], "articles", depth), esc(a["essays"]["cta"]))
 
     # 10 — projects
     project_rows = "".join("""
@@ -927,8 +933,8 @@ def render_home(data):
         esc(data["meta"]["links"]["instagram"]),
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-    body = (hero + featured_band(data, depth) + intro + worlds + about + disciplines + writing
-            + film_section(data, depth) + projects + library + gallery
+    body = (hero + featured_band(data, depth) + intro + worlds + about + leading + writing
+            + film_section(data, depth) + professions + projects + library + gallery
             + journey + notes_section + contact)
 
     return document(
@@ -1764,7 +1770,7 @@ def render_root_index(datasets=None):
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>მაქსი დარკოსაძე / Max Darkosadze</title>
-<meta name="description" content="Max Darkosadze — surgeon, aviation instructor, lecturer, writer and public figure. Official site in English and Georgian.">
+<meta name="description" content="Max Darkosadze — writer, director and contemporary philosopher. Official site in English and Georgian.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="assets/icons/icon-96.png">
@@ -1790,8 +1796,8 @@ def render_root_index(datasets=None):
     <div class="choose-inner">
       <img class="brand-mark brand-mark-lg" src="assets/img/favicon.svg" alt="" width="64" height="64">
       <h1><span lang="ka">მაქსი დარკოსაძე</span><br>Max Darkosadze</h1>
-      <p>Surgeon · Aviation instructor · Lecturer · Writer · Public figure</p>
-      <p lang="ka">ქირურგი · ავიაინსტრუქტორი · ლექტორი · მწერალი · საზოგადო მოღვაწე</p>
+      <p>Writer · Director · Philosopher</p>
+      <p lang="ka">მწერალი · რეჟისორი · ფილოსოფოსი</p>
       <p class="choose-actions">
         <a class="btn btn-primary" href="ka/" lang="ka">ქართული</a>
         <a class="btn btn-ghost" href="en/">English</a>
