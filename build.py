@@ -1524,6 +1524,11 @@ def render_root_index(datasets=None):
         head_extra += '<link rel="canonical" href="%s/ka/index.html">\n' % esc(base)
     head_extra += ('<meta name="robots" content="index, follow, max-image-preview:large, '
                    'max-snippet:-1">\n')
+    # the root is the address a search engine verifies, so the codes belong here too
+    for field, meta in (("googleVerification", "google-site-verification"),
+                        ("bingVerification", "msvalidate.01")):
+        if SITE.get(field, "").strip():
+            head_extra += '<meta name="%s" content="%s">\n' % (meta, esc(SITE[field].strip()))
     if datasets:
         head_extra += person_jsonld(datasets["ka"]) + "\n"
     return """<!DOCTYPE html>
