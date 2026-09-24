@@ -1,0 +1,2191 @@
+{
+  "lang": "en",
+  "htmlLang": "en",
+  "other": "ka",
+  "otherLabel": "ქართული",
+  "otherAria": "Switch to Georgian",
+  "meta": {
+    "siteName": "Max Darkosadze",
+    "tagline": "Writer · Director · Philosopher",
+    "description": "Official website of Max Darkosadze — writer, director and contemporary philosopher. Books, essays, filmography, lectures and the foundation, in English and Georgian.",
+    "nickname": "Mr. Max",
+    "nicknameLabel": "Known to many simply as",
+    "links": {
+      "instagram": "https://www.instagram.com/maxdarkosadze/",
+      "imdb": "https://www.imdb.com/name/nm8752510/",
+      "game": "https://voidmafia.one/"
+    }
+  },
+  "nav": [
+    {
+      "key": "about",
+      "label": "About"
+    },
+    {
+      "key": "articles",
+      "label": "Writing"
+    },
+    {
+      "key": "films",
+      "label": "Film"
+    },
+    {
+      "key": "home",
+      "label": "Philosophy",
+      "anchor": "philosophy"
+    },
+    {
+      "key": "game",
+      "label": "Game"
+    },
+    {
+      "key": "gallery",
+      "label": "Gallery"
+    },
+    {
+      "key": "guestbook",
+      "label": "Guest book"
+    },
+    {
+      "key": "contact",
+      "label": "Contact"
+    }
+  ],
+  "ui": {
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "readMore": "Read the article",
+    "readingTime": "min read",
+    "allArticles": "All articles",
+    "backToArticles": "Back to all articles",
+    "nextArticle": "Next article",
+    "prevArticle": "Previous article",
+    "share": "Share this article",
+    "editorNote": "Editor’s note: passages marked like this are placeholders. Replace them with verified dates, names and figures before the site goes public.",
+    "imageMissing": "Photo slot — place your image at:",
+    "featured": "Featured articles",
+    "relatedReading": "Continue reading",
+    "toTop": "Back to top",
+    "footerNote": "All materials on this site concern the life and work of Max Darkosadze.",
+    "rights": "All rights reserved.",
+    "langLabel": "Language",
+    "categoryLabel": "Category",
+    "theme": "Switch between light and dark",
+    "quotesTitle": "In his own words",
+    "legendCta": "Read the legend",
+    "faqMore": "Read more",
+    "filmPause": "Pause the background film",
+    "filmPlay": "Play the background film",
+    "contents": "Contents"
+  },
+  "archive": {
+    "hero": {
+      "eyebrow": "Max Darkosadze",
+      "lines": [
+        "A life between",
+        "the word, the frame",
+        "and the question."
+      ],
+      "roles": [
+        "Writer",
+        "Director",
+        "Philosopher"
+      ],
+      "statement": "The space where the written word, the filmed frame and the open question meet.",
+      "place": "Tbilisi · Georgia",
+      "scroll": "Scroll to explore",
+      "portraitAlt": "Max Darkosadze — Mr. Max"
+    },
+    "featured": {
+      "slug": "success",
+      "eyebrow": "Featured",
+      "kicker": "New",
+      "cta": "Read the article"
+    },
+    "intro": {
+      "statement": "I am interested in the space where the written word meets human experience.",
+      "paragraphs": [
+        "A page, a film set, a lecture hall — and, in other rooms, an operating table and a cockpit: worlds that look far apart and are held together by one question: how do we decide when the information is never complete?",
+        "This site is an archive. It gathers what I do, read, write and think about — not because any of it is finished, but because it continues."
+      ]
+    },
+    "worlds": {
+      "eyebrow": "The archive",
+      "title": "The worlds I explore",
+      "items": [
+        {
+          "n": "01",
+          "title": "Writing",
+          "text": "The page where thinking becomes responsibility.",
+          "image": "assets/img/writing.jpg",
+          "key": "article",
+          "slug": "writer"
+        },
+        {
+          "n": "02",
+          "title": "Film",
+          "text": "Directing, screenwriting and acting — the work with a public record.",
+          "image": "assets/img/film.jpg",
+          "key": "article",
+          "slug": "filmmaker"
+        },
+        {
+          "n": "03",
+          "title": "Philosophy",
+          "text": "Questions whose answers are never written once.",
+          "image": "assets/img/philosophy.jpg",
+          "key": "article",
+          "slug": "philosopher"
+        },
+        {
+          "n": "04",
+          "title": "Surgery",
+          "text": "A precise movement with months of preparation behind it.",
+          "image": "assets/img/surgery.jpg",
+          "key": "article",
+          "slug": "surgeon"
+        },
+        {
+          "n": "05",
+          "title": "Aviation",
+          "text": "The discipline that turns out to be the only reliable form of freedom.",
+          "image": "assets/img/aviation.jpg",
+          "key": "article",
+          "slug": "aviation-instructor"
+        },
+        {
+          "n": "06",
+          "title": "Projects",
+          "text": "Experiments between thought and technology.",
+          "image": "assets/img/gallery/17.jpg",
+          "key": "projects",
+          "slug": null
+        }
+      ]
+    },
+    "writing": {
+      "eyebrow": "Discipline 01",
+      "title": "Writing",
+      "quote": "The same questions kept coming back in the corridor — and the answers were far too long for a corridor.",
+      "text": "The books and the long essays ask one question in several languages: how does a person decide without the full answer? The text does not diagnose the reader. It shows what the work looks like from the inside and leaves the question where it belongs.",
+      "image": "assets/img/writing.jpg",
+      "cta": "Read the article",
+      "slug": "writer",
+      "points": [
+        {
+          "h": "Where it began",
+          "t": "The first book grew out of notes made for the doctors training beside him, then was written for patients and their families."
+        },
+        {
+          "h": "The style",
+          "t": "Nothing decorative, nothing spare, and a refusal to hurry the difficult passage. He revises heavily, and cuts most where he felt impressive."
+        },
+        {
+          "h": "Who reads it",
+          "t": "The books found readers well outside the professions they describe — which, he says, is a remark about the public's appetite rather than about him."
+        }
+      ]
+    },
+    "cinema": {
+      "eyebrow": "Discipline 02",
+      "title": "Film",
+      "quote": "A crew, a plan, a briefing, and one person answerable for the result.",
+      "text": "Directing, screenwriting and acting — the part of the work with the longest public record: the credits are dated, listed and anyone's to check.",
+      "image": "assets/img/film.jpg",
+      "cta": "The filmography",
+      "slug": "filmmaker",
+      "points": [
+        {
+          "h": "The credits",
+          "t": "Director, writer and actor. In 2016 he directed and starred in the action film Cowards; his credits also include Star Wars Zero."
+        },
+        {
+          "h": "Tbilisi and New York",
+          "t": "Both cities show up in the work differently: one supplies the material, the other the industry."
+        },
+        {
+          "h": "Where to check",
+          "t": "The full, current filmography is on IMDb; the set itself turns up on Instagram."
+        }
+      ],
+      "page": "films"
+    },
+    "philosophy": {
+      "eyebrow": "Discipline 03",
+      "title": "Philosophy",
+      "quote": "To understand a life, one must first understand the ideas that built it.",
+      "text": "Philosophy here is not an academic title. It is a set of questions that follow the day's work around: will, freedom, consciousness, meaning.",
+      "themesTitle": "The reading circle",
+      "themes": [
+        "Nietzsche",
+        "Schopenhauer",
+        "Plato",
+        "Hegel",
+        "Existentialism",
+        "Consciousness",
+        "Will",
+        "Human nature",
+        "Meaning"
+      ],
+      "image": "assets/img/philosophy.jpg",
+      "cta": "Read the article",
+      "points": [
+        {
+          "h": "The reading",
+          "t": "Nietzsche, Schopenhauer, Plato, Hegel — not as authorities but as people who asked the same questions first."
+        },
+        {
+          "h": "The questions",
+          "t": "What obligation does freedom leave behind; where will ends and habit begins; how meaning differs from explanation."
+        },
+        {
+          "h": "Where it shows",
+          "t": "In the operating room and the cockpit — wherever a decision has to be made without the full answer. Philosophy is the preparation for that minute."
+        }
+      ]
+    },
+    "essays": {
+      "eyebrow": "The archive",
+      "title": "Writing",
+      "lead": "Essays and long pieces — each following one question to the end.",
+      "cta": "All writing",
+      "read": "Read"
+    },
+    "surgery": {
+      "eyebrow": "Discipline 04",
+      "title": "Surgery",
+      "quote": "An operating room forgives nothing careless — which is exactly why it teaches precision everywhere else.",
+      "text": "What matters most in surgery is not what happens at the table but what was settled before it: a plan that already contains what to do if something goes wrong.",
+      "points": [
+        {
+          "h": "At the table",
+          "t": "An operation begins with a plan rather than an incision: the order of the steps, the fallback, and the minute where you stop and look again."
+        },
+        {
+          "h": "Deciding",
+          "t": "The information is never complete. The skill that matters is knowing which step can wait and which one cannot."
+        },
+        {
+          "h": "The team",
+          "t": "The most dangerous words in an operating room are “I assumed you knew”. Which is why the obvious is said out loud too."
+        },
+        {
+          "h": "Philosophy of medicine",
+          "t": "A patient is not a case. A patient is a person with a story, whose trust is spent again at every visit."
+        }
+      ],
+      "image": "assets/img/surgery.jpg",
+      "cta": "Read the article"
+    },
+    "aviation": {
+      "eyebrow": "Discipline 05",
+      "title": "Aviation",
+      "quote": "There is a particular kind of silence above the clouds.",
+      "text": "A flight is preceded by a briefing that often takes longer than the flight itself. Aviation teaches that confidence is born of preparation, never the other way round.",
+      "points": [
+        {
+          "h": "The briefing",
+          "t": "Before the flight: weather, weight, fuel, the alternate — and the question a student remembers for a career: what will you do if something goes wrong, and at what moment will you decide it?"
+        },
+        {
+          "h": "Instructing",
+          "t": "An instructor's work is to leave the student able to think when the right-hand seat is empty. So you ask rather than answer."
+        },
+        {
+          "h": "Philosophy of flight",
+          "t": "The checklist exists not because the pilot is not trusted, but because memory never is. Discipline here is not the opposite of freedom; it is its condition."
+        }
+      ],
+      "image": "assets/img/aviation.jpg",
+      "cta": "Read the article"
+    },
+    "projects": {
+      "eyebrow": "The archive",
+      "title": "Projects",
+      "lead": "What is already being made — and what you will find on this site.",
+      "items": [
+        {
+          "n": "01",
+          "title": "Void Mafia",
+          "kind": "Platform",
+          "text": "A game, a social network and tests of the mind in one place — Mafia rounds, a profile and a feed, VOID IQ, the logic academy and playable thought experiments, with a public leaderboard.",
+          "status": "Live",
+          "page": "game"
+        },
+        {
+          "n": "02",
+          "title": "The short film",
+          "kind": "Video",
+          "text": "Half a minute built from the photographs on this site: the operating theatre, the cockpit, the lecture hall, the studio, the set. Two languages, no sound.",
+          "status": "Published"
+        },
+        {
+          "n": "03",
+          "title": "The Max Darkosadze Foundation",
+          "kind": "Public work",
+          "text": "Support for the three things he follows himself: education, medicine and culture.",
+          "status": "Ongoing"
+        },
+        {
+          "n": "04",
+          "title": "Lectures and seminars",
+          "kind": "Teaching",
+          "text": "A university, a school, a professional meeting or a conference — subjects from medicine and aviation to ethics and the making of things. Invitations are sent from this site.",
+          "status": "Open to invitations"
+        },
+        {
+          "n": "05",
+          "title": "The essays",
+          "kind": "Writing",
+          "text": "Long pieces, each following one question to the end, from surgery to philosophy. In Georgian and English.",
+          "status": "Growing"
+        }
+      ]
+    },
+    "library": {
+      "eyebrow": "The space",
+      "title": "The Library of the Void",
+      "subtitle": "An archive of ideas.",
+      "text": "The other name for this site. It gathers what is on the way from a thought to a text: essays, fragments, quotations, photographs and the film — linked to one another, unfinished, and deliberately left open.",
+      "tabs": [
+        "Essays",
+        "Notes",
+        "Quotations",
+        "Photographs",
+        "Film",
+        "Lectures"
+      ],
+      "note": "Every new text, photograph or note is added here."
+    },
+    "gallery": {
+      "eyebrow": "The archive",
+      "title": "Visual archive",
+      "text": "Portraits, aviation, the studio, the set, the city.",
+      "cta": "Open the gallery"
+    },
+    "timeline": {
+      "eyebrow": "The path",
+      "title": "Four stages",
+      "lead": "One line running from medicine to the page — asking the same question at every stage.",
+      "entries": [
+        {
+          "year": "01",
+          "title": "Medicine",
+          "text": "It began at the operating table, where preparation and calm turned out to be two names for the same skill."
+        },
+        {
+          "year": "02",
+          "title": "Aviation",
+          "text": "The cockpit repeated the lesson in another language, and showed that discipline is the only reliable form of freedom."
+        },
+        {
+          "year": "03",
+          "title": "The lecture hall",
+          "text": "Teaching forced what the hands already knew into words — which turns out to be the hardest part."
+        },
+        {
+          "year": "04",
+          "title": "The page",
+          "text": "Whatever would not fit into a lecture became text: essays on medicine, aviation, will and responsibility."
+        }
+      ]
+    },
+    "notes": {
+      "eyebrow": "Fragments",
+      "title": "Notes from the void",
+      "items": [
+        "The question is not whether we possess freedom, but what we choose to do with the freedom we believe we possess.",
+        "Discipline is not a restriction. It is attention saved for the minute that will need it.",
+        "Every yes is said at the expense of another yes.",
+        "The impossible is usually just a task nobody has divided up yet."
+      ]
+    },
+    "contactBlock": {
+      "eyebrow": "Contact",
+      "title": "Let's talk",
+      "text": "A lecture, a collaboration, an interview — or simply a question. Write.",
+      "locationLabel": "Location",
+      "location": "Tbilisi, Georgia",
+      "emailLabel": "E-mail",
+      "closing": "Less noise. More presence."
+    }
+  },
+  "film": {
+    "eyebrow": "The film",
+    "title": "One man, several lives",
+    "lead": "Half a minute of Mr. Max's world in pictures: the operating theatre, the cockpit, the lecture hall, the studio, the set.",
+    "caption": "Max Darkosadze — a short film. Silent; best watched full screen."
+  },
+  "pages": {
+    "home": {
+      "title": "Max Darkosadze — Writer, Director & Philosopher",
+      "heroEyebrow": "Official site",
+      "heroTitle": "Max Darkosadze",
+      "heroSubtitle": "A writer at the desk, a director on set, a philosopher in front of the question — and a teacher in the lecture hall.",
+      "heroLead": "Max Darkosadze — known across Georgia simply as Mr. Max — does three things first: he writes, he makes films, and he thinks in public. Books and essays that put a professional's eye into ordinary language; films in which he is credited as director, writer and actor; and a contemporary philosophy written out of practice rather than out of a library. The material for all of it comes from where he works — the operating room, the cockpit and the lecture hall.",
+      "ctaPrimary": "Read the articles",
+      "ctaSecondary": "The biography",
+      "pillarsTitle": "Eight lives in one",
+      "pillarsLead": "Each of these fields demands a lifetime. Together they describe one person, and one consistent way of working.",
+      "pillars": [
+        {
+          "slug": "surgeon",
+          "label": "Surgeon",
+          "text": "Years spent where precision, nerve and judgement meet — and where the patient, never the procedure, is the point."
+        },
+        {
+          "slug": "aviation-instructor",
+          "label": "Aviation instructor",
+          "text": "Teaching pilots that discipline is not the enemy of confidence but its foundation."
+        },
+        {
+          "slug": "lecturer",
+          "label": "Lecturer",
+          "text": "A lecture hall run like an operating theatre: prepared, exacting, and generous with what is hard-won."
+        },
+        {
+          "slug": "writer",
+          "label": "Writer",
+          "text": "Books and essays that carry the professional’s eye into ordinary language."
+        },
+        {
+          "slug": "philosopher",
+          "label": "Philosopher",
+          "text": "A modern philosophy written from practice rather than from the library — several books on responsibility, attention and how a person decides."
+        },
+        {
+          "slug": "sculptor",
+          "label": "Sculptor",
+          "text": "Portrait busts in clay and marble — the one craft in which nothing can be added back."
+        },
+        {
+          "slug": "public-figure",
+          "label": "Public figure",
+          "text": "A voice in public life, and a foundation that turns that voice into practical help."
+        },
+        {
+          "slug": "filmmaker",
+          "label": "Filmmaker",
+          "text": "Director, writer and actor — the action film Cowards (2016) and the credits that followed."
+        }
+      ],
+      "featuredLead": "Long-form profiles of the work, written in English and Georgian.",
+      "foundationTitle": "The Max Darkosadze Foundation",
+      "foundationText": "The foundation carries the same principle into practice: skill is only worth what it gives back. It supports young doctors, aviation students and readers across Georgia — with scholarships, equipment and the kind of mentorship that cannot be bought.",
+      "foundationCta": "About the foundation",
+      "quote": "Whatever the field — an operating room, a cockpit, a lecture hall or a page — the work is the same: prepare completely, decide calmly, and answer for the result.",
+      "quoteCite": "Max Darkosadze",
+      "galleryTeaserTitle": "In pictures",
+      "galleryTeaserText": "Photographs from the hospital, the airfield, the lecture hall and public life.",
+      "galleryCta": "Open the gallery",
+      "motto": {
+        "main": "Discipline creates freedom.",
+        "alt": "დისციპლინა ქმნის თავისუფლებას"
+      }
+    },
+    "about": {
+      "title": "Biography — Max Darkosadze | მაქსი დარკოსაძე",
+      "eyebrow": "Biography",
+      "heading": "The making of Max Darkosadze",
+      "lead": "A life built on one conviction: that mastery is a duty, not a privilege. Known to a generation of students, patients and pilots simply as Mr. Max.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "assets/img/portrait.jpg",
+          "alt": "Portrait of Max Darkosadze",
+          "caption": "Max Darkosadze."
+        },
+        {
+          "type": "h2",
+          "text": "Early years"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze was born in Tbilisi on 26 August 1995, into a family that prized study and service in equal measure. The household rule, as he has described it since, was simple: you may choose your work freely, but once you have chosen it you owe it everything. That rule has followed him into every field he has entered."
+        },
+        {
+          "type": "p",
+          "text": "His interests ran in two directions from the start — people and the machines that carry them — and he has never given either up. Where most people are asked to choose, he has built a working life in which the disciplines teach each other."
+        },
+        {
+          "type": "p",
+          "text": "Somewhere in those years he acquired the name that has followed him ever since. To students, patients, pilots and readers alike he is not “professor” or “doctor” but Mr. Max — in Georgian „ბატონი მაქსი“, an address that carries respect and affection in the same breath. He has never encouraged it and has never managed to stop it."
+        },
+        {
+          "type": "h2",
+          "text": "Medicine and surgery"
+        },
+        {
+          "type": "p",
+          "text": "He studied medicine and went on to train in surgery. Those training years were, by his own account, the hardest and most formative of his life: long rotations, difficult cases, and the slow accumulation of the one thing a young surgeon cannot be given — judgement."
+        },
+        {
+          "type": "p",
+          "text": "Colleagues describe a surgeon who is unhurried in the most literal sense: he moves at exactly the speed the tissue in front of him allows, and not one step faster. He is early in a career rather than at the end of one, and says so whenever the description of him grows too grand."
+        },
+        {
+          "type": "h2",
+          "text": "Aviation"
+        },
+        {
+          "type": "p",
+          "text": "He learned to fly young and went on to qualify as an instructor, and he has taught from the right-hand seat ever since — students ranging from professional crews to people who simply wanted to fly well."
+        },
+        {
+          "type": "p",
+          "text": "The link between the two professions is not decorative. Surgery and aviation are the two fields that have thought hardest about human error: checklists, briefings, crew resource management, the honest debrief. Max Darkosadze has spent years carrying the best practice of each discipline into the other, and lecturing on the subject to audiences from both."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching and writing"
+        },
+        {
+          "type": "p",
+          "text": "He teaches as often as he is asked to, in lecture halls and in briefing rooms, and his writing grew directly out of those lectures — out of a conviction that specialists owe the public a readable account of what they do."
+        },
+        {
+          "type": "h2",
+          "text": "Philosophy"
+        },
+        {
+          "type": "p",
+          "text": "The books that made him known beyond the professions came out of the same impulse. Writing from decisions taken under pressure, he turned to the questions medicine and aviation had forced on him — what responsibility actually requires of a person, how attention is trained, what competence is for, and how anyone decides well when the information is incomplete and the clock is running."
+        },
+        {
+          "type": "p",
+          "text": "He resists the word “philosopher” in conversation and accepts it in print. His argument is that philosophy written only from libraries answers questions nobody is standing in front of, and that someone who works at the point where a decision becomes irreversible has something to contribute that a seminar room cannot supply."
+        },
+        {
+          "type": "h2",
+          "text": "Film"
+        },
+        {
+          "type": "p",
+          "text": "He is also a filmmaker, and it is the part of his work with the longest public record. He is credited as director, writer and actor, and directed and starred in the action film *Cowards* (2016); his credits also include *Star Wars Zero*. The full filmography is on his IMDb page."
+        },
+        {
+          "type": "h2",
+          "text": "Public life"
+        },
+        {
+          "type": "p",
+          "text": "Public work came, he says, inevitably. Handed the consequences of decisions taken elsewhere — under-equipped hospitals, undertrained crews, communities without access to either — he began to argue in public for what he had been repairing in private, and established the Max Darkosadze Foundation to do something about it."
+        },
+        {
+          "type": "quote",
+          "text": "I have never believed that a person is defined by a profession. A person is defined by what they leave behind them in other people.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "Personal"
+        },
+        {
+          "type": "p",
+          "text": "He lives and works between Tbilisi and New York. He reads history, walks in the mountains, and still, whenever the weather allows, flies on Saturday mornings."
+        }
+      ],
+      "five": {
+        "title": "Five answers",
+        "items": [
+          {
+            "h": "Who I am",
+            "t": "A writer, a director and a contemporary philosopher — also a lecturer, a surgeon and an aviation instructor. To many, simply Mr. Max."
+          },
+          {
+            "h": "What I do",
+            "t": "I write books and essays, I direct and act in films, I lecture — and I work in the rooms all of it draws on: the operating theatre and the cockpit."
+          },
+          {
+            "h": "What I study",
+            "t": "Decision-making under incomplete information: in medicine, in aviation, in philosophy. One problem in three languages."
+          },
+          {
+            "h": "What I create",
+            "t": "Texts, a film, sculpture, and projects that stand between thought and technology."
+          },
+          {
+            "h": "What I believe",
+            "t": "That mastery is a duty rather than a privilege — and that preparation is the only honest form of what other people call talent."
+          }
+        ]
+      },
+      "timelineTitle": "Verified dates",
+      "timelineNote": "This list is deliberately short: only what can be verified appears here. The rest of the story is in the text above.",
+      "timeline": [
+        {
+          "year": "1995",
+          "text": "Born in Tbilisi on 26 August."
+        },
+        {
+          "year": "2016",
+          "text": "Directs and stars in the action film Cowards."
+        }
+      ],
+      "honoursTitle": "Honours and distinctions",
+      "honoursLead": "Recognition from the professions he has served. The list below is kept short on purpose: only what can be documented belongs on it.",
+      "honours": []
+    },
+    "articles": {
+      "title": "Articles — Max Darkosadze",
+      "eyebrow": "Articles",
+      "heading": "Articles",
+      "lead": "Long-form pieces on the work of Max Darkosadze — the surgery, the flying, the teaching, the books and the public service. Every article is published in both English and Georgian."
+    },
+    "films": {
+      "title": "Filmography — Max Darkosadze",
+      "eyebrow": "Film",
+      "heading": "Filmography",
+      "lead": "Every public credit — directing, writing, producing and acting. The list follows the record on IMDb: what cannot be checked there is not claimed here.",
+      "labels": {
+        "roles": "Roles",
+        "year": "Year",
+        "kind": "Format",
+        "genre": "Genre",
+        "country": "Country",
+        "language": "Language",
+        "imdb": "On IMDb"
+      },
+      "unknown": "not listed",
+      "items": [
+        {
+          "title": "Cowards",
+          "year": "2016",
+          "kind": "Feature film",
+          "roles": [
+            "Director",
+            "Actor"
+          ],
+          "genre": "Action",
+          "country": "United States",
+          "language": "English",
+          "imdb": "https://www.imdb.com/title/tt6493126/",
+          "id": "tt6493126",
+          "text": "He directed it and played the lead. Made in the United States, in English.",
+          "genreSchema": "Action"
+        },
+        {
+          "title": "Star Wars Zero",
+          "year": "",
+          "kind": "Film",
+          "roles": [
+            "Director",
+            "Writer",
+            "Producer",
+            "Actor"
+          ],
+          "genre": "Action",
+          "country": "",
+          "language": "English",
+          "imdb": "https://www.imdb.com/title/tt6492040/",
+          "id": "tt6492040",
+          "text": "Four jobs on one film: he wrote it, directed it, produced it and acted in it. IMDb lists no release year.",
+          "genreSchema": "Action"
+        }
+      ],
+      "profileCta": "The full profile on IMDb",
+      "essayCta": "The essay on film",
+      "note": "The list follows the public credits on IMDb (nm8752510). A new credit appears there first, and here after."
+    },
+    "game": {
+      "title": "Void Mafia — the game, the feed and the tests of the mind",
+      "eyebrow": "Project",
+      "heading": "Void Mafia",
+      "tagline": "A game, a social network and tests of the mind, in one place.",
+      "lead": "Max Darkosadze built this platform. Cyberpunk Mafia rounds; a profile and a feed where anyone can post what they like; and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments. Results go on a public leaderboard. It all runs in the browser, in Georgian and in English.",
+      "cta": "Enter",
+      "ctaNote": "voidmafia.one — opens in the browser, on a phone or a computer",
+      "factsTitle": "What is inside",
+      "facts": [
+        {
+          "h": "The Mafia rounds",
+          "t": "Mafia, Don, Doctor, Detective, Sheriff, Jester, Phantom and the civilians — lobbies, chat and a voice session. A round is built on real conversation, not on buttons."
+        },
+        {
+          "h": "A profile and a feed",
+          "t": "The social half: a profile, posts, follows, comments and likes — post what you want, and read what everyone else is posting."
+        },
+        {
+          "h": "VOID IQ",
+          "t": "A test across six kinds of reasoning: pattern recognition, matrix, numerical, logical, spatial and verbal. The result comes back as a percentile — how many of those tested you are ahead of."
+        },
+        {
+          "h": "The Academy of Formal Logic",
+          "t": "Logic, argument, deduction — from syllogisms up. Four levels, a practice mode and a ranked mode, an exam, a handbook, and a daily challenge with a new test every day. Ranks run from student to legend of logic."
+        },
+        {
+          "h": "Thought experiments, played",
+          "t": "The Chinese Room, the brain in a vat and others, rebuilt as scenes you decide your way through. At the end it names the position you actually hold: functionalist, biological naturalist or mysterian."
+        },
+        {
+          "h": "A public leaderboard",
+          "t": "Results stand in the world, in the country and among friends — by week, by month and all time. Seasons, ranks and clans; a test left unfinished does not count."
+        },
+        {
+          "h": "Two languages, and a phone",
+          "t": "The whole interface in Georgian and English; it keeps to the home screen like an app, with no store in the way."
+        }
+      ],
+      "whyTitle": "Why he recommends it",
+      "why": "Mafia is the one game you win not by being quick but by reading people. The logic academy and the thought experiments are the other side of that question: how we reason, and why we believe what we believe. It is the question his writing keeps returning to — and Void Mafia is where it can be played rather than only read.",
+      "note": "The platform lives on its own site, voidmafia.one. This page only says that it is his work."
+    },
+    "foundation": {
+      "title": "The Foundation — Max Darkosadze",
+      "eyebrow": "The foundation",
+      "heading": "The Max Darkosadze Foundation",
+      "lead": "Skill is only worth what it gives back.",
+      "blocks": [
+        {
+          "type": "image",
+          "src": "assets/img/foundation.jpg",
+          "alt": "The work of the Max Darkosadze Foundation",
+          "caption": ""
+        },
+        {
+          "type": "p",
+          "text": "The Max Darkosadze Foundation was established with a single, unglamorous purpose: to put resources where talent already exists but opportunity does not. It works in the three fields its founder knows best — medicine, aviation and literacy — and it works mostly outside the capital, where the gap between ability and access is widest."
+        },
+        {
+          "type": "h2",
+          "text": "What the foundation does"
+        },
+        {
+          "type": "p",
+          "text": "Its programmes are deliberately small, practical and measurable. The foundation does not fund conferences about problems; it funds the specific thing that removes them."
+        },
+        {
+          "type": "h2",
+          "text": "Principles"
+        },
+        {
+          "type": "list",
+          "items": [
+            "Fund people, not prestige. Every lari should end up in the hands of someone doing the work.",
+            "Go where the need is, not where the cameras are.",
+            "Mentorship is part of every grant. Money without guidance is a gesture, not a programme.",
+            "Publish the numbers. Anyone who gives has the right to see where it went."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Support the work"
+        },
+        {
+          "type": "p",
+          "text": "The foundation is funded by private donations, by partner clinics and companies, and by the author’s royalties. If you would like to support a scholarship, donate equipment, or offer your own time as a mentor, the quickest way to reach it is by message on [Instagram](https://www.instagram.com/maxdarkosadze/)."
+        }
+      ],
+      "programmesTitle": "Programmes",
+      "programmes": [
+        {
+          "title": "Scholarships in medicine",
+          "text": "Annual scholarships for a number of medical students from the regions, covering tuition, textbooks and travel to placements."
+        },
+        {
+          "title": "Equipment for regional clinics",
+          "text": "Surgical and diagnostic equipment delivered directly to district hospitals, with training for the staff who will use it."
+        },
+        {
+          "title": "Wings programme",
+          "text": "Subsidised flight training for a number of cadets a year who could not otherwise afford a licence, with instruction hours donated by volunteer instructors."
+        },
+        {
+          "title": "Books for regional libraries",
+          "text": "Medical, technical and general-interest titles supplied to school and village libraries across the regions, in Georgian."
+        },
+        {
+          "title": "The debrief seminars",
+          "text": "Free seminars for hospital teams on checklists, briefings and error prevention — the aviation safety culture applied to clinical work."
+        }
+      ]
+    },
+    "gallery": {
+      "title": "Gallery — Max Darkosadze",
+      "eyebrow": "The archive",
+      "heading": "Visual archive",
+      "lead": "Photographs from the hospital, the airfield, the lecture hall, the writing desk, the film set and the workshop — and from the days away from all of them. Choose a category, or open any picture to see it full size.",
+      "items": [
+        {
+          "src": "assets/img/gallery/01.jpg",
+          "category": "life",
+          "caption": "On the course."
+        },
+        {
+          "src": "assets/img/gallery/02.jpg",
+          "category": "medicine",
+          "caption": "In the hospital."
+        },
+        {
+          "src": "assets/img/gallery/03.jpg",
+          "category": "aviation",
+          "caption": "Instructing from the right-hand seat."
+        },
+        {
+          "src": "assets/img/gallery/15.jpg",
+          "category": "lectures",
+          "caption": "Lecturing on philosophy."
+        },
+        {
+          "src": "assets/img/gallery/04.jpg",
+          "category": "philosophy",
+          "caption": "At the writing desk."
+        },
+        {
+          "src": "assets/img/gallery/06.jpg",
+          "category": "philosophy",
+          "caption": "With the philosophers."
+        },
+        {
+          "src": "assets/img/gallery/05.jpg",
+          "category": "film",
+          "caption": "Directing on set."
+        },
+        {
+          "src": "assets/img/gallery/09.jpg",
+          "category": "sculpture",
+          "caption": "In the sculpture workshop."
+        },
+        {
+          "src": "assets/img/gallery/08.jpg",
+          "category": "service",
+          "caption": "On a rescue call."
+        },
+        {
+          "src": "assets/img/gallery/14.jpg",
+          "category": "service",
+          "caption": "The cat that would not come down."
+        },
+        {
+          "src": "assets/img/gallery/07.jpg",
+          "category": "life",
+          "caption": "With the honours."
+        },
+        {
+          "src": "assets/img/gallery/10.jpg",
+          "category": "life",
+          "caption": "Departure."
+        },
+        {
+          "src": "assets/img/gallery/11.jpg",
+          "category": "life",
+          "caption": "At sea."
+        },
+        {
+          "src": "assets/img/gallery/12.jpg",
+          "category": "life",
+          "caption": "Monaco."
+        },
+        {
+          "src": "assets/img/gallery/13.jpg",
+          "category": "life",
+          "caption": "An evening off."
+        },
+        {
+          "src": "assets/img/gallery/16.jpg",
+          "category": "life",
+          "caption": "Before the ride."
+        },
+        {
+          "src": "assets/img/gallery/17.jpg",
+          "category": "life",
+          "caption": "On the way."
+        },
+        {
+          "src": "assets/img/gallery/18.jpg",
+          "category": "life",
+          "caption": "Afternoon, above the city."
+        },
+        {
+          "src": "assets/img/gallery/19.jpg",
+          "category": "life",
+          "caption": "Tbilisi at night — after the meeting."
+        }
+      ],
+      "categories": [
+        {
+          "key": "all",
+          "label": "All"
+        },
+        {
+          "key": "medicine",
+          "label": "Medicine"
+        },
+        {
+          "key": "aviation",
+          "label": "Aviation"
+        },
+        {
+          "key": "lectures",
+          "label": "Lectures"
+        },
+        {
+          "key": "philosophy",
+          "label": "Books & philosophy"
+        },
+        {
+          "key": "film",
+          "label": "Film"
+        },
+        {
+          "key": "sculpture",
+          "label": "Sculpture"
+        },
+        {
+          "key": "service",
+          "label": "Service"
+        },
+        {
+          "key": "life",
+          "label": "Life"
+        }
+      ],
+      "countLabel": "photographs",
+      "emptyLabel": "Nothing in this category yet.",
+      "lightbox": {
+        "close": "Close",
+        "prev": "Previous photograph",
+        "next": "Next photograph"
+      }
+    },
+    "contact": {
+      "title": "Contact — Max Darkosadze",
+      "eyebrow": "Contact",
+      "heading": "Get in touch",
+      "lead": "For interviews, lectures, foundation matters and publishing enquiries.",
+      "cards": [
+        {
+          "title": "General and press",
+          "lines": [
+            "Write on [Instagram](https://www.instagram.com/maxdarkosadze/) — @maxdarkosadze",
+            "For editors there is a [press kit](press.html): biography, photographs and the short facts."
+          ]
+        },
+        {
+          "title": "Film",
+          "lines": [
+            "Credits and filmography on [IMDb](https://www.imdb.com/name/nm8752510/)",
+            "Questions — [Instagram](https://www.instagram.com/maxdarkosadze/)"
+          ]
+        },
+        {
+          "title": "Lectures and seminars",
+          "lines": [
+            "Use the [invitation form](booking.html) — the reply comes to you directly.",
+            "Give the date, the audience and the subject."
+          ]
+        },
+        {
+          "title": "The foundation",
+          "lines": [
+            "[The foundation page](foundation.html) — its directions and programmes.",
+            "Donations, partnerships or mentoring — reach us on Instagram."
+          ]
+        }
+      ],
+      "socialTitle": "Follow the work",
+      "social": [
+        {
+          "label": "Instagram",
+          "url": "https://www.instagram.com/maxdarkosadze/"
+        },
+        {
+          "label": "IMDb",
+          "url": "https://www.imdb.com/name/nm8752510/"
+        }
+      ],
+      "pressTitle": "Press kit",
+      "pressText": "High-resolution photographs, a short and long biography and a list of honours are available on request. Editors are asked to use the name in the form “Max Darkosadze” in English and „მაქსი დარკოსაძე“ in Georgian. The nickname is „ბატონი მაქსი“ in Georgian and **Mr. Max** in English.",
+      "formTitle": "Write a message",
+      "form": {
+        "name": "Your name",
+        "email": "Your e-mail",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send",
+        "note": "The message goes straight to his inbox."
+      }
+    },
+    "news": {
+      "title": "News — Max Darkosadze",
+      "eyebrow": "News",
+      "heading": "News",
+      "lead": "Short notes on new work: films, books, lectures and the foundation.",
+      "empty": "Nothing posted yet.",
+      "entries": [
+        {
+          "date": "23 September 2026",
+          "title": "New article: how to get somewhere",
+          "text": "“When impossibility meets the possibilities” — Mr. Max's seven rules: vision, preparation, execution, discipline, “no” as leverage, the debrief, and momentum.",
+          "link": "articles/success.html",
+          "linkLabel": "Read the article"
+        },
+        {
+          "date": "16 September 2026",
+          "title": "This site opens",
+          "text": "maxdarkosadze — the official site — is published in English and Georgian: the biography, the articles, the gallery and the work of the foundation. New entries will appear here.",
+          "link": "",
+          "linkLabel": ""
+        }
+      ]
+    },
+    "press": {
+      "title": "Press kit — Max Darkosadze",
+      "eyebrow": "For editors",
+      "heading": "Press kit",
+      "lead": "Everything a newsroom usually asks for, ready to copy. Nothing here needs permission — please credit the photographs to their owner.",
+      "shortTitle": "Short biography (35 words)",
+      "short": "Max Darkosadze, known across Georgia as Mr. Max, is a writer, a director and a contemporary philosopher; he is also a lecturer, a surgeon and an aviation instructor. Born in Tbilisi in 1995, he works between Georgia and New York and leads the foundation that carries his name.",
+      "longTitle": "Longer biography (120 words)",
+      "long": "Max Darkosadze — Mr. Max — was born in Tbilisi on 26 August 1995. He writes books and long essays on responsibility, attention and deciding well under pressure; the first of them began as notes for the doctors training beside him. He is credited as a director, writer and actor, and directed and starred in the action film Cowards (2016); his credits also include Star Wars Zero. His philosophical writing turns on will, freedom, consciousness and the search for meaning. By profession he trained in medicine and in surgery and qualified as a flight instructor, and he teaches in lecture halls and briefing rooms alike — the two rooms that supply the material for what he writes and films. Through the Max Darkosadze Foundation he supports medical students, regional clinics and flight cadets across Georgia. He lives and works between Tbilisi and New York.",
+      "factsTitle": "Fact sheet",
+      "facts": [
+        "Full name: Max Darkosadze — მაქსი დარკოსაძე",
+        "Known as: Mr. Max — ბატონი მაქსი",
+        "Born: 26 August 1995, Tbilisi, Georgia",
+        "Based: Tbilisi and New York",
+        "Fields: writing · film · philosophy · lecturing · surgery · aviation",
+        "Foundation: the Max Darkosadze Foundation",
+        "Project: Void Mafia — voidmafia.one",
+        "IMDb: imdb.com/name/nm8752510",
+        "Instagram: @maxdarkosadze"
+      ],
+      "namesTitle": "How to write the name",
+      "names": "In English: **Max Darkosadze**, with **Mr. Max** as the nickname — the English form of the Georgian „ბატონი მაქსი“. In Georgian: **მაქსი დარკოსაძე**, „ბატონი მაქსი“. Please do not use “Maxim”.",
+      "downloadsTitle": "Downloads",
+      "downloadsText": "A single archive with the photographs on this site at full size, for print and web.",
+      "downloadLabel": "Photographs (ZIP)",
+      "contactTitle": "Interviews",
+      "contactText": "Interview and lecture requests go through the contact page.",
+      "brandTitle": "Brand assets",
+      "brandText": "The wordmark, the business card and the QR code, drawn from the same palette as the site.",
+      "brandItems": [
+        [
+          "Wordmark (SVG)",
+          "assets/brand/wordmark.svg"
+        ],
+        [
+          "Business card — front (PNG, 300 dpi)",
+          "assets/brand/business-card-front.png"
+        ],
+        [
+          "Business card — back (PNG, 300 dpi)",
+          "assets/brand/business-card-back.png"
+        ],
+        [
+          "QR code to this site (PNG)",
+          "assets/brand/qr.png"
+        ],
+        [
+          "E-mail signature (HTML)",
+          "assets/brand/email-signature.html"
+        ]
+      ]
+    },
+    "faq": {
+      "title": "Frequently asked questions — Max Darkosadze",
+      "eyebrow": "Questions",
+      "heading": "Frequently asked questions",
+      "lead": "Short answers to what people ask most often about Mr. Max.",
+      "items": [
+        {
+          "q": "Who is Max Darkosadze?",
+          "a": "A writer, a director and a contemporary philosopher — also a lecturer, a surgeon, an aviation instructor and a sculptor. He is 31. What holds these distant occupations together is one thing: precision, and responsibility for the result.",
+          "link": "about"
+        },
+        {
+          "q": "What films has he made?",
+          "a": "He directed and played the lead in the action film Cowards (2016); on Star Wars Zero he is credited as director, writer, producer and actor. The full list is on the filmography page, following the record on IMDb.",
+          "link": "films"
+        },
+        {
+          "q": "What is Void Mafia?",
+          "a": "A platform built by Max Darkosadze: cyberpunk Mafia rounds, a profile and a feed where anyone can post, and tests of the mind — VOID IQ, the Academy of Formal Logic and playable thought experiments, with a public leaderboard. voidmafia.one.",
+          "link": "game"
+        },
+        {
+          "q": "Where does the name Mr. Max come from?",
+          "a": "Students and colleagues gave it to him — a courteous form of address in Georgian that stuck until it worked like a name. He is known by both: Max Darkosadze and Mr. Max."
+        },
+        {
+          "q": "What does he lecture on?",
+          "a": "Medicine and how decisions get made under pressure, aviation and discipline, ethics and responsibility, and the making of things. The rooms vary: a university, a school, a professional meeting, a conference.",
+          "link": "articles"
+        },
+        {
+          "q": "How do I invite him to speak?",
+          "a": "Use the invitation form — who is asking, the date you have in mind, the audience and the subject. Requests are never made public.",
+          "link": "booking"
+        },
+        {
+          "q": "Where can I see his film work?",
+          "a": "His film credits are on IMDb; the link is at the foot of every page. Photographs from the set are in the gallery.",
+          "link": "gallery"
+        },
+        {
+          "q": "What does the foundation do?",
+          "a": "It backs the work he follows himself — education, medicine and culture.",
+          "link": "foundation"
+        },
+        {
+          "q": "Is the Legend page true?",
+          "a": "No — and the page says so itself. It collects the tall tales people tell about him, told with a straight face. The rest of the site is the serious part.",
+          "link": "legend"
+        },
+        {
+          "q": "Can I leave a note?",
+          "a": "Yes. In the guest book you pick any name you like and write a few words — where you met him, and what stayed with you.",
+          "link": "guestbook"
+        },
+        {
+          "q": "What languages is the site in?",
+          "a": "Georgian and English. The switch is in the top corner, and it always takes you to the same page in the other language."
+        },
+        {
+          "q": "May I use the photographs and text?",
+          "a": "There is a press kit for journalists and organisers — a biography, photographs and the short facts. For anything else, please ask first.",
+          "link": "press"
+        }
+      ]
+    },
+    "search": {
+      "title": "Search — Max Darkosadze",
+      "eyebrow": "Search",
+      "heading": "Search the site",
+      "lead": "Type a word — the articles and pages filter as you go.",
+      "placeholder": "for example: aviation, foundation, lecture",
+      "label": "Search term",
+      "empty": "Nothing matched. Try another word.",
+      "start": "Start typing and the results appear here.",
+      "countOne": "1 page found",
+      "countMany": "%d pages found"
+    },
+    "legend": {
+      "title": "The Legend — Max Darkosadze",
+      "eyebrow": "Unofficial",
+      "masthead": "THE LEGEND",
+      "heading": "The Legend of Mr. Max",
+      "strapline": "An unofficial chronicle · Collected from people who swear they were there",
+      "lead": "None of what follows is confirmed. Some of it Max Darkosadze first heard about himself, years after it supposedly happened.",
+      "quote": "Some of these are exaggerated. I am not going to tell you which.",
+      "quoteCite": "Mr. Max",
+      "entriesTitle": "The file",
+      "entries": [
+        {
+          "tag": "Mountain flying, 2021",
+          "title": "The cloud that apologised",
+          "text": "Witnesses in the valley maintain that the cloud moved first. Mr. Max maintains that he turned back early, which is what he teaches, and that clouds do not apologise. The witnesses are not persuaded."
+        },
+        {
+          "tag": "Chess",
+          "title": "The game he won without sitting down",
+          "text": "He walked past the board on the way to the theatre, said one word, and kept walking. The player he said it to resigned eleven moves later and has never explained why."
+        },
+        {
+          "tag": "Testimony",
+          "title": "The anaesthetist's statement",
+          "text": "Asked to account for an unusually smooth induction, the anaesthetist wrote in the record that no additional agent had been required: the patient had fallen asleep out of sheer respect."
+        },
+        {
+          "tag": "The workshop",
+          "title": "The marble that named itself",
+          "text": "He had the chisel raised when, by his own account, the stone made its preference known. He put the chisel down and started again. The bust took four months longer and is the only one he has refused to give away."
+        },
+        {
+          "tag": "Tbilisi",
+          "title": "The kitten came back",
+          "text": "Three weeks after being carried down the ladder, the cat was found sitting outside a building it had no reason to know, waiting. It is said to have looked mildly annoyed about the wait."
+        },
+        {
+          "tag": "Briefing room",
+          "title": "The four-second pause",
+          "text": "Students time it. The record stands at four seconds of silence before an answer, after which the student in question changed their own answer twice, unprompted, and arrived at the right one."
+        },
+        {
+          "tag": "Kakheti",
+          "title": "The horse",
+          "text": "The horse has a documented objection to being saddled by anyone else, which the owner describes as a personality flaw and Max Darkosadze describes as good judgement."
+        },
+        {
+          "tag": "The university",
+          "title": "The nine minutes",
+          "text": "A lecture once ran nine minutes over. Rather than ask him to finish on time, the department moved the following class. The timetable has never been moved back."
+        },
+        {
+          "tag": "A wedding",
+          "title": "The checklist at the top table",
+          "text": "The best man lost his speech. Mr. Max is said to have handed him a napkin with four words on it. Guests report the speech was better than the original, and considerably shorter."
+        },
+        {
+          "tag": "The airline",
+          "title": "Still doing it his way",
+          "text": "A captain on a scheduled route was observed briefing his crew in a sequence not found in any manual. Asked about it, he named his first instructor and declined to discuss the matter further."
+        },
+        {
+          "tag": "The engraver",
+          "title": "First time right",
+          "text": "The plaque reads DISCIPLINE CREATES FREEDOM. The engraver got it right at the first attempt, which the engraver says has not happened before or since."
+        },
+        {
+          "tag": "Unverifiable",
+          "title": "The one he will not discuss",
+          "text": "There is a twelfth story. Everyone who tells it tells it differently, and he answers all of them the same way: by asking whether you have eaten."
+        }
+      ],
+      "recordsTitle": "Records",
+      "recordsNote": "Held, claimed or invented — in no particular order.",
+      "records": [
+        {
+          "name": "Longest recorded briefing-room silence",
+          "value": "4 seconds · unconfirmed"
+        },
+        {
+          "name": "Saturdays flown without incident",
+          "value": "all of them"
+        },
+        {
+          "name": "Cats brought down from trees",
+          "value": "1 · so far"
+        },
+        {
+          "name": "Operations declined on principle",
+          "value": "not counted"
+        },
+        {
+          "name": "Times he has mentioned any of this himself",
+          "value": "0"
+        },
+        {
+          "name": "Clouds apologised to",
+          "value": "disputed"
+        }
+      ],
+      "closing": "Everything else on this site is meant seriously. This page is not."
+    },
+    "guestbook": {
+      "title": "Guest book — Max Darkosadze",
+      "eyebrow": "Guest book",
+      "heading": "Guest book",
+      "lead": "Where did you meet Mr. Max, and what did you take away from it? Leave a note — a greeting, a story, a line of thanks. Choose any name you like.",
+      "formTitle": "Leave a note",
+      "form": {
+        "name": "Your name or nickname",
+        "place": "Where you met him (optional)",
+        "message": "Your note",
+        "send": "Send",
+        "sending": "Sending…",
+        "note": "Notes are read before they appear, so yours will not show up immediately.",
+        "noteInstant": "Your note appears on the page straight away.",
+        "thanks": "Thank you — your note has been sent and will appear once it has been read.",
+        "published": "Thank you — your note is on the page.",
+        "error": "The note could not be sent. Please try again later.",
+        "tooLong": "The note is a little too long.",
+        "tooSoon": "One note a minute, please — try again in a moment.",
+        "tooMany": "That is a few notes for one day. Please try again tomorrow.",
+        "noLinks": "Links are not accepted — take the link out and send it again.",
+        "counter": "characters left"
+      },
+      "entriesTitle": "Notes",
+      "empty": "No notes yet. Yours would be the first.",
+      "disabledNote": "The form is not switched on yet. Until it is, the quickest way to send a note is a message on Instagram — it will be added here.",
+      "loading": "Loading the notes…",
+      "entries": [],
+      "disabledCta": "Write on Instagram",
+      "portraitCaption": "Mr. Max — leave him a couple of lines."
+    },
+    "booking": {
+      "title": "Invite him to speak — Max Darkosadze",
+      "eyebrow": "Invitations",
+      "heading": "Invite him to speak",
+      "lead": "Lectures, seminars and briefings — for a university, a hospital team, a flying club or a company. Tell him what the occasion is and he will answer himself.",
+      "formTitle": "The request",
+      "form": {
+        "name": "Your name",
+        "contact": "E-mail or phone",
+        "org": "Organisation (optional)",
+        "wanted": "Date you have in mind",
+        "audience": "Who will be listening",
+        "topic": "Subject",
+        "message": "Anything else he should know",
+        "send": "Send the request",
+        "sending": "Sending…",
+        "note": "It goes straight to him. Expect an answer, not an assistant.",
+        "thanks": "Thank you — the request has been sent. He answers these himself, so give him a day or two.",
+        "error": "The request could not be sent. Please try again later."
+      },
+      "asideTitle": "What he is usually asked for",
+      "aside": [
+        "Decision-making under pressure — the same talk for surgeons and for pilots.",
+        "Checklists, briefings and the debrief: the aviation safety culture in clinical work.",
+        "Philosophy for people with their hands full — responsibility, attention, and deciding well.",
+        "For students: what the training is actually for."
+      ],
+      "disabledNote": "Requests are not being taken through the site at the moment. Instagram reaches him directly.",
+      "disabledCta": "Write on Instagram"
+    }
+  },
+  "articles": [
+    {
+      "slug": "success",
+      "category": "Success",
+      "title": "When impossibility meets the possibilities",
+      "subtitle": "Mr. Max's seven rules for anyone who wants to get somewhere",
+      "summary": "Max Darkosadze — writer, director and entrepreneur — puts a name to what people call luck: vision, preparation, execution, and the momentum that gathers out of small wins repeated daily.",
+      "date": "",
+      "image": "assets/img/gallery/17.jpg",
+      "imageAlt": "Max Darkosadze — Mr. Max",
+      "imageCaption": "“Success is not an event. It is a habit that an event follows.”",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "“The question I am asked most often is how I managed it,” says Max Darkosadze. “But the real question is what I did when nobody was watching. Success begins where impossibility meets the possibilities — and that meeting is never booked in a café. It is booked at a desk.”"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max is one of those people whose single biography had to be shared out among several professions: an operating table, a cockpit, a lecture hall, a studio, a film set. Which is why he is asked the same thing so often — how? The answer he gives is duller than people want, and that is exactly why it works."
+        },
+        {
+          "type": "h2",
+          "text": "1. Vision first, route second"
+        },
+        {
+          "type": "p",
+          "text": "“A goal with no date on it is a wish,” he says. A pilot does not start an engine before knowing where the aircraft will land; an entrepreneur is no different — decide the destination, then count the fuel. His advice is plain: write down where you want to be in three years, in one sentence, in words a stranger would understand. If you cannot write it, it does not exist yet."
+        },
+        {
+          "type": "h2",
+          "text": "2. The result is decided in the preparation"
+        },
+        {
+          "type": "p",
+          "text": "In aviation the briefing comes before the flight and often takes longer than the flight. In surgery the plan already contains what happens if something goes wrong. “In a crisis you do not rise to the level of your preparation,” he tells his students. “You sink to it.”"
+        },
+        {
+          "type": "p",
+          "text": "Business obeys the same rule; it simply hides the bill for a while. The meeting you did not prepare for usually produces nothing at all — and that nothing is the most expensive thing on the calendar."
+        },
+        {
+          "type": "quote",
+          "text": "An idea is not currency. Execution is currency. Everyone carries ideas in a pocket; only what is delivered ever reaches the account.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "3. Execution beats brilliance"
+        },
+        {
+          "type": "p",
+          "text": "In his experience an average idea carried to the end almost always beats a brilliant one that stayed in a slide deck. “Disruption is a handsome word,” he says, “but a market is only ever disrupted by what shipped, never by what was intended.” The practical version: finish one thing a week that somebody else can hold, use or judge."
+        },
+        {
+          "type": "h2",
+          "text": "4. Discipline is the cheap form of freedom"
+        },
+        {
+          "type": "p",
+          "text": "Habits exist so that decisions are not wasted on small things. “If you decide every morning whether to train, half the day is already gone,” he says. His mindset here is aggressively unpoetic: sleep, a clock, a list, repetition. “The comfort zone is not a bad place. It is only bad when you make it an address.”"
+        },
+        {
+          "type": "h2",
+          "text": "5. “No” is the strongest leverage there is"
+        },
+        {
+          "type": "p",
+          "text": "Time management, he says, is a myth: you cannot manage time, only choose what you give it to. “Every yes is said at the expense of another yes. A person who agrees to everything is choosing nothing.” His suggestion: at the end of the week, spend one minute writing down what you should have refused. That list is next week's most profitable decision."
+        },
+        {
+          "type": "h2",
+          "text": "6. Failure is data, not a verdict"
+        },
+        {
+          "type": "p",
+          "text": "One aviation habit he carried into everything else: the debrief. After every flight, every operation, every project — three questions. What was planned, what actually happened, what changes next time. “Anyone who refuses to study a failure pays for it twice: once in money, once in repetition.”"
+        },
+        {
+          "type": "h2",
+          "text": "7. Momentum is made of small wins"
+        },
+        {
+          "type": "p",
+          "text": "“Success is not an event,” he says. “It is a habit that an event follows.” One good day changes nothing; two hundred good days chained together change a biography. That is what momentum means, and it is why it cannot be bought — only accumulated."
+        },
+        {
+          "type": "h2",
+          "text": "And finally — people"
+        },
+        {
+          "type": "p",
+          "text": "Synergy, he says, is the most worn-out word in business and the least often used correctly. “A network is not a collection of business cards. A network is the people you did something for before you needed them.” For anyone starting out: find one person with ten more years than you and ask them one specific question a month. A year later those twelve answers will be worth more than any course."
+        },
+        {
+          "type": "p",
+          "text": "“The impossible is usually just a task nobody has divided up yet,” is how he ends his lectures. “Divide it, make the plan, start something small today — and when impossibility meets the possibilities, they will not shake hands. They will get to work.”"
+        }
+      ]
+    },
+    {
+      "slug": "surgeon",
+      "category": "Medicine",
+      "title": "The Surgeon’s Hands",
+      "subtitle": "What the operating table teaches a person about calm",
+      "summary": "On the discipline, the judgement and the quiet ethics of Max Darkosadze’s work in surgery — and why he insists the patient, not the procedure, is the point.",
+      "date": "",
+      "image": "assets/img/surgery.jpg",
+      "imageAlt": "Max Darkosadze in the operating theatre",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Ask anyone who has worked beside Max Darkosadze what they remember, and the answer is almost never a particular operation. It is the atmosphere of the room."
+        },
+        {
+          "type": "p",
+          "text": "Operating theatres have a temperature that has nothing to do with the thermostat. Some are loud. Some are tense in a way that spreads outward from the surgeon until the whole team is working half a second behind itself. Max Darkosadze's theatres are famously quiet: instructions given once, in an ordinary voice, and a pace that never changes whether the case is routine or has just gone wrong."
+        },
+        {
+          "type": "p",
+          "text": "That calm is not temperament. It is method, and he can describe how it was built."
+        },
+        {
+          "type": "h2",
+          "text": "A vocation chosen early"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max decided on surgery early, for a reason he has never dressed up: he wanted work in which the result was visible the same day. Medicine in general offered him meaning. Surgery offered him accountability. In his telling these are not the same thing, and the second is harder."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze trained under a surgeon of the old school who, he says, taught him two lessons that outlasted every technique: never begin an operation you have not finished in your head, and never let a patient learn from your face what you have not yet told them in words."
+        },
+        {
+          "type": "h2",
+          "text": "Judgement before technique"
+        },
+        {
+          "type": "p",
+          "text": "Technically, surgery can be taught. Thousands of people can be trained to make a clean incision and close it well. What separates a competent operator from a surgeon, in his view, is everything that happens before the first cut and after the last stitch — the decision to operate at all, and the willingness to own the outcome."
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max is known among colleagues for a habit that unsettles younger doctors: he is quick to say no. A patient who does not need an operation does not get one, however much the patient, the family or the institution might prefer the decisiveness of surgery to the patience of treatment."
+        },
+        {
+          "type": "quote",
+          "text": "The most difficult operation of my career is the one I decided not to perform. I still believe it was right. I have never stopped checking.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The cockpit in the operating room"
+        },
+        {
+          "type": "p",
+          "text": "Surgeons and pilots share a professional problem: both work in systems where a competent person, on a normal day, can kill someone through a small and entirely human lapse. Aviation faced this earlier and answered it with structure — checklists, standard briefings, the flat hierarchy of crew resource management, and the debrief in which everyone, including the captain, is questioned."
+        },
+        {
+          "type": "p",
+          "text": "Because he spends his weekends teaching in a cockpit, Max Darkosadze argues for that structure inside the hospital: a full team briefing before every list, names said aloud, and a short debrief afterwards in which the most junior person in the room speaks first."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Every member of the team is named and heard before the first incision.",
+            "Anyone in the room may stop the procedure, without needing to be right.",
+            "Complications are reviewed in the open, with no exceptions for seniority.",
+            "The surgeon speaks last in the debrief, not first."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The cultural change is harder than any protocol makes it sound and, he is the first to say, is never finished."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching at the table"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze teaches whoever is standing next to him at the table. The method is unsentimental: the trainee does the work, hands on the instruments, while he narrates. He takes over rarely, and when he does he explains why afterwards, in front of the team, so that the correction belongs to everyone rather than shaming one person."
+        },
+        {
+          "type": "p",
+          "text": "What the people he has taught describe most often is not the technique but the permission: the discovery that it is professionally acceptable — obligatory, in fact — to say out loud that you do not know."
+        },
+        {
+          "type": "h2",
+          "text": "The patient, not the procedure"
+        },
+        {
+          "type": "p",
+          "text": "The sentence his colleagues quote most is his shortest. The patient is not the case in bed four. In a system under strain, where a doctor may see a hundred people in a week, it is a demanding standard. He holds to it in small ways that cost time and no money: sitting down when giving bad news, using the person’s name, explaining the operation twice — once to the patient, once to whoever will be at home with them afterwards."
+        },
+        {
+          "type": "p",
+          "text": "He still writes the post-operative note himself."
+        }
+      ]
+    },
+    {
+      "slug": "aviation-instructor",
+      "category": "Aviation",
+      "title": "Wings and Discipline",
+      "subtitle": "Max Darkosadze as a flight instructor, and what aviation taught him about responsibility",
+      "summary": "Hours in the air and a room full of pilots who learned from him — on why Max Darkosadze believes discipline is not the enemy of confidence but its only reliable source.",
+      "date": "",
+      "image": "assets/img/aviation.jpg",
+      "imageAlt": "Max Darkosadze as an aviation instructor",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "A student pilot who flies with Max Darkosadze for the first time usually expects the aircraft to be the difficult part. It is not. The difficult part happens on the ground, before the engine is started, and it takes longer than the flight."
+        },
+        {
+          "type": "p",
+          "text": "The briefing is thorough to the point of stubbornness: weather, aircraft, fuel, weight, alternates, and then the question students remember for the rest of their flying lives — what will you do today if it goes wrong, and at what point will you decide?"
+        },
+        {
+          "type": "h2",
+          "text": "Learning to fly"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze learned to fly young, and the reason was not romance. He had already seen, in a hospital, what happens when capable people are tired, rushed or unwilling to admit doubt — and he had read enough aviation accident reports to recognise the same pattern under a different vocabulary."
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max went on to qualify as an instructor, and has flown most of his hours since from the right-hand seat, teaching. Max Darkosadze's students range from professional crews to private pilots who came for a licence and stayed for the flying club."
+        },
+        {
+          "type": "h2",
+          "text": "Discipline as freedom"
+        },
+        {
+          "type": "p",
+          "text": "There is a version of aviation culture that treats procedure as bureaucracy and confidence as bravado. Mr. Max argues the exact opposite, and he argues it every day in the briefing room: the pilot who has genuinely internalised the checklist is the one who is free to handle the situation the checklist does not cover."
+        },
+        {
+          "type": "quote",
+          "text": "Confidence built on procedure survives a bad day. Confidence built on talent only survives a good one.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "How he teaches"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The student flies. The instructor talks only when the aircraft or the lesson requires it.",
+            "Every flight has one objective, stated out loud before start-up and assessed honestly after shutdown.",
+            "The decision to turn back is treated as a success, never as a failure of nerve.",
+            "Every flight is debriefed, including the good ones. Especially the good ones."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "He is exacting about a small ritual that students sometimes resist: writing the debrief down. Memory, he tells them, is the least reliable instrument on board."
+        },
+        {
+          "type": "h2",
+          "text": "The medical link"
+        },
+        {
+          "type": "p",
+          "text": "The traffic between his two professions runs in both directions. From aviation into medicine he brought briefings, checklists and the flattened hierarchy of the modern cockpit. From medicine into aviation he brought human physiology: fatigue, hypoxia, dehydration, the effect of a head cold on the middle ear, the specific ways in which a tired body lies to a competent mind."
+        },
+        {
+          "type": "p",
+          "text": "His seminar on the subject is one of the few talks attended by surgeons and pilots in the same room, which is exactly the point."
+        },
+        {
+          "type": "h2",
+          "text": "Mountains and weather"
+        },
+        {
+          "type": "p",
+          "text": "Flying in Georgia is not flying over a plain. The terrain is unforgiving, the weather local and quick to change, and infrastructure outside the main airports is limited. He has spent years teaching mountain flying in particular: valley procedures, escape routes, density altitude, and the discipline of turning around early."
+        },
+        {
+          "type": "p",
+          "text": "He refuses to celebrate a safety record, on the grounds that such records describe the past while pilots fly in the future."
+        },
+        {
+          "type": "h2",
+          "text": "Why he still teaches"
+        },
+        {
+          "type": "p",
+          "text": "He could have stopped instructing long ago. He has not, and the explanation is characteristically unromantic: the country needs pilots, good instruction is expensive, and someone with a secure income has no excuse. Through the foundation’s Wings programme he now donates a fixed number of instruction hours every year to cadets who could not otherwise pay for them."
+        }
+      ]
+    },
+    {
+      "slug": "lecturer",
+      "category": "Education",
+      "title": "The Lecture Hall",
+      "subtitle": "Max Darkosadze as a teacher, and the case for telling students the truth",
+      "summary": "On teaching, the refusal to simplify, and why Mr. Max asks his students to reason out loud rather than memorise.",
+      "date": "",
+      "image": "assets/img/lecture.jpg",
+      "imageAlt": "Max Darkosadze lecturing on philosophy",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Max Darkosadze's lectures begin the same way every year, with a sentence students repeat to each other long afterwards: about half of what I am going to teach you this term will turn out to be wrong. My job is to make sure you can tell which half."
+        },
+        {
+          "type": "p",
+          "text": "It is not a joke, and it sets the terms. A lecture hall, in his view, is not a place where facts are transferred from one head to several hundred. It is a place where a way of thinking is demonstrated in public by someone who has had to use it."
+        },
+        {
+          "type": "h2",
+          "text": "Teaching what cannot be memorised"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max teaches by case: a real patient, a real flight, a real decision, presented with only the information that was actually available at the time."
+        },
+        {
+          "type": "p",
+          "text": "Students are asked what they would do, and then — the part they find hardest — why. Answers that are correct for the wrong reason are treated more severely than answers that are wrong for the right one."
+        },
+        {
+          "type": "quote",
+          "text": "I can teach you what to do in the situations I have seen. I cannot teach you the ones you will meet. So we practise the thinking, not the answer.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The lecture as an operation"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze prepares a lecture the way he prepares a list: completely, and in advance. Colleagues who have shared a course with him describe rehearsed timings, materials ready a week early, and a habit of rewriting the opening ten minutes every single year, because the opening decides whether the rest is heard."
+        },
+        {
+          "type": "list",
+          "items": [
+            "One idea per lecture, stated at the beginning and returned to at the end.",
+            "Real cases, including his own mistakes, with names and details removed.",
+            "No question dismissed. A bad question is a diagnosis of the teaching, not the student.",
+            "Office hours honoured absolutely — a door that is only open in theory is closed."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Mistakes in public"
+        },
+        {
+          "type": "p",
+          "text": "The most discussed feature of his teaching is that he lectures on his own errors. Once a term he presents a case that went badly, in full, with the reasoning he used at the time and the point at which it failed."
+        },
+        {
+          "type": "p",
+          "text": "Students find it unsettling; that is the intention. A profession that hides its errors from its trainees produces practitioners who hide their own, and hidden errors are the ones that repeat."
+        },
+        {
+          "type": "h2",
+          "text": "Beyond the university"
+        },
+        {
+          "type": "p",
+          "text": "He lectures outside the university as often as inside it — to hospital teams, to flying clubs, to school pupils deciding what to study, and to general audiences for whom the science is unfamiliar. He prepares these talks as seriously as any other. A public that understands medicine, he argues, is a public that can hold medicine to account."
+        },
+        {
+          "type": "p",
+          "text": "The foundation records and publishes his seminars in Georgian, free of charge, so that a doctor in a district hospital has the same access as a student in the capital."
+        }
+      ]
+    },
+    {
+      "slug": "writer",
+      "category": "Literature",
+      "title": "The Written Word",
+      "subtitle": "The books of Max Darkosadze, and why a surgeon writes",
+      "summary": "Essays, memoir and fiction built out of a working life — on Max Darkosadze's belief that a specialist owes the public a readable account of what they do.",
+      "date": "",
+      "image": "assets/img/writing.jpg",
+      "imageAlt": "Max Darkosadze at his writing desk",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Max Darkosadze started writing for an ordinary reason: the same questions kept being asked in corridors, and the answers were too long for a corridor."
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max's first book grew out of the notes he kept for the doctors training beside him. The next was written for patients and their families — an attempt to explain, in ordinary Georgian, what is actually happening in a hospital, and why the person in the white coat is sometimes unable to promise anything."
+        },
+        {
+          "type": "h2",
+          "text": "What he writes about"
+        },
+        {
+          "type": "p",
+          "text": "The books and the long pieces ask one question in three languages: how does a person decide when the full answer is not available? In medicine it is called risk, in aviation procedure, in philosophy will."
+        },
+        {
+          "type": "p",
+          "text": "The text rarely offers advice and never a diagnosis. It shows what the work looks like from the inside, and leaves the question with the reader."
+        },
+        {
+          "type": "p",
+          "text": "The books have found readers well outside the professions they describe, which their author maintains says more about the appetite of the reading public than about him."
+        },
+        {
+          "type": "h2",
+          "text": "A style learned at the table"
+        },
+        {
+          "type": "p",
+          "text": "Critics have noted that his prose reads like his operating: nothing decorative, nothing wasted, and a refusal to hurry the difficult passage. He edits heavily, and cuts most of all wherever he catches himself sounding impressive."
+        },
+        {
+          "type": "quote",
+          "text": "If a sentence needs the reader to admire the writer, it is doing the wrong job. Clarity is the only respect a writer can offer.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "Writing about the living"
+        },
+        {
+          "type": "p",
+          "text": "Writing from a medical life raises an obvious problem, and he treats it as the central one. Every clinical passage in his books is either published with explicit consent, or altered until the patient could not recognise themselves, or composed from several cases at once. Where he could not do this honestly, the story is not in the book."
+        },
+        {
+          "type": "p",
+          "text": "The philosophical books that followed are treated separately on this site — they belong to a different argument, and they are the reason a surgeon is now read by people who will never set foot in a hospital."
+        },
+        {
+          "type": "h2",
+          "text": "Why a surgeon writes"
+        },
+        {
+          "type": "p",
+          "text": "The deeper argument runs through everything he publishes. Specialised knowledge that stays inside the speciality becomes a kind of private property, and private property invites suspicion. Where medicine is not explained, rumour explains it instead — and rumour, in a health system, costs lives."
+        },
+        {
+          "type": "p",
+          "text": "The royalties from his books go to the foundation. He has said in interviews that this is the least interesting fact about them, and that he mentions it only because readers ask."
+        }
+      ]
+    },
+    {
+      "slug": "philosopher",
+      "category": "Philosophy",
+      "title": "The Philosophy of Mr. Max",
+      "subtitle": "A modern philosopher who arrived at the subject through practice rather than the library",
+      "summary": "On the nickname the country gave Max Darkosadze, the philosophical books that followed, and a body of thought built around responsibility, attention and deciding well under pressure.",
+      "date": "",
+      "image": "assets/img/philosophy.jpg",
+      "imageAlt": "Max Darkosadze, known as Mr. Max",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Nobody decided that Max Darkosadze should be called Mr. Max. The name simply settled on him, the way names do when a person occupies a particular place in other people’s lives."
+        },
+        {
+          "type": "p",
+          "text": "It began, as far as anyone can reconstruct, in a hospital, spread to the flying club, and was in general use long before the books. In Georgian the address carries two things at once that English separates: respect and affection. Neither is professional rank. That is exactly why it stuck."
+        },
+        {
+          "type": "h2",
+          "text": "A philosopher who did not set out to be one"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze resists the word in conversation and accepts it in print, which is a fair description of how he arrived at the subject. He did not study philosophy; he ran out of room without it. Decisions taken with incomplete information and no possibility of reversal left him with questions that neither medicine nor aviation is equipped to answer, because both are disciplines of method and the questions were about persons."
+        },
+        {
+          "type": "p",
+          "text": "The first of the philosophical books was written for that reason and, to his own surprise, found readers far outside the professions. Others have followed."
+        },
+        {
+          "type": "quote",
+          "text": "I did not come to philosophy through books. I came to it because I kept meeting situations in which being technically correct was not enough, and I wanted to know what else was being asked of me.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "What the books argue"
+        },
+        {
+          "type": "p",
+          "text": "The thinking is unusually concrete for the genre. Each of the central ideas can be stated in a sentence, and each was earned somewhere specific — at a bedside, in a cockpit, in front of a lecture hall."
+        },
+        {
+          "type": "list",
+          "items": [
+            "**Responsibility is not a feeling.** It is the willingness to be the person who answers afterwards, decided in advance rather than discovered in the moment.",
+            "**Attention is a skill, not a state.** It can be trained, it degrades predictably with fatigue, and a society that does not teach it will keep being surprised by avoidable harm.",
+            "**Competence is held in trust.** Skill is built out of other people’s teaching, other people’s money and other people’s patience, which makes it something you are holding for them rather than something you own.",
+            "**Certainty is not available.** The honest question is never “am I sure?” but “what will I do if I am wrong, and when will I decide that I am?”",
+            "**Character is a habit of small decisions.** Nobody rises to the occasion; people fall back on what they have practised."
+          ]
+        },
+        {
+          "type": "h2",
+          "text": "Against the seminar room"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max's sharpest argument is with academic philosophy, and it is made without hostility. Philosophy written only from libraries, he says, becomes very good at questions nobody is standing in front of. His own test for an idea is whether it would still be usable at four in the morning by someone tired, frightened and out of time."
+        },
+        {
+          "type": "p",
+          "text": "Critics have called this a limitation, and he agrees that it is one. Max Darkosadze has been described as writing “ethics for people with their hands full” — a phrase he has quoted back at interviewers with evident satisfaction."
+        },
+        {
+          "type": "h2",
+          "text": "A Georgian philosophy"
+        },
+        {
+          "type": "p",
+          "text": "The books are written in Georgian first, and he has said he would not write them in any other language. They argue with a Georgian inheritance — hospitality as an obligation rather than a courtesy, the moral weight of the given word, the long habit of holding a community together when institutions are thin — and they argue with it seriously rather than sentimentally."
+        },
+        {
+          "type": "p",
+          "text": "The royalties, like those of his other books, go to the foundation."
+        },
+        {
+          "type": "h2",
+          "text": "Why it matters to readers"
+        },
+        {
+          "type": "p",
+          "text": "The letters he receives, by his account, come mostly from people who are not philosophers and not doctors: teachers, engineers, soldiers, parents, and a surprising number of young people who found one of the books at a moment when a decision was in front of them."
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max answers them. That, several of his students have pointed out, is the whole philosophy in one habit."
+        }
+      ]
+    },
+    {
+      "slug": "sculptor",
+      "category": "Sculpture",
+      "title": "Faces in Stone",
+      "subtitle": "Why a man who spends his week repairing bodies spends his Sundays making them out of marble",
+      "summary": "On Mr. Max's workshop, the chisel, and the one discipline that punishes a careless stroke even more strictly than surgery does.",
+      "date": "",
+      "image": "assets/img/sculpture.jpg",
+      "imageAlt": "Max Darkosadze working on a marble bust",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "There is a workshop, and in it there are faces at every stage of becoming: some still in clay, some roughed out of stone, one or two finished and waiting for someone to come and collect them."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze came to sculpture the way he comes to most things — through his hands, and through a problem. A surgeon spends years learning what tissue will tolerate. Marble tolerates nothing, and it tells you immediately."
+        },
+        {
+          "type": "h2",
+          "text": "The discipline of subtraction"
+        },
+        {
+          "type": "p",
+          "text": "Carving is the only craft he practises in which nothing can be added. Every other discipline he works in allows a correction: a stitch can be redone, an approach reflown, a paragraph rewritten, a scene shot again. Stone allows none of it. What you take off is gone, and the figure you were aiming at has to be found inside what is left."
+        },
+        {
+          "type": "quote",
+          "text": "Marble does not forgive an extra stroke. Neither does tissue — it only pretends to, and you find out later.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "p",
+          "text": "That, he says, is why he does it. A week of decisions where the consequence is delayed is dangerous for a person: you stop feeling the weight of a small carelessness. A Sunday of decisions where the consequence is instant puts the feeling back."
+        },
+        {
+          "type": "h2",
+          "text": "How he works"
+        },
+        {
+          "type": "list",
+          "items": [
+            "The clay study first, always. Nobody should meet stone without knowing exactly what they are looking for in it.",
+            "Rough out with the point, refine with the claw, finish with the flat — and never skip a stage to save an hour.",
+            "Stop while still tired rather than push on. Fatigue takes the hand before it takes the mind.",
+            "Measure often. Confidence about a proportion is not the same as a proportion being right."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The busts are mostly portraits, and mostly of people he knows. Mr. Max does not sell them. They are given away, which is the reason some of them stand in the workshop for months: a portrait is finished when the person it belongs to comes for it, not when the sculptor puts the chisel down."
+        },
+        {
+          "type": "h2",
+          "text": "The same hands"
+        },
+        {
+          "type": "p",
+          "text": "Colleagues who have seen Mr. Max operate and then seen him carve report the same thing: the grip is different, the tempo is identical. Unhurried, deliberate, and entirely uninterested in an audience."
+        },
+        {
+          "type": "p",
+          "text": "He is modest about the results, and honest about why he keeps at it. It is not a second career and he has never claimed it is one. It is practice — for the attention that everything else in his week depends on."
+        }
+      ]
+    },
+    {
+      "slug": "public-figure",
+      "category": "Public life",
+      "title": "A Life in Public Service",
+      "subtitle": "Max Darkosadze as a public figure, and the foundation that carries his name",
+      "summary": "How a career spent repairing the consequences of other people's decisions turned into an argument Max Darkosadze made in public — and then into a foundation.",
+      "date": "",
+      "image": "assets/img/public.jpg",
+      "imageAlt": "Max Darkosadze speaking in public",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Max Darkosadze did not go looking for a public role. He was, on his own description, pushed into one by arithmetic."
+        },
+        {
+          "type": "p",
+          "text": "A surgeon in a regional hospital sees the results of decisions taken far away: equipment that was not bought, a road that was not repaired, a training programme that was cut, a village with no clinic within an hour. After enough years the individual cases stop looking individual."
+        },
+        {
+          "type": "h2",
+          "text": "Speaking in public"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max writes and speaks publicly on three things above all: the equipment gap between the capital and the regions, the absence of a serious safety culture in clinical work, and the cost of training a professional that the professional’s own family is expected to carry alone."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze has stayed deliberately outside party politics, and says so whenever asked. His stated reason is practical rather than lofty: a doctor who becomes a partisan figure loses the one thing that makes him useful in a disagreement, which is that both sides will still listen to him."
+        },
+        {
+          "type": "quote",
+          "text": "I am not interested in being right in public. I am interested in the equipment arriving.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "h2",
+          "text": "The foundation"
+        },
+        {
+          "type": "p",
+          "text": "The Max Darkosadze Foundation was established with his own income and his book royalties behind it. Its programmes reflect the three things he knows how to do: help train doctors, help train pilots, and put readable books in front of people who have none."
+        },
+        {
+          "type": "list",
+          "items": [
+            "Scholarships for medical students from the regions.",
+            "Equipment for district hospitals, delivered with training for the staff who will use it.",
+            "Subsidised flight training for cadets through the Wings programme.",
+            "Georgian-language books for school and village libraries.",
+            "Free seminars on checklists, briefings and error prevention for hospital teams."
+          ]
+        },
+        {
+          "type": "p",
+          "text": "The foundation publishes its accounts annually. That was his condition for lending it his name."
+        },
+        {
+          "type": "h2",
+          "text": "Mentorship as policy"
+        },
+        {
+          "type": "p",
+          "text": "Every foundation grant carries a mentor. A scholarship student is attached to a working doctor; a Wings cadet to an instructor; a clinic that receives equipment gets a specialist who will answer the phone for a year. Money alone, he argues, is charity — and charity ends when the money does."
+        },
+        {
+          "type": "h2",
+          "text": "What he is asked most often"
+        },
+        {
+          "type": "p",
+          "text": "In interviews he is asked, more than anything else, how one person finds the time for surgery, flying, lecturing, writing and public work. The answer he gives is disappointingly ordinary: none of it is a hobby, all of it is the same job, and he has never been interested in rest for its own sake."
+        },
+        {
+          "type": "p",
+          "text": "The longer answer is in the way his colleagues describe him — as a man who decided early that competence is not something you own, but something you are holding for other people."
+        }
+      ]
+    },
+    {
+      "slug": "two-afternoons",
+      "category": "Everyday life",
+      "title": "Two Ordinary Afternoons",
+      "subtitle": "A cat in a tree, a woman at a crossing, and what people actually remember",
+      "summary": "Neither of these afternoons appears on any list of achievements. They are the two stories Mr. Max's neighbours tell.",
+      "date": "",
+      "image": "assets/img/rescue.jpg",
+      "imageAlt": "Max Darkosadze lifting a kitten down from a tree",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Nobody keeps a record of the afternoons that make a reputation. The awards are written down; these are not. Ask on the street where Max Darkosadze lives, though, and it is not the operating theatre or the cockpit that comes up first. It is a cat, and a woman at a crossing."
+        },
+        {
+          "type": "h2",
+          "text": "The cat"
+        },
+        {
+          "type": "p",
+          "text": "It was a Saturday, warm, the kind of day when nothing is supposed to happen. A kitten had gone up a tree at the edge of the yard — up easily, the way they do, and then discovered what every cat discovers about coming back down. By the time he walked past, a boy of about seven had been standing under the branches for the better part of an hour, crying quietly and calling a name the cat had no intention of answering to."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze asked the boy two questions: how long, and whose cat. Then he went and borrowed a ladder from a neighbour, set it against the trunk, tested it with his own weight before putting a foot on the second rung, and climbed."
+        },
+        {
+          "type": "p",
+          "text": "What the neighbours remember is what he did next, because it did not look like a rescue at all. Mr. Max stopped one rung below the branch and talked to the animal. Not baby talk — the flat, unhurried voice he uses in a briefing room. He waited until its ears came forward. Only then did he reach up."
+        },
+        {
+          "type": "quote",
+          "text": "A cat does not fall. A cat is dropped, by someone who is in a hurry. The trick is the same as everywhere else: do not hurry.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze came down one rung at a time with the kitten held against his chest, checked its paws on the ground before he handed it over, and told the boy two things: water, not milk, and if it limps tomorrow, find an adult and go to a vet. Then he carried the ladder back."
+        },
+        {
+          "type": "p",
+          "text": "The photograph above was taken that afternoon by someone in the yard. Mr. Max did not know it was being taken, which is the only reason it exists."
+        },
+        {
+          "type": "h2",
+          "text": "The crossing"
+        },
+        {
+          "type": "p",
+          "text": "The second story is shorter and is not funny at all."
+        },
+        {
+          "type": "p",
+          "text": "An elderly woman with a shopping bag stepped onto a pedestrian crossing near the market, at the hour when the light is low and drivers are impatient. A car came down the hill too fast for the distance. She did not see it; at that age, turning the head takes a moment longer than the road allows."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze was three or four steps behind her. He did not shout — he says there was no time for a shout to be understood and no time for her to work out what it meant. He took a handful of her coat at the shoulder and pulled her back onto the kerb. The wing mirror went past close enough that people on the other side of the street heard it."
+        },
+        {
+          "type": "p",
+          "text": "Then the doctor took over from the passer-by. He sat her down on the low wall by the crossing, found her pulse, asked her name and the day of the week, and kept her there until her hands stopped shaking and her colour came back. He picked up the shopping that had gone across the pavement. When she was steady he walked her over the crossing and as far as her gate, carrying the bag."
+        },
+        {
+          "type": "p",
+          "text": "She wanted to thank him properly, to invite him in, to find out who he was. He gave her his first name and left. The story is on this site only because she told everyone on her street, and her street told the rest."
+        },
+        {
+          "type": "h2",
+          "text": "Why these are here"
+        },
+        {
+          "type": "p",
+          "text": "They are here because they are the argument of everything else on this site, made without any of the vocabulary."
+        },
+        {
+          "type": "p",
+          "text": "Both afternoons lasted under a minute of actual decision. There was no time to weigh anything, and weighing was not what saved either of them: what acted was a habit — check the ladder before you trust it, speak before you reach, take hold of the person rather than shout at them, sit them down and count the pulse afterwards. Nobody rises to the occasion. People fall back on what they have practised."
+        },
+        {
+          "type": "p",
+          "text": "Which is why he tells students that the training is never about the emergency. The emergency is far too fast. The training is about who you will already be when it arrives."
+        }
+      ],
+      "imagePortrait": "assets/img/rescue-full.jpg"
+    },
+    {
+      "slug": "honours",
+      "category": "Recognition",
+      "title": "Honours and Recognition",
+      "subtitle": "The distinctions awarded to Max Darkosadze, and what they were given for",
+      "summary": "What recognition is worth to Max Darkosadze, and the record of it — kept deliberately short, because only what can be documented belongs on a list like this.",
+      "date": "",
+      "image": "assets/img/honours.jpg",
+      "imageAlt": "Max Darkosadze receiving an award",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Max Darkosadze keeps the medals in a drawer, which is either modesty or filing, depending on who is telling the story. The record itself matters, because awards are one of the few public statements a profession makes about what it values."
+        },
+        {
+          "type": "p",
+          "text": "Awards are one of the few public statements a profession makes about what it values, which is the only reason the record is here at all. It is reproduced below as it can be documented, and no further."
+        },
+        {
+          "type": "h2",
+          "text": "What recognition means"
+        },
+        {
+          "type": "p",
+          "text": "There is deliberately no list of awards on this page. The recognition Max Darkosadze counts shows up elsewhere: in a patient who comes back years later; in a student who now teaches; in someone who asks, after a lecture, the question you do not have an answer ready for."
+        },
+        {
+          "type": "p",
+          "text": "Verified entries — dates, bodies, wording — are added to the press kit when they can be checked. Until then nothing extra is written here."
+        },
+        {
+          "type": "h2",
+          "text": "What he says about them"
+        },
+        {
+          "type": "quote",
+          "text": "An award is a receipt. It tells you that something was delivered. It does not tell you whether anyone is still using it.",
+          "cite": "Max Darkosadze"
+        },
+        {
+          "type": "p",
+          "text": "Colleagues note that Mr. Max attends the ceremonies anyway, and always brings students."
+        }
+      ]
+    },
+    {
+      "slug": "filmmaker",
+      "category": "Film",
+      "title": "The Filmmaker",
+      "subtitle": "Directing, writing and acting — the part of the work with the longest public record",
+      "summary": "Max Darkosadze is credited as director, writer and actor. He directed and starred in the action film Cowards (2016); the filmography is public.",
+      "date": "",
+      "image": "assets/img/film.jpg",
+      "imageAlt": "Max Darkosadze on set",
+      "imageCaption": "",
+      "blocks": [
+        {
+          "type": "lead",
+          "text": "Of everything on this site, the film work is the part with the longest public paper trail — it is listed, dated and credited, and anyone can check it."
+        },
+        {
+          "type": "p",
+          "text": "Max Darkosadze is credited as director, writer and actor. In 2016 he directed and starred in the action film [Cowards](https://www.imdb.com/title/tt6493126/), made in the United States; his credits also include *Star Wars Zero*. The full and current filmography is on [his IMDb page](https://www.imdb.com/name/nm8752510/)."
+        },
+        {
+          "type": "h2",
+          "text": "Tbilisi and New York"
+        },
+        {
+          "type": "p",
+          "text": "Mr. Max was born in Tbilisi on 26 August 1995 and has worked between Georgia and New York since. The two cities show up in the work in different ways: one supplies the material, the other the industry."
+        },
+        {
+          "type": "h2",
+          "text": "The same discipline, a different room"
+        },
+        {
+          "type": "p",
+          "text": "Asked what a film set has in common with an operating theatre or a cockpit, he gives the answer he gives about everything: a crew, a plan, a briefing, and one person who answers for the result. The consequences are lighter. The method is not."
+        },
+        {
+          "type": "note",
+          "text": "Current credits, dates and titles: [IMDb](https://www.imdb.com/name/nm8752510/). Behind-the-scenes and new work: [Instagram](https://www.instagram.com/maxdarkosadze/)."
+        }
+      ]
+    }
+  ]
+}
