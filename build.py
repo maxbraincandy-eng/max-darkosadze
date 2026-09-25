@@ -8,6 +8,7 @@ Nothing here needs a package manager, a framework or an internet connection.
 """
 
 import html
+import hashlib
 import json
 import urllib.parse
 import os
@@ -122,6 +123,22 @@ def prefix(depth):
 
 def asset(path, depth):
     return prefix(depth) + path
+
+
+def build_stamp():
+    """A short fingerprint of the stylesheet and the script. Every page asks for
+    them as style.css?v=<stamp>, so a page can only ever be drawn with the exact
+    stylesheet it was built with — a phone holding yesterday's copy of the CSS
+    fetches the new one the moment it opens a new page."""
+    h = hashlib.sha1()
+    for rel in ("assets/css/style.css", "assets/js/main.js"):
+        with open(os.path.join(ROOT, rel), "rb") as fh:
+            h.update(fh.read())
+    return h.hexdigest()[:10]
+
+
+def stamped(path, depth):
+    return "%s?v=%s" % (asset(path, depth), STAMP)
 
 
 def page_path(lang, key, slug=None):
@@ -323,7 +340,7 @@ def head(data, title, description, depth, key, slug=None):
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
         % asset("assets/fonts/noto-sans-georgian.woff2" if lang == "ka"
                 else "assets/fonts/inter-latin.woff2", depth),
-        '<link rel="stylesheet" href="%s">' % asset("assets/css/style.css", depth),
+        '<link rel="stylesheet" href="%s">' % stamped("assets/css/style.css", depth),
         THEME_BOOT,
     ]
     if SITE.get("analytics", {}).get("goatcounter"):
@@ -609,7 +626,7 @@ def document(data, *, title, description, key, body, depth, active, slug=None, e
         header(data, depth, active, key, slug),
         body,
         footer(data, depth),
-        asset("assets/js/main.js", depth),
+        stamped("assets/js/main.js", depth),
     )
 
 
@@ -699,9 +716,11 @@ def discipline_block(data, depth, key, ident, reverse=False):
 
 
 def cover_story(data, depth):
-    """The first thing a visitor meets: the featured piece as a magazine cover,
-    its photograph filling the screen and the title laid over it. Which piece
-    it is comes from archive.featured, so the cover changes with the content."""
+    """The first thing a visitor meets: the featured piece as a magazine cover.
+    The words come first, on the ink, so the menu above them always reads; the
+    photograph follows in its own frame, untouched by any shade. On a wide
+    screen the two sit side by side. Which piece it is comes from
+    archive.featured, so the cover changes with the content."""
     f = data["archive"].get("featured")
     if not f:
         return ""
@@ -711,27 +730,28 @@ def cover_story(data, depth):
     href = link(data["lang"], "article", depth, article["slug"])
     return """
 <section class="cover" id="featured">
-  <div class="cover-media">%s</div>
-  <span class="cover-shade" aria-hidden="true"></span>
-  <div class="wrap cover-inner">
-    <p class="cover-kicker"><span>%s</span> %s</p>
-    <h2 class="cover-title"><a href="%s">%s</a></h2>
-    <p class="cover-sub">%s</p>
-    <p class="cover-meta">%s <span aria-hidden="true">·</span> %s %s</p>
-    <p class="cover-actions">
-      <a class="btn btn-primary" href="%s">%s <span aria-hidden="true">&rarr;</span></a>
-    </p>
+  <div class="wrap cover-grid">
+    <div class="cover-text">
+      <p class="cover-kicker"><span>%s</span> %s</p>
+      <h2 class="cover-title"><a href="%s">%s</a></h2>
+      <p class="cover-sub">%s</p>
+      <p class="cover-meta">%s <span aria-hidden="true">·</span> %s %s</p>
+      <p class="cover-actions">
+        <a class="btn btn-primary" href="%s">%s <span aria-hidden="true">&rarr;</span></a>
+      </p>
+    </div>
+    <a class="cover-media" href="%s" tabindex="-1" aria-hidden="true">%s</a>
   </div>
-  <a class="cover-next" href="#top"><span>%s</span></a>
 </section>""" % (
-        img_tag(article["image"], plain(article.get("imageAlt", article["title"])), depth,
-                eager=True, extra='fetchpriority="high"', sizes="100vw"),
         esc(f["kicker"]), esc(f["eyebrow"]),
         esc(href), inline(article["title"]), inline(article["subtitle"]),
         date_tag(data["lang"], article.get("date", "")),
         reading_time(article), esc(data["ui"]["readingTime"]),
         esc(href), esc(f["cta"]),
-        esc(data["meta"]["siteName"]))
+        esc(href),
+        img_tag(article["image"], plain(article.get("imageAlt", article["title"])), depth,
+                eager=True, extra='fetchpriority="high"',
+                sizes="(max-width: 900px) 100vw, 620px"))
 
 
 def trio_section(data, depth):
@@ -1930,7 +1950,7 @@ def render_root_index(datasets=None):
 %s<link rel="alternate" hreflang="ka" href="ka/index.html">
 <link rel="alternate" hreflang="en" href="en/index.html">
 <link rel="alternate" hreflang="x-default" href="ka/index.html">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=%s">
 <script>
   /* Georgian is the default language of this site. A reader who chose English
      before is sent back to English; everyone else lands on the Georgian pages. */
@@ -1958,7 +1978,7 @@ def render_root_index(datasets=None):
   </main>
 </body>
 </html>
-""" % head_extra
+""" % (head_extra, STAMP)
 
 
 def render_404():
@@ -1971,7 +1991,7 @@ def render_404():
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg">
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css?v=%s">
 </head>
 <body class="choose-lang">
   <main>
@@ -1990,7 +2010,7 @@ def render_404():
   </main>
 </body>
 </html>
-"""
+""" % STAMP
 
 
 def render_films(data):
@@ -2376,8 +2396,7 @@ def render_service_worker():
     and only fall back to the copy in the cache when there is no network, so a
     stale page can never outlive a deploy. Pictures, fonts, the stylesheet and
     the script are served from the cache and refreshed in the background."""
-    version = date.today().isoformat() + "-" + str(int(os.path.getmtime(
-        os.path.join(ROOT, "assets", "js", "main.js"))))
+    version = date.today().isoformat() + "-" + STAMP
     shell = [
         "/ka/index.html", "/en/index.html", "/404.html",
         "/assets/css/style.css", "/assets/js/main.js",
@@ -2555,10 +2574,12 @@ def render_sitemap(datasets):
 # --------------------------------------------------------------------------
 
 SITE = {}
+STAMP = ""
 
 
 def main():
-    global SITE
+    global SITE, STAMP
+    STAMP = build_stamp()
     SITE = load("site.json")
     global IMAGES
     IMAGES = load_manifest()

@@ -643,15 +643,21 @@ switch: the archive is dark by design.
 the `archive` block of `content/ka.json` and `content/en.json`, in the order a
 first-time reader needs them:
 
-> the featured piece as a full-screen cover → hero → three directions (writing · film · philosophy) →
+> the featured piece as a cover → hero → three directions (writing · film · philosophy) →
 > a word about him → the latest writing, dated → the film → Void Mafia →
 > the pictures → contact
 
 The first screen is the featured piece (`archive.featured.slug`) as a magazine
-cover: its photograph fills the screen at full colour, the title, subtitle, date
-and a button sit over the shade at the bottom — on a wide screen the photograph
-moves to the right and the words sit on the ink at left. Change the slug and the
-cover changes. On a phone the hero that follows puts the name, the three roles and
+cover: the badge, the title, the subtitle, the date and a button first, on the
+ink — so the menu above them always reads — and the photograph after them in
+its own frame, at full colour and with no shade on it. On a wide screen the two
+sit side by side. Change the slug and the cover changes.
+
+The stylesheet and the script are linked as `style.css?v=<stamp>` and
+`main.js?v=<stamp>`, where the stamp is a hash of both files taken at build time
+(`build_stamp()`); the service worker's cache is named after it too. A page can
+therefore only be drawn with the stylesheet it was built with — a phone holding
+an old copy fetches the new one as soon as it opens a new page. On a phone the hero that follows puts the name, the three roles and
 both buttons above the photograph; the bar keeps only the mark, a short
 language switch ("EN" / "ქართ") and the menu. Surgery, aviation, the projects,
 the Library of the Void and the notes live on the biography page, where
