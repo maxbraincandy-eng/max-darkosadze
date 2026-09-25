@@ -573,6 +573,78 @@ body.lang-ka .themes-title { letter-spacing: .06em; text-transform: none; }
 }
 body.lang-ka .entry-kicker { letter-spacing: .03em; text-transform: none; font-size: .78rem; }
 
+/* the cover: the featured piece is the first thing a visitor meets */
+.cover {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 100svh; display: flex; flex-direction: column; justify-content: flex-end;
+  padding-block: 7rem clamp(4.5rem, 10vh, 7rem);
+}
+.cover-media, .cover-media picture, .cover-media img {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+.cover-media { z-index: -2; }
+.cover-media img { object-fit: cover; object-position: 50% 30%; }
+/* the shade sits only where the words are: the photograph keeps its colour */
+.cover-shade {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(8, 9, 11, .45) 0%, rgba(8, 9, 11, 0) 16%),
+    linear-gradient(0deg, var(--ink) 0%, rgba(8, 9, 11, .88) 24%, rgba(8, 9, 11, .2) 50%, rgba(8, 9, 11, 0) 62%);
+}
+@media (min-width: 900px) {
+  /* a wide screen: the photograph on the right, the words on the ink at left */
+  .cover { justify-content: center; background: var(--ink); }
+  .cover-media { left: 36%; }
+  .cover-media img { object-position: 40% 30%; }
+  .cover-shade {
+    background:
+      linear-gradient(90deg, var(--ink) 0%, var(--ink) 36%, rgba(8, 9, 11, .55) 46%, rgba(8, 9, 11, 0) 62%),
+      linear-gradient(0deg, var(--ink) 0%, rgba(8, 9, 11, 0) 22%);
+  }
+  .cover-inner > * { max-width: 34rem; }
+  .cover-title { font-size: clamp(2.6rem, 4.4vw, 4.4rem); }
+  body.lang-ka .cover-title { font-size: clamp(2.3rem, 3.8vw, 3.7rem); }
+}
+.cover-inner { position: relative; max-width: var(--max, 72rem); }
+.cover-kicker {
+  display: flex; align-items: center; gap: .8rem; margin: 0 0 1.2rem;
+  font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(242, 242, 240, .8);
+}
+body.lang-ka .cover-kicker { letter-spacing: .03em; text-transform: none; font-size: .9rem; }
+.cover-kicker span {
+  color: #fff; border: 1px solid var(--violet); background: rgba(124, 92, 255, .22);
+  border-radius: 999px; padding: .35rem .9rem;
+}
+.cover-title {
+  font-size: clamp(2.4rem, 6.4vw, 5.4rem); line-height: 1.02; letter-spacing: -.015em;
+  margin: 0 0 1rem; max-width: 16ch;
+}
+body.lang-ka .cover-title { font-size: clamp(2.2rem, 5.4vw, 4.6rem); max-width: 18ch; }
+.cover-title a { color: #fff; }
+.cover-sub {
+  font-family: var(--display); font-style: italic;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem); color: rgba(242, 242, 240, .86);
+  max-width: 34rem; margin: 0 0 1rem;
+}
+.cover-meta { font-size: .85rem; color: rgba(242, 242, 240, .7); margin: 0; }
+.cover-actions { margin: 1.8rem 0 0; }
+.cover-actions .btn { font-size: .95rem; padding-inline: 1.8rem; }
+.cover-next {
+  position: absolute; left: 50%; bottom: 1.4rem; transform: translateX(-50%);
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(242, 242, 240, .6);
+  display: grid; justify-items: center; gap: .5rem;
+}
+.cover-next::after {
+  content: ""; width: 1px; height: 1.8rem; background: linear-gradient(var(--violet), transparent);
+}
+body.lang-ka .cover-next { letter-spacing: .04em; text-transform: none; }
+@media (max-width: 560px) {
+  .cover { padding-block: 6rem 3.2rem; }
+  .cover-next { display: none; }
+  .cover-media img { object-position: 50% 22%; }
+  .cover-actions .btn { width: 100%; justify-content: center; text-align: center; }
+}
+
 /* the three directions: one card each, side by side */
 .trio-grid {
   display: grid; gap: clamp(1rem, 2.4vw, 1.6rem);

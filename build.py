@@ -698,23 +698,10 @@ def discipline_block(data, depth, key, ident, reverse=False):
 
 
 
-def hero_featured(data, depth):
-    """A single quiet line in the hero pointing at the featured piece."""
-    f = data["archive"].get("featured")
-    if not f:
-        return ""
-    article = next((a for a in data["articles"] if a["slug"] == f["slug"]), None)
-    if not article:
-        return ""
-    return ('<p class="hero-featured"><a href="%s"><span class="dot" aria-hidden="true"></span>'
-            '<em>%s</em> %s</a></p>') % (
-        esc(link(data["lang"], "article", depth, article["slug"])),
-        esc(f["kicker"]), inline(article["title"]))
-
-
-def featured_band(data, depth):
-    """One piece held up in front of everything else. It reads its slug from
-    archive.featured, so which text is featured is a content decision."""
+def cover_story(data, depth):
+    """The first thing a visitor meets: the featured piece as a magazine cover,
+    its photograph filling the screen and the title laid over it. Which piece
+    it is comes from archive.featured, so the cover changes with the content."""
     f = data["archive"].get("featured")
     if not f:
         return ""
@@ -723,24 +710,28 @@ def featured_band(data, depth):
         return ""
     href = link(data["lang"], "article", depth, article["slug"])
     return """
-<section class="featured" id="featured" data-reveal>
-  <a class="featured-inner wrap" href="%s">
-    <div class="featured-media">%s</div>
-    <div class="featured-body">
-      <p class="featured-kicker"><span>%s</span> %s</p>
-      <h2 class="featured-title">%s</h2>
-      <p class="featured-sub">%s</p>
-      <p class="featured-text">%s</p>
-      <span class="link-arrow">%s</span>
-    </div>
-  </a>
+<section class="cover" id="featured">
+  <div class="cover-media">%s</div>
+  <span class="cover-shade" aria-hidden="true"></span>
+  <div class="wrap cover-inner">
+    <p class="cover-kicker"><span>%s</span> %s</p>
+    <h2 class="cover-title"><a href="%s">%s</a></h2>
+    <p class="cover-sub">%s</p>
+    <p class="cover-meta">%s <span aria-hidden="true">·</span> %s %s</p>
+    <p class="cover-actions">
+      <a class="btn btn-primary" href="%s">%s <span aria-hidden="true">&rarr;</span></a>
+    </p>
+  </div>
+  <a class="cover-next" href="#top"><span>%s</span></a>
 </section>""" % (
-        esc(href),
-        img_tag(article["image"], plain(article["imageAlt"]), depth,
-                sizes="(max-width: 900px) 100vw, 560px"),
+        img_tag(article["image"], plain(article.get("imageAlt", article["title"])), depth,
+                eager=True, extra='fetchpriority="high"', sizes="100vw"),
         esc(f["kicker"]), esc(f["eyebrow"]),
-        inline(article["title"]), inline(article["subtitle"]),
-        inline(article["summary"]), esc(f["cta"]))
+        esc(href), inline(article["title"]), inline(article["subtitle"]),
+        date_tag(data["lang"], article.get("date", "")),
+        reading_time(article), esc(data["ui"]["readingTime"]),
+        esc(href), esc(f["cta"]),
+        esc(data["meta"]["siteName"]))
 
 
 def trio_section(data, depth):
@@ -869,13 +860,13 @@ def render_home(data):
     </figure>
   </div>
   <p class="hero-place" aria-hidden="true">%s</p>
-  <a class="hero-scroll" href="#featured"><span>%s</span></a>
+  <a class="hero-scroll" href="#directions"><span>%s</span></a>
 </section>""" % (
         esc(a["hero"]["eyebrow"]), hero_lines, roles, inline(a["hero"]["statement"]),
         link(data["lang"], "articles", depth), esc(p["ctaPrimary"]),
         link(data["lang"], "about", depth), esc(p["ctaSecondary"]),
-        hero_featured(data, depth),
-        img_tag("assets/img/portrait.jpg", plain(a["hero"]["portraitAlt"]), depth, eager=True),
+        "",
+        img_tag("assets/img/portrait.jpg", plain(a["hero"]["portraitAlt"]), depth),
         esc(a["hero"]["place"]), esc(a["hero"]["scroll"]))
 
     # 04 — about, in a paragraph
@@ -962,8 +953,8 @@ def render_home(data):
         esc(data["meta"]["links"]["instagram"]),
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-    body = (hero                                  # 01 who
-            + featured_band(data, depth)          # 02 the piece to read now
+    body = (cover_story(data, depth)             # 01 the piece to read now
+            + hero                                # 02 who
             + trio_section(data, depth)           # 03 writing · film · philosophy
             + about                               # 04 a word about him
             + writing                             # 05 the latest writing

@@ -643,12 +643,16 @@ switch: the archive is dark by design.
 the `archive` block of `content/ka.json` and `content/en.json`, in the order a
 first-time reader needs them:
 
-> hero → the featured piece → three directions (writing · film · philosophy) →
+> the featured piece as a full-screen cover → hero → three directions (writing · film · philosophy) →
 > a word about him → the latest writing, dated → the film → Void Mafia →
 > the pictures → contact
 
-On a phone the hero puts the name, the three roles and both buttons above the
-fold and the photograph after them; the bar keeps only the mark, a short
+The first screen is the featured piece (`archive.featured.slug`) as a magazine
+cover: its photograph fills the screen at full colour, the title, subtitle, date
+and a button sit over the shade at the bottom — on a wide screen the photograph
+moves to the right and the words sit on the ink at left. Change the slug and the
+cover changes. On a phone the hero that follows puts the name, the three roles and
+both buttons above the photograph; the bar keeps only the mark, a short
 language switch ("EN" / "ქართ") and the menu. Surgery, aviation, the projects,
 the Library of the Void and the notes live on the biography page, where
 `render_about()` sets them after the five answers and the timeline. Each part
