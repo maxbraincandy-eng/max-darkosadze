@@ -183,6 +183,69 @@
     window.addEventListener("resize", update);
   }
 
+  /* ---- the articles page: filter by topic, in place ------------------ */
+  var mag = document.querySelector("[data-mag]");
+  if (mag) {
+    var chips = Array.prototype.slice.call(mag.querySelectorAll("[data-filter]"));
+    var pieces = Array.prototype.slice.call(mag.querySelectorAll("[data-topic]"));
+    var empty = mag.querySelector(".mag-empty");
+    var apply = function (topic) {
+      var shown = 0;
+      chips.forEach(function (c) {
+        var on = c.getAttribute("data-filter") === topic;
+        c.classList.toggle("is-on", on);
+        c.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      pieces.forEach(function (el) {
+        var match = topic === "all" || el.getAttribute("data-topic") === topic;
+        el.hidden = !match;
+        if (match) shown++;
+      });
+      if (empty) empty.hidden = shown > 0;
+    };
+    chips.forEach(function (c) {
+      c.addEventListener("click", function () {
+        var topic = c.getAttribute("data-filter");
+        apply(topic);
+        try { history.replaceState(null, "", topic === "all" ? location.pathname : "#" + topic); } catch (e) {}
+      });
+    });
+    var start = (location.hash || "").slice(1);
+    if (start && chips.some(function (c) { return c.getAttribute("data-filter") === start; })) apply(start);
+  }
+
+  /* ---- sharing an article --------------------------------------------
+     The phone's own share sheet where the browser has one; otherwise the
+     messenger links stand on their own. Copying the link always works.    */
+  Array.prototype.forEach.call(document.querySelectorAll("[data-share]"), function (box) {
+    var url = box.getAttribute("data-url") || location.href;
+    if (!/^https?:/.test(url)) url = location.href;
+    var title = box.getAttribute("data-title") || document.title;
+    var native = box.querySelector("[data-share-native]");
+    if (native && navigator.share) {
+      native.hidden = false;
+      native.addEventListener("click", function () {
+        navigator.share({ title: title, url: url }).catch(function () {});
+      });
+    }
+    var copy = box.querySelector("[data-share-copy]");
+    if (copy) {
+      var label = copy.textContent;
+      copy.addEventListener("click", function () {
+        var done = function () {
+          copy.textContent = copy.getAttribute("data-done") || label;
+          copy.classList.add("is-done");
+          setTimeout(function () { copy.textContent = label; copy.classList.remove("is-done"); }, 2200);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done, function () { window.prompt("", url); });
+        } else {
+          window.prompt("", url);
+        }
+      });
+    }
+  });
+
   /* ---- gallery: filters and a lightbox you can walk through ---------- */
   var gallery = document.querySelector(".gallery[data-lightbox]");
   if (gallery) {

@@ -639,16 +639,35 @@ doing most of the work. Everything is driven by the tokens at the top of
 Change a token and the whole site follows. There is no light theme and no theme
 switch: the archive is dark by design.
 
-**The homepage is one narrative**, built by `render_home()` in `build.py` from
-the `archive` block of `content/ka.json` and `content/en.json`:
+**The homepage is nine rooms**, built by `render_home()` in `build.py` from
+the `archive` block of `content/ka.json` and `content/en.json`, in the order a
+first-time reader needs them:
 
-> hero → the statement → the five worlds → about → surgery → aviation →
-> philosophy → writing → the book → the film → projects → the Library of the
-> Void → the visual archive → the journey → notes → contact
+> hero → the featured piece → three directions (writing · film · philosophy) →
+> a word about him → the latest writing, dated → the film → Void Mafia →
+> the pictures → contact
 
-Each part reads its text from `archive.<name>`; nothing in the layout is
-hard-coded prose. The five disciplines share one renderer
-(`discipline_block()`), so a new one is a content change, not a template change.
+On a phone the hero puts the name, the three roles and both buttons above the
+fold and the photograph after them; the bar keeps only the mark, a short
+language switch ("EN" / "ქართ") and the menu. Surgery, aviation, the projects,
+the Library of the Void and the notes live on the biography page, where
+`render_about()` sets them after the five answers and the timeline. Each part
+reads its text from `archive.<name>`; the disciplines share one renderer
+(`discipline_block()`), so moving one between pages is a line, not a template.
+
+**The articles page is a contents page**: the newest piece as the cover story,
+then the rest in date order with a thumbnail, subject, date and reading time,
+and topic filters above (`pages.articles.topics`; each article carries a
+`topic`: `ideas`, `art`, `work` or `public`). A filter can be linked to
+directly — `articles.html#art`.
+
+**Every article is dated** (`date`, ISO, in both content files, kept newest
+first). The date is shown in the reader's language, written into the Article
+record as `datePublished`, and carried on every card. At the end of a piece:
+a share row (the phone's own share sheet where it exists, WhatsApp, Facebook,
+Telegram, copy link), an invitation to the tests on Void Mafia, the newer and
+the next piece with their dates, and three more to read — the same topic first.
+The opening paragraph starts with a large first letter.
 
 **Motion** lives in `assets/js/main.js` and is all optional: sections reveal as
 they approach, a two-part cursor names what a link would do, buttons lean
@@ -658,16 +677,14 @@ violet line covers a page change. Every one of these is switched off by
 fine pointer — a phone gets none of them and pays for none of them.
 
 **Unverified facts are visible, not invented.** Anything written as
-`[[…]]` in the content files renders as marked text on the page: the
-professional background in surgery and aviation, the book's chapters, excerpt
-and status, one project, and every row of the journey. Replace the text between
-the brackets and the mark disappears.
+`[[…]]` in the content files renders as marked text on the page, so a gap is
+never filled with a guess. None are left at present.
 
 დიზაინი: მუქი, სარედაქციო არქივი. ფერები და შრიფტები ერთ ადგილას წერია
-(`assets/css/style.css`-ის თავში), მთავარი გვერდის თექვსმეტივე ნაწილი კი
-`content/*.json`-ის `archive` ბლოკიდან იკითხება. `[[…]]`-ში ჩასმული ტექსტი
-გვერდზე გამოკვეთილად ჩანს — ეს ის ადგილებია, სადაც დადასტურებული ინფორმაცია
-უნდა ჩაიწეროს.
+(`assets/css/style.css`-ის თავში). მთავარ გვერდს ცხრა ნაწილი აქვს და ყველა
+`content/*.json`-ის `archive` ბლოკიდან იკითხება; ქირურგია, ავიაცია, პროექტები,
+ბიბლიოთეკა და ჩანაწერები ბიოგრაფიის გვერდზეა. სტატიებს თარიღი და თემა აქვთ,
+სტატიების გვერდი კი ჟურნალის სარჩევივითაა აწყობილი.
 
 ## Typefaces / შრიფტები
 

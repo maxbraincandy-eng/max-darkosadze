@@ -9,6 +9,7 @@ Nothing here needs a package manager, a framework or an internet connection.
 
 import html
 import json
+import urllib.parse
 import os
 import re
 import shutil
@@ -151,6 +152,30 @@ def reading_time(article):
     return max(1, round(word_count(article) / 180))
 
 
+MONTHS = {
+    "ka": ["იანვარი", "თებერვალი", "მარტი", "აპრილი", "მაისი", "ივნისი", "ივლისი",
+           "აგვისტო", "სექტემბერი", "ოქტომბერი", "ნოემბერი", "დეკემბერი"],
+    "en": ["January", "February", "March", "April", "May", "June", "July",
+           "August", "September", "October", "November", "December"],
+}
+
+
+def human_date(lang, iso):
+    """2026-09-21 as a reader says it: "21 სექტემბერი 2026", "21 September 2026"."""
+    try:
+        y, m, d = (int(x) for x in iso.split("-"))
+    except (ValueError, AttributeError):
+        return iso or ""
+    return "%d %s %d" % (d, MONTHS.get(lang, MONTHS["en"])[m - 1], y)
+
+
+def date_tag(lang, iso):
+    """A <time> the reader sees and a machine can read."""
+    if not iso:
+        return ""
+    return '<time datetime="%s">%s</time>' % (esc(iso), esc(human_date(lang, iso)))
+
+
 # --------------------------------------------------------------------------
 # components
 # --------------------------------------------------------------------------
@@ -217,6 +242,7 @@ def article_card(data, article, depth):
           <span class="tag">%s</span>
           <h3>%s</h3>
           <p>%s</p>
+          <span class="card-date">%s</span>
           <span class="card-more">%s <span aria-hidden="true">&rarr;</span></span>
         </div>
       </a>""" % (
@@ -226,6 +252,7 @@ def article_card(data, article, depth):
         esc(article["category"]),
         inline(article["title"]),
         inline(article["summary"]),
+        date_tag(data["lang"], article.get("date", "")),
         esc(ui["readMore"]),
     )
 
@@ -445,8 +472,13 @@ def header(data, depth, active, key="home", slug=None):
     items = []
     for item in data["nav"]:
         target = item.get("anchor")
-        href = (home + "#" + target) if target else link(data["lang"], item["key"], depth)
-        current = (item["key"] == active and not target)
+        if item.get("slug"):
+            href = link(data["lang"], "article", depth, item["slug"])
+        elif target:
+            href = home + "#" + target
+        else:
+            href = link(data["lang"], item["key"], depth)
+        current = (item["key"] == active and not target and not item.get("slug"))
         items.append('<li><a%s href="%s"><span>%s</span></a></li>'
                      % (' class="is-active"' if current else "", esc(href), esc(item["label"])))
 
@@ -466,7 +498,7 @@ def header(data, depth, active, key="home", slug=None):
       </div>
     </nav>
     <div class="nav-tools">
-      <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s">%s</a>
+      <a class="lang-switch" href="%s" hreflang="%s" lang="%s" title="%s"><span class="lang-long">%s</span><span class="lang-short" aria-hidden="true">%s</span></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="%s">
         <span class="nav-toggle-bars" aria-hidden="true"><i></i><i></i></span>
         <span class="nav-toggle-word">%s</span>
@@ -491,6 +523,7 @@ def header(data, depth, active, key="home", slug=None):
         data["other"],
         esc(data["otherAria"]),
         esc(data["otherLabel"]),
+        "EN" if data["other"] == "en" else "ქართ",     # a phone has room for this much
         esc(data["ui"]["menu"]),
         esc(data["ui"]["menu"]),
     )
@@ -710,9 +743,102 @@ def featured_band(data, depth):
         inline(article["summary"]), esc(f["cta"]))
 
 
+def trio_section(data, depth):
+    """The three things he does first, side by side: writing, film, philosophy.
+    One card each — the picture, the line, the way in."""
+    t = data["archive"]["trio"]
+    cards = []
+    for i, item in enumerate(t["items"], start=1):
+        d = data["archive"][item["key"]]
+        if item.get("slug"):
+            href = link(data["lang"], "article", depth, item["slug"])
+        else:
+            href = link(data["lang"], item["page"], depth)
+        cards.append("""
+      <a class="trio-card" href="%s">
+        <span class="trio-media">%s</span>
+        <span class="trio-body">
+          <span class="trio-n">%02d</span>
+          <span class="trio-title">%s</span>
+          <span class="trio-quote">%s</span>
+          <span class="trio-cta">%s <span aria-hidden="true">&rarr;</span></span>
+        </span>
+      </a>""" % (esc(href), img_tag(d["image"], "", depth,
+                                     sizes="(max-width: 900px) 100vw, 380px"),
+                 i, inline(d["title"]), inline(d["quote"]), esc(item["cta"])))
+    return """
+<section class="section trio" id="directions" data-reveal>
+  <div class="wrap">%s
+    <div class="trio-grid">%s</div>
+  </div>
+</section>""" % (archive_head(t["eyebrow"], t["title"], t.get("lead", "")), "".join(cards))
+
+
+def projects_section(data, depth):
+    a = data["archive"]
+
+    def project_title(item):
+        if item.get("page"):
+            return '<a href="%s">%s</a>' % (esc(link(data["lang"], item["page"], depth)),
+                                            inline(item["title"]))
+        return inline(item["title"])
+
+    rows = "".join("""
+      <article class="project">
+        <p class="project-n">%s</p>
+        <div class="project-body">
+          <h3 class="project-title">%s</h3>
+          <p class="project-kind">%s</p>
+          <p class="project-text">%s</p>
+        </div>
+        <p class="project-status">%s</p>
+      </article>""" % (esc(item["n"]), project_title(item), esc(item["kind"]),
+                       inline(item["text"]), inline(item["status"]))
+        for item in a["projects"]["items"])
+    return """
+<section class="section projects" id="projects" data-reveal>
+  <div class="wrap">%s
+    <div class="project-list">%s</div>
+  </div>
+</section>""" % (archive_head(a["projects"]["eyebrow"], a["projects"]["title"],
+                              a["projects"]["lead"]), rows)
+
+
+def library_section(data, depth):
+    lib = data["archive"]["library"]
+    return """
+<section class="section library" id="library" data-reveal>
+  <div class="library-stars" aria-hidden="true"></div>
+  <div class="wrap library-inner">
+    <p class="eyebrow">%s</p>
+    <h2 class="library-title">%s</h2>
+    <p class="library-subtitle">%s</p>
+    <p class="library-text">%s</p>
+    <ul class="library-tabs">%s</ul>
+    <p class="library-note">%s</p>
+  </div>
+</section>""" % (esc(lib["eyebrow"]), inline(lib["title"]), inline(lib["subtitle"]),
+                 inline(lib["text"]),
+                 "".join("<li>%s</li>" % esc(t) for t in lib["tabs"]), inline(lib["note"]))
+
+
+def notes_section(data, depth):
+    a = data["archive"]
+    notes = "".join('<li class="note-fragment"><p>%s</p></li>' % inline(t)
+                    for t in a["notes"]["items"])
+    return """
+<section class="section notes-band" id="notes" data-reveal>
+  <div class="wrap">%s
+    <ul class="fragments">%s</ul>
+  </div>
+</section>""" % (archive_head(a["notes"]["eyebrow"], a["notes"]["title"]), notes)
+
+
 def render_home(data):
-    """The archive of a life, read from the top: who, then the worlds, then the
-    work, then the ideas, then the way to reach him."""
+    """Nine rooms, in the order a first-time reader needs them: who he is, the
+    piece to read now, the three things he does, a word about him, the latest
+    writing, the film, the platform he built, the pictures, the way to reach
+    him. Everything else lives on the biography page."""
     depth = 1
     p = data["pages"]["home"]
     a = data["archive"]
@@ -743,48 +869,16 @@ def render_home(data):
     </figure>
   </div>
   <p class="hero-place" aria-hidden="true">%s</p>
-  <a class="hero-scroll" href="#intro"><span>%s</span></a>
+  <a class="hero-scroll" href="#featured"><span>%s</span></a>
 </section>""" % (
         esc(a["hero"]["eyebrow"]), hero_lines, roles, inline(a["hero"]["statement"]),
-        link(data["lang"], "about", depth), esc(p["ctaPrimary"]),
-        link(data["lang"], "articles", depth), esc(p["ctaSecondary"]),
+        link(data["lang"], "articles", depth), esc(p["ctaPrimary"]),
+        link(data["lang"], "about", depth), esc(p["ctaSecondary"]),
         hero_featured(data, depth),
         img_tag("assets/img/portrait.jpg", plain(a["hero"]["portraitAlt"]), depth, eager=True),
         esc(a["hero"]["place"]), esc(a["hero"]["scroll"]))
 
-    # 02 — the statement that sets the tone
-    intro = """
-<section class="section intro" id="intro" data-reveal>
-  <div class="wrap intro-inner">
-    <p class="intro-statement">%s</p>
-    <div class="intro-body">%s</div>
-  </div>
-</section>""" % (
-        inline(a["intro"]["statement"]),
-        "".join("<p>%s</p>" % inline(t) for t in a["intro"]["paragraphs"]))
-
-    # 03 — the worlds
-    rows = []
-    for item in a["worlds"]["items"]:
-        href = (link(data["lang"], "article", depth, item["slug"]) if item.get("slug")
-                else "#projects")
-        rows.append("""
-      <a class="world" href="%s">
-        <span class="world-media" aria-hidden="true">%s</span>
-        <span class="world-n">%s</span>
-        <span class="world-title">%s</span>
-        <span class="world-text">%s</span>
-        <span class="world-arrow" aria-hidden="true">&rarr;</span>
-      </a>""" % (esc(href), img_tag(item["image"], "", depth, sizes="800px"), esc(item["n"]),
-                 inline(item["title"]), inline(item["text"])))
-    worlds = """
-<section class="section worlds" id="worlds" data-reveal>
-  <div class="wrap">%s
-    <div class="world-list">%s</div>
-  </div>
-</section>""" % (archive_head(a["worlds"]["eyebrow"], a["worlds"]["title"]), "".join(rows))
-
-    # 04 — about
+    # 04 — about, in a paragraph
     about_page = data["pages"]["about"]
     about = """
 <section class="section about-band" id="about" data-reveal>
@@ -804,29 +898,22 @@ def render_home(data):
         esc(about_page["eyebrow"]), inline(about_page["heading"]), inline(about_page["lead"]),
         link(data["lang"], "about", depth), esc(ui["readMore"]))
 
-    # 05-07 — what he leads with: the writing, the films, the thinking
-    leading = (discipline_block(data, depth, "writing", "writing")
-               + discipline_block(data, depth, "cinema", "cinema", reverse=True)
-               + discipline_block(data, depth, "philosophy", "philosophy"))
-
-    # 09-10 — the professions the work above is drawn from, further down the page
-    professions = (discipline_block(data, depth, "surgery", "surgery")
-                   + discipline_block(data, depth, "aviation", "aviation", reverse=True))
-
-    # 08 — the pieces themselves
+    # 05 — the latest writing, dated
     entries = []
-    for i, article in enumerate(data["articles"][:6], start=1):
+    for i, article in enumerate(data["articles"][:5], start=1):
         entries.append("""
       <a class="entry" href="%s">
         <span class="entry-n">%02d</span>
         <span class="entry-main">
+          <span class="entry-kicker">%s</span>
           <span class="entry-title">%s</span>
           <span class="entry-text">%s</span>
         </span>
-        <span class="entry-meta">%s %s</span>
+        <span class="entry-meta">%s<br>%s %s</span>
         <span class="entry-arrow" aria-hidden="true">&rarr;</span>
       </a>""" % (link(data["lang"], "article", depth, article["slug"]), i,
-                 inline(article["title"]), inline(article["summary"]),
+                 esc(article["category"]), inline(article["title"]), inline(article["summary"]),
+                 date_tag(data["lang"], article.get("date", "")),
                  reading_time(article), esc(ui["readingTime"])))
     writing = """
 <section class="section writing" id="essays" data-reveal>
@@ -837,51 +924,7 @@ def render_home(data):
 </section>""" % (archive_head(a["essays"]["eyebrow"], a["essays"]["title"], a["essays"]["lead"]),
                  "".join(entries), link(data["lang"], "articles", depth), esc(a["essays"]["cta"]))
 
-    # 10 — projects
-    def project_title(item):
-        if item.get("page"):
-            return '<a href="%s">%s</a>' % (esc(link(data["lang"], item["page"], depth)),
-                                            inline(item["title"]))
-        return inline(item["title"])
-
-    project_rows = "".join("""
-      <article class="project">
-        <p class="project-n">%s</p>
-        <div class="project-body">
-          <h3 class="project-title">%s</h3>
-          <p class="project-kind">%s</p>
-          <p class="project-text">%s</p>
-        </div>
-        <p class="project-status">%s</p>
-      </article>""" % (esc(item["n"]), project_title(item), esc(item["kind"]),
-                       inline(item["text"]), inline(item["status"]))
-        for item in a["projects"]["items"])
-    projects = """
-<section class="section projects" id="projects" data-reveal>
-  <div class="wrap">%s
-    <div class="project-list">%s</div>
-  </div>
-</section>""" % (archive_head(a["projects"]["eyebrow"], a["projects"]["title"],
-                              a["projects"]["lead"]), project_rows)
-
-    # 11 — the library
-    lib = a["library"]
-    library = """
-<section class="section library" id="library" data-reveal>
-  <div class="library-stars" aria-hidden="true"></div>
-  <div class="wrap library-inner">
-    <p class="eyebrow">%s</p>
-    <h2 class="library-title">%s</h2>
-    <p class="library-subtitle">%s</p>
-    <p class="library-text">%s</p>
-    <ul class="library-tabs">%s</ul>
-    <p class="library-note">%s</p>
-  </div>
-</section>""" % (esc(lib["eyebrow"]), inline(lib["title"]), inline(lib["subtitle"]),
-                 inline(lib["text"]),
-                 "".join("<li>%s</li>" % esc(t) for t in lib["tabs"]), inline(lib["note"]))
-
-    # 12 — the visual archive
+    # 08 — the pictures
     tiles = "".join(
         '<a class="strip-item" href="%s">%s</a>' % (
             link(data["lang"], "gallery", depth),
@@ -896,35 +939,7 @@ def render_home(data):
 </section>""" % (archive_head(a["gallery"]["eyebrow"], a["gallery"]["title"], a["gallery"]["text"]),
                  tiles, link(data["lang"], "gallery", depth), esc(a["gallery"]["cta"]))
 
-    # 13 — the journey
-    steps = "".join("""
-      <li class="step" data-reveal>
-        <p class="step-year">%s</p>
-        <div class="step-body">
-          <h3>%s</h3>
-          <p>%s</p>
-        </div>
-      </li>""" % (inline(e["year"]), inline(e["title"]), inline(e["text"]))
-        for e in a["timeline"]["entries"])
-    journey = """
-<section class="section journey" id="journey" data-reveal>
-  <div class="wrap">%s
-    <ol class="steps">%s</ol>
-  </div>
-</section>""" % (archive_head(a["timeline"]["eyebrow"], a["timeline"]["title"],
-                              a["timeline"]["lead"]), steps)
-
-    # 14 — notes
-    notes = "".join('<li class="note-fragment"><p>%s</p></li>' % inline(t)
-                    for t in a["notes"]["items"])
-    notes_section = """
-<section class="section notes-band" id="notes" data-reveal>
-  <div class="wrap">%s
-    <ul class="fragments">%s</ul>
-  </div>
-</section>""" % (archive_head(a["notes"]["eyebrow"], a["notes"]["title"]), notes)
-
-    # 15 — contact
+    # 09 — the way to reach him
     c = a["contactBlock"]
     contact_page = data["pages"]["contact"]
     email = contact_page.get("email", "")
@@ -947,10 +962,15 @@ def render_home(data):
         esc(data["meta"]["links"]["instagram"]),
         link(data["lang"], "contact", depth), esc(contact_page["heading"]))
 
-    body = (hero + featured_band(data, depth) + intro + worlds + about + leading + writing
-            + film_section(data, depth) + professions + projects + game_band(data, depth)
-            + library + gallery
-            + journey + notes_section + contact)
+    body = (hero                                  # 01 who
+            + featured_band(data, depth)          # 02 the piece to read now
+            + trio_section(data, depth)           # 03 writing · film · philosophy
+            + about                               # 04 a word about him
+            + writing                             # 05 the latest writing
+            + film_section(data, depth)           # 06 the film
+            + game_band(data, depth)              # 07 Void Mafia
+            + gallery                             # 08 the pictures
+            + contact)                            # 09 the way to reach him
 
     return document(
         data,
@@ -1018,6 +1038,8 @@ def render_about(data):
   </div>
 </section>
 
+%s
+
 <section class="section section-alt">
   <div class="wrap">
     <header class="section-head">
@@ -1029,6 +1051,9 @@ def render_about(data):
 </section>
 
 %s
+%s
+%s
+%s
 """ % (
         esc(p["eyebrow"]),
         inline(p["heading"]),
@@ -1038,10 +1063,16 @@ def render_about(data):
         esc(p["five"]["title"]),
         "".join('<div class="five-item"><h3>%s</h3><p>%s</p></div>'
                 % (inline(i["h"]), inline(i["t"])) for i in p["five"]["items"]),
+        # the professions the writing and the films draw on
+        discipline_block(data, depth, "surgery", "surgery")
+        + discipline_block(data, depth, "aviation", "aviation", reverse=True),
         esc(p["timelineTitle"]),
         inline(p["timelineNote"]),
         timeline,
         honours,
+        projects_section(data, depth),
+        library_section(data, depth),
+        notes_section(data, depth),
     )
     return document(
         data,
@@ -1056,11 +1087,64 @@ def render_about(data):
 
 
 def render_articles_index(data):
+    """A magazine's contents page: the newest piece given the room of a cover
+    story, then everything else in order, each with its subject, its date and
+    how long it takes. The topics above filter the list in place."""
     depth = 1
     p = data["pages"]["articles"]
-    cards = "".join(article_card(data, a, depth) for a in data["articles"])
+    ui = data["ui"]
+    articles = data["articles"]
+    lang = data["lang"]
+    topics = p.get("topics", {})
+
+    def meta(article):
+        return '<span class="mag-meta">%s <span aria-hidden="true">·</span> %s %s</span>' % (
+            date_tag(lang, article.get("date", "")), reading_time(article), esc(ui["readingTime"]))
+
+    lead = articles[0]
+    cover = """
+    <a class="mag-cover" href="%s" data-topic="%s">
+      <span class="mag-cover-media">%s</span>
+      <span class="mag-cover-body">
+        <span class="mag-kicker"><b>%s</b> %s</span>
+        <span class="mag-cover-title">%s</span>
+        <span class="mag-cover-sub">%s</span>
+        <span class="mag-cover-text">%s</span>
+        %s
+        <span class="mag-cta">%s <span aria-hidden="true">&rarr;</span></span>
+      </span>
+    </a>""" % (
+        link(lang, "article", depth, lead["slug"]), esc(lead.get("topic", "")),
+        img_tag(lead["image"], lead.get("imageAlt", plain(lead["title"])), depth, eager=True,
+                sizes="(max-width: 900px) 100vw, 640px"),
+        esc(p.get("latest", "")), esc(lead["category"]),
+        inline(lead["title"]), inline(lead.get("subtitle", "")), inline(lead["summary"]),
+        meta(lead), esc(p.get("read", ui["readMore"])))
+
+    rows = "".join("""
+    <a class="mag-item" href="%s" data-topic="%s">
+      <span class="mag-thumb">%s</span>
+      <span class="mag-body">
+        <span class="mag-kicker">%s</span>
+        <span class="mag-title">%s</span>
+        <span class="mag-text">%s</span>
+        %s
+      </span>
+      <span class="mag-arrow" aria-hidden="true">&rarr;</span>
+    </a>""" % (link(lang, "article", depth, a["slug"]), esc(a.get("topic", "")),
+               img_tag(a["image"], "", depth, sizes="(max-width: 700px) 30vw, 220px"),
+               esc(a["category"]), inline(a["title"]), inline(a["summary"]), meta(a))
+        for a in articles[1:])
+
+    present = {a.get("topic") for a in articles}
+    chips = "".join(
+        '<button type="button" class="chip%s" data-filter="%s" aria-pressed="%s">%s</button>'
+        % (" is-on" if key == "all" else "", esc(key), "true" if key == "all" else "false",
+           esc(label))
+        for key, label in topics.items() if key == "all" or key in present)
+
     body = """
-<section class="page-head">
+<section class="page-head mag-head">
   <div class="wrap">
     <p class="eyebrow">%s</p>
     <h1>%s</h1>
@@ -1068,17 +1152,26 @@ def render_articles_index(data):
   </div>
 </section>
 
-<section class="section">
+<section class="section mag" data-mag>
   <div class="wrap">
-    <div class="cards">%s</div>
+    <div class="chips" role="toolbar" aria-label="%s">%s</div>
+    %s
+    <div class="mag-list">%s</div>
+    <p class="mag-empty" hidden>%s</p>
   </div>
 </section>
-""" % (
-        esc(p["eyebrow"]),
-        inline(p["heading"]),
-        inline(p["lead"]),
-        cards,
-    )
+""" % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
+       esc(p.get("filterLabel", "")), chips, cover, rows, esc(p.get("empty", "")))
+
+    listing = {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": plain(a["title"]),
+             "url": "%s/%s" % (SITE["baseUrl"].rstrip("/"), page_path(lang, "article", a["slug"]))
+                    if SITE.get("baseUrl") else page_path(lang, "article", a["slug"])}
+            for i, a in enumerate(articles)],
+    }
     return document(
         data,
         title=p["title"],
@@ -1087,7 +1180,55 @@ def render_articles_index(data):
         body=body,
         depth=depth,
         active="articles",
+        extra_head='<script type="application/ld+json">%s</script>'
+                   % json.dumps(listing, ensure_ascii=False),
     )
+
+
+def share_row(data, article, depth):
+    """Pass it on: the phone's own share sheet where there is one, and the
+    three messengers people here actually use, plus a plain link to copy."""
+    ui = data["ui"]
+    path = page_path(data["lang"], "article", article["slug"])
+    base = SITE.get("baseUrl", "").rstrip("/")
+    url = "%s/%s" % (base, path) if base else path
+    title = plain(article["title"])
+    q = urllib.parse.quote
+    links = [
+        ("whatsapp", "WhatsApp", "https://wa.me/?text=%s" % q("%s %s" % (title, url))),
+        ("facebook", "Facebook", "https://www.facebook.com/sharer/sharer.php?u=%s" % q(url)),
+        ("telegram", "Telegram", "https://t.me/share/url?url=%s&text=%s" % (q(url), q(title))),
+    ]
+    items = "".join(
+        '<a class="share-btn share-%s" href="%s" target="_blank" rel="noopener">%s</a>'
+        % (key, esc(href), esc(label)) for key, label, href in links)
+    return """<div class="share" data-share data-url="%s" data-title="%s">
+      <p class="share-label">%s</p>
+      <div class="share-row">
+        <button class="share-btn share-native" type="button" data-share-native hidden>%s</button>
+        %s
+        <button class="share-btn share-copy" type="button" data-share-copy data-done="%s">%s</button>
+      </div>
+    </div>""" % (esc(url), esc(title), esc(ui["share"]), esc(ui["shareNative"]), items,
+                 esc(ui["copied"]), esc(ui["copyLink"]))
+
+
+def void_invite(data):
+    """After the reading, the doing: the tests on Void Mafia."""
+    url = data["meta"]["links"].get("game")
+    if not url:
+        return ""
+    ui = data["ui"]
+    return """<a class="invite" href="%s" target="_blank" rel="noopener">
+      <img class="invite-mark" src="%s" alt="" width="64" height="64" loading="lazy">
+      <span class="invite-body">
+        <span class="invite-kicker">%s</span>
+        <strong class="invite-title">%s</strong>
+        <span class="invite-text">%s</span>
+      </span>
+      <span class="invite-cta">%s &rarr;</span>
+    </a>""" % (esc(url), asset("assets/img/voidmafia.png", 2), esc(ui["inviteKicker"]),
+               esc(ui["inviteTitle"]), esc(ui["inviteText"]), esc(ui["inviteCta"]))
 
 
 def render_article(data, index):
@@ -1095,31 +1236,30 @@ def render_article(data, index):
     ui = data["ui"]
     article = data["articles"][index]
     articles = data["articles"]
-    prev_a = articles[index - 1] if index > 0 else None
-    next_a = articles[index + 1] if index < len(articles) - 1 else None
+    # the list runs newest first: the next piece to read is the older one
+    newer = articles[index - 1] if index > 0 else None
+    older = articles[index + 1] if index < len(articles) - 1 else None
+
+    def pager_item(other, label, cls):
+        return ('<a class="pager-item %s" href="%s"><span>%s</span><strong>%s</strong>'
+                '<em>%s</em></a>' % (
+                    cls, link(data["lang"], "article", depth, other["slug"]), esc(label),
+                    inline(other["title"]), esc(human_date(data["lang"], other.get("date", "")))))
 
     pager = []
-    if prev_a:
-        pager.append(
-            '<a class="pager-item pager-prev" href="%s"><span>%s</span><strong>%s</strong></a>'
-            % (
-                link(data["lang"], "article", depth, prev_a["slug"]),
-                esc(ui["prevArticle"]),
-                inline(prev_a["title"]),
-            )
-        )
-    if next_a:
-        pager.append(
-            '<a class="pager-item pager-next" href="%s"><span>%s</span><strong>%s</strong></a>'
-            % (
-                link(data["lang"], "article", depth, next_a["slug"]),
-                esc(ui["nextArticle"]),
-                inline(next_a["title"]),
-            )
-        )
+    if newer:
+        pager.append(pager_item(newer, ui["newerArticle"], "pager-prev"))
+    if older:
+        pager.append(pager_item(older, ui["nextArticle"], "pager-next"))
 
-    others = [a for a in articles if a["slug"] != article["slug"]][:3]
-    related = "".join(article_card(data, a, depth) for a in others)
+    # what to read after this: the same subject first, then the newest of the rest
+    same = [a for a in articles if a["slug"] != article["slug"]
+            and a.get("topic") and a.get("topic") == article.get("topic")]
+    rest = [a for a in articles if a["slug"] != article["slug"] and a not in same]
+    related = "".join(article_card(data, a, depth) for a in (same + rest)[:3])
+
+    share = share_row(data, article, depth)
+    invite = void_invite(data)
 
     body = """
 <article class="article">
@@ -1148,6 +1288,8 @@ def render_article(data, index):
   </div>
 
   <div class="wrap article-foot">
+    %s
+    %s
     <a class="btn btn-ghost" href="%s">&larr; %s</a>
   </div>
 
@@ -1166,7 +1308,7 @@ def render_article(data, index):
         esc(article["category"]),
         inline(article["title"]),
         inline(article["subtitle"]),
-        ("<span>%s</span>" % inline(article["date"])) if article.get("date") else "",
+        ("<span>%s</span>" % date_tag(data["lang"], article["date"])) if article.get("date") else "",
         reading_time(article),
         esc(ui["readingTime"]),
         figure(
@@ -1180,6 +1322,8 @@ def render_article(data, index):
         esc(ui["contents"]),
         editor_note(data, article["blocks"], article.get("subtitle"), article.get("summary")),
         blocks_html(article["blocks"], depth),
+        share,
+        invite,
         link(data["lang"], "articles", depth),
         esc(ui["backToArticles"]),
         esc(ui["allArticles"]),
@@ -1208,6 +1352,8 @@ def render_article(data, index):
             "inLanguage": data["lang"],
             "about": data["meta"]["siteName"],
             "author": {"@type": "Person", "name": data["meta"]["siteName"]},
+            **({"datePublished": article["date"], "dateModified": article["date"]}
+               if article.get("date") else {}),
         },
         ensure_ascii=False,
     )

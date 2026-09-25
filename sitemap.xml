@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
         xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  <url><loc>https://maxdarkosadze.com/en/index.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/index.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/hero.jpg</image:loc><image:title>Max Darkosadze</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/portrait.jpg</image:loc><image:title>Max Darkosadze</image:title></image:image>
     <video:video><video:thumbnail_loc>https://maxdarkosadze.com/assets/video/showreel-poster.jpg</video:thumbnail_loc><video:title>One man, several lives</video:title><video:description>Half a minute of Mr. Max&#x27;s world in pictures: the operating theatre, the cockpit, the lecture hall, the studio, the set.</video:description><video:content_loc>https://maxdarkosadze.com/assets/video/showreel-en.mp4</video:content_loc><video:family_friendly>yes</video:family_friendly></video:video>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/about.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/about.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/films.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/films.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/void-mafia.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/void-mafia.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/news.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/news.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/foundation.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/foundation.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/gallery.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/gallery.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/01.jpg</image:loc><image:title>On the course.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/02.jpg</image:loc><image:title>In the hospital.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/03.jpg</image:loc><image:title>Instructing from the right-hand seat.</image:title></image:image>
@@ -40,71 +40,71 @@
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/18.jpg</image:loc><image:title>Afternoon, above the city.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/19.jpg</image:loc><image:title>Tbilisi at night — after the meeting.</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/legend.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/legend.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/guestbook.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/guestbook.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/booking.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/booking.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/faq.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/faq.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/search.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/search.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/contact.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/contact.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/press.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/press.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/success.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/success.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/17.jpg</image:loc><image:title>Max Darkosadze — Mr. Max</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/surgeon.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/surgeon.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/surgery.jpg</image:loc><image:title>Max Darkosadze in the operating theatre</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/aviation-instructor.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/aviation.jpg</image:loc><image:title>Max Darkosadze as an aviation instructor</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/lecturer.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/lecture.jpg</image:loc><image:title>Max Darkosadze lecturing on philosophy</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/writer.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/writing.jpg</image:loc><image:title>Max Darkosadze at his writing desk</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/philosopher.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/philosophy.jpg</image:loc><image:title>Max Darkosadze, known as Mr. Max</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/sculptor.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/sculpture.jpg</image:loc><image:title>Max Darkosadze working on a marble bust</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/public-figure.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/public-figure.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/public.jpg</image:loc><image:title>Max Darkosadze speaking in public</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/two-afternoons.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/rescue.jpg</image:loc><image:title>Max Darkosadze lifting a kitten down from a tree</image:title></image:image>
+  <url><loc>https://maxdarkosadze.com/en/articles/lecturer.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/lecture.jpg</image:loc><image:title>Max Darkosadze lecturing on philosophy</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/honours.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/writer.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/writing.jpg</image:loc><image:title>Max Darkosadze at his writing desk</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/en/articles/honours.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/honours.jpg</image:loc><image:title>Max Darkosadze receiving an award</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/en/articles/filmmaker.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/philosopher.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/philosophy.jpg</image:loc><image:title>Max Darkosadze, known as Mr. Max</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/en/articles/two-afternoons.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/rescue.jpg</image:loc><image:title>Max Darkosadze lifting a kitten down from a tree</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/en/articles/filmmaker.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/film.jpg</image:loc><image:title>Max Darkosadze on set</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/index.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/en/articles/sculptor.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/sculpture.jpg</image:loc><image:title>Max Darkosadze working on a marble bust</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/en/articles/aviation-instructor.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/aviation.jpg</image:loc><image:title>Max Darkosadze as an aviation instructor</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/index.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/hero.jpg</image:loc><image:title>მაქსი დარკოსაძე</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/portrait.jpg</image:loc><image:title>მაქსი დარკოსაძე</image:title></image:image>
     <video:video><video:thumbnail_loc>https://maxdarkosadze.com/assets/video/showreel-poster.jpg</video:thumbnail_loc><video:title>ერთი ადამიანი, რამდენიმე ცხოვრება</video:title><video:description>ნახევარი წუთი — ბატონი მაქსის სამყარო კადრებში: საოპერაციო, კაბინა, აუდიტორია, სახელოსნო, გადასაღები მოედანი.</video:description><video:content_loc>https://maxdarkosadze.com/assets/video/showreel-ka.mp4</video:content_loc><video:family_friendly>yes</video:family_friendly></video:video>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/about.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/about.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/films.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/films.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/void-mafia.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/void-mafia.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/news.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/news.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/foundation.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/foundation.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/gallery.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/gallery.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/01.jpg</image:loc><image:title>გოლფის მოედანზე.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/02.jpg</image:loc><image:title>კლინიკაში.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/03.jpg</image:loc><image:title>ინსტრუქტაჟი მარჯვენა სავარძლიდან.</image:title></image:image>
@@ -125,51 +125,51 @@
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/18.jpg</image:loc><image:title>შუადღე, ქალაქს ზემოთ.</image:title></image:image>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/19.jpg</image:loc><image:title>თბილისი ღამით — შეხვედრის შემდეგ.</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/legend.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/legend.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/guestbook.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/guestbook.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/booking.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/booking.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/faq.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/faq.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/search.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/search.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/contact.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/contact.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/press.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/press.html</loc><lastmod>2026-09-25</lastmod>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/success.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles/success.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/gallery/17.jpg</image:loc><image:title>მაქსი დარკოსაძე — ბატონი მაქსი</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/surgeon.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles/surgeon.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/surgery.jpg</image:loc><image:title>მაქსი დარკოსაძე საოპერაციოში</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/aviation-instructor.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/aviation.jpg</image:loc><image:title>მაქსი დარკოსაძე როგორც ავიაინსტრუქტორი</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/lecturer.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/lecture.jpg</image:loc><image:title>მაქსი დარკოსაძე ფილოსოფიის ლექციაზე</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/writer.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/writing.jpg</image:loc><image:title>მაქსი დარკოსაძე საწერ მაგიდასთან</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/philosopher.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/philosophy.jpg</image:loc><image:title>მაქსი დარკოსაძე, ცნობილი როგორც ბატონი მაქსი</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/sculptor.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/sculpture.jpg</image:loc><image:title>მაქსი დარკოსაძე მარმარილოს ბიუსტზე მუშაობს</image:title></image:image>
-  </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/public-figure.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles/public-figure.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/public.jpg</image:loc><image:title>მაქსი დარკოსაძე საჯარო გამოსვლისას</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/two-afternoons.html</loc><lastmod>2026-09-23</lastmod>
-    <image:image><image:loc>https://maxdarkosadze.com/assets/img/rescue.jpg</image:loc><image:title>მაქსი დარკოსაძე კნუტს ხიდან ჩამოჰყავს</image:title></image:image>
+  <url><loc>https://maxdarkosadze.com/ka/articles/lecturer.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/lecture.jpg</image:loc><image:title>მაქსი დარკოსაძე ფილოსოფიის ლექციაზე</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/honours.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles/writer.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/writing.jpg</image:loc><image:title>მაქსი დარკოსაძე საწერ მაგიდასთან</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/articles/honours.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/honours.jpg</image:loc><image:title>მაქსი დარკოსაძე ჯილდოს მიღებისას</image:title></image:image>
   </url>
-  <url><loc>https://maxdarkosadze.com/ka/articles/filmmaker.html</loc><lastmod>2026-09-23</lastmod>
+  <url><loc>https://maxdarkosadze.com/ka/articles/philosopher.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/philosophy.jpg</image:loc><image:title>მაქსი დარკოსაძე, ცნობილი როგორც ბატონი მაქსი</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/articles/two-afternoons.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/rescue.jpg</image:loc><image:title>მაქსი დარკოსაძე კნუტს ხიდან ჩამოჰყავს</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/articles/filmmaker.html</loc><lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://maxdarkosadze.com/assets/img/film.jpg</image:loc><image:title>მაქსი დარკოსაძე გადასაღებ მოედანზე</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/articles/sculptor.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/sculpture.jpg</image:loc><image:title>მაქსი დარკოსაძე მარმარილოს ბიუსტზე მუშაობს</image:title></image:image>
+  </url>
+  <url><loc>https://maxdarkosadze.com/ka/articles/aviation-instructor.html</loc><lastmod>2026-09-25</lastmod>
+    <image:image><image:loc>https://maxdarkosadze.com/assets/img/aviation.jpg</image:loc><image:title>მაქსი დარკოსაძე როგორც ავიაინსტრუქტორი</image:title></image:image>
   </url>
 </urlset>
