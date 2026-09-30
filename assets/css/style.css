@@ -1128,38 +1128,99 @@ body.lang-ka .five-item h3 { letter-spacing: .06em; text-transform: none; }
 .chip:hover { color: var(--text); border-color: var(--line-strong); }
 .chip.is-on { color: #fff; border-color: var(--violet); background: rgba(124, 92, 255, .14); }
 .chip-count { color: var(--muted); margin-inline-start: .4rem; font-size: .7rem; }
-.gallery { columns: 3 260px; column-gap: 1px; }
-.gal-item { break-inside: avoid; margin-bottom: 1px; }
-.gal-open { display: block; position: relative; overflow: hidden; }
-.gal-open img { width: 100%; transition: transform var(--slow) var(--ease); }
+/* the gallery: a mosaic of photographs, each opening in the lightbox.
+   The tile is a <figure> holding a <button>; both come with browser defaults
+   — 40px side margins on a figure, and on iPhone a button's own padding,
+   background and rounded frame — so both are reset here, not styled around. */
+.gallery { columns: 3 260px; column-gap: var(--space-3); }
+.gal-item { break-inside: avoid; margin: 0 0 var(--space-5); }
+.gal-open {
+  -webkit-appearance: none; appearance: none;
+  display: block; position: relative; overflow: hidden; width: 100%;
+  margin: 0; padding: 0; border: 0; background: none; color: inherit; font: inherit;
+  border-radius: var(--radius-md); cursor: zoom-in;
+}
+.gal-open .img-slot { display: block; }
+.gal-open img {
+  width: 100%; height: auto; display: block;
+  transition: transform var(--slow) var(--ease);
+}
 .gal-item:hover .gal-open img { transform: scale(1.03); }
 .gal-tag {
   position: absolute; inset-block-end: .8rem; inset-inline-start: .8rem;
   font-size: .7rem; letter-spacing: .12em; color: var(--text);
   background: rgba(8, 9, 11, .6); padding: .3rem .7rem; backdrop-filter: blur(6px);
+  border-radius: var(--radius-pill);
   opacity: 0; transition: opacity var(--mid) var(--ease);
 }
-.gal-item:hover .gal-tag { opacity: 1; }
+.gal-item:hover .gal-tag, .gal-open:focus-visible .gal-tag { opacity: 1; }
+.gal-item figcaption {
+  color: var(--muted); font-size: .88rem; line-height: 1.5; margin-top: var(--space-2);
+}
 .gal-count { color: var(--muted); font-size: .85rem; }
 .gal-empty { color: var(--muted); }
 
-/* lightbox */
+/* lightbox: the photograph as large as the screen allows, with the count and
+   the close button above it and the arrows at its sides — each placed, not
+   left to fall where the flow puts it */
 .lightbox {
-  position: fixed; inset: 0; z-index: 120; display: none;
-  background: rgba(4, 5, 7, .96); backdrop-filter: blur(8px);
-  align-items: center; justify-content: center; padding: clamp(1rem, 4vw, 3rem);
+  position: fixed; inset: 0; z-index: 120;
+  display: grid; grid-template-rows: auto minmax(0, 1fr);
+  background: #040507;        /* solid: the page must not ghost through behind the photograph */
+  padding: calc(var(--space-3) + env(safe-area-inset-top, 0px)) var(--space-4)
+           calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+  opacity: 0; transition: opacity var(--fast) var(--ease);
+  touch-action: pan-y;
 }
-.lightbox[open], .lightbox.is-open { display: flex; }
-.lightbox img { max-height: 86vh; width: auto; object-fit: contain; }
-.lightbox figcaption { color: var(--muted); text-align: center; margin-top: 1rem; font-size: .9rem; }
+.lightbox.is-open { opacity: 1; }
+.lightbox-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--space-4);
+  min-height: 2.75rem;
+}
+.lightbox-counter {
+  margin: 0; color: var(--muted); font-size: .85rem; letter-spacing: .08em;
+  white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+/* the picture and its caption travel together, centred as one */
+.lightbox-figure {
+  margin: 0; min-height: 0; display: flex; flex-direction: column;
+  justify-content: center; align-items: center; gap: var(--space-3);
+}
+.lightbox-figure img {
+  flex: 0 1 auto; min-height: 0;
+  max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain;
+  border-radius: var(--radius-sm);
+  transition: opacity var(--fast) var(--ease);
+}
+.lightbox-figure img.is-loading { opacity: .35; }
+.lightbox-figure figcaption {
+  flex: none; color: var(--text); opacity: .8; text-align: center; font-size: .95rem; max-width: 40rem;
+}
+.lightbox-figure figcaption:empty { display: none; }
 .lightbox button {
-  position: absolute; background: none; border: 1px solid var(--line-strong);
-  color: var(--text); width: 2.8rem; height: 2.8rem; border-radius: 50%; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+  display: inline-grid; place-items: center; flex: none;
+  width: 2.75rem; height: 2.75rem; padding: 0; margin: 0;
+  border-radius: 50%; border: 1px solid var(--line-strong);
+  background: rgba(8, 9, 11, .55); color: var(--text);
+  font: 400 1.5rem/1 var(--sans); cursor: pointer;
+  transition: border-color var(--fast) var(--ease), background var(--fast) var(--ease);
 }
-.lightbox .lb-close { inset-block-start: 1.2rem; inset-inline-end: 1.2rem; }
-.lightbox .lb-prev { inset-inline-start: 1.2rem; }
-.lightbox .lb-next { inset-inline-end: 1.2rem; }
-.lightbox button:hover { border-color: var(--violet); }
+.lightbox button:hover { border-color: var(--violet); background: rgba(124, 92, 255, .18); }
+.lightbox .lightbox-prev, .lightbox .lightbox-next {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  backdrop-filter: blur(6px);
+}
+.lightbox .lightbox-prev { left: max(var(--space-3), env(safe-area-inset-left, 0px)); }
+.lightbox .lightbox-next { right: max(var(--space-3), env(safe-area-inset-right, 0px)); }
+.lightbox [hidden] { display: none; }
+@media (max-width: 700px) {
+  /* on a phone the arrows sit low, under the thumb, clear of the picture's middle */
+  .lightbox .lightbox-prev, .lightbox .lightbox-next {
+    top: auto; bottom: calc(var(--space-5) + env(safe-area-inset-bottom, 0px)); transform: none;
+  }
+  .lightbox { padding-bottom: calc(4.6rem + env(safe-area-inset-bottom, 0px)); }
+}
 
 /* forms: guest book, invitation, contact */
 .guest-grid, .booking-grid, .contact-grid {
@@ -1507,7 +1568,9 @@ html:not(.js) [data-reveal] { opacity: 1; transform: none; }
   .world-arrow { display: none; }
   .entry { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
   .entry-arrow { display: none; }
-  .gallery { columns: 1; }
+  .gallery { columns: 2; column-gap: var(--space-3); }   /* a phone sees more than one at a time */
+  .gal-item { margin-bottom: var(--space-4); }
+  .gal-item figcaption { font-size: .8rem; }
   .hero-scroll { display: none; }
 }
 

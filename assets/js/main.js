@@ -6,35 +6,40 @@
   docEl.classList.add("js");
   var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  /* ---- holding the page still under an overlay -----------------------
+     iOS ignores overflow:hidden on its own, so the body is pinned where it
+     was and put back exactly there. Counted, so the menu and the lightbox
+     can never unpin each other.                                          */
+  var pins = 0, pinnedY = 0;
+  var pinPage = function (on) {
+    var body = document.body;
+    if (on) {
+      if (pins++ > 0) return;
+      pinnedY = window.scrollY;
+      body.style.position = "fixed"; body.style.top = -pinnedY + "px";
+      body.style.left = "0"; body.style.right = "0";
+    } else {
+      if (pins === 0 || --pins > 0) return;
+      body.style.position = ""; body.style.top = ""; body.style.left = ""; body.style.right = "";
+      // instant, not smooth: the reader should be exactly where they were
+      window.scrollTo({ top: pinnedY, left: 0, behavior: "instant" });
+    }
+  };
+  var setInert = function (nodes, on) {
+    nodes.forEach(function (el) {
+      if (!el) return;
+      if (on) el.setAttribute("inert", ""); else el.removeAttribute("inert");
+    });
+  };
+
   /* ---- mobile navigation ------------------------------------------- */
   var toggle = document.querySelector(".nav-toggle");
   var nav = document.getElementById("site-nav");
 
   if (toggle && nav) {
     var page = [document.querySelector("main"), document.querySelector(".site-footer")];
-    var lockedY = 0;
-
-    /* while the menu is open the page behind it neither scrolls nor takes
-       focus: iOS ignores overflow:hidden on its own, so the body is pinned
-       where it was and put back exactly there on close                     */
-    var lock = function (on) {
-      var body = document.body;
-      if (on) {
-        lockedY = window.scrollY;
-        body.style.position = "fixed";
-        body.style.top = -lockedY + "px";
-        body.style.left = "0"; body.style.right = "0";
-      } else {
-        body.style.position = ""; body.style.top = "";
-        body.style.left = ""; body.style.right = "";
-        // instant, not smooth: the reader should be exactly where they were
-        window.scrollTo({ top: lockedY, left: 0, behavior: "instant" });
-      }
-      page.forEach(function (el) {
-        if (!el) return;
-        if (on) el.setAttribute("inert", ""); else el.removeAttribute("inert");
-      });
-    };
+    // while the menu is open the page behind it neither scrolls nor takes focus
+    var lock = function (on) { pinPage(on); setInert(page, on); };
 
     var isOpen = function () { return document.body.classList.contains("nav-open"); };
 
@@ -345,32 +350,67 @@
     });
 
     /* --- lightbox --- */
-    var box = null, current = 0;
+    var box = null, figImg = null, current = 0, opener = null;
+    var behind = [document.querySelector(".site-header"), document.querySelector("main"),
+                  document.querySelector(".site-footer")];
+
+    // the largest file a tile offers: its WebP set if it has one, else the <img>'s own
+    var fullSource = function (tile) {
+      var img = tile.querySelector("img");
+      var source = tile.querySelector("source[srcset]");
+      var set = (source && source.getAttribute("srcset")) || img.getAttribute("srcset") || "";
+      var best = "", bestW = -1;
+      set.split(",").forEach(function (part) {
+        var bits = part.trim().split(/\s+/);
+        var w = parseInt(bits[1], 10) || 0;
+        if (bits[0] && w >= bestW) { best = bits[0]; bestW = w; }
+      });
+      return best ? new URL(best, document.baseURI).href : (img.currentSrc || img.src);
+    };
 
     var show = function (index) {
-      if (!visible.length) return;
+      if (!box || !visible.length) return;
       current = (index + visible.length) % visible.length;
       var tile = visible[current];
       var img = tile.querySelector("img");
       var caption = tile.querySelector("figcaption");
-      box.querySelector(".lightbox-figure img").src = img.currentSrc || img.src;
-      box.querySelector(".lightbox-figure img").alt = img.alt || "";
+
+      // what the page already holds appears at once; the full size follows
+      figImg.src = img.currentSrc || img.src;
+      figImg.alt = img.alt || "";
+      var full = fullSource(tile);
+      if (full && full !== figImg.src) {
+        figImg.classList.add("is-loading");
+        var hi = new Image();
+        hi.onload = function () {
+          if (box && visible[current] === tile) { figImg.src = full; figImg.classList.remove("is-loading"); }
+        };
+        hi.onerror = function () { figImg.classList.remove("is-loading"); };
+        hi.src = full;
+      }
       box.querySelector(".lightbox-figure figcaption").textContent =
         caption ? caption.textContent.trim() : "";
-      box.querySelector(".lightbox-counter").textContent =
-        (current + 1) + " / " + visible.length;
+      box.querySelector(".lightbox-counter").textContent = (current + 1) + " / " + visible.length;
       var solo = visible.length < 2;
       box.querySelector(".lightbox-prev").hidden = solo;
       box.querySelector(".lightbox-next").hidden = solo;
+
+      // the neighbours, so walking through is instant
+      [1, -1].forEach(function (step) {
+        var t = visible[(current + step + visible.length) % visible.length];
+        if (t && t !== tile) new Image().src = fullSource(t);
+      });
     };
 
     var close = function () {
       if (!box) return;
       var node = box;
-      box = null;
+      box = null; figImg = null;
       node.classList.remove("is-open");
-      document.body.style.removeProperty("overflow");
-      window.setTimeout(function () { node.remove(); }, 250);
+      pinPage(false);
+      setInert(behind, false);
+      window.setTimeout(function () { node.remove(); }, 220);
+      if (opener) opener.focus({ preventScroll: true });
     };
 
     var button = function (cls, label, glyph) {
@@ -378,51 +418,61 @@
       b.type = "button";
       b.className = cls;
       b.setAttribute("aria-label", label);
-      b.innerHTML = glyph;
+      b.innerHTML = '<span aria-hidden="true">' + glyph + "</span>";
       return b;
     };
 
     var open = function (tile) {
+      opener = tile.querySelector(".gal-open");
       box = document.createElement("div");
       box.className = "lightbox";
       box.setAttribute("role", "dialog");
       box.setAttribute("aria-modal", "true");
       box.innerHTML =
-        '<figure class="lightbox-figure"><img alt=""><figcaption></figcaption></figure>' +
-        '<p class="lightbox-counter"></p>';
+        '<div class="lightbox-bar"><p class="lightbox-counter" aria-live="polite"></p></div>' +
+        '<figure class="lightbox-figure"><img alt=""><figcaption></figcaption></figure>';
       var closeButton = button("lightbox-close", labels.close, "&times;");
-      box.appendChild(closeButton);
+      box.querySelector(".lightbox-bar").appendChild(closeButton);
       box.appendChild(button("lightbox-prev", labels.prev, "&#8249;"));
       box.appendChild(button("lightbox-next", labels.next, "&#8250;"));
+      figImg = box.querySelector(".lightbox-figure img");
 
       box.addEventListener("click", function (event) {
         var hit = event.target.closest("button");
         if (hit && hit.classList.contains("lightbox-prev")) return show(current - 1);
         if (hit && hit.classList.contains("lightbox-next")) return show(current + 1);
         if (hit && hit.classList.contains("lightbox-close")) return close();
-        if (event.target === box) close();
+        // a tap on the dark around the picture closes it; a tap on the picture does not
+        if (!event.target.closest("img, figcaption, .lightbox-bar")) close();
       });
 
       document.body.appendChild(box);
-      document.body.style.overflow = "hidden";
+      pinPage(true);
+      setInert(behind, true);
       show(visible.indexOf(tile));
-      window.requestAnimationFrame(function () { box.classList.add("is-open"); });
-      closeButton.focus();
+      window.requestAnimationFrame(function () { if (box) box.classList.add("is-open"); });
+      closeButton.focus({ preventScroll: true });
     };
 
     gallery.addEventListener("click", function (event) {
-      var opener = event.target.closest(".gal-open");
-      if (!opener) return;
-      var tile = opener.closest(".gal-item");
+      var hit = event.target.closest(".gal-open");
+      if (!hit) return;
+      var tile = hit.closest(".gal-item");
       if (tile.querySelector(".img-slot.is-missing")) return;
       open(tile);
     });
 
     document.addEventListener("keydown", function (event) {
       if (!box) return;
-      if (event.key === "Escape") close();
-      if (event.key === "ArrowRight") show(current + 1);
-      if (event.key === "ArrowLeft") show(current - 1);
+      if (event.key === "Escape") { event.preventDefault(); return close(); }
+      if (event.key === "ArrowRight") return show(current + 1);
+      if (event.key === "ArrowLeft") return show(current - 1);
+      if (event.key === "Tab") {       // keep focus on the lightbox's own buttons
+        var stops = Array.prototype.slice.call(box.querySelectorAll("button")).filter(function (b) { return !b.hidden; });
+        var i = stops.indexOf(document.activeElement);
+        event.preventDefault();
+        stops[(i + (event.shiftKey ? -1 : 1) + stops.length) % stops.length].focus();
+      }
     });
 
     /* --- swipe on a phone --- */
