@@ -1,5 +1,5 @@
 /* Built by build.py — do not edit by hand. */
-var VERSION = "2026-09-25-d7512b4b74";
+var VERSION = "2026-09-30-a2d7ac6c2a";
 var SHELL = [
   "/ka/index.html",
   "/en/index.html",

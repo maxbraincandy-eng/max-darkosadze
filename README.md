@@ -632,9 +632,52 @@ doing most of the work. Everything is driven by the tokens at the top of
 --ink: #08090b;  --ink-2: #111318;  --surface: #15171c;
 --text: #f2f2f0; --muted: #9a9da5;  --line: rgba(255,255,255,.10);
 --violet: #7c5cff; --blue: #7ea7ff;
---display: "Cormorant Garamond", "Noto Serif Georgian", …;
+--display: "Newsreader", "Noto Serif Georgian", …;
 --sans: "Inter", "Noto Sans Georgian", …;
+
+/* spacing: one scale, so gaps are chosen rather than accumulated */
+--space-1 … --space-9: 4, 8, 12, 16, 24, 32, 48, 64, 96px;
+--section: clamp(2.5rem, 1.25rem + 3.6vw, 5rem);  /* ~40px phone, ~70px laptop */
+
+/* corners */
+--radius-sm: 6px; --radius-md: 12px; --radius-lg: 18px; --radius-pill: 999px;
 ```
+
+Rules the stylesheet keeps, each learned from a real defect:
+
+- **Sections breathe by `--section`, top and bottom.** It used to bottom out
+  at 80px a side, so two sections met with 160px of nothing between them on a
+  phone. Now it is ~80px on a phone and ~130px on a laptop, the same everywhere.
+- **Body text is weight 400.** 300 read thin on the dark ground, Georgian most.
+- **Georgian labels are not tracked or uppercased.** Latin small capitals need
+  letter-spacing; Georgian has no capitals, falls apart when spaced, and some
+  browsers turn `text-transform: uppercase` into Mtavruli. One rule at the end
+  of the stylesheet sets every such label to its natural spacing on `lang-ka`.
+- **Georgian titles on a phone are sized from the width available.** The
+  longest words (შესაძლებლობებს, დაგვიკავშირდით) are ~9.5 times their font size
+  and cannot wrap; at a fixed 38–42px they were wider than a 320–390px screen,
+  which widened the page and pushed the menu button off it. Headings also carry
+  `overflow-wrap: break-word` as a safety net.
+- **Photographs reserve their space before they load.** Every `<img>` has
+  `width`/`height`; tall ones also get `--ar` from the build, because
+  `width: auto` with a max-height reserved nothing (a 2×2px box that jumped).
+- **A photograph that has not been supplied is left out**, and the build lists
+  it, rather than shipping an empty frame. At present: `assets/img/foundation.jpg`.
+- **Classes are named for what they are.** The filmography's entries are
+  `.credit*`; they were once `.film`, which also styled the home page's film
+  section into a narrow column.
+
+The phone menu is a full-screen panel whose list starts below the bar and
+scrolls on its own; while it is open the page behind is pinned in place and
+`inert`, Tab stays inside the header, Escape closes it and returns focus to the
+button, and widening the window closes it.
+
+**Performance, as measured** (Lighthouse 12.8, simulated slow 4G phone, the
+site served with gzip as the production edge does): home 91–92 (Georgian) and
+96–99 (English), articles 91–93, biography 91; desktop 100; accessibility 100
+and SEO 100 on every page measured. The cover photo is preloaded from the
+`<head>` at high priority; the film's poster is attached only when the film
+comes near the screen.
 
 Change a token and the whole site follows. There is no light theme and no theme
 switch: the archive is dark by design.

@@ -11,30 +11,76 @@
   var nav = document.getElementById("site-nav");
 
   if (toggle && nav) {
-    var setMenu = function (open) {
+    var page = [document.querySelector("main"), document.querySelector(".site-footer")];
+    var lockedY = 0;
+
+    /* while the menu is open the page behind it neither scrolls nor takes
+       focus: iOS ignores overflow:hidden on its own, so the body is pinned
+       where it was and put back exactly there on close                     */
+    var lock = function (on) {
+      var body = document.body;
+      if (on) {
+        lockedY = window.scrollY;
+        body.style.position = "fixed";
+        body.style.top = -lockedY + "px";
+        body.style.left = "0"; body.style.right = "0";
+      } else {
+        body.style.position = ""; body.style.top = "";
+        body.style.left = ""; body.style.right = "";
+        // instant, not smooth: the reader should be exactly where they were
+        window.scrollTo({ top: lockedY, left: 0, behavior: "instant" });
+      }
+      page.forEach(function (el) {
+        if (!el) return;
+        if (on) el.setAttribute("inert", ""); else el.removeAttribute("inert");
+      });
+    };
+
+    var isOpen = function () { return document.body.classList.contains("nav-open"); };
+
+    var setMenu = function (open, returnFocus) {
+      if (open === isOpen()) return;
       document.body.classList.toggle("nav-open", open);
       nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      lock(open);
       if (open) {
         var first = nav.querySelector("a");
-        if (first) window.setTimeout(function () { first.focus(); }, 180);
+        if (first) window.setTimeout(function () { first.focus({ preventScroll: true }); }, 180);
+      } else if (returnFocus) {
+        toggle.focus({ preventScroll: true });
       }
     };
 
-    toggle.addEventListener("click", function () {
-      setMenu(!document.body.classList.contains("nav-open"));
-    });
+    toggle.addEventListener("click", function () { setMenu(!isOpen(), true); });
 
     nav.addEventListener("click", function (event) {
-      if (event.target.closest("a")) setMenu(false);
+      if (event.target.closest("a")) setMenu(false, false);
     });
 
     document.addEventListener("keydown", function (event) {
-      if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
-        setMenu(false);
-        toggle.focus();
+      if (!isOpen()) return;
+      if (event.key === "Escape") { setMenu(false, true); return; }
+      if (event.key !== "Tab") return;
+      // keep Tab inside the open menu: its links, the language switch, the toggle
+      var stops = Array.prototype.slice.call(document.querySelectorAll(
+        ".site-header a[href], .site-header button")).filter(function (el) {
+          return el.offsetParent !== null || el === toggle;
+        });
+      if (!stops.length) return;
+      var firstStop = stops[0], lastStop = stops[stops.length - 1];
+      if (event.shiftKey && document.activeElement === firstStop) {
+        event.preventDefault(); lastStop.focus();
+      } else if (!event.shiftKey && document.activeElement === lastStop) {
+        event.preventDefault(); firstStop.focus();
       }
     });
+
+    // a phone turned sideways or a window widened past the menu: close it
+    var wide = window.matchMedia("(min-width: 821px)");
+    var onWide = function () { if (wide.matches) setMenu(false, false); };
+    if (wide.addEventListener) wide.addEventListener("change", onWide);
+    else if (wide.addListener) wide.addListener(onWide);
   }
 
   /* ---- photo slots --------------------------------------------------
@@ -181,6 +227,20 @@
       if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
     }, { passive: true });
     window.addEventListener("resize", update);
+  }
+
+  /* ---- the film's poster, only when the film is near ----------------- */
+  var posters = Array.prototype.slice.call(document.querySelectorAll("video[data-poster]"));
+  if (posters.length) {
+    var attach = function (v) { v.setAttribute("poster", v.getAttribute("data-poster")); v.removeAttribute("data-poster"); };
+    if ("IntersectionObserver" in window) {
+      var po = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { attach(e.target); po.unobserve(e.target); } });
+      }, { rootMargin: "600px 0px" });
+      posters.forEach(function (v) { po.observe(v); });
+    } else {
+      posters.forEach(attach);
+    }
   }
 
   /* ---- the articles page: filter by topic, in place ------------------ */

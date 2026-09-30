@@ -82,6 +82,22 @@ def img_tag(src, alt, depth, *, eager=False, extra="", sizes=""):
     return tag
 
 
+def preload_image(src, depth, sizes):
+    """Ask for the first screen's photograph from the <head>, at high priority,
+    in the same WebP and the same sizes the <picture> will choose — so on a slow
+    connection it does not wait behind the fonts."""
+    small = src.rsplit(".", 1)[0] + "-800.webp"
+    big = src.rsplit(".", 1)[0] + ".webp"
+    if big not in IMAGES:
+        return ""
+    if small in IMAGES and IMAGES[small][0] < IMAGES[big][0]:
+        srcset = "%s %dw, %s %dw" % (asset(small, depth), IMAGES[small][0], asset(big, depth), IMAGES[big][0])
+    else:
+        srcset = "%s %dw" % (asset(big, depth), IMAGES[big][0])
+    return ('<link rel="preload" as="image" type="image/webp" fetchpriority="high" '
+            'imagesrcset="%s" imagesizes="%s">' % (esc(srcset), esc(sizes)))
+
+
 def esc(text):
     return html.escape(str(text), quote=True)
 
@@ -197,17 +213,29 @@ def date_tag(lang, iso):
 # components
 # --------------------------------------------------------------------------
 
+MISSING_IMAGES = set()
+
+
 def figure(src, alt, caption, depth, classes="fig"):
+    # a photograph that has not been supplied yet is left out, not shown as an
+    # empty frame; the build lists it at the end so it can be added
+    if not os.path.exists(os.path.join(ROOT, src)):
+        MISSING_IMAGES.add(src)
+        return ""
     size = IMAGES.get(src)
     if size and size[1] > size[0] and "fig-portrait" not in classes:
         classes += " fig-tall"      # taller than it is wide: do not let it run away
     caption_html = (
         '<figcaption>%s</figcaption>' % inline(caption) if caption else ""
     )
+    # a tall picture is capped by the screen's height, so its width follows
+    # from its proportions; given here, the page can hold the space before the
+    # file arrives instead of opening it up when it does
+    ratio = ' style="--ar: %.4f"' % (size[0] / size[1]) if size else ""
     return (
-        '<figure class="%s">'
+        '<figure class="%s"%s>'
         '<div class="img-slot" data-path="%s">%s</div>%s</figure>'
-    ) % (classes, esc(src), img_tag(src, alt, depth), caption_html)
+    ) % (classes, ratio, esc(src), img_tag(src, alt, depth), caption_html)
 
 
 def editor_note(data, *parts):
@@ -333,14 +361,16 @@ def head(data, title, description, depth, key, slug=None):
         '<link rel="manifest" href="%s">' % asset("manifest.webmanifest", depth),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["instagram"]),
         '<link rel="me" href="%s">' % esc(data["meta"]["links"]["imdb"]),
-        # only the two faces this language sets its text in
+        # the stylesheet first: nothing is drawn until it has arrived, so on a
+        # slow connection it must not share the line with the fonts
+        '<link rel="stylesheet" href="%s">' % stamped("assets/css/style.css", depth),
+        # then only the two faces this language sets its text in
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
         % asset("assets/fonts/noto-serif-georgian.woff2" if lang == "ka"
                 else "assets/fonts/newsreader-latin.woff2", depth),
         '<link rel="preload" as="font" type="font/woff2" crossorigin href="%s">'
         % asset("assets/fonts/noto-sans-georgian.woff2" if lang == "ka"
                 else "assets/fonts/inter-latin.woff2", depth),
-        '<link rel="stylesheet" href="%s">' % stamped("assets/css/style.css", depth),
         THEME_BOOT,
     ]
     if SITE.get("analytics", {}).get("goatcounter"):
@@ -393,7 +423,10 @@ def film_section(data, depth, alt=False):
         return ""
     up = "../" * depth
     poster = "assets/video/showreel-poster.jpg"
-    poster_tag = (' poster="%s%s"' % (up, poster)) if os.path.exists(os.path.join(ROOT, poster)) else ""
+    # the poster is attached by main.js when the film comes near the screen:
+    # a video's poster cannot be lazy-loaded, and 117KB for a picture far down
+    # the page was being fetched on every visit
+    poster_tag = (' data-poster="%s%s"' % (up, poster)) if os.path.exists(os.path.join(ROOT, poster)) else ""
     webm = name.replace(".mp4", ".webm")
     webm_source = ('\n        <source src="%s%s" type="video/webm">' % (up, webm)
                    if os.path.exists(os.path.join(ROOT, webm)) else "")
@@ -567,7 +600,7 @@ def footer(data, depth):
     return """
 <footer class="site-footer">
   <div class="footer-top">
-    <p class="footer-mark" aria-hidden="true">MD</p>
+    <img class="footer-mark" src="%s" alt="" width="72" height="72" loading="lazy">
     <p class="footer-name">%s</p>
     <p class="footer-line">%s</p>
   </div>
@@ -587,6 +620,7 @@ def footer(data, depth):
     <a class="to-top" href="#top">%s</a>
   </div>
 </footer>""" % (
+        asset("assets/img/favicon.svg", depth),
         esc(data["meta"]["siteName"]),
         esc(data["meta"]["tagline"]),
         esc(data["ui"]["menu"]),
@@ -991,8 +1025,14 @@ def render_home(data):
         body=body,
         depth=depth,
         active="home",
-        extra_head=person_jsonld(data) + film_jsonld(data),
+        extra_head=cover_preload(data, depth) + person_jsonld(data) + film_jsonld(data),
     )
+
+
+def cover_preload(data, depth):
+    f = data["archive"].get("featured")
+    article = next((a for a in data["articles"] if f and a["slug"] == f["slug"]), None)
+    return preload_image(article["image"], depth, "(max-width: 900px) 100vw, 620px") if article else ""
 
 
 def render_about(data):
@@ -2023,7 +2063,7 @@ def render_films(data):
 
     def fact(label, value):
         return """
-          <div class="film-fact">
+          <div class="credit-fact">
             <p class="fact-label">%s</p>
             <p>%s</p>
           </div>""" % (esc(label), esc(value) if value else '<span class="is-muted">%s</span>'
@@ -2040,13 +2080,13 @@ def render_films(data):
         ])
         roles = "".join('<li>%s</li>' % esc(role) for role in film.get("roles", []))
         rows.append("""
-      <article class="film" id="%s">
-        <p class="film-n">%02d</p>
-        <div class="film-body">
-          <h2 class="film-title">%s</h2>
-          <ul class="film-roles">%s</ul>
-          <p class="film-text">%s</p>
-          <div class="film-facts">%s</div>
+      <article class="credit" id="%s">
+        <p class="credit-n">%02d</p>
+        <div class="credit-body">
+          <h2 class="credit-title">%s</h2>
+          <ul class="credit-roles">%s</ul>
+          <p class="credit-text">%s</p>
+          <div class="credit-facts">%s</div>
           <p class="sec-actions">
             <a class="link-arrow" href="%s" rel="noopener" target="_blank">%s &rarr;</a>
           </p>
@@ -2074,8 +2114,8 @@ def render_films(data):
 </section>
 
 <section class="section">
-  <div class="wrap film-list">%s
-    <p class="film-note">%s</p>
+  <div class="wrap credit-list">%s
+    <p class="credit-note">%s</p>
   </div>
 </section>
 """ % (esc(p["eyebrow"]), inline(p["heading"]), inline(p["lead"]),
@@ -2620,6 +2660,10 @@ def main():
             write(page_path(lang, "article", article["slug"]), render_article(data, i))
 
     write("index.html", render_root_index(datasets))
+    if MISSING_IMAGES:
+        print("photographs referenced but not supplied (left out of the pages):")
+        for src in sorted(MISSING_IMAGES):
+            print("  " + src)
     write("manifest.webmanifest", render_manifest(datasets))
     write("sw.js", render_service_worker())
     write("404.html", render_404())
